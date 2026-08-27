@@ -36,21 +36,25 @@ const contentGate = async (route, requirements) => {
   assert.ok(textFrom(html).split(' ').length >= 700, `${route} must have at least 700 visible words`);
   assert.ok((html.match(/<img /g) || []).length >= requirements.images, `${route} must include original explanatory visuals`);
   for (const phrase of requirements.phrases) assert.match(html, new RegExp(phrase), `${route} missing required player-help content: ${phrase}`);
-  assert.match(html, /SOURCES \/ VERIFY/, `${route} must expose source links`);
   assert.match(html, /"@type":"Article"/, `${route} must expose Article structured data`);
   assert.match(html, /"@type":"BreadcrumbList"/, `${route} must expose BreadcrumbList structured data`);
   assert.equal((html.match(/id="ld-json"/g) || []).length, 1, `${route} must emit exactly one server JSON-LD node for client replacement`);
-  assert.match(html, /pcgamer\.com\/games\/sim\/how-to-fish-spider-crab/, `${route} must cite PC Gamer`);
-  assert.match(html, /gamesradar\.com\/games\/co-op\/how-to-fish-spider-crab/, `${route} must cite GamesRadar+`);
-  assert.match(html, /steamcommunity\.com\/app\/4001890\/announcements/, `${route} must cite the official patch feed`);
-  assert.match(html, /douyin\.com\/search\/%E6%B8%94%E5%8A%9B%E5%85%A8%E5%BC%80/, `${route} must cite the direct-frame Douyin review`);
-  assert.match(html, /xiaohongshu\.com\/explore\/6a8aaf56000000001700b59b/, `${route} must cite the direct-frame Xiaohongshu review`);
-  assert.match(html, /Evidence boundary: the Douyin and Xiaohongshu clips were directly frame-reviewed/, `${route} must state the visual-evidence boundary`);
+  if (requirements.sources) {
+    assert.match(html, /SOURCES \/ VERIFY/, `${route} must expose source links`);
+    assert.match(html, /pcgamer\.com\/games\/sim\/how-to-fish-spider-crab/, `${route} must cite PC Gamer`);
+    assert.match(html, /gamesradar\.com\/games\/co-op\/how-to-fish-spider-crab/, `${route} must cite GamesRadar+`);
+    assert.match(html, /steamcommunity\.com\/app\/4001890\/announcements/, `${route} must cite the official patch feed`);
+    assert.match(html, /douyin\.com\/search\/%E6%B8%94%E5%8A%9B%E5%85%A8%E5%BC%80/, `${route} must cite the direct-frame Douyin review`);
+    assert.match(html, /xiaohongshu\.com\/explore\/6a8aaf56000000001700b59b/, `${route} must cite the direct-frame Xiaohongshu review`);
+    assert.match(html, /Evidence boundary: the Douyin and Xiaohongshu clips were directly frame-reviewed/, `${route} must state the visual-evidence boundary`);
+  }
   for (const src of [...html.matchAll(/<img[^>]+src="([^"]+)"/g)].map(match => match[1])) await access(`public${src}`);
   assert.match(html, /class="article guide-article"/, `${route} must be server-rendered from the shared guide tree`);
 };
-await contentGate('/beginner-guide', { images: 9, phrases: ['First 20 minutes', 'Bait and hotspots', 'Make more money', 'Prepare for Spider Crab', 'The complete five-location story route', 'Late-game firepower', 'If the route stalls', 'Empty Beer Can', 'Spider Crab Meat', 'VOLCANO'] });
-await contentGate('/bosses/spider-crab', { images: 2, phrases: ['Summon Spider Crab correctly', 'charge → stun → punish', 'Common mistakes and quick recoveries', 'Empty Beer Can', 'boat keys'] });
+await contentGate('/beginner-guide', { images: 9, sources: false, phrases: ['First 20 minutes', 'Bait and hotspots', 'Make more money', 'Prepare for Spider Crab', 'The complete five-location story route', 'Late-game firepower', 'If the route stalls', 'Empty Beer Can', 'Spider Crab Meat', 'VOLCANO'] });
+const beginner = await readFile('dist/beginner-guide/index.html', 'utf8');
+assert.doesNotMatch(beginner, /Claim sources|SOURCES \/ VERIFY/, '/beginner-guide must not render the removed claim-sources section');
+await contentGate('/bosses/spider-crab', { images: 2, sources: true, phrases: ['Summon Spider Crab correctly', 'charge → stun → punish', 'Common mistakes and quick recoveries', 'Empty Beer Can', 'boat keys'] });
 const lighthouse = await readFile('dist/locations/lighthouse/index.html', 'utf8');
 assert.ok(textFrom(lighthouse).split(' ').length >= 900, '/locations/lighthouse must be a deep guide');
 assert.ok((lighthouse.match(/<img /g) || []).length >= 10, '/locations/lighthouse must include the extracted gameplay sequence');
