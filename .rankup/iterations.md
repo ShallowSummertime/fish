@@ -29,3 +29,10 @@
 - 完成：加入精确 seller line，新增四个信任页与全站 footer 入口，补充隐私与广告披露，扩写四个列表型 hub，加入 large image preview robots 指令。
 - 验证：`pnpm test` 全通过；13 个静态路由、ads.txt 精确值、privacy 必备披露、footer 信任链接、canonical 与 JSON-LD 均由阻断断言覆盖。
 - 下一步：推送 Vercel 后验证生产 URL；在 AdSense 勾选 ads.txt 并验证；在 GSC 提交 sitemap 和核心攻略 URL。
+
+## 2026-08-28 — GSC verification and focused indexing
+
+- Added the Search Console domain-verification TXT at Namecheap root DNS without changing the production A/CNAME records; authoritative DNS propagation was verified.
+- Google confirmed domain ownership automatically through the domain provider method.
+- Submitted `sitemap.xml`; immediate first processing status briefly reported unable to fetch, while the submission confirmation stated periodic processing would continue.
+- Submitted exactly three URLs: homepage and Lighthouse were discovered/not indexed and joined the priority crawl queue; Beginner Guide was already indexed and was resubmitted after its content update.

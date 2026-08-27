@@ -1,6 +1,6 @@
 # Integrations
 
 - Analytics: not configured.
-- Search Console: Google account is available in the signed-in browser; current open GSC tabs point to another domain property. The How to Fish property and sitemap/indexing status still require live UI verification after deployment.
-- Advertising: AdSense publisher `pub-5329936944958399`; site is added with status `Needs review`. Ownership verification uses `/ads.txt`; the authorized seller line is included in the 2026-08-28 release. No ad code is deployed yet, and a Google-certified consent flow remains required before regional ad serving where applicable.
+- Search Console: domain property `sc-domain:howtofishwalkthrough.com` verified on 2026-08-28 with a Namecheap root TXT record. Sitemap submitted. Indexing requests accepted for `/`, `/beginner-guide`, and `/locations/lighthouse`; Beginner Guide was already indexed, while homepage and Lighthouse were `Discovered - currently not indexed` before submission.
+- Advertising: AdSense publisher `pub-5329936944958399`; application was submitted successfully after `/ads.txt` deployment. No ad code is deployed yet. Wait for Google `Ready`, complete account/payment activation, and configure a Google-certified consent flow before applicable regional ad serving.
 - External game sources: public Steam Community and Destructoid references are linked in the UI; no API or runtime dependency is used.
