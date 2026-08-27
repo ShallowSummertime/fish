@@ -35,11 +35,11 @@ export const sourceNotes = [
 ];
 export const pageMeta: Record<string, {title:string; description:string; image?:string}> = {
   '/': { title: 'How to Fish Walkthrough & Guides Wiki - All Bosses, Fish & Islands | How to Fish Walkthrough', description: 'Complete How to Fish Game wiki and walkthrough: boss guides, all creatures, locations, lures, and a beginner route for the 2026 Dazed Games fishing sim.' },
-  '/beginner-guide': { title: 'How to Fish Game Beginner Guide & Lighthouse Route | How to Fish Walkthrough', description: 'A step-by-step How to Fish Game beginner route: finish the Lighthouse tutorial, earn safely, prepare for Spider Crab, keep the shell, and reach Island 2.', image: '/images/guides/beginner-lighthouse-loop.svg' },
+  '/beginner-guide': { title: 'How to Fish Game Beginner Guide & Lighthouse Route | How to Fish Walkthrough', description: 'A step-by-step How to Fish Game beginner route: finish the Lighthouse tutorial, earn safely, prepare for Spider Crab, keep the shell, and reach Island 2.' },
   '/creatures': { title: 'All 49 How to Fish Game Creatures Checklist | How to Fish Walkthrough', description: 'Browse, filter, and track all 49 creatures in How to Fish Game, including 11 boss and special creatures.' },
   '/bosses': { title: 'All How to Fish Game Bosses & Special Creatures | How to Fish Walkthrough', description: 'How to Fish Game boss guide: every special creature, summoning item, and progression route.' },
   '/locations': { title: 'How to Fish Game Islands & Locations Guide | How to Fish Walkthrough', description: 'Guide to all five main How to Fish Game locations: Lighthouse plus Forest, Desert, Rocks, and Volcano.' },
   '/lures': { title: 'How to Fish Game Lures & Bait Guide | How to Fish Walkthrough', description: 'How to Fish Game lure and bait guide covering the four progression pools and special boss summons.' },
-  '/bosses/spider-crab': { title: 'How to Beat Spider Crab in How to Fish Game | How to Fish Walkthrough', description: 'Beat the How to Fish Game Spider Crab: get the Empty Beer Can, dodge its charge, punish the stun, turn in the shell, and use the boat keys.', image: '/images/guides/spider-crab-combat-loop.svg' },
+  '/bosses/spider-crab': { title: 'How to Beat Spider Crab in How to Fish Game | How to Fish Walkthrough', description: 'Beat the How to Fish Game Spider Crab: get the Empty Beer Can, dodge its charge, punish the stun, turn in the shell, and use the boat keys.' },
   '/achievements': { title: 'How to Fish Game Achievements Guide - All 28 | How to Fish Walkthrough', description: 'Complete list of all 28 How to Fish Game achievements, organized into a clean completion checklist.' }
 };

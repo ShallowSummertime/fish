@@ -6,21 +6,19 @@ Checked: 2026-08-27. This packet is an editorial record, not publishable game me
 
 | Source | URL | What was checked | Useful sequence |
 | --- | --- | --- | --- |
-| Skoottie — *I'm Playing 100% of How to Fish* | https://www.youtube.com/watch?v=mK5WaARlT9w | Public full-run gameplay reference. Direct YouTube playback/captions were unavailable from this build environment; the linked public guide cites the run and exposes its navigation timecodes. | 03:03 shipwreck/tutorial; 16:25 beer quest; 19:03 Spider Crab fight and self-stun; 26:44 shell hand-in/boat keys; 31:01 travel toward Island 2. |
+| Skoottie — *I'm Playing 100% of How to Fish* | https://www.youtube.com/watch?v=mK5WaARlT9w | Public time index only. Direct playback/captions were unavailable from this build environment and this video was **not independently replayed**. It is not used to validate a page claim. | Publicly cited index: 03:03 shipwreck/tutorial; 16:25 beer quest; 19:03 Spider Crab; 26:44 shell hand-in; 31:01 departure. |
 | Dazed Games — *How to Fish - Official Gameplay Trailer* | https://www.youtube.com/watch?v=Hg5pBDKCNFI | Official gameplay reference for the game identity and catch/fight/sell/upgrade loop. | Trailer-level verification only; do not use it for exact quest economics or boss timing. |
 | Dazed Games — *How to Fish \| Release Date Trailer* | https://www.youtube.com/watch?v=YVPYjhBdRbE | Official release-video identity reference. | Supports the 2026 Dazed Games entity anchor, not individual boss mechanics. |
 
 ### Frame / transcript handling
 
-The request called for frame-by-frame analysis. This environment could resolve the public video URLs and timecode records but YouTube video, thumbnail, and timed-text endpoints timed out. No full video, copied frame, or long transcript was retained. The site therefore uses original explanatory SVG diagrams and links the source videos for player verification. A future pass with normal playback access should spot-check the five Skoottie timestamps above before asserting any exact price, HP, damage, or timer duration.
+The request called for frame-by-frame analysis. This environment could resolve public video URLs and public time-index records but YouTube video, thumbnail, and timed-text endpoints timed out. No full video, copied frame, or long transcript was retained; no claim is presented as directly observed from this video. The site uses original explanatory SVG diagrams and labels the video as a non-replayed public time index. A future pass with normal playback access should independently verify the five timestamps before treating them as evidence.
 
 ## Facts used in P0 copy
 
-- Lighthouse is the tutorial/start route; the first boss is Spider Crab.
-- The beer errand yields the **Empty Beer Can**, which is the Spider Crab lure.
-- The safe combat sequence is charge → lateral dodge → self-stun → short attack window → reset.
-- The Spider Crab **shell** (not ordinary meat) is handed to the fisherman for boat keys; radar is the follow-up navigation step.
-- The current official announcement feed shows Patch 1.0.9 (Aug 24): Easy / Normal / Hard difficulty and the described manual/autosave behavior.
+- PC Gamer: sailor tutorial → beer exchange → **Empty Beer Can** bait; food recovery; melee recommendation; dazed attack window; shell hand-in for boat keys; radar recommendation.
+- GamesRadar+: Empty Beer Can bait; straight charge → stars/stun → attack → leave on recovery; shell hand-in / boat keys; radar tablet follow-up.
+- Official Steam announcement: current Patch 1.0.9 (Aug 24) has Easy / Normal / Hard and the described manual/autosave behavior.
 
 ## Cross-check sources
 

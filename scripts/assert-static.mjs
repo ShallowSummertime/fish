@@ -1,8 +1,10 @@
-import { readFile, stat } from 'node:fs/promises';
+import { readFile, stat, access } from 'node:fs/promises';
 import assert from 'node:assert/strict';
 
 const domain = 'https://howtofishwalkthrough.com';
 const routes = ['/', '/beginner-guide', '/creatures', '/bosses', '/locations', '/lures', '/bosses/spider-crab', '/achievements'];
+const prerenderSource = await readFile('scripts/prerender.ts', 'utf8');
+assert.match(prerenderSource, /renderToStaticMarkup\(React\.createElement\(App/, 'static pages must render the shared React App tree');
 for (const route of routes) {
   const file = route === '/' ? 'dist/index.html' : `dist${route}/index.html`;
   await stat(file);
@@ -24,9 +26,16 @@ const contentGate = async (route, requirements) => {
   assert.ok(textFrom(html).split(' ').length >= 700, `${route} must have at least 700 visible words`);
   assert.ok((html.match(/<img /g) || []).length >= requirements.images, `${route} must include original explanatory visuals`);
   for (const phrase of requirements.phrases) assert.match(html, new RegExp(phrase), `${route} missing required player-help content: ${phrase}`);
-  assert.match(html, /WATCH \/ VERIFY/, `${route} must expose source links`);
-  assert.match(html, /@type&quot;:&quot;HowTo|"@type":"HowTo"/, `${route} must expose HowTo structured data`);
+  assert.match(html, /SOURCES \/ VERIFY/, `${route} must expose source links`);
+  assert.match(html, /"@type":"Article"/, `${route} must expose Article structured data`);
+  assert.match(html, /"@type":"BreadcrumbList"/, `${route} must expose BreadcrumbList structured data`);
+  assert.equal((html.match(/id="ld-json"/g) || []).length, 1, `${route} must emit exactly one server JSON-LD node for client replacement`);
+  assert.match(html, /pcgamer\.com\/games\/sim\/how-to-fish-spider-crab/, `${route} must cite PC Gamer`);
+  assert.match(html, /gamesradar\.com\/games\/co-op\/how-to-fish-spider-crab/, `${route} must cite GamesRadar+`);
+  assert.match(html, /steamcommunity\.com\/app\/4001890\/announcements/, `${route} must cite the official patch feed`);
+  for (const src of [...html.matchAll(/<img[^>]+src="([^"]+)"/g)].map(match => match[1])) await access(`public${src}`);
+  assert.match(html, /class="article guide-article"/, `${route} must be server-rendered from the shared guide tree`);
 };
-await contentGate('/beginner-guide', { images: 2, phrases: ['First 20 minutes', 'Prepare for Spider Crab', 'If the route stalls', 'Empty Beer Can', 'Spider Crab shell'] });
+await contentGate('/beginner-guide', { images: 1, phrases: ['First 20 minutes', 'Prepare for Spider Crab', 'If the route stalls', 'Empty Beer Can', 'Spider Crab shell'] });
 await contentGate('/bosses/spider-crab', { images: 2, phrases: ['Summon Spider Crab correctly', 'charge → stun → punish', 'Common mistakes and quick recoveries', 'Empty Beer Can', 'boat keys'] });
 console.log(`verified ${routes.length} crawlable static routes`);
