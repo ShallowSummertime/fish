@@ -15,3 +15,10 @@
 - 验证：`scripts/assert-static.mjs` 检查全部八个生成页面和关键 crawlable 内容。
 - 独立验收：浏览器 E2E 通过直达 Spider Crab、creature 搜索/持久化、移动导航和零 console error；re-review 无 P0 问题。
 - 经验决定：run-specific，本次无项目外可泛化且需修改全局 skill 的新规则。
+
+## 2026-08-27 — Vercel production deployment
+
+- 完成：从 GitHub 导入 Vercel 项目 `lik/fish`，部署生产构建，并在 Namecheap 将停车页 DNS 替换为 Vercel apex A 与 `www` CNAME。
+- 主域策略：apex 直接连接 Production；`www` 以 308 跳转到 apex，与 canonical 和 sitemap 保持一致。
+- 生产验收：八个正式路由均返回 200 和路由专属元数据；`robots.txt`、`sitemap.xml` 返回 200；未知路径返回 404。
+- 安全与成本：未写入 token、账号或密钥；Vercel Hobby 部署本次外部成本为 0。
