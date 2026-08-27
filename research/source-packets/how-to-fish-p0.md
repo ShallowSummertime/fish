@@ -10,6 +10,15 @@ Checked: 2026-08-27. This packet is an editorial record, not publishable game me
 | Dazed Games — *How to Fish - Official Gameplay Trailer* | https://www.youtube.com/watch?v=Hg5pBDKCNFI | Official gameplay reference for the game identity and catch/fight/sell/upgrade loop. | Trailer-level verification only; do not use it for exact quest economics or boss timing. |
 | Dazed Games — *How to Fish \| Release Date Trailer* | https://www.youtube.com/watch?v=YVPYjhBdRbE | Official release-video identity reference. | Supports the 2026 Dazed Games entity anchor, not individual boss mechanics. |
 
+## Direct browser frame review
+
+| Platform / author | Direct URL | Version visible | Timestamps and direct observations | Limits |
+| --- | --- | --- | --- | --- |
+| Douyin / @卿 — “渔力全开 教程关单通boss蜘蛛蟹教学” (2:05, 4 days old) | https://www.douyin.com/search/%E6%B8%94%E5%8A%9B%E5%85%A8%E5%BC%80%20%E8%9C%98%E8%9B%9B%E8%9F%B9%20%E6%94%BB%E7%95%A5?modal_id=7677035790840499508&type=general | 1.0.9, visible at lower right | ~00:12: Lighthouse fisherman area with Empty Beer Can lure/inventory visible. ~00:35: Spider Crab attack/recovery, visible daze particles, player holding a knife. | Visual mechanics/item evidence only; no exact price, input, damage, duration, or location inference beyond the visible frame. |
+| Xiaohongshu / 游戏小挖机 — “【新手向】一招带你轻松吊打螃蟹王子” (2:08, 2 days old) | https://www.xiaohongshu.com/explore/6a8aaf56000000001700b59b | 1.0.2 | ~00:20: charge followed by a visibly dizzy/stunned state. ~00:49: player dies while taking hits. ~01:05: Empty Beer Can lure visible. | Older build; used solely as a mechanics cross-check. Its author-comment lottery warning is not published as a site claim. |
+
+The browser review used the user’s logged-in Chrome. No platform video, screenshot, thumbnail, or extracted frame was downloaded or placed in `public/`. A missing watermark is not a reuse license. The Xiaohongshu NONO guide at https://www.xiaohongshu.com/explore/6a89c202000000001801a46f was consulted only as an unpublished cross-check; its unverified cross-island statements are excluded.
+
 ### Frame / transcript handling
 
 The request called for frame-by-frame analysis. This environment could resolve public video URLs and public time-index records but YouTube video, thumbnail, and timed-text endpoints timed out. No full video, copied frame, or long transcript was retained; no claim is presented as directly observed from this video. The site uses original explanatory SVG diagrams and labels the video as a non-replayed public time index. A future pass with normal playback access should independently verify the five timestamps before treating them as evidence.

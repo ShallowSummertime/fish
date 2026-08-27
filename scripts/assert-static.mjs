@@ -33,6 +33,9 @@ const contentGate = async (route, requirements) => {
   assert.match(html, /pcgamer\.com\/games\/sim\/how-to-fish-spider-crab/, `${route} must cite PC Gamer`);
   assert.match(html, /gamesradar\.com\/games\/co-op\/how-to-fish-spider-crab/, `${route} must cite GamesRadar+`);
   assert.match(html, /steamcommunity\.com\/app\/4001890\/announcements/, `${route} must cite the official patch feed`);
+  assert.match(html, /douyin\.com\/search\/%E6%B8%94%E5%8A%9B%E5%85%A8%E5%BC%80/, `${route} must cite the direct-frame Douyin review`);
+  assert.match(html, /xiaohongshu\.com\/explore\/6a8aaf56000000001700b59b/, `${route} must cite the direct-frame Xiaohongshu review`);
+  assert.match(html, /Evidence boundary: the Douyin and Xiaohongshu clips were directly frame-reviewed/, `${route} must state the visual-evidence boundary`);
   for (const src of [...html.matchAll(/<img[^>]+src="([^"]+)"/g)].map(match => match[1])) await access(`public${src}`);
   assert.match(html, /class="article guide-article"/, `${route} must be server-rendered from the shared guide tree`);
 };
