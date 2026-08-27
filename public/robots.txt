@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://howtofishwalkthrough.com/sitemap.xml
