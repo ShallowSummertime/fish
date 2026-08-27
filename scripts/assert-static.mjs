@@ -28,6 +28,11 @@ for (const route of routes) {
 const creatures = await readFile('dist/creatures/index.html', 'utf8');
 assert.match(creatures, /All 49 How to Fish/);
 assert.match(creatures, /Mutated Bowhead Whale/);
+const home = await readFile('dist/index.html', 'utf8');
+assert.match(home, /aria-label="Original How to Fish gameplay field images"/, 'homepage must expose the original-material carousel');
+const homeImages = [...home.matchAll(/src="(\/images\/home\/[^"]+\.webp)"/g)].map(match => match[1]);
+assert.equal(homeImages.length, 4, 'homepage carousel must include all four processed gameplay frames');
+for (const src of homeImages) await access(`public${src}`);
 const spider = await readFile('dist/bosses/spider-crab/index.html', 'utf8');
 assert.match(spider, /Empty Beer Can/);
 const textFrom = html => html.replace(/<script[\s\S]*?<\/script>/g, ' ').replace(/<style[\s\S]*?<\/style>/g, ' ').replace(/<[^>]+>/g, ' ').replace(/&[a-z#0-9]+;/gi, ' ').replace(/\s+/g, ' ').trim();
