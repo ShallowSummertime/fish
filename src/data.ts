@@ -35,7 +35,7 @@ export const sourceNotes = [
 ];
 export const pageMeta: Record<string, {title:string; description:string; image?:string}> = {
   '/': { title: 'How to Fish Walkthrough & Guides Wiki - All Bosses, Fish & Islands | How to Fish Walkthrough', description: 'Complete How to Fish Game wiki and walkthrough: boss guides, all creatures, locations, lures, and a beginner route for the 2026 Dazed Games fishing sim.' },
-  '/beginner-guide': { title: 'How to Fish Game Beginner Guide & Lighthouse Route | How to Fish Walkthrough', description: 'A step-by-step How to Fish Game beginner route: finish the Lighthouse tutorial, earn safely, prepare for Spider Crab, keep the shell, and reach Island 2.' },
+  '/beginner-guide': { title: 'How to Fish Game Beginner Guide - Full Five-Island Route | How to Fish Walkthrough', description: 'A step-by-step How to Fish Game beginner walkthrough covering the Lighthouse opening, Spider Crab, upgrades, survival tips, and the five-island route to Volcano.', image: '/images/guides/beginner/localized/01-beginner-cover-en.png' },
   '/creatures': { title: 'All 49 How to Fish Game Creatures Checklist | How to Fish Walkthrough', description: 'Browse, filter, and track all 49 creatures in How to Fish Game, including 11 boss and special creatures.' },
   '/bosses': { title: 'All How to Fish Game Bosses & Special Creatures | How to Fish Walkthrough', description: 'How to Fish Game boss guide: every special creature, summoning item, and progression route.' },
   '/locations': { title: 'How to Fish Game Islands & Locations Guide | How to Fish Walkthrough', description: 'Guide to all five main How to Fish Game locations: Lighthouse plus Forest, Desert, Rocks, and Volcano.' },

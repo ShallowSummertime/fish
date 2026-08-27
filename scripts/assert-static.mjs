@@ -49,6 +49,6 @@ const contentGate = async (route, requirements) => {
   for (const src of [...html.matchAll(/<img[^>]+src="([^"]+)"/g)].map(match => match[1])) await access(`public${src}`);
   assert.match(html, /class="article guide-article"/, `${route} must be server-rendered from the shared guide tree`);
 };
-await contentGate('/beginner-guide', { images: 1, phrases: ['First 20 minutes', 'Prepare for Spider Crab', 'If the route stalls', 'Empty Beer Can', 'Spider Crab shell'] });
+await contentGate('/beginner-guide', { images: 6, phrases: ['First 20 minutes', 'Prepare for Spider Crab', 'The complete five-location story route', 'Upgrade priorities', 'If the route stalls', 'Empty Beer Can', 'Spider Crab Meat', 'VOLCANO'] });
 await contentGate('/bosses/spider-crab', { images: 2, phrases: ['Summon Spider Crab correctly', 'charge → stun → punish', 'Common mistakes and quick recoveries', 'Empty Beer Can', 'boat keys'] });
 console.log(`verified ${routes.length} crawlable static routes`);
