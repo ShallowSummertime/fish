@@ -1,5 +1,16 @@
 # Audit
 
+## 2026-08-28 — AdSense pre-application remediation
+
+- AdSense account evidence: `howtofishwalkthrough.com` is present in Sites with status `Needs review`; ownership flow selected `ads.txt`; dashboard reported `Not found` before this release.
+- Fixed: added the exact authorized seller record for publisher `pub-5329936944958399` at `/ads.txt`.
+- Fixed: added substantive About, Contact, Privacy, and Terms/Disclaimer routes and linked them from every footer.
+- Fixed: privacy policy now explains browser-local checklist storage, hosting logs, Google AdSense cookies/identifiers, My Ad Center choices, and the need for a Google-certified CMP where consent is required.
+- Fixed: expanded the Bosses, Locations, Lures, and Achievements hubs with actionable workflows, evidence boundaries, and internal links instead of leaving list-only pages.
+- Fixed: emitted `index,follow,max-image-preview:large` in prerendered and client metadata; preserved real host-level 404 behavior.
+- Verified locally: 13 prerendered routes, exact ads.txt content, trust-page footer links, canonical/OG/Twitter/JSON-LD/robots metadata, image assets, and zero broken internal route links; `pnpm test` passed.
+- Remaining account action: verify ads.txt after production propagation, configure a Google-certified CMP before serving ads in regions where consent is required, complete payment/account activation, and submit site review.
+
 ## 2026-08-27 — implementation review
 
 - Resolved: replaced JS-only route metadata with postbuild static HTML for all sitemap routes.

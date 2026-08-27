@@ -2,7 +2,7 @@ import { readFile, stat, access } from 'node:fs/promises';
 import assert from 'node:assert/strict';
 
 const domain = 'https://howtofishwalkthrough.com';
-const routes = ['/', '/beginner-guide', '/creatures', '/bosses', '/locations', '/locations/lighthouse', '/lures', '/bosses/spider-crab', '/achievements'];
+const routes = ['/', '/beginner-guide', '/creatures', '/bosses', '/locations', '/locations/lighthouse', '/lures', '/bosses/spider-crab', '/achievements', '/about', '/contact', '/privacy', '/terms'];
 const prerenderSource = await readFile('scripts/prerender.ts', 'utf8');
 assert.match(prerenderSource, /renderToString\(React\.createElement\(App/, 'static pages must render the shared React App tree with the hydration-compatible API');
 const clientSource = await readFile('src/client.tsx', 'utf8');
@@ -12,6 +12,7 @@ assert.match(appSource, /useState<string\[\]>\(\[\]\);const \[hydrated,setHydrat
 assert.match(appSource, /useEffect\(\(\)=>\{try\{const raw=JSON\.parse\(localStorage\.getItem\('htf-caught'\)/, 'creature checklist must restore validated local storage after mount');
 assert.match(appSource, /if\(hydrated\)localStorage\.setItem\('htf-caught'/, 'creature checklist must not persist before restore completes');
 assert.match(appSource, /set\('og:type',known\?'article':'website',true\)/, 'known client pages must use article Open Graph type');
+assert.match(appSource, /index,follow,max-image-preview:large/, 'indexable pages must allow large image previews');
 const stylesSource = await readFile('src/styles.css', 'utf8');
 assert.match(stylesSource, /\.guide-visual\{margin:30px 0;overflow-x:auto/, 'mobile guide visuals must support horizontal scrolling');
 assert.match(stylesSource, /Swipe or scroll the diagram horizontally/, 'mobile guide visuals must explain the scroll affordance');
@@ -23,6 +24,7 @@ for (const route of routes) {
   assert.match(html, /<meta property="og:title"/);
   assert.match(html, /<meta name="twitter:card" content="summary_large_image">/);
   assert.match(html, /application\/ld\+json/);
+  assert.match(html, /<meta name="robots" content="index,follow,max-image-preview:large">/);
   assert.doesNotMatch(html, /<div id="root"><\/div>/);
 }
 const creatures = await readFile('dist/creatures/index.html', 'utf8');
@@ -33,6 +35,11 @@ assert.match(home, /aria-label="Original How to Fish gameplay field images"/, 'h
 const homeImages = [...home.matchAll(/src="(\/images\/home\/[^"]+\.webp)"/g)].map(match => match[1]);
 assert.equal(homeImages.length, 4, 'homepage carousel must include all four processed gameplay frames');
 for (const src of homeImages) await access(`public${src}`);
+assert.equal((await readFile('dist/ads.txt', 'utf8')).trim(), 'google.com, pub-5329936944958399, DIRECT, f08c47fec0942fa0', 'ads.txt must exactly match the authorized seller record');
+const privacy = await readFile('dist/privacy/index.html', 'utf8');
+for (const phrase of ['Google AdSense', 'local storage', 'Google-certified consent management platform', 'My Ad Center']) assert.match(privacy, new RegExp(phrase));
+const about = await readFile('dist/about/index.html', 'utf8');
+for (const path of ['/about','/contact','/privacy','/terms']) assert.match(about, new RegExp(`href="${path}"`));
 const spider = await readFile('dist/bosses/spider-crab/index.html', 'utf8');
 assert.match(spider, /Empty Beer Can/);
 const textFrom = html => html.replace(/<script[\s\S]*?<\/script>/g, ' ').replace(/<style[\s\S]*?<\/style>/g, ' ').replace(/<[^>]+>/g, ' ').replace(/&[a-z#0-9]+;/gi, ' ').replace(/\s+/g, ' ').trim();

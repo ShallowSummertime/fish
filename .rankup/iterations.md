@@ -22,3 +22,10 @@
 - 主域策略：apex 直接连接 Production；`www` 以 308 跳转到 apex，与 canonical 和 sitemap 保持一致。
 - 生产验收：八个正式路由均返回 200 和路由专属元数据；`robots.txt`、`sitemap.xml` 返回 200；未知路径返回 404。
 - 安全与成本：未写入 token、账号或密钥；Vercel Hobby 部署本次外部成本为 0。
+
+## 2026-08-28 — AdSense readiness remediation
+
+- 现状：AdSense Sites 显示 `howtofishwalkthrough.com` 为 `Needs review`，ads.txt 为 `Not found`，验证/审核尚未完成。
+- 完成：加入精确 seller line，新增四个信任页与全站 footer 入口，补充隐私与广告披露，扩写四个列表型 hub，加入 large image preview robots 指令。
+- 验证：`pnpm test` 全通过；13 个静态路由、ads.txt 精确值、privacy 必备披露、footer 信任链接、canonical 与 JSON-LD 均由阻断断言覆盖。
+- 下一步：推送 Vercel 后验证生产 URL；在 AdSense 勾选 ads.txt 并验证；在 GSC 提交 sitemap 和核心攻略 URL。
