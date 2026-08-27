@@ -4,7 +4,12 @@ import assert from 'node:assert/strict';
 const domain = 'https://howtofishwalkthrough.com';
 const routes = ['/', '/beginner-guide', '/creatures', '/bosses', '/locations', '/lures', '/bosses/spider-crab', '/achievements'];
 const prerenderSource = await readFile('scripts/prerender.ts', 'utf8');
-assert.match(prerenderSource, /renderToStaticMarkup\(React\.createElement\(App/, 'static pages must render the shared React App tree');
+assert.match(prerenderSource, /renderToString\(React\.createElement\(App/, 'static pages must render the shared React App tree with the hydration-compatible API');
+const clientSource = await readFile('src/client.tsx', 'utf8');
+assert.match(clientSource, /hydrateRoot\(/, 'client entry must hydrate the server-rendered App');
+const stylesSource = await readFile('src/styles.css', 'utf8');
+assert.match(stylesSource, /\.guide-visual\{margin:30px 0;overflow-x:auto/, 'mobile guide visuals must support horizontal scrolling');
+assert.match(stylesSource, /Swipe or scroll the diagram horizontally/, 'mobile guide visuals must explain the scroll affordance');
 for (const route of routes) {
   const file = route === '/' ? 'dist/index.html' : `dist${route}/index.html`;
   await stat(file);

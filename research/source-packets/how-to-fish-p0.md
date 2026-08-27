@@ -27,7 +27,7 @@ The request called for frame-by-frame analysis. This environment could resolve p
 
 - PC Gamer: sailor tutorial → beer exchange → **Empty Beer Can** bait; food recovery; melee recommendation; dazed attack window; shell hand-in for boat keys; radar recommendation.
 - GamesRadar+: Empty Beer Can bait; straight charge → stars/stun → attack → leave on recovery; shell hand-in / boat keys; radar tablet follow-up.
-- Official Steam announcement: current Patch 1.0.9 (Aug 24) has Easy / Normal / Hard and the described manual/autosave behavior.
+- Official Steam announcements: current Patch 1.0.9 (Aug 24) has Easy / Normal / Hard; Patch 1.0.6 (Aug 23) describes manual Save / Main Menu / Quit points and the one-minute autosave behavior.
 
 ## Cross-check sources
 
