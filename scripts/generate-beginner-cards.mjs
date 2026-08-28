@@ -63,11 +63,11 @@ const cards = [
     file: '07-island-route-en.svg', part: '06', title: 'THE FIVE-ISLAND ROUTE', kicker: 'KEYS, COORDINATES & BOAT',
     lead: 'Hand each boss objective to the key NPC to reveal the next destination.',
     items: [
-      ['1', 'LIGHTHOUSE — ISLAND 1', 'Summon Spider Crab with the Empty Beer Can. Return its Meat to the keeper for Boat Keys; Forest appears as a green Radar marker.'],
+      ['1', 'LIGHTHOUSE — ISLAND 1', 'Summon Spider Crab with the Empty Beer Can. Return its Shell to the keeper for Boat Keys; Forest appears as a green Radar marker.'],
       ['2', 'FOREST — ISLAND 2', 'Give three Leeches to the lake NPC. Defeat Giant Piranha and return its Skeleton; Desert appears as a yellow marker.'],
       ['3', 'DESERT — ISLAND 3', 'Complete the Tourist request for a Carrot. Defeat Pufferfish and return its Fin; Rocks appears as a red marker.'],
       ['4', 'ROCKS — ISLAND 4', 'Catch Tuna with a Professional Boss Lure and place it on land. Defeat Albatross and return its Head for the final coordinates.'],
-      ['5', 'VOLCANO — ISLAND 5', 'Follow the pink marker. Complete the scientist route, defeat the Bowhead Whale chain, and secure the military boat key.'],
+      ['5', 'VOLCANO — ISLAND 5', 'Five native catches → Fish Bucket → Bowhead body/crater → Mutated Bowhead → Whale Fin → scientist → military boat key.'],
     ], footer: 'KEEP THE COORDINATE DRIVE AFTER HAND-IN', accent: '#50d6e8'
   },
   {
@@ -85,11 +85,11 @@ const cards = [
     file: '09-boss-clear-en.svg', part: '08', title: 'FIVE-ISLAND BOSS CLEAR', kicker: 'GET THE COORDINATES. LEAVE THE ARCHIPELAGO.',
     lead: 'Treat every boss as a hand-off: summon, control, defeat, then secure the quest item.',
     items: [
-      ['1', 'LIGHTHOUSE — SPIDER CRAB', 'Summon with the Empty Beer Can. Sidestep its charge, attack during the stun, then return its Meat for the Boat Keys.'],
+      ['1', 'LIGHTHOUSE — SPIDER CRAB', 'Summon with the Empty Beer Can. Sidestep its charge, attack during the stun, then return its Shell for the Boat Keys.'],
       ['2', 'FOREST — GIANT PIRANHA', 'Use the Modified Leech. Clear its smaller attackers, defeat the boss, and return its Skeleton for Desert coordinates.'],
       ['3', 'DESERT — PUFFERFISH', 'Use the Carrot. Keep distance from its rolling attack, then return its Fin for Rocks coordinates.'],
       ['4', 'ROCKS — ALBATROSS', 'Catch Tuna with the Professional Boss Lure and leave it on land. Use cover, defeat Albatross, and return its Head.'],
-      ['5', 'VOLCANO — WHALE FINALE', 'Finish the scientist quest, defeat Bowhead Whale, throw its body into the volcano, then defeat Mutated Bowhead Whale.'],
+      ['5', 'VOLCANO — WHALE FINALE', 'Five native catches → Fish Bucket → Bowhead body/crater → Mutated Bowhead → Whale Fin → scientist → military boat key.'],
     ], footer: '100% COMPLETE — ESCAPE THE ISLANDS', accent: '#ff5d4d'
   },
 ]

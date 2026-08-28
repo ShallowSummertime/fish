@@ -14,6 +14,10 @@ describe('How to Fish content baseline', () => {
   it('has metadata for every required core route', () => {
     ['/','/beginner-guide','/creatures','/bosses','/locations','/locations/lighthouse','/guides/reel-of-fortune','/lures','/bosses/spider-crab','/achievements','/about','/contact','/privacy','/terms'].forEach(path => expect(pageMeta[path]).toBeDefined());
     expect(pageMeta['/'].title).toContain('How to Fish Walkthrough');
+    expect(pageMeta['/locations'].title.length).toBeLessThanOrEqual(60);
+    expect(pageMeta['/guides/reel-of-fortune'].title.length).toBeLessThanOrEqual(60);
+    expect(pageMeta['/bosses'].image).toBe('/images/guides/island-1/08-spider-crab.jpg');
+    expect(pageMeta['/bosses/spider-crab'].image).toBe('/images/guides/island-1/08-spider-crab.jpg');
     expect(achievements).toHaveLength(28);
   });
 });

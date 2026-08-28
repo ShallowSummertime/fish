@@ -56,14 +56,13 @@ const contentGate = async (route, requirements) => {
     assert.match(html, /pcgamer\.com\/games\/sim\/how-to-fish-spider-crab/, `${route} must cite PC Gamer`);
     assert.match(html, /gamesradar\.com\/games\/co-op\/how-to-fish-spider-crab/, `${route} must cite GamesRadar+`);
     assert.match(html, /steamcommunity\.com\/app\/4001890\/announcements/, `${route} must cite the official patch feed`);
-    assert.match(html, /douyin\.com\/search\/%E6%B8%94%E5%8A%9B%E5%85%A8%E5%BC%80/, `${route} must cite the direct-frame Douyin review`);
-    assert.match(html, /xiaohongshu\.com\/explore\/6a8aaf56000000001700b59b/, `${route} must cite the direct-frame Xiaohongshu review`);
-    assert.match(html, /Evidence boundary: the Douyin and Xiaohongshu clips were directly frame-reviewed/, `${route} must state the visual-evidence boundary`);
+    assert.match(html, /Owner-supplied gameplay was used as a private visual cross-check/, `${route} must state the private visual-evidence boundary`);
+    assert.doesNotMatch(html, /douyin|xiaohongshu|modal_id|6a8aaf56000000001700b59b/i, `${route} must not expose social-platform identities or source IDs`);
   }
   for (const src of [...html.matchAll(/<img[^>]+src="([^"]+)"/g)].map(match => match[1])) await access(`public${src}`);
   assert.match(html, /class="article guide-article"/, `${route} must be server-rendered from the shared guide tree`);
 };
-await contentGate('/beginner-guide', { images: 9, sources: false, phrases: ['First 20 minutes', 'Bait and hotspots', 'Make more money', 'Prepare for Spider Crab', 'The complete five-location story route', 'Late-game firepower', 'If the route stalls', 'Empty Beer Can', 'Spider Crab Meat', 'VOLCANO'] });
+await contentGate('/beginner-guide', { images: 9, sources: false, phrases: ['First 20 minutes', 'Bait and hotspots', 'Make more money', 'Prepare for Spider Crab', 'The complete five-location story route', 'Late-game firepower', 'If the route stalls', 'Empty Beer Can', 'Spider Crab Shell', 'VOLCANO'] });
 const beginner = await readFile('dist/beginner-guide/index.html', 'utf8');
 assert.doesNotMatch(beginner, /Claim sources|SOURCES \/ VERIFY/, '/beginner-guide must not render the removed claim-sources section');
 await contentGate('/bosses/spider-crab', { images: 2, sources: true, phrases: ['Summon Spider Crab correctly', 'charge → stun → punish', 'Common mistakes and quick recoveries', 'Empty Beer Can', 'boat keys'] });
@@ -83,4 +82,42 @@ for (const phrase of ['Drip creature','cosmetic skin','Z or C','GOLD GOLD GOLD',
 assert.match(reel, /reel-machine-hero\.png/);
 assert.doesNotMatch(reel, /there is one machine (?:on|per) (?:each|every) island|skins? (?:are|is) shared (?:between|with) players|pity (?:counter|system) guarantees/i);
 await access('public/images/guides/reel-of-fortune/reel-machine-hero.png');
+const spiderText = textFrom(spider);
+const beginnerText = textFrom(beginner);
+const lighthouseText = textFrom(lighthouse);
+const locationsText = textFrom(locationsGuide);
+for (const [route, pageText] of [['/beginner-guide',beginnerText],['/locations/lighthouse',lighthouseText],['/bosses/spider-crab',spiderText],['/locations',locationsText]]) {
+  assert.match(pageText, /Spider Crab Shell/, `${route} must name the current progression item`);
+  assert.match(pageText, /Boat Keys/, `${route} must preserve the Shell to Boat Keys chain`);
+  assert.doesNotMatch(pageText, /Spider Crab Meat|return (?:its|required )?Meat|hand in (?:the required )?Meat/i, `${route} must not contain the obsolete Meat hand-in`);
+}
+assert.match(spiderText, /white (?:bar is )?Spider Crab’s escape timer|white escape timer/i, 'Spider guide must identify the white bar as the boss escape timer');
+assert.doesNotMatch(spiderText, /white bar (?:is|acts as) (?:a |the )?revive|downed-state bar/i, 'Spider guide must not mislabel the boss escape bar as a revive timer');
+assert.match(locationsText, /five native catches[\s\S]*Fish Bucket[\s\S]*Bowhead Whale body[\s\S]*crater[\s\S]*Mutated Bowhead Whale[\s\S]*Whale Fin[\s\S]*military boat key/i, 'Volcano route must include the complete dependency chain');
+assert.match(textFrom(reel), /catch[^.]*kill[^.]*carry[^.]*Drip body/i, 'Reel guide must explain the dead Drip body input');
+assert.match(textFrom(reel), /confirm[^.]*dead|that it is dead/i, 'Reel troubleshooting must verify that the creature is dead');
+for (const base of ['public/images/guides/locations/five-location-route-hero','public/images/guides/reel-of-fortune/reel-machine-hero']) {
+  for (const width of [768,1280]) await access(`${base}-${width}.webp`);
+}
+for (const html of [locationsGuide,reel]) {
+  assert.match(html, /<picture>/, 'generated guide heroes must use picture');
+  assert.match(html, /-768\.webp 768w, [^" ]+-1280\.webp 1280w/, 'generated guide heroes must expose responsive WebP srcset');
+  assert.match(html, /width="1536" height="1024"/, 'generated guide heroes must reserve intrinsic layout space');
+  assert.match(html, /decoding="async" loading="eager" fetchPriority="high"/, 'generated guide heroes must expose loading hints');
+}
+const bossesPage = await readFile('dist/bosses/index.html', 'utf8');
+for (const [route,html] of [['/bosses',bossesPage],['/bosses/spider-crab',spider]]) assert.match(html, /<meta property="og:image" content="https:\/\/howtofishwalkthrough\.com\/images\/guides\/island-1\/08-spider-crab\.jpg">/, `${route} must expose a rights-safe OG image`);
+for (const route of ['/locations','/guides/reel-of-fortune']) {
+  const html = await readFile(`dist${route}/index.html`, 'utf8');
+  const title = html.match(/<title>(.*?)<\/title>/)?.[1].replace(/&amp;/g,'&') || '';
+  assert.ok(title.length <= 60, `${route} title must be at most 60 characters`);
+}
+const beginnerCardGenerator = await readFile('scripts/generate-beginner-cards.mjs', 'utf8');
+const generatedRouteSvg = await readFile('public/images/guides/beginner/localized/07-island-route-en.svg', 'utf8');
+const generatedBossSvg = await readFile('public/images/guides/beginner/localized/09-boss-clear-en.svg', 'utf8');
+for (const [label, source] of [['generator source',beginnerCardGenerator],['07 route SVG',generatedRouteSvg],['09 boss SVG',generatedBossSvg]]) {
+  assert.match(source, /return its Shell[^.]*Boat Keys/i, `${label} must preserve the Spider Crab Shell hand-in`);
+  assert.doesNotMatch(source, /return its Meat|Spider Crab Meat/i, `${label} must not regenerate the obsolete Meat hand-in`);
+  assert.match(source, /Five native catches[\s\S]*Fish Bucket[\s\S]*Bowhead body\/crater[\s\S]*Mutated[\s\S]*Bowhead[\s\S]*Whale Fin[\s\S]*scientist[\s\S]*military boat key/i, `${label} must preserve the complete Volcano dependency`);
+}
 console.log(`verified ${routes.length} crawlable static routes`);
