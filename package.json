@@ -7,6 +7,9 @@
     "dev": "vite",
     "build": "tsc -b && vite build && tsx scripts/prerender.ts",
     "typecheck": "tsc -b --pretty false",
+    "asset-library": "node scripts/build-asset-library.mjs --archive-root \"/Users/wanglu/Desktop/how to fish/固定资产库\"",
+    "asset-library:verify": "node scripts/build-asset-library.mjs --archive-root \"/Users/wanglu/Desktop/how to fish/固定资产库\" --verify",
+    "test:asset-library": "node scripts/test-asset-library.mjs",
     "test": "vitest run && pnpm build && node scripts/assert-static.mjs"
   },
   "dependencies": {
