@@ -7,8 +7,12 @@ import { fileURLToPath } from 'node:url';
 
 const repoRoot = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const desktopRoot = '/Users/wanglu/Desktop/how to fish';
+const weaponReferenceRoot = '/Users/wanglu/Documents/Codex/2026-08-28/ho/outputs/how-to-fish-weapons';
 const maxFullCopyBytes = 100 * 1024 * 1024;
-const knowledgeSeedPath = path.join(repoRoot, 'research/asset-knowledge/first-island.seed.json');
+const knowledgeSeedPaths = [
+  path.join(repoRoot, 'research/asset-knowledge/first-island.seed.json'),
+  path.join(repoRoot, 'research/asset-knowledge/weapons.seed.json'),
+];
 
 function usage() {
   return 'Usage: node scripts/build-asset-library.mjs --archive-root <absolute-path> [--verify]';
@@ -51,6 +55,7 @@ function assertSafeArchiveRoot(archiveRoot) {
     path.join(desktopRoot, '新手指南'),
     path.join(desktopRoot, '第一座岛'),
     path.join(desktopRoot, '攻略1'),
+    weaponReferenceRoot,
   ];
   for (const sourceRoot of sourceRoots) {
     if (isWithin(archiveRoot, sourceRoot)) {
@@ -210,7 +215,7 @@ function mediaType(filePath) {
   const extension = path.extname(filePath).toLowerCase();
   if (['.mp4', '.mov', '.webm'].includes(extension)) return 'video';
   if (['.jpg', '.jpeg', '.png', '.webp', '.gif', '.svg'].includes(extension)) return 'image';
-  if (['.md', '.txt', '.csv', '.json'].includes(extension)) return 'document';
+  if (['.md', '.txt', '.csv', '.json', '.html', '.js'].includes(extension)) return 'document';
   return 'file';
 }
 
@@ -257,6 +262,31 @@ function sourceGroups() {
         archiveRoot: '03-reference/game8',
         role: 'reference', status: 'archived', rights: 'third-party Game8 reference-only media', publishability: false,
         pageUsage: ['research-only'], derivedFrom: null,
+      },
+      {
+        sourceRoot: weaponReferenceRoot,
+        archiveRoot: '03-reference/how-to-fish-weapons',
+        role: 'reference', status: 'archived',
+        rights: 'mixed third-party gameplay captures, community research, and images labeled as official Steam screenshots; reference-only',
+        publishability: false, pageUsage: ['research-only'], derivedFrom: null,
+        metadataForRelative(relativePath) {
+          const steamReferences = new Set([
+            'assets/assault-rifle-official.jpg',
+            'assets/shotgun-official.jpg',
+            'assets/steam-weapon-wall.jpg',
+          ]);
+          const normalizedPath = relativePath.split(path.sep).join('/');
+          if (steamReferences.has(normalizedPath)) {
+            return { rights: 'supplied as an official Dazed Games / Steam screenshot; provenance not independently established; reference-only', publishability: false };
+          }
+          if (normalizedPath.startsWith('assets/') && mediaType(relativePath) === 'image') {
+            return { rights: 'third-party gameplay capture; reference-only and not cleared for publication', publishability: false };
+          }
+          return {
+            rights: 'offline community reference compilation containing third-party claims; research-only',
+            publishability: false,
+          };
+        },
       },
       {
         sourceRoot: path.join(repoRoot, 'research/video-analysis'),
@@ -312,12 +342,14 @@ function sourceGroups() {
         role: 'analysis', status: 'archived', rights: 'project-owned research source packet', publishability: false,
         pageUsage: ['research-only'], derivedFrom: null,
       },
-      {
-        sourcePath: knowledgeSeedPath,
-        archivePath: '04-project/knowledge-seed/first-island.seed.json',
+      ...knowledgeSeedPaths.map((sourcePath) => ({
+        sourcePath,
+        archivePath: `04-project/knowledge-seed/${path.basename(sourcePath)}`,
         role: 'analysis', status: 'archived', rights: 'project-owned structured knowledge seed', publishability: false,
-        pageUsage: ['research-only'], derivedFrom: ['04-project/source-packets/how-to-fish-p0.md'],
-      },
+        pageUsage: ['research-only'], derivedFrom: path.basename(sourcePath) === 'weapons.seed.json'
+          ? ['asset:03-reference/how-to-fish-weapons/assets/weapons.js']
+          : ['asset:04-project/source-packets/how-to-fish-p0.md'],
+      })),
     ],
     sourceOnlyFiles: [
       {
@@ -526,11 +558,12 @@ function catalogReadme() {
 }
 
 function knowledgeColumns() {
-  return ['id', 'category', 'canonicalName', 'aliases', 'imageAssetIds', 'evidenceAssetIds', 'sourceVideo', 'sourceVideoAssetId', 'timestamp', 'attackPattern', 'salePrice', 'buyPrice', 'currency', 'priceContext', 'unlockUse', 'verificationStatus', 'verificationDate', 'notes', 'pageUsage'];
+  return ['id', 'category', 'canonicalName', 'aliases', 'imageAssetIds', 'evidenceAssetIds', 'sourceVideo', 'sourceVideoAssetId', 'timestamp', 'attackPattern', 'salePrice', 'buyPrice', 'currency', 'priceContext', 'unlockUse', 'verificationStatus', 'verificationDate', 'observations', 'notes', 'pageUsage'];
 }
 
 const knowledgeCategories = new Set(['island/location', 'weapon', 'NPC', 'fish/creature', 'boss', 'weapon_attachment', 'bait', 'item', 'shop']);
 const knowledgeStatuses = new Set(['verified', 'unverified']);
+const observationStatuses = new Set(['verified', 'reference-only']);
 const requiredKnowledgeFields = [
   'id', 'category', 'canonicalName', 'aliases', 'imageAssetIds', 'evidenceAssetIds', 'sourceVideo', 'sourceVideoAssetId',
   'timestamp', 'attackPattern', 'salePrice', 'buyPrice', 'currency', 'priceContext', 'unlockUse', 'verificationStatus',
@@ -567,6 +600,30 @@ function validateKnowledgeSchema(knowledge) {
     for (const field of ['salePrice', 'buyPrice']) {
       if (entity[field] !== null && typeof entity[field] !== 'number') throw new Error(`Knowledge entity ${entity.id} has invalid ${field}; use a number or null.`);
     }
+    if (entity.observations !== undefined) {
+      if (!Array.isArray(entity.observations)) throw new Error(`Knowledge entity ${entity.id} has invalid observations.`);
+      for (const observation of entity.observations) {
+        if (!observation || typeof observation !== 'object') throw new Error(`Knowledge entity ${entity.id} has a non-object observation.`);
+        for (const field of ['field', 'value', 'sourceAssetIds', 'sourceUrls', 'status', 'observedAt', 'context']) {
+          if (!Object.hasOwn(observation, field)) throw new Error(`Knowledge entity ${entity.id} observation is missing ${field}.`);
+        }
+        if (typeof observation.field !== 'string' || observation.field.length === 0 || observation.value === null || observation.value === undefined) {
+          throw new Error(`Knowledge entity ${entity.id} observation requires a field and value.`);
+        }
+        for (const field of ['sourceAssetIds', 'sourceUrls']) {
+          if (!Array.isArray(observation[field]) || observation[field].some((value) => typeof value !== 'string' || value.length === 0)) {
+            throw new Error(`Knowledge entity ${entity.id} observation has invalid ${field}.`);
+          }
+        }
+        if (!observationStatuses.has(observation.status)) throw new Error(`Knowledge entity ${entity.id} observation has unsupported status: ${observation.status}`);
+        if (typeof observation.observedAt !== 'string' || observation.observedAt.length === 0 || typeof observation.context !== 'string' || observation.context.length === 0) {
+          throw new Error(`Knowledge entity ${entity.id} observation requires observedAt and context strings.`);
+        }
+        if (observation.sourceAssetIds.length === 0 && observation.sourceUrls.length === 0) {
+          throw new Error(`Knowledge entity ${entity.id} observation requires a durable asset or source URL.`);
+        }
+      }
+    }
     if (entity.verificationStatus === 'verified') {
       const hasDurableEvidence = entity.imageAssetIds.length > 0 || entity.evidenceAssetIds.length > 0 || entity.sourceVideoAssetId !== null;
       if (!hasDurableEvidence) throw new Error(`Verified knowledge entity ${entity.id} requires a durable image, evidence, or sourceVideoAssetId.`);
@@ -592,7 +649,8 @@ function assertKnowledgeReferences(knowledge, assets) {
   validateKnowledgeSchema(knowledge);
   const assetsById = new Map(assets.map((asset) => [asset.id, asset]));
   for (const entity of knowledge.entities) {
-    for (const referencedId of [...(entity.imageAssetIds ?? []), ...(entity.evidenceAssetIds ?? []), ...(entity.sourceVideoAssetId ? [entity.sourceVideoAssetId] : [])]) {
+    const observationAssetIds = (entity.observations ?? []).flatMap((observation) => observation.sourceAssetIds ?? []);
+    for (const referencedId of [...(entity.imageAssetIds ?? []), ...(entity.evidenceAssetIds ?? []), ...(entity.sourceVideoAssetId ? [entity.sourceVideoAssetId] : []), ...observationAssetIds]) {
       const referencedAsset = assetsById.get(referencedId);
       if (!referencedAsset) throw new Error(`Knowledge entity ${entity.id} references an unknown asset ID: ${referencedId}`);
       if (referencedAsset.status === 'archived/superseded') {
@@ -603,14 +661,17 @@ function assertKnowledgeReferences(knowledge, assets) {
 }
 
 async function writeKnowledgeCatalog(archiveRoot, assets) {
-  const seed = JSON.parse(await fs.readFile(knowledgeSeedPath, 'utf8'));
-  const entities = [...seed.entities].sort((left, right) => compareStrings(left.id, right.id));
+  const seeds = await Promise.all(knowledgeSeedPaths.map(async (seedPath) => ({
+    seedPath,
+    seed: JSON.parse(await fs.readFile(seedPath, 'utf8')),
+  })));
+  const entities = seeds.flatMap(({ seed }) => seed.entities).sort((left, right) => compareStrings(left.id, right.id));
   const knowledge = {
-    schemaVersion: seed.schemaVersion,
-    sourceSeedArchivePath: assets.find((asset) => asset.sourcePath === knowledgeSeedPath)?.archivePath ?? null,
-    scope: seed.scope,
+    schemaVersion: Math.max(...seeds.map(({ seed }) => seed.schemaVersion)),
+    sourceSeedArchivePaths: seeds.map(({ seedPath }) => assets.find((asset) => asset.sourcePath === seedPath)?.archivePath ?? null),
+    scopes: seeds.map(({ seed }) => seed.scope),
     entities,
-    coverageGaps: seed.coverageGaps ?? [],
+    coverageGaps: seeds.flatMap(({ seed }) => seed.coverageGaps ?? []),
   };
   assertKnowledgeReferences(knowledge, assets);
   const columns = knowledgeColumns();
@@ -701,6 +762,7 @@ async function main() {
     safeArchiveDirectory(currentArchiveRoot, '02-analysis/island-1'),
     safeArchiveDirectory(currentArchiveRoot, '02-analysis/guide-1'),
     safeArchiveDirectory(currentArchiveRoot, '03-reference/game8'),
+    safeArchiveDirectory(currentArchiveRoot, '03-reference/how-to-fish-weapons'),
     safeArchiveDirectory(currentArchiveRoot, '04-project/source-packets'),
     safeArchiveDirectory(currentArchiveRoot, '04-project/knowledge-seed'),
     safeArchiveDirectory(currentArchiveRoot, '05-published/public-images'),

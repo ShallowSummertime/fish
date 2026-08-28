@@ -125,6 +125,17 @@
       "unlockUse": null,
       "verificationStatus": "verified",
       "verificationDate": "2026-08-28",
+      "observations": [
+        {
+          "field": "communityWeaponProfile",
+          "value": {"unlockLocation": "Lighthouse", "claimedDamageRange": "5 to 60", "claimedPurchasePrice": 24, "currency": "$"},
+          "sourceAssetIds": ["asset:03-reference/how-to-fish-weapons/assets/weapons.js"],
+          "sourceUrls": ["https://tposegaming.com/how-to-fish-gun-guide/", "https://allthings.how/how-to-fish-every-shop-vendor-and-what-to-buy/"],
+          "status": "reference-only",
+          "observedAt": "2026-08-28",
+          "context": "The $24 price independently agrees with the owner-provided Patch 1.0.8 shop frame; location and damage ceiling remain community-reference claims."
+        }
+      ],
       "notes": "The shop listing and captured price are visually legible; damage and attack behavior are not established by this frame.",
       "pageUsage": ["research-only"]
     },
@@ -146,6 +157,17 @@
       "unlockUse": null,
       "verificationStatus": "verified",
       "verificationDate": "2026-08-28",
+      "observations": [
+        {
+          "field": "communityWeaponProfile",
+          "value": {"unlockLocation": "Lighthouse", "claimedDamageRange": "16 to 120", "claimedPurchasePrice": 45, "currency": "$", "upgradeLadder": [[0,16,"—"],[1,18,14],[2,20,28],[3,22,36],[4,24,84],[5,26,190],[6,28,290],[7,32,480],[8,36,810],[9,40,1100],[10,46,1800],[11,54,3100],[12,62,6200],[13,80,14600],[14,100,19250],[15,120,28750]]},
+          "sourceAssetIds": ["asset:03-reference/how-to-fish-weapons/assets/weapons.js"],
+          "sourceUrls": ["https://tposegaming.com/how-to-fish-gun-guide/", "https://how-to-fish.best/guides/weapons-unlock-guide", "https://allthings.how/how-to-fish-every-shop-vendor-and-what-to-buy/"],
+          "status": "reference-only",
+          "observedAt": "2026-08-28",
+          "context": "The $45 price independently agrees with the owner-provided Patch 1.0.8 shop frame; the damage and upgrade ladder remain community-reference claims."
+        }
+      ],
       "notes": "The shop listing and captured price are visually legible; damage and attack behavior are not established by this frame.",
       "pageUsage": ["research-only"]
     },

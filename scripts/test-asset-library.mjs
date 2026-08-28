@@ -54,6 +54,23 @@ try {
     () => validateKnowledgeSchema({ entities: [entity({ verificationStatus: 'unverified', verificationDate: null, pageUsage: ['/public'] })], coverageGaps: [] }),
     /must use only research-only pageUsage/,
   );
+  assert.throws(
+    () => validateKnowledgeSchema({ entities: [entity({ observations: [{ field: 'price' }] })], coverageGaps: [] }),
+    /observation is missing value/,
+  );
+  const referenceObservation = {
+    field: 'communityProfile', value: { claimedPrice: 50 }, sourceAssetIds: ['asset:fixture-observation'],
+    sourceUrls: ['https://example.com/reference'], status: 'reference-only', observedAt: '2026-08-28',
+    context: 'Fixture observation that is not promoted to a verified entity field.',
+  };
+  assert.doesNotThrow(() => validateKnowledgeSchema({ entities: [entity({ observations: [referenceObservation] })], coverageGaps: [] }));
+  assert.throws(
+    () => assertKnowledgeReferences(
+      { entities: [entity({ observations: [referenceObservation] })], coverageGaps: [] },
+      [{ id: 'asset:fixture-image' }],
+    ),
+    /unknown asset ID: asset:fixture-observation/,
+  );
   assert.doesNotThrow(() => assertKnowledgeReferences({ entities: [entity()], coverageGaps: [] }, [{ id: 'asset:fixture-image' }]));
 
   const archiveRoot = path.join(fixtureRoot, 'archive');

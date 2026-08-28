@@ -11,6 +11,7 @@
 - 原始视频**不进入资产库目录**：第一座岛、攻略 1 和所有待审视频仅以原始绝对路径、字节数与 SHA-256 指纹登记在目录中。任何 `MP4`、`MOV` 或 `WEBM` 出现在可归档来源树中都会使工具停止；必须把视频显式登记为 source-only，只归档其分析衍生图。
 - `02-analysis/island-1/` 与 `02-analysis/guide-1/`：由原视频采样生成的关键帧、联系表、分析笔记；`entities/` 保存去掉上下字幕区后的实体证据裁切，并保留来源帧关系。
 - `03-reference/game8/`：Game8 参考图与说明。
+- `03-reference/how-to-fish-weapons/`：离线武器资料包、数据脚本与配套截图。该资料混合社区攻略、第三方游戏截图和官方 Steam 截图，只能用于研究与交叉核验。
 - `04-project/source-packets/`：站点研究源包。
 - `05-published/public-images/`：站点当前使用的原始或生成图片。
 
@@ -49,9 +50,11 @@ node scripts/build-asset-library.mjs --archive-root "/Users/wanglu/Desktop/how t
 
 `00-catalog/asset-manifest.json` 是机器可读的主清单，按稳定路径排序，逐文件记录来源绝对路径、归档相对路径、媒体类型、角色、状态、权利、可发布性、页面用途、字节数、SHA-256/`fingerprint` 与衍生关系。当前资产使用不随物理版本目录变化的逻辑 `asset:` ID；内容更新产生的旧副本保留为 `archived/superseded`，并使用独立的 `asset-history:` ID。历史记录的 `sourcePath` 为 `null`，通过 `historicalProvenance`、`logicalArchivePath` 与 `supersededBy` 指向当前逻辑资产。知识条目不能引用历史 ID。CSV 便于人工筛选；`checksums.sha256` 列出当前和所有已保留历史副本。`--verify` 会检查每份副本（包括历史版本）是否存在且校验和一致，并以 `lstat`/`realpath` 验证所有 source-only（包括 pending）视频仍是 Desktop `how to fish` 根目录内的普通文件、字节数和指纹，不要求也不会寻找视频副本。
 
-`research/asset-knowledge/first-island.seed.json` 是可审阅的实体知识种子；工具会归档它，并输出 `00-catalog/knowledge-manifest.json` 与 CSV。每条实体都支持岛屿/地点、武器、NPC、鱼类/生物、Boss、武器附件、饵料、物品和商店等分类，并记录规范名、别名、图像/证据资产 ID、可选的 source-only 视频资产 ID 与时间戳、攻击方式、买卖价与适用语境、解锁/用途、核验状态/日期、备注及页面用途。未知值必须是 `null`，核验状态只能是 `verified` 或 `unverified`；不得猜测价格、精确名称或战斗数值。每条已核验实体至少需要一个可追溯的图像、证据或 source-only 视频资产 ID；自由文本 `sourceVideo` 只是说明，永远不能单独作为核验依据。工具会验证所有图像、证据和视频资产 ID 都存在于文件清单中。
+`research/asset-knowledge/first-island.seed.json` 与 `research/asset-knowledge/weapons.seed.json` 是可审阅的实体知识种子；工具会分别归档并合并输出 `00-catalog/knowledge-manifest.json` 与 CSV。每条实体都支持岛屿/地点、武器、NPC、鱼类/生物、Boss、武器附件、饵料、物品和商店等分类，并记录规范名、别名、图像/证据资产 ID、可选的 source-only 视频资产 ID 与时间戳、攻击方式、买卖价与适用语境、解锁/用途、核验状态/日期、备注及页面用途。未知值必须是 `null`，核验状态只能是 `verified` 或 `unverified`；不得猜测价格、精确名称或战斗数值。每条已核验实体至少需要一个可追溯的图像、证据或 source-only 视频资产 ID；自由文本 `sourceVideo` 只是说明，永远不能单独作为核验依据。工具会验证所有图像、证据和视频资产 ID 都存在于文件清单中。
 
-知识目录中的 `coverageGaps` 是待补证据列表，而不是可发布的事实。第一座岛目前可以可靠回答 Lighthouse、Lighthouse Keeper、Clam、Fishing rod、Empty Beer Can、Spider Crab、Shell、Boat Keys、Radar 和 Reel of Fortune 的可见身份/用途；另有来自 Patch 1.0.8 原片的 Brass Knuckles（$24）、Knife（$45）与 Hot Dog（$1）商店截图。这三个价格只作为带版本语境的历史观测，发布前必须按当前补丁复核。Game8 图只可作参考证据；攻略 1 所见的 Drip 仍只保留为 `unverified`、`research-only`。所有未证实的鱼名、附件、价格和战斗指标保持为空，先补可追溯证据再更新种子。
+社区资料中的具体数值使用实体内的 `observations` 保存。每条观察都必须记录字段、原始值、来源资产/URL、采集日期、语境和状态；`reference-only` 观察可以完整保留价格、伤害、升级阶梯等待核验数据，但不能自动提升到实体的正式价格、伤害或公开页面用途。只有获得当前补丁的自有游戏截图或同等可靠证据后，才能把观察升级为 `verified` 并更新正式字段。
+
+知识目录中的 `coverageGaps` 是待补证据列表，而不是可发布的事实。第一座岛目前可以可靠回答 Lighthouse、Lighthouse Keeper、Clam、Fishing rod、Empty Beer Can、Spider Crab、Shell、Boat Keys、Radar 和 Reel of Fortune 的可见身份/用途；另有来自 Patch 1.0.8 原片的 Brass Knuckles（$24）、Knife（$45）与 Hot Dog（$1）商店截图。这三个价格只作为带版本语境的历史观测，发布前必须按当前补丁复核。武器资料包补充登记了 Dynamite、Pistol、Shotgun、SMG、Sniper Rifle、Assault Rifle 和六种附件，以及社区声称的价格、伤害和升级阶梯；它们全部保持 `unverified`、`reference-only`，配图也不可直接发布。Game8 图只可作参考证据；攻略 1 所见的 Drip 仍只保留为 `unverified`、`research-only`。所有未证实的鱼名、附件、价格和战斗指标保持为空，先补可追溯证据再更新种子。
 
 ## 路径安全
 
