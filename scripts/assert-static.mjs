@@ -179,10 +179,23 @@ const privacy = await readFile("dist/privacy/index.html", "utf8");
 for (const phrase of [
   "Google AdSense",
   "local storage",
+  "Email communications",
+  "email providers",
   "Google-certified consent management platform",
   "My Ad Center",
 ])
   assert.match(privacy, new RegExp(phrase));
+const contact = await readFile("dist/contact/index.html", "utf8");
+for (const phrase of [
+  "Private contact",
+  "mailto:likaichina1995@gmail.com",
+  "GitHub issues are public",
+  "Do not send passwords",
+])
+  assert.match(contact, new RegExp(phrase));
+const terms = await readFile("dist/terms/index.html", "utf8");
+assert.match(terms, /Rights and takedown requests/);
+assert.match(terms, /privately by email/);
 const about = await readFile("dist/about/index.html", "utf8");
 for (const path of ["/about", "/contact", "/privacy", "/terms"])
   assert.match(about, new RegExp(`href="${path}"`));

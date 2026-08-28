@@ -865,12 +865,12 @@ export const pageMeta: Record<
   "/contact": {
     title: "Contact How to Fish Walkthrough",
     description:
-      "Report a correction, broken page, or rights concern to the independent How to Fish Walkthrough editorial team.",
+      "Privately report a correction, privacy question, accessibility problem, broken page, or rights concern to How to Fish Walkthrough.",
   },
   "/privacy": {
     title: "Privacy Policy | How to Fish Walkthrough",
     description:
-      "Read the How to Fish Walkthrough privacy policy, including local checklist storage, cookies, advertising, and user choices.",
+      "Read the How to Fish Walkthrough privacy policy, including email communications, local storage, cookies, advertising, and user choices.",
   },
   "/terms": {
     title: "Terms & Disclaimer | How to Fish Walkthrough",

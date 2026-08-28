@@ -76,8 +76,16 @@
 - 结论：production-verified。
 ## 0.6.1 — 2026-08-28
 
-- 环境：本地验证完成，等待 Vercel Production 发布。
+- 环境：Vercel Production，主域 `https://howtofishwalkthrough.com`。
 - 变更：全站删除 Claim sources、Sources / Verify、route sources 和 evidence boundary 可见区块；正文、攻略步骤和相关推荐不变。
 - SEO：Achievements description 不再承诺 linked sources；16 路由增加无来源面板回归门禁。
 - 验证：Vitest、TypeScript、Vite build、16 路由预渲染与全站静态扫描通过。
-- 结论：local-verified，等待生产验证与 Commit 号。
+- Commit：`4917740`。
+- 结论：production-verified；16 个公开路由均未发现已删除的来源面板或标题。
+
+## 0.6.2 — 2026-08-29
+
+- 目标：为隐私、版权、无障碍和事实纠错提供不公开的站长联系渠道。
+- 变更：Contact 增加站长确认的私人邮箱，并将 GitHub Issues 明确限定为公开、非敏感技术反馈；Privacy 补充邮件数据处理、用途和保留说明；Terms 指向私人版权下架通道。
+- 门禁：静态构建必须包含私人邮箱入口、GitHub 公开警示、邮件隐私披露和版权请求路径。
+- 环境：本地实施，等待测试与生产发布。

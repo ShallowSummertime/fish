@@ -3124,9 +3124,25 @@ function Contact() {
         accessibility problems, privacy questions, or rights concerns.
       </p>
       <section>
-        <h2>Best contact channel</h2>
+        <h2>Private contact</h2>
         <p>
-          Open a public issue in the project repository:{" "}
+          Email{" "}
+          <a href="mailto:likaichina1995@gmail.com?subject=How%20to%20Fish%20Walkthrough%20report">
+            likaichina1995@gmail.com
+          </a>{" "}
+          for factual corrections, privacy requests, accessibility problems,
+          or rights and takedown concerns. Email correspondence is not posted
+          publicly. Include the affected page URL, the sentence or image at
+          issue, your evidence, and the game version when relevant. Do not send
+          passwords, payment information, government identifiers, or other
+          unnecessary sensitive data.
+        </p>
+      </section>
+      <section>
+        <h2>Public technical reports</h2>
+        <p>
+          For non-sensitive broken links or technical errors, you may instead
+          open a public issue in the project repository:{" "}
           <a
             href="https://github.com/ShallowSummertime/fish/issues"
             target="_blank"
@@ -3134,9 +3150,8 @@ function Contact() {
           >
             How to Fish Walkthrough issues ↗
           </a>
-          . Include the affected URL, the sentence or image at issue, your
-          evidence, and the game version when relevant. Do not post private
-          account information.
+          . GitHub issues are public, so never post personal information,
+          private correspondence, or confidential rights documentation there.
         </p>
       </section>
       <section>
@@ -3155,7 +3170,7 @@ function Privacy() {
   return (
     <article className="article policy-page">
       <Crumb>Privacy Policy</Crumb>
-      <p className="eyebrow">LAST UPDATED AUGUST 28, 2026</p>
+      <p className="eyebrow">LAST UPDATED AUGUST 29, 2026</p>
       <h1>
         Privacy
         <br />
@@ -3172,6 +3187,18 @@ function Privacy() {
           you mark as caught. That data remains on your device, is not tied to
           an account, and can be cleared through your browser settings or by
           clearing site data.
+        </p>
+      </section>
+      <section>
+        <h2>Email communications</h2>
+        <p>
+          If you contact us by email, we receive the address you use, your
+          message, and any information or attachments you choose to include.
+          We use that information only to review and respond to your request,
+          investigate corrections, or handle privacy and rights concerns. Email
+          is processed by the sender&apos;s and recipient&apos;s email providers and
+          retained only as reasonably needed for those purposes or legal and
+          security obligations. Please do not send unnecessary sensitive data.
         </p>
       </section>
       <section>
@@ -3237,7 +3264,7 @@ function Terms() {
   return (
     <article className="article policy-page">
       <Crumb>Terms &amp; Disclaimer</Crumb>
-      <p className="eyebrow">LAST UPDATED AUGUST 28, 2026</p>
+      <p className="eyebrow">LAST UPDATED AUGUST 29, 2026</p>
       <h1>
         Terms &amp;
         <br />
@@ -3277,12 +3304,11 @@ function Terms() {
         </p>
       </section>
       <section>
-        <h2>Sources and takedown requests</h2>
+        <h2>Rights and takedown requests</h2>
         <p>
-          External sources are linked for verification; links do not transfer
-          ownership or imply endorsement. Rights holders can submit a specific
-          removal or correction request through the{" "}
-          <a href="/contact">contact page</a>.
+          Links to other sites do not transfer ownership or imply endorsement.
+          Rights holders can submit a specific removal or correction request
+          privately by email through the <a href="/contact">contact page</a>.
         </p>
       </section>
     </article>

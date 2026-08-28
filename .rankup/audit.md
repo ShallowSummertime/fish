@@ -26,7 +26,7 @@
 - Fixed performance: converted all nine Beginner Guide cards from 17.34 MB of PNGs to 920 KB of WebP assets, added dimensions and decoding hints, and lazy-loads eight off-screen carousel slides.
 - Fixed structured data: Article is now limited to editorial guides; hubs use CollectionPage, the homepage uses WebSite, and trust pages use AboutPage, ContactPage, or WebPage.
 - Regression gate: build now enforces content depth for Bosses/Lures/Achievements, all 28 achievement conditions, source links, optimized carousel budget, route-appropriate schema, correct gallery media, and no AdSense runtime before CMP configuration.
-- Remaining external conditions: Google must approve the site; a Google-certified CMP must be configured before applicable ad serving; no private contact address was invented, so sensitive reports still require an owner-supplied private channel.
+- Remaining external conditions: Google must approve the site and a Google-certified CMP must be configured before applicable ad serving. The owner-approved private email channel is now published for sensitive reports.
 
 ## 2026-08-28 — Static indexing and homepage depth gate
 
