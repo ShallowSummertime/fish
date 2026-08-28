@@ -66,9 +66,11 @@
 - 结论：production-verified；GSC sitemap 当前成功读取但仍显示 13 个已发现页面，等待重新提交以刷新 16 URL 状态。
 ## 0.6.0 — 2026-08-28
 
-- 环境：本地验证完成，等待 Vercel Production 发布。
+- 环境：Vercel Production，主域 `https://howtofishwalkthrough.com`。
 - 变更：`/achievements` 升级为 28 项带官方图标的交互百科，加入搜索、分类、位置、难度、Steam 全球完成率快照和本地完成进度。
 - SEO：28 个完整卡片和图标进入静态 HTML，并输出 28 项 ItemList；页面 OG 图改为成就素材。
 - 资产：28 张 WebP 共约 168 KB，固定资产库共 359 项，已归档 351 项，待处理 8 项，校验失败 0 项。
 - 验证：Vitest、TypeScript、Vite build、16 路由预渲染、静态断言与固定资产校验通过。
-- 结论：local-verified，等待生产验证与 Commit 号。
+- 生产验证：`/achievements` 返回 200；Title 38 字符；28 张图、28 个完成率、28 项 ItemList、canonical 与 sitemap 均正确，所有图标 URL 返回 200。
+- Commit：`8e5cb26`。
+- 结论：production-verified。
