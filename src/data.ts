@@ -88,19 +88,49 @@ export const sourceNotes = [
   { label: 'Destructoid walkthrough', url: 'https://www.destructoid.com/complete-how-to-fish-game-walkthrough-100-completion/' },
   { label: 'Destructoid boss guide', url: 'https://www.destructoid.com/all-bosses-in-how-to-fish-and-how-to-defeat-them/' }
 ];
+export const homeFaqs = [
+  {
+    question: 'Is this website about the How to Fish game or real-world fishing?',
+    answer: 'This is an independent walkthrough for How to Fish, the 2026 co-op fishing simulator by Dazed Games. Every guide is written around the game’s creatures, weapons, lures, bosses, NPC hand-ins, and five-location story route. It is not advice about real fishing, boats, tackle, or wildlife.'
+  },
+  {
+    question: 'How many main locations are in How to Fish?',
+    answer: 'The main progression has five accessible locations: Lighthouse, Forest, Desert, Rocks, and Volcano. Lighthouse is available at the start, so some players describe the route as four unlockable islands. This walkthrough calls it a five-location route because all five stops contain required objectives. Developer Island is optional and is not part of the normal story chain.'
+  },
+  {
+    question: 'What should a new player do first?',
+    answer: 'Learn the Lighthouse survival and cash loop, buy the first rod, keep one recovery item, and finish the keeper’s early requests. Then obtain the Empty Beer Can, use it to summon Spider Crab, fight during the dazed window, and protect the Spider Crab Shell until it has been handed in for Boat Keys. Buy the Radar before sailing away.'
+  },
+  {
+    question: 'What is the difference between normal lures and boss bait?',
+    answer: 'Normal lure tiers expand the ordinary creature pool for a location and are mainly used for money, collection, and NPC requests. Named bait or boss lures start specific encounters and progression chains. Examples include the Empty Beer Can for Spider Crab, Modified Leech for Giant Piranha, Carrot for Pufferfish, and Fish Bucket for Bowhead Whale.'
+  },
+  {
+    question: 'Why did my next island marker not appear?',
+    answer: 'Defeating a boss is usually only one part of the unlock. Recover the unique boss item, return it to the correct NPC, finish the dialogue or hand-in, and then check the Radar. Selling, cooking, losing, or leaving behind a unique drop can make the route appear stuck even though the fight itself is complete.'
+  },
+  {
+    question: 'Does the site include all 49 creatures?',
+    answer: 'Yes. The creature encyclopedia covers 49 ordinary, boss, and special creatures with their location, lure or summon item, progression tier, and reported base value. The checklist is stored locally in your browser, does not require an account, and does not change your Steam achievements or game save.'
+  },
+  {
+    question: 'How are these walkthroughs checked after patches?',
+    answer: 'Detailed routes are built from owner-supplied gameplay research, clean explanatory images, official patch announcements, and independent written cross-checks. Pages show a checked date or version boundary when that context matters. Route dependencies are treated as more stable than prices, weapon damage, key bindings, and other numbers that can change between patches.'
+  }
+];
 export const pageMeta: Record<string, {title:string; description:string; image?:string}> = {
-  '/': { title: 'How to Fish Walkthrough & Guides Wiki - All Bosses, Fish & Islands | How to Fish Walkthrough', description: 'Complete How to Fish Game wiki and walkthrough: boss guides, all creatures, locations, lures, and a beginner route for the 2026 Dazed Games fishing sim.' },
-  '/beginner-guide': { title: 'How to Fish Game Beginner Guide - Full Five-Island Route | How to Fish Walkthrough', description: 'A step-by-step How to Fish Game beginner walkthrough covering the Lighthouse opening, Spider Crab, upgrades, survival tips, and the five-island route to Volcano.', image: '/images/guides/beginner/localized/01-beginner-cover-en.png' },
-  '/creatures': { title: 'All 49 How to Fish Game Creatures, Lures & Values | How to Fish Walkthrough', description: 'Illustrated How to Fish Game creature encyclopedia with all 49 creatures, locations, lures, reported base values, bosses, and a saved checklist.', image: '/images/creatures/encyclopedia-overview.webp' },
+  '/': { title: 'How to Fish Walkthrough & Game Guides Wiki', description: 'Complete How to Fish Game wiki and walkthrough: boss guides, all creatures, locations, lures, and a beginner route for the 2026 Dazed Games fishing sim.' },
+  '/beginner-guide': { title: 'How to Fish Beginner Guide: Five-Location Route', description: 'A step-by-step How to Fish Game beginner walkthrough covering the Lighthouse opening, Spider Crab, upgrades, survival tips, and the five-location route to Volcano.', image: '/images/guides/beginner/localized/01-beginner-cover-en.png' },
+  '/creatures': { title: 'All 49 How to Fish Creatures, Lures & Values', description: 'Illustrated How to Fish Game creature encyclopedia with all 49 creatures, locations, lures, reported base values, bosses, and a saved checklist.', image: '/images/creatures/encyclopedia-overview.webp' },
   '/bosses': { title: 'How to Fish Boss Guide & Progression | HTF Wiki', description: 'How to Fish Game boss guide: every special creature, summoning item, and progression route.', image: '/images/guides/island-1/08-spider-crab.jpg' },
   '/locations': { title: 'How to Fish Five-Island Route Guide | HTF Wiki', description: 'Deep five-stop How to Fish Game route: every Lighthouse, Forest, Desert, Rocks and Volcano objective, boss, hand-in, marker and failure recovery.', image: '/images/guides/locations/five-location-route-hero.png' },
-  '/locations/lighthouse': { title: 'How to Fish Lighthouse Island Guide - First Island Walkthrough | How to Fish Walkthrough', description: 'Complete How to Fish Game Lighthouse walkthrough: survival HUD, Clam cash route, first rod, catch controls, upgrades, Empty Beer Can, Spider Crab, Boat Keys, and Radar.', image: '/images/guides/island-1/08-spider-crab.jpg' },
+  '/locations/lighthouse': { title: 'How to Fish Lighthouse Guide: First Location', description: 'Complete How to Fish Game Lighthouse walkthrough: survival HUD, Clam cash route, first rod, catch controls, upgrades, Empty Beer Can, Spider Crab, Boat Keys, and Radar.', image: '/images/guides/island-1/08-spider-crab.jpg' },
   '/locations/rocks': { title: 'How to Fish Rocks Island Guide | HTF Wiki', description: 'Complete Rocks Island 4 walkthrough for How to Fish Game: Professional catches, Tuna, Albatross cover strategy, Head hand-in, and Volcano coordinates.', image: '/images/creatures/encyclopedia-professional.webp' },
   '/locations/volcano': { title: 'How to Fish Volcano Island Guide | HTF Wiki', description: 'Complete Volcano Island 5 walkthrough for How to Fish Game: Scientific catches, Scientist quest, Bowhead Whale, crater carry, Mutated Bowhead fight, and Whale Fin ending.', image: '/images/guides/volcano/01-volcano-arrival.png' },
   '/guides/reel-of-fortune': { title: 'How to Fish Reel of Fortune Guide | HTF Wiki', description: 'Use one rare Drip creature at the Reel of Fortune, identify the random cosmetic skin, equip it with Z or C, and understand GOLD GOLD GOLD.', image: '/images/guides/reel-of-fortune/reel-machine-hero.png' },
-  '/lures': { title: 'How to Fish Game Lures & Bait Guide | How to Fish Walkthrough', description: 'How to Fish Game lure and bait guide covering the four progression pools and special boss summons.' },
+  '/lures': { title: 'How to Fish Lures & Bait Guide', description: 'How to Fish Game lure and bait guide covering the four progression pools and special boss summons.' },
   '/bosses/spider-crab': { title: 'How to Beat Spider Crab | HTF Wiki', description: 'Beat the How to Fish Game Spider Crab: get the Empty Beer Can, dodge its charge, punish the stun, turn in the shell, and use the boat keys.', image: '/images/guides/island-1/08-spider-crab.jpg' },
-  '/achievements': { title: 'How to Fish Game Achievements Guide - All 28 | How to Fish Walkthrough', description: 'Complete list of all 28 How to Fish Game achievements, organized into a clean completion checklist.' },
+  '/achievements': { title: 'How to Fish Achievements Guide: All 28', description: 'Complete list of all 28 How to Fish Game achievements, organized into a clean completion checklist.' },
   '/about': { title: 'About How to Fish Walkthrough - Independent Game Guide', description: 'Learn how How to Fish Walkthrough researches, verifies, illustrates, and updates its independent player-made game guides.' },
   '/contact': { title: 'Contact How to Fish Walkthrough', description: 'Report a correction, broken page, or rights concern to the independent How to Fish Walkthrough editorial team.' },
   '/privacy': { title: 'Privacy Policy | How to Fish Walkthrough', description: 'Read the How to Fish Walkthrough privacy policy, including local checklist storage, cookies, advertising, and user choices.' },

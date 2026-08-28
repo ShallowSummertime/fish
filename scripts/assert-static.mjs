@@ -3,6 +3,7 @@ import assert from 'node:assert/strict';
 
 const domain = 'https://howtofishwalkthrough.com';
 const routes = ['/', '/beginner-guide', '/creatures', '/bosses', '/locations', '/locations/lighthouse', '/locations/rocks', '/locations/volcano', '/guides/reel-of-fortune', '/lures', '/bosses/spider-crab', '/achievements', '/about', '/contact', '/privacy', '/terms'];
+const textFrom = html => html.replace(/<script[\s\S]*?<\/script>/g, ' ').replace(/<style[\s\S]*?<\/style>/g, ' ').replace(/<[^>]+>/g, ' ').replace(/&[a-z#0-9]+;/gi, ' ').replace(/\s+/g, ' ').trim();
 const prerenderSource = await readFile('scripts/prerender.ts', 'utf8');
 assert.match(prerenderSource, /renderToString\(React\.createElement\(App/, 'static pages must render the shared React App tree with the hydration-compatible API');
 const clientSource = await readFile('src/client.tsx', 'utf8');
@@ -26,6 +27,8 @@ for (const route of routes) {
   assert.match(html, /application\/ld\+json/);
   assert.match(html, /<meta name="robots" content="index,follow,max-image-preview:large">/);
   assert.doesNotMatch(html, /<div id="root"><\/div>/);
+  const renderedTitle = html.match(/<title>(.*?)<\/title>/)?.[1].replace(/&amp;/g, '&') || '';
+  assert.ok(renderedTitle.length <= 60, `${route} final rendered title must be at most 60 characters`);
 }
 const creatures = await readFile('dist/creatures/index.html', 'utf8');
 assert.match(creatures, /All 49 How to Fish/);
@@ -34,6 +37,11 @@ assert.match(creatures, /Creature encyclopedia overview/);
 assert.match(creatures, /Drip variants/);
 assert.match(creatures, /encyclopedia-overview\.webp/);
 const home = await readFile('dist/index.html', 'utf8');
+assert.ok(textFrom(home).split(/\s+/).length >= 1200, 'homepage must expose at least 1200 visible words in initial HTML');
+assert.match(home, /<div id="root">[\s\S]*<h1>How to Fish[\s\S]*Walkthrough &amp; Guides/, 'homepage H1 must exist inside the initial static root');
+assert.match(home, /How the walkthrough works/i, 'homepage must include the expanded route manual in initial HTML');
+assert.match(home, /How to Fish Game FAQ/i, 'homepage must include visible FAQ content in initial HTML');
+assert.match(home, /"@type":"FAQPage"/, 'homepage must expose FAQPage structured data that matches the visible FAQ');
 assert.match(home, /aria-label="Original How to Fish gameplay field images"/, 'homepage must expose the original-material carousel');
 assert.match(home, /href="\/locations\/rocks"/, 'homepage must link directly to the Rocks deep guide');
 assert.match(home, /href="\/locations\/volcano"/, 'homepage must link directly to the Volcano deep guide');
@@ -47,7 +55,6 @@ const about = await readFile('dist/about/index.html', 'utf8');
 for (const path of ['/about','/contact','/privacy','/terms']) assert.match(about, new RegExp(`href="${path}"`));
 const spider = await readFile('dist/bosses/spider-crab/index.html', 'utf8');
 assert.match(spider, /Empty Beer Can/);
-const textFrom = html => html.replace(/<script[\s\S]*?<\/script>/g, ' ').replace(/<style[\s\S]*?<\/style>/g, ' ').replace(/<[^>]+>/g, ' ').replace(/&[a-z#0-9]+;/gi, ' ').replace(/\s+/g, ' ').trim();
 const contentGate = async (route, requirements) => {
   const html = await readFile(`dist${route}/index.html`, 'utf8');
   assert.ok(textFrom(html).split(' ').length >= 700, `${route} must have at least 700 visible words`);

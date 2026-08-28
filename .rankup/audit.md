@@ -1,5 +1,14 @@
 # Audit
 
+## 2026-08-28 — Static indexing and homepage depth gate
+
+- Verified architecture: all 16 indexable routes are rendered with `renderToString` during the production build and written as route-specific HTML before deployment; the site is SSG/static prerendered rather than a CSR-only shell.
+- Verified local output: the homepage H1 begins at byte 5,884, the initial HTML contains 1,622 visible words, and visible FAQ content matches the emitted FAQPage JSON-LD.
+- Fixed: compressed every final rendered Title to 60 characters or fewer; the build now checks all 16 routes rather than a small route subset.
+- Fixed: expanded the homepage with a route manual, first-hour priorities, late-game dependency guidance, and seven intent-specific FAQs.
+- Regression gate: production build fails if a route has an empty root, a Title over 60 characters, or the homepage drops below 1,200 visible words / loses its static H1, route manual, FAQ, or FAQ schema.
+- External follow-up: publish and verify the same properties on production, then refresh GSC sitemap and URL inspection. BacklinkDirs is not eligible without a permanent third-party Submit Link and reciprocal-link authorization; no eligibility facts may be invented.
+
 ## 2026-08-28 — AdSense pre-application remediation
 
 - AdSense account evidence: `howtofishwalkthrough.com` is present in Sites with status `Needs review`; ownership flow selected `ads.txt`; dashboard reported `Not found` before this release.
