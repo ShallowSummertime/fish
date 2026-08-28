@@ -8,6 +8,7 @@ describe('How to Fish content baseline', () => {
     expect(creatures.find(c => c.name === 'Voxelfish')).toMatchObject({ island: 'Rocks', lure: 'Professional Lure', value: 340 });
     expect(creatures.find(c => c.name === 'Mutated Bowhead Whale')).toMatchObject({ island: 'Volcano', value: 15000 });
     expect(bosses).toHaveLength(11);
+    expect(bosses.every(b => b.fight.length > 40 && b.reward.length > 35 && b.recovery.length > 35)).toBe(true);
   });
   it('models the five main locations correctly', () => {
     expect(locations).toHaveLength(5);
@@ -22,7 +23,10 @@ describe('How to Fish content baseline', () => {
     expect(pageMeta['/guides/reel-of-fortune'].title.length).toBeLessThanOrEqual(60);
     expect(pageMeta['/bosses'].image).toBe('/images/guides/island-1/08-spider-crab.jpg');
     expect(pageMeta['/bosses/spider-crab'].image).toBe('/images/guides/island-1/08-spider-crab.jpg');
-    expect(pageMeta['/creatures'].image).toBe('/images/creatures/encyclopedia-overview.webp');
+    expect(pageMeta['/creatures'].image).toBe('/images/creatures/encyclopedia-early.webp');
     expect(achievements).toHaveLength(28);
+    expect(new Set(achievements.map(a => a.name)).size).toBe(28);
+    expect(achievements.every(a => a.official && a.category && a.route.length > 45)).toBe(true);
+    expect(achievements.find(a => a.name === 'Bean')?.caution).toContain('patched');
   });
 });

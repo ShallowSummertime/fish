@@ -1,5 +1,16 @@
 # Audit
 
+## 2026-08-28 — AdSense low-value remediation follow-up
+
+- Fixed `/achievements`: replaced the 28-name list with all 28 official Steam conditions, practical attempt routes, cleanup categories, and current-build cautions for disputed or patched advice.
+- Fixed `/lures`: published the four regular lure pools with confirmed target lists, route locations, all 11 special summons, story-item dependencies, owner-provided visual evidence, and cited verification sources.
+- Fixed `/bosses`: every special encounter now includes a fight plan, reward or progression result, and recovery step; the page is no longer a one-line entity board.
+- Fixed media quality: removed the unrelated creature-gallery overview image, replaced the unclear Spider Crab frame, recropped the keeper/Empty Beer Can exchange, and corrected Lighthouse captions so they describe visible evidence.
+- Fixed performance: converted all nine Beginner Guide cards from 17.34 MB of PNGs to 920 KB of WebP assets, added dimensions and decoding hints, and lazy-loads eight off-screen carousel slides.
+- Fixed structured data: Article is now limited to editorial guides; hubs use CollectionPage, the homepage uses WebSite, and trust pages use AboutPage, ContactPage, or WebPage.
+- Regression gate: build now enforces content depth for Bosses/Lures/Achievements, all 28 achievement conditions, source links, optimized carousel budget, route-appropriate schema, correct gallery media, and no AdSense runtime before CMP configuration.
+- Remaining external conditions: Google must approve the site; a Google-certified CMP must be configured before applicable ad serving; no private contact address was invented, so sensitive reports still require an owner-supplied private channel.
+
 ## 2026-08-28 — Static indexing and homepage depth gate
 
 - Verified architecture: all 16 indexable routes are rendered with `renderToString` during the production build and written as route-specific HTML before deployment; the site is SSG/static prerendered rather than a CSR-only shell.
@@ -15,7 +26,7 @@
 - Fixed: added the exact authorized seller record for publisher `pub-5329936944958399` at `/ads.txt`.
 - Fixed: added substantive About, Contact, Privacy, and Terms/Disclaimer routes and linked them from every footer.
 - Fixed: privacy policy now explains browser-local checklist storage, hosting logs, Google AdSense cookies/identifiers, My Ad Center choices, and the need for a Google-certified CMP where consent is required.
-- Fixed: expanded the Bosses, Locations, Lures, and Achievements hubs with actionable workflows, evidence boundaries, and internal links instead of leaving list-only pages.
+- Superseded by the low-value follow-up above: Bosses, Lures, and Achievements now have route-level guidance and automated depth gates rather than lightweight workflow copy.
 - Fixed: emitted `index,follow,max-image-preview:large` in prerendered and client metadata; preserved real host-level 404 behavior.
 - Verified locally: 13 prerendered routes, exact ads.txt content, trust-page footer links, canonical/OG/Twitter/JSON-LD/robots metadata, image assets, and zero broken internal route links; `pnpm test` passed.
 - Remaining account action: verify ads.txt after production propagation, configure a Google-certified CMP before serving ads in regions where consent is required, complete payment/account activation, and submit site review.

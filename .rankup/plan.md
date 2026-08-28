@@ -10,7 +10,7 @@
 | P0 | Boss/Location/Lure Hub | done | 实体数据和内链一致 |
 | P0 | 重写 Spider Crab 实战攻略 | done | 具备版本日期、准备清单、召唤步骤、战斗循环、失败处理、任务交付与原创图解 |
 | P0 | 重写 Beginner 第一小时路线 | done | 五地点路线与九图轮播已发布，步骤和结果状态可执行 |
-| P0 | 建立内容发布门禁 | pending | 新攻略必须通过事实来源、步骤完整性、图片权利、失败状态和版本日期检查，不以 TDK/字数作为完成标准 |
+| P0 | 建立内容发布门禁 | done | Boss/Lure/Achievement 深度、事实来源、步骤、失败状态、图片权利、图片性能、Schema 与 CMP 前禁投广告均有阻断断言 |
 | P1 | SEO 基础设施 | done | canonical/OG/schema/sitemap/robots 齐全 |
 | P1 | 补强 Boss/Location/Lure/Achievement hubs | done | 增加行动流程、验证边界、故障恢复与深度攻略内链 |
 | P1 | Rocks 第四岛深度攻略 | done | 自有图鉴图片、10 条 Professional 捕获物、Tuna/Albatross 战斗步骤、Head 交付、Volcano 解锁与移动端 QA 全部通过 |

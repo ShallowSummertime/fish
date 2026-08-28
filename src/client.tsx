@@ -3,6 +3,7 @@ import { App } from './main';
 import './styles.css';
 import './creatures.css';
 import './rocks.css';
+import './quality.css';
 
 const root = document.getElementById('root')!;
 if (root.hasChildNodes()) hydrateRoot(root, <App />);

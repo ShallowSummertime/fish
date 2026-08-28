@@ -2,6 +2,8 @@
 
 Scope: `https://howtofishwalkthrough.com` after release `cdb42e5`.
 
+> Follow-up remediation: release 0.6.0 supersedes the earlier content-depth assessment. Achievements, Lures, and Bosses now have route-level guidance and blocking depth tests; the Beginner carousel is optimized; mismatched media and universal Article schema are corrected. AdSense runtime remains intentionally absent until approval and certified-CMP configuration. See `audit.md` for the current delta and production-verification state.
+
 Evidence checked: production responses, 13 prerendered routes, repository source and tests, live AdSense Sites status, live Search Console ownership/index inspection, public DNS, robots.txt, sitemap.xml, ads.txt, privacy/trust pages, and Google policy documentation refreshed on 2026-08-28.
 
 ## Decision

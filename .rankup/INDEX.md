@@ -25,3 +25,4 @@
 - 2026-08-28：新增 `/locations/rocks` 深度攻略，使用自有图鉴素材覆盖 Professional 鱼池、Tuna、Albatross、Volcano 解锁与失败恢复；路由和 sitemap 扩展到 15 页。
 - 2026-08-28：分析攻略4-5旧版视频并归档 13 张研究帧与实体种子；补强 Rocks，新增 `/locations/volcano` 深度攻略、3 张截图式重建素材和完整 Bowhead 双战路线；扩展到 16 个静态路由。
 - 2026-08-28：确认 16 页已有构建时静态预渲染；新增全站 Title ≤60、首页首轮 HTML ≥1200 词、静态 H1/FAQ/FAQPage schema 阻断门禁；生产部署与 GSC/目录复核待完成。
+- 2026-08-28：完成 AdSense 低价值复审整改：Achievements/Lures/Bosses 从薄列表升级为实操指南，九张 Beginner 图压缩为 920 KB WebP，修正第一岛与生物图证，按页面类型输出 Schema，并加入 CMP 前禁投广告及内容深度门禁。

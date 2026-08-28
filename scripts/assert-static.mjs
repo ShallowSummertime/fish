@@ -9,10 +9,10 @@ assert.match(prerenderSource, /renderToString\(React\.createElement\(App/, 'stat
 const clientSource = await readFile('src/client.tsx', 'utf8');
 assert.match(clientSource, /hydrateRoot\(/, 'client entry must hydrate the server-rendered App');
 const appSource = await readFile('src/main.tsx', 'utf8');
-assert.match(appSource, /useState<string\[\]>\(\[\]\);const \[hydrated,setHydrated\]=useState\(false\)/, 'creature SSR and first client render must start with an empty checklist');
-assert.match(appSource, /useEffect\(\(\)=>\{try\{const raw=JSON\.parse\(localStorage\.getItem\('htf-caught'\)/, 'creature checklist must restore validated local storage after mount');
-assert.match(appSource, /if\(hydrated\)localStorage\.setItem\('htf-caught'/, 'creature checklist must not persist before restore completes');
-assert.match(appSource, /set\('og:type',known\?'article':'website',true\)/, 'known client pages must use article Open Graph type');
+assert.match(appSource, /useState<string\[\]>\(\[\]\)[\s\S]{0,120}useState\(false\)/, 'creature SSR and first client render must start with an empty checklist');
+assert.match(appSource, /localStorage\.getItem\(["']htf-caught["']\)/, 'creature checklist must restore validated local storage after mount');
+assert.match(appSource, /if \(hydrated\)[\s\S]{0,80}localStorage\.setItem\(["']htf-caught["']/, 'creature checklist must not persist before restore completes');
+assert.match(appSource, /articlePaths\.has\(path\)\s*\?\s*["']article["']\s*:\s*["']website["']/, 'client Open Graph type must distinguish articles from other pages');
 assert.match(appSource, /index,follow,max-image-preview:large/, 'indexable pages must allow large image previews');
 const stylesSource = await readFile('src/styles.css', 'utf8');
 assert.match(stylesSource, /\.guide-visual\{margin:30px 0;overflow-x:auto/, 'mobile guide visuals must support horizontal scrolling');
@@ -33,9 +33,10 @@ for (const route of routes) {
 const creatures = await readFile('dist/creatures/index.html', 'utf8');
 assert.match(creatures, /All 49 How to Fish/);
 assert.match(creatures, /Mutated Bowhead Whale/);
-assert.match(creatures, /Creature encyclopedia overview/);
+assert.match(creatures, /Lighthouse and early catches/);
 assert.match(creatures, /Drip variants/);
-assert.match(creatures, /encyclopedia-overview\.webp/);
+assert.doesNotMatch(creatures, /encyclopedia-overview\.webp/, 'creature page must not use the unrelated rod-over-ocean image');
+assert.match(creatures, /encyclopedia-early\.webp/);
 const home = await readFile('dist/index.html', 'utf8');
 assert.ok(textFrom(home).split(/\s+/).length >= 1200, 'homepage must expose at least 1200 visible words in initial HTML');
 assert.match(home, /<div id="root">[\s\S]*<h1>How to Fish[\s\S]*Walkthrough &amp; Guides/, 'homepage H1 must exist inside the initial static root');
@@ -77,6 +78,14 @@ const contentGate = async (route, requirements) => {
 await contentGate('/beginner-guide', { images: 9, sources: false, phrases: ['First 20 minutes', 'Bait and hotspots', 'Make more money', 'Prepare for Spider Crab', 'The complete five-location story route', 'Late-game firepower', 'If the route stalls', 'Empty Beer Can', 'Spider Crab Shell', 'VOLCANO'] });
 const beginner = await readFile('dist/beginner-guide/index.html', 'utf8');
 assert.doesNotMatch(beginner, /Claim sources|SOURCES \/ VERIFY/, '/beginner-guide must not render the removed claim-sources section');
+const beginnerImages = [...beginner.matchAll(/<img[^>]+src="(\/images\/guides\/beginner\/localized\/[^"]+)"[^>]*>/g)];
+assert.equal(beginnerImages.length, 9, 'beginner carousel must include exactly nine visual steps');
+assert.ok(beginnerImages.every(match => match[1].endsWith('.webp')), 'beginner carousel must use optimized WebP assets');
+assert.match(beginnerImages[0][0], /loading="eager"[^>]*fetchPriority="high"/, 'first beginner image must be prioritized');
+for (const match of beginnerImages.slice(1)) assert.match(match[0], /loading="lazy"/, 'off-screen beginner slides must load lazily');
+let beginnerImageBytes = 0;
+for (const match of beginnerImages) beginnerImageBytes += (await stat(`public${match[1]}`)).size;
+assert.ok(beginnerImageBytes < 1_500_000, 'all nine beginner WebP assets must stay below 1.5 MB total');
 await contentGate('/bosses/spider-crab', { images: 2, sources: true, phrases: ['Summon Spider Crab correctly', 'charge → stun → punish', 'Common mistakes and quick recoveries', 'Empty Beer Can', 'boat keys'] });
 const lighthouse = await readFile('dist/locations/lighthouse/index.html', 'utf8');
 assert.ok(textFrom(lighthouse).split(' ').length >= 900, '/locations/lighthouse must be a deep guide');
@@ -138,6 +147,24 @@ for (const html of [locationsGuide,reel]) {
   assert.match(html, /decoding="async" loading="eager" fetchPriority="high"/, 'generated guide heroes must expose loading hints');
 }
 const bossesPage = await readFile('dist/bosses/index.html', 'utf8');
+assert.ok(textFrom(bossesPage).split(/\s+/).length >= 900, '/bosses must provide deep fight, reward, and recovery guidance');
+for (const phrase of ['Fight plan','Reward / next step','If it goes wrong','Spider Crab','Mutated Bowhead Whale']) assert.match(bossesPage, new RegExp(phrase));
+assert.match(bossesPage, /"@type":"CollectionPage"/, '/bosses must use CollectionPage schema');
+const luresPage = await readFile('dist/lures/index.html', 'utf8');
+assert.ok(textFrom(luresPage).split(/\s+/).length >= 800, '/lures must be a substantive field guide');
+for (const phrase of ['Confirmed targets','Named bait and story dependencies','Beginner Lure','Scientific Lure','Fish Bucket','SOURCES / VERIFY']) assert.match(luresPage, new RegExp(phrase));
+assert.match(luresPage, /encyclopedia-scientific\.webp/);
+assert.match(luresPage, /"@type":"CollectionPage"/);
+const achievementsPage = await readFile('dist/achievements/index.html', 'utf8');
+assert.ok(textFrom(achievementsPage).split(/\s+/).length >= 1200, '/achievements must explain all 28 routes');
+assert.equal((achievementsPage.match(/class="official-condition"/g) || []).length, 28, 'all 28 achievements need official conditions');
+for (const phrase of ['Official condition','Practical route','Current-build caution','Bean','Handyman','Steam — official global achievements']) assert.match(achievementsPage, new RegExp(phrase));
+assert.match(achievementsPage, /"@type":"CollectionPage"/);
+for (const [route,type] of [['/','WebSite'],['/about','AboutPage'],['/contact','ContactPage'],['/privacy','WebPage']]) {
+  const html = await readFile(route === '/' ? 'dist/index.html' : `dist${route}/index.html`, 'utf8');
+  assert.match(html, new RegExp(`"@type":"${type}"`), `${route} must use ${type} schema`);
+}
+for (const html of [home, beginner, bossesPage, luresPage, achievementsPage]) assert.doesNotMatch(html, /adsbygoogle|pagead2\.googlesyndication\.com/, 'AdSense runtime must remain disabled until a certified CMP is configured');
 for (const [route,html] of [['/bosses',bossesPage],['/bosses/spider-crab',spider]]) assert.match(html, /<meta property="og:image" content="https:\/\/howtofishwalkthrough\.com\/images\/guides\/island-1\/08-spider-crab\.jpg">/, `${route} must expose a rights-safe OG image`);
 for (const route of ['/locations','/locations/rocks','/locations/volcano','/guides/reel-of-fortune']) {
   const html = await readFile(`dist${route}/index.html`, 'utf8');

@@ -1,5 +1,12 @@
 # Release record
 
+## 0.6.0 — 2026-08-28
+
+- 目标：AdSense 低价值内容、图文证据、媒体性能与结构化数据整改。
+- 变更：重写 Achievements/Lures/Bosses；优化九张 Beginner 轮播图；替换错误或不清晰的 Creature/Lighthouse 图证；Schema 改为按路由类型输出；新增 CMP 前禁投广告和内容质量阻断门禁。
+- 本地验证：Vitest、TypeScript、Vite build、16 路由预渲染及静态质量断言通过。
+- 部署：待本次提交推送后补生产验证与 commit。
+
 ## 0.1.0 — 2026-08-27
 
 - 环境：GitHub source release; no production website deployment.
