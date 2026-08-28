@@ -21,6 +21,8 @@ const knowledgeSeedPaths = [
   path.join(repoRoot, "research/asset-knowledge/first-island.seed.json"),
   path.join(repoRoot, "research/asset-knowledge/weapons.seed.json"),
   path.join(repoRoot, "research/asset-knowledge/guide-4-5.seed.json"),
+  path.join(repoRoot, "research/asset-knowledge/guide-2.seed.json"),
+  path.join(repoRoot, "research/asset-knowledge/guide-3.seed.json"),
 ];
 
 function usage() {
@@ -72,6 +74,8 @@ function assertSafeArchiveRoot(archiveRoot) {
     path.join(desktopRoot, "新手指南"),
     path.join(desktopRoot, "第一座岛"),
     path.join(desktopRoot, "攻略1"),
+    path.join(desktopRoot, "攻略2"),
+    path.join(desktopRoot, "攻略3"),
     weaponReferenceRoot,
     creatureGalleryRoot,
     achievementGalleryRoot,
@@ -332,6 +336,14 @@ function sourceGroups() {
     desktopRoot,
     "攻略4-5/ScreenRecording_08-28-2026 10-48-09_1.MP4",
   );
+  const guide2VideoPath = path.join(
+    desktopRoot,
+    "攻略2/ScreenRecording_08-28-2026 10-03-30_1.MP4",
+  );
+  const guide3VideoPath = path.join(
+    desktopRoot,
+    "攻略3/ScreenRecording_08-28-2026 10-09-46_1.MP4",
+  );
   const islandRawAssetId = assetId({
     sourcePath: islandVideoPath,
     archivePath: null,
@@ -343,6 +355,8 @@ function sourceGroups() {
     sourcePath: guide45VideoPath,
     archivePath: null,
   });
+  const guide2RawAssetId = assetId({ sourcePath: guide2VideoPath, archivePath: null });
+  const guide3RawAssetId = assetId({ sourcePath: guide3VideoPath, archivePath: null });
   const entityFrames = {
     "clam.jpg": {
       entity: "Clam",
@@ -567,6 +581,24 @@ function sourceGroups() {
               derivedFrom: [guide45RawAssetId],
             };
           }
+          if (firstDirectory === "guide-2") {
+            return {
+              rights:
+                "analysis derivative of third-party Douyin Guide 2 media; watermark, platform UI, and creator subtitles make every frame research-only",
+              publishability: false,
+              pageUsage: ["research-only"],
+              derivedFrom: [guide2RawAssetId],
+            };
+          }
+          if (firstDirectory === "guide-3") {
+            return {
+              rights:
+                "analysis derivative of third-party Douyin Guide 3 media; watermark, platform UI, and creator subtitles make every frame research-only",
+              publishability: false,
+              pageUsage: ["research-only"],
+              derivedFrom: [guide3RawAssetId],
+            };
+          }
           return {
             rights:
               "new analysis material; rights and publishability require review",
@@ -599,6 +631,51 @@ function sourceGroups() {
             "creatures/encyclopedia-bosses.webp": "mobalytics-06-bosses.png",
           };
           const normalizedPath = relativePath.split(path.sep).join("/");
+          const fieldDiagrams = {
+            "guides/forest/forest-route.svg": {
+              pageUsage: "/locations/forest",
+              seed: "guide-2.seed.json",
+              notes: "guide-2",
+            },
+            "guides/forest/giant-piranha-loop.svg": {
+              pageUsage: "/locations/forest",
+              seed: "guide-2.seed.json",
+              notes: "guide-2",
+            },
+            "guides/forest/forest-recovery.svg": {
+              pageUsage: "/locations/forest",
+              seed: "guide-2.seed.json",
+              notes: "guide-2",
+            },
+            "guides/desert/desert-route.svg": {
+              pageUsage: "/locations/desert",
+              seed: "guide-3.seed.json",
+              notes: "guide-3",
+            },
+            "guides/desert/pufferfish-loop.svg": {
+              pageUsage: "/locations/desert",
+              seed: "guide-3.seed.json",
+              notes: "guide-3",
+            },
+            "guides/desert/desert-recovery.svg": {
+              pageUsage: "/locations/desert",
+              seed: "guide-3.seed.json",
+              notes: "guide-3",
+            },
+          };
+          const fieldDiagram = fieldDiagrams[normalizedPath];
+          if (fieldDiagram) {
+            return {
+              rights:
+                "project-owned original editorial field diagram; independently composed from research notes and structured knowledge, not copied from or cropped out of any source frame",
+              publishability: true,
+              pageUsage: [fieldDiagram.pageUsage],
+              derivedFrom: [
+                `asset:02-analysis/${fieldDiagram.notes}/analysis-notes.md`,
+                `asset:04-project/knowledge-seed/${fieldDiagram.seed}`,
+              ],
+            };
+          }
           if (
             normalizedPath.startsWith("achievements/") &&
             normalizedPath.endsWith(".webp")
@@ -673,6 +750,16 @@ function sourceGroups() {
                   "asset:02-analysis/guide-4-5/analysis-notes.md",
                   guide45RawAssetId,
                 ]
+              : path.basename(sourcePath) === "guide-2.seed.json"
+                ? [
+                    "asset:02-analysis/guide-2/analysis-notes.md",
+                    guide2RawAssetId,
+                  ]
+                : path.basename(sourcePath) === "guide-3.seed.json"
+                  ? [
+                      "asset:02-analysis/guide-3/analysis-notes.md",
+                      guide3RawAssetId,
+                    ]
               : ["asset:04-project/source-packets/how-to-fish-p0.md"],
       })),
     ],
@@ -709,10 +796,30 @@ function sourceGroups() {
         pageUsage: ["research-only"],
         derivedFrom: null,
       },
+      {
+        sourcePath: guide2VideoPath,
+        mediaType: "video",
+        role: "raw",
+        status: "analyzed/source-only",
+        rights:
+          "third-party Douyin screen recording retained only at original path; every derivative is research-only",
+        publishability: false,
+        pageUsage: ["research-only"],
+        derivedFrom: null,
+      },
+      {
+        sourcePath: guide3VideoPath,
+        mediaType: "video",
+        role: "raw",
+        status: "analyzed/source-only",
+        rights:
+          "third-party Douyin screen recording retained only at original path; every derivative is research-only",
+        publishability: false,
+        pageUsage: ["research-only"],
+        derivedFrom: null,
+      },
     ],
     pendingFiles: [
-      path.join(desktopRoot, "攻略2/ScreenRecording_08-28-2026 10-03-30_1.MP4"),
-      path.join(desktopRoot, "攻略3/ScreenRecording_08-28-2026 10-09-46_1.MP4"),
       path.join(
         desktopRoot,
         "什么都有/ScreenRecording_08-28-2026 10-22-35_1.MP4",
@@ -1022,6 +1129,38 @@ async function writeTextAtomically(targetPath, contents) {
 
 function catalogReadme() {
   return `# Asset library catalog\n\nThis directory is generated by \`scripts/build-asset-library.mjs\`. Do not edit manifest or checksum files by hand. Originals remain at the absolute \`sourcePath\` recorded in the manifest; the library is a copy-only archive. Changed-source history is retained as \`archived/superseded\` records and included in checksums. \`knowledge-manifest.json\` is the evidence-bound entity layer, sourced from the archived knowledge seed. Run the tool with \`--verify\` to validate current and historical archived checksums, source-only video fingerprints, and knowledge asset references.\n`;
+}
+
+const requiredFieldDiagrams = new Map([
+  ["asset:05-published/public-images/guides/forest/forest-route.svg", "/locations/forest"],
+  ["asset:05-published/public-images/guides/forest/giant-piranha-loop.svg", "/locations/forest"],
+  ["asset:05-published/public-images/guides/forest/forest-recovery.svg", "/locations/forest"],
+  ["asset:05-published/public-images/guides/desert/desert-route.svg", "/locations/desert"],
+  ["asset:05-published/public-images/guides/desert/pufferfish-loop.svg", "/locations/desert"],
+  ["asset:05-published/public-images/guides/desert/desert-recovery.svg", "/locations/desert"],
+]);
+
+function assertFieldDiagramPublicationMetadata(records) {
+  const byId = new Map(records.map((record) => [record.id, record]));
+  for (const [id, requiredPage] of requiredFieldDiagrams) {
+    const record = byId.get(id);
+    if (!record) throw new Error(`Missing required published field diagram: ${id}`);
+    if (record.publishability !== true)
+      throw new Error(`Field diagram must be publishable: ${id}`);
+    if (
+      !Array.isArray(record.pageUsage) ||
+      record.pageUsage.length !== 1 ||
+      record.pageUsage[0] !== requiredPage
+    )
+      throw new Error(`Field diagram has incorrect pageUsage: ${id}`);
+    if (!Array.isArray(record.derivedFrom) || record.derivedFrom.length === 0)
+      throw new Error(`Field diagram requires honest non-null lineage: ${id}`);
+    if (
+      !record.rights?.includes("project-owned original editorial field diagram") ||
+      !record.rights?.includes("not copied from or cropped out of any source frame")
+    )
+      throw new Error(`Field diagram requires explicit original-art rights: ${id}`);
+  }
 }
 
 function knowledgeColumns() {
@@ -1364,6 +1503,7 @@ async function writeCatalog(archiveRoot, records) {
         right.archivePath ?? right.sourcePath,
       ),
     );
+  assertFieldDiagramPublicationMetadata(sorted);
   const manifest = {
     schemaVersion: 1,
     run: { generatedAt: new Date().toISOString(), archiveRoot },
@@ -1542,6 +1682,7 @@ async function main() {
 }
 
 export {
+  assertFieldDiagramPublicationMetadata,
   assertKnowledgeReferences,
   assertNoVideosInArchivedTree,
   assertNoSymlinksInExistingPath,

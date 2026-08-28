@@ -38,6 +38,8 @@ describe("How to Fish content baseline", () => {
       "/bosses",
       "/locations",
       "/locations/lighthouse",
+      "/locations/forest",
+      "/locations/desert",
       "/locations/rocks",
       "/locations/volcano",
       "/guides/reel-of-fortune",
@@ -54,6 +56,12 @@ describe("How to Fish content baseline", () => {
       expect(meta.title.length, `${path} title`).toBeLessThanOrEqual(60);
     expect(pageMeta["/locations/volcano"].image).toBe(
       "/images/guides/volcano/01-volcano-arrival.png",
+    );
+    expect(pageMeta["/locations/forest"].image).toBe(
+      "/images/home/04-forest-route.webp",
+    );
+    expect(pageMeta["/locations/desert"].image).toBe(
+      "/images/guides/locations/five-location-route-hero.png",
     );
     expect(
       pageMeta["/guides/reel-of-fortune"].title.length,

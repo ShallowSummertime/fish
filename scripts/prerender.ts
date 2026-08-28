@@ -10,6 +10,8 @@ const domain = "https://howtofishwalkthrough.com";
 const articlePaths = new Set([
   "/beginner-guide",
   "/locations/lighthouse",
+  "/locations/forest",
+  "/locations/desert",
   "/locations/rocks",
   "/locations/volcano",
   "/guides/reel-of-fortune",
@@ -55,7 +57,10 @@ for (const path of Object.keys(pageMeta)) {
           description: meta.description,
           mainEntityOfPage: canonical,
           image,
-          dateModified: "2026-08-28",
+          dateModified:
+            path === "/locations/forest" || path === "/locations/desert"
+              ? "2026-08-29"
+              : "2026-08-28",
           author: { "@type": "Organization", name: "How to Fish Walkthrough" },
           about: { "@type": "VideoGame", name: "How to Fish" },
         }

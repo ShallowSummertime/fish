@@ -2,7 +2,7 @@ import assert from 'node:assert/strict';
 import { createHash } from 'node:crypto';
 import { promises as fs } from 'node:fs';
 import path from 'node:path';
-import { assertKnowledgeReferences, assertNoSymlinksInExistingPath, assertNoVideosInArchivedTree, collectHistoricalRecords, safeSourceOnlyFile, validateKnowledgeSchema } from './build-asset-library.mjs';
+import { assertFieldDiagramPublicationMetadata, assertKnowledgeReferences, assertNoSymlinksInExistingPath, assertNoVideosInArchivedTree, collectHistoricalRecords, safeSourceOnlyFile, validateKnowledgeSchema } from './build-asset-library.mjs';
 
 const fixtureRoot = await fs.mkdtemp('/private/tmp/fish-asset-library-test-');
 
@@ -72,6 +72,31 @@ try {
     /unknown asset ID: asset:fixture-observation/,
   );
   assert.doesNotThrow(() => assertKnowledgeReferences({ entities: [entity()], coverageGaps: [] }, [{ id: 'asset:fixture-image' }]));
+
+  const fieldDiagramIds = [
+    ['guides/forest/forest-route.svg', '/locations/forest'],
+    ['guides/forest/giant-piranha-loop.svg', '/locations/forest'],
+    ['guides/forest/forest-recovery.svg', '/locations/forest'],
+    ['guides/desert/desert-route.svg', '/locations/desert'],
+    ['guides/desert/pufferfish-loop.svg', '/locations/desert'],
+    ['guides/desert/desert-recovery.svg', '/locations/desert'],
+  ];
+  const fieldDiagramRecords = fieldDiagramIds.map(([relativePath, pageUsage]) => ({
+    id: `asset:05-published/public-images/${relativePath}`,
+    publishability: true,
+    pageUsage: [pageUsage],
+    derivedFrom: ['asset:02-analysis/guide/analysis-notes.md'],
+    rights: 'project-owned original editorial field diagram; independently composed from research notes and structured knowledge, not copied from or cropped out of any source frame',
+  }));
+  assert.doesNotThrow(() => assertFieldDiagramPublicationMetadata(fieldDiagramRecords));
+  assert.throws(
+    () => assertFieldDiagramPublicationMetadata(fieldDiagramRecords.map((record, index) => index === 0 ? { ...record, derivedFrom: null } : record)),
+    /requires honest non-null lineage/,
+  );
+  assert.throws(
+    () => assertFieldDiagramPublicationMetadata(fieldDiagramRecords.map((record, index) => index === 3 ? { ...record, pageUsage: ['/locations/forest'] } : record)),
+    /incorrect pageUsage/,
+  );
 
   const archiveRoot = path.join(fixtureRoot, 'archive');
   const logicalArchivePath = '04-project/knowledge-seed/first-island.seed.json';

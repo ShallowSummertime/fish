@@ -64,7 +64,7 @@ const cards = [
     lead: 'Hand each boss objective to the key NPC to reveal the next destination.',
     items: [
       ['1', 'LIGHTHOUSE — ISLAND 1', 'Summon Spider Crab with the Empty Beer Can. Return its Shell to the keeper for Boat Keys; Forest appears as a green Radar marker.'],
-      ['2', 'FOREST — ISLAND 2', 'Give three Leeches to the lake NPC. Defeat Giant Piranha and return its Skeleton; Desert appears as a yellow marker.'],
+      ['2', 'FOREST — ISLAND 2', 'Follow the current Leech objective and verify its bait. Defeat Giant Piranha and return its Skeleton; Desert appears as a yellow marker.'],
       ['3', 'DESERT — ISLAND 3', 'Complete the Tourist request for a Carrot. Defeat Pufferfish and return its Fin; Rocks appears as a red marker.'],
       ['4', 'ROCKS — ISLAND 4', 'Catch Tuna with a Professional Boss Lure and place it on land. Defeat Albatross and return its Head for the final coordinates.'],
       ['5', 'VOLCANO — ISLAND 5', 'Five native catches → Fish Bucket → Bowhead body/crater → Mutated Bowhead → Whale Fin → scientist → military boat key.'],

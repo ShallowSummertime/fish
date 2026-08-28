@@ -320,7 +320,8 @@ export const locations = [
   {
     name: "Desert",
     type: "Island",
-    detail: "A later island that advances the Blue Shark route.",
+    detail:
+      "The third story location, centered on Pufferfish progression; Blue Shark is optional collection.",
   },
   {
     name: "Rocks",
@@ -820,6 +821,18 @@ export const pageMeta: Record<
     description:
       "Complete How to Fish Game Lighthouse walkthrough: survival HUD, Clam cash route, first rod, catch controls, upgrades, Empty Beer Can, Spider Crab, Boat Keys, and Radar.",
     image: "/images/guides/island-1/08-spider-crab.jpg",
+  },
+  "/locations/forest": {
+    title: "How to Fish Forest Guide: Giant Piranha Route",
+    description:
+      "Evidence-bounded How to Fish Forest walkthrough: current Leech objective, special bait verification, Giant Piranha phases, Skeleton hand-in, and Desert checks.",
+    image: "/images/home/04-forest-route.webp",
+  },
+  "/locations/desert": {
+    title: "How to Fish Desert Guide: Pufferfish Route",
+    description:
+      "Evidence-bounded How to Fish Desert walkthrough: quest verification, Standard pool boundary, Pufferfish gas phase, Fin safety, and Rocks departure checks.",
+    image: "/images/guides/locations/five-location-route-hero.png",
   },
   "/locations/rocks": {
     title: "How to Fish Rocks Island Guide | HTF Wiki",

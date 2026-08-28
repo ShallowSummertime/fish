@@ -9,6 +9,8 @@ import {
   sourceNotes,
 } from "./data";
 import {
+  DesertGuide,
+  ForestGuide,
   LocationsGuide,
   ReelOfFortuneGuide,
   RocksGuide,
@@ -26,6 +28,8 @@ const nav = [
 const articlePaths = new Set([
   "/beginner-guide",
   "/locations/lighthouse",
+  "/locations/forest",
+  "/locations/desert",
   "/locations/rocks",
   "/locations/volcano",
   "/guides/reel-of-fortune",
@@ -110,7 +114,10 @@ function Meta({ path }: { path: string }) {
         headline: m.title,
         mainEntityOfPage: url,
         image,
-        dateModified: "2026-08-28",
+        dateModified:
+          path === "/locations/forest" || path === "/locations/desert"
+            ? "2026-08-29"
+            : "2026-08-28",
         author: { "@type": "Organization", name: "How to Fish Walkthrough" },
         about: { "@type": "VideoGame", name: "How to Fish" },
       });
@@ -733,11 +740,13 @@ function Home() {
               href={
                 x.name === "Lighthouse"
                   ? "/locations/lighthouse"
+                  : x.name === "Forest"
+                    ? "/locations/forest"
+                    : x.name === "Desert"
+                      ? "/locations/desert"
                   : x.name === "Rocks"
                     ? "/locations/rocks"
-                    : x.name === "Volcano"
-                      ? "/locations/volcano"
-                      : `/locations#${x.name.toLowerCase()}`
+                    : "/locations/volcano"
               }
               key={x.name}
             >
@@ -806,7 +815,8 @@ function Home() {
               mistake is assuming that defeating the creature automatically
               completes the objective.
             </p>
-            <a href="/locations">See all five location dependencies →</a>
+            <a href="/locations/forest">Open the Forest walkthrough →</a>{" "}
+            <a href="/locations/desert">Open the Desert walkthrough →</a>
           </article>
           <article>
             <span>03 · ROCKS &amp; VOLCANO</span>
@@ -877,6 +887,12 @@ function Home() {
         </a>
         <a href="/bosses/spider-crab">
           Spider Crab Guide <span>→</span>
+        </a>
+        <a href="/locations/forest">
+          Forest &amp; Giant Piranha <span>→</span>
+        </a>
+        <a href="/locations/desert">
+          Desert &amp; Pufferfish <span>→</span>
         </a>
         <a href="/locations/rocks">
           Rocks Island 4 Guide <span>→</span>
@@ -1242,9 +1258,10 @@ function Beginner() {
           <li>
             <b>Forest — Giant Piranha.</b>
             <span>
-              Give three Leeches to the woman by the lake, use the Modified
-              Leech, defeat Giant Piranha, and return its Skeleton for the
-              yellow Desert marker.
+              Follow the current lake NPC Leech counter, verify the received
+              special bait, defeat Giant Piranha, and return its Skeleton for
+              the yellow Desert marker. A captured Patch 1.0.8 counter showed
+              three Leeches, but the live objective is authoritative.
             </span>
           </li>
           <li>
@@ -1739,9 +1756,12 @@ function LighthouseGuide() {
       </section>
       <Related
         links={[
+          ["Forest location 2 walkthrough", "/locations/forest"],
           ["Full beginner route to Volcano", "/beginner-guide"],
           ["Spider Crab combat guide", "/bosses/spider-crab"],
           ["All five locations", "/locations"],
+          ["Creature checklist", "/creatures"],
+          ["Lures and special bait", "/lures"],
         ]}
       />
     </article>
@@ -2205,8 +2225,10 @@ function BossProgression() {
         <li>
           <b>Forest — Giant Piranha.</b>
           <span>
-            Give three Leeches to the lake NPC, use the Modified Leech, defeat
-            Giant Piranha, and return its Skeleton for the yellow Desert marker.
+            Follow the current lake NPC Leech counter, verify the received
+            special bait, defeat Giant Piranha, and return its Skeleton for the
+            yellow Desert marker. The three-Leech count is a Patch 1.0.8 lead,
+            not a cross-version guarantee.
           </span>
         </li>
         <li>
@@ -2319,6 +2341,12 @@ function Bosses() {
             </div>
             {b.name === "Spider Crab" && (
               <a href="/bosses/spider-crab">Read full guide →</a>
+            )}
+            {b.name === "Giant Piranha" && (
+              <a href="/locations/forest">Read Forest &amp; Giant Piranha guide →</a>
+            )}
+            {b.name === "Pufferfish" && (
+              <a href="/locations/desert">Read Desert &amp; Pufferfish guide →</a>
             )}
             {b.name === "Albatross" && (
               <a href="/locations/rocks">Read Rocks &amp; Albatross guide →</a>
@@ -3343,6 +3371,8 @@ export function App({ initialPath }: { initialPath?: string }) {
       "/bosses": Bosses,
       "/locations": Locations,
       "/locations/lighthouse": LighthouseGuide,
+      "/locations/forest": ForestGuide,
+      "/locations/desert": DesertGuide,
       "/locations/rocks": RocksGuide,
       "/locations/volcano": VolcanoGuide,
       "/guides/reel-of-fortune": ReelOfFortuneGuide,

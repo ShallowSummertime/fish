@@ -9,6 +9,8 @@ const routes = [
   "/bosses",
   "/locations",
   "/locations/lighthouse",
+  "/locations/forest",
+  "/locations/desert",
   "/locations/rocks",
   "/locations/volcano",
   "/guides/reel-of-fortune",
@@ -326,6 +328,80 @@ for (const phrase of [
 ])
   assert.match(lighthouse, new RegExp(phrase));
 for (const src of [...lighthouse.matchAll(/<img[^>]+src="([^"]+)"/g)].map(
+  (match) => match[1],
+))
+  await access(`public${src}`);
+const forest = await readFile("dist/locations/forest/index.html", "utf8");
+assert.ok(
+  textFrom(forest).split(" ").length >= 1200,
+  "/locations/forest must be a deep guide",
+);
+assert.ok(
+  (forest.match(/<img /g) || []).length >= 3,
+  "/locations/forest must include three rights-safe field diagrams",
+);
+for (const phrase of [
+  "current Leech counter",
+  "Giant Piranha",
+  "small-fish adds",
+  "later phase",
+  "Giant Piranha Skeleton",
+  "EVIDENCE BOUNDARY",
+  "Forest troubleshooting",
+])
+  assert.match(forest, new RegExp(phrase, "i"));
+for (const href of [
+  "/locations/lighthouse",
+  "/locations/desert",
+  "/locations",
+  "/creatures",
+  "/bosses",
+  "/lures",
+])
+  assert.match(forest, new RegExp(`href="${href}"`));
+assert.doesNotMatch(
+  forest,
+  /research\/video-analysis|frame-\d+\.jpg|douyin|@(?:斯坦|123yhy)|tiktok|near half|half-health|half health|half HP/i,
+  "research-only frames and social identities must not be published on Forest",
+);
+for (const src of [...forest.matchAll(/<img[^>]+src="([^"]+)"/g)].map(
+  (match) => match[1],
+))
+  await access(`public${src}`);
+const desert = await readFile("dist/locations/desert/index.html", "utf8");
+assert.ok(
+  textFrom(desert).split(" ").length >= 1200,
+  "/locations/desert must be a deep guide",
+);
+assert.ok(
+  (desert.match(/<img /g) || []).length >= 3,
+  "/locations/desert must include three rights-safe field diagrams",
+);
+for (const phrase of [
+  "Pufferfish",
+  "poison gas",
+  "after health has been reduced",
+  "Pufferfish Fin",
+  "Blue Shark is optional",
+  "EVIDENCE BOUNDARY",
+  "Desert troubleshooting",
+])
+  assert.match(desert, new RegExp(phrase, "i"));
+for (const href of [
+  "/locations/forest",
+  "/locations/rocks",
+  "/locations",
+  "/creatures",
+  "/bosses",
+  "/lures",
+])
+  assert.match(desert, new RegExp(`href="${href}"`));
+assert.doesNotMatch(
+  desert,
+  /research\/video-analysis|frame-\d+\.jpg|douyin|@(?:斯坦|123yhy)|tiktok|near half|half-health|half health|half HP/i,
+  "research-only frames and social identities must not be published on Desert",
+);
+for (const src of [...desert.matchAll(/<img[^>]+src="([^"]+)"/g)].map(
   (match) => match[1],
 ))
   await access(`public${src}`);
@@ -670,6 +746,8 @@ for (const [route, html] of [
   );
 for (const route of [
   "/locations",
+  "/locations/forest",
+  "/locations/desert",
   "/locations/rocks",
   "/locations/volcano",
   "/guides/reel-of-fortune",
