@@ -24,3 +24,14 @@
 - 变更：新增 `/ads.txt`、About、Contact、Privacy、Terms；补强 Bosses、Locations、Lures、Achievements hubs；13 个路由统一静态输出 `max-image-preview:large`。
 - 验证：`pnpm test` 通过，静态路由/信任链接/隐私披露/ads.txt/404 契约均有断言。
 - 账户状态：AdSense 站点已添加但仍待 ads.txt 线上验证和人工审核；无广告代码上线。
+
+## 0.3.0 — 2026-08-28
+
+- 环境：Vercel Production，主域 `https://howtofishwalkthrough.com`。
+- 变更：新增 `/locations/rocks` 第四座岛深度攻略，覆盖 10 种常规生物、Tuna 战斗、Albatross 召唤与打法、Volcano 解锁路线，以及武器和鱼饵准备。
+- 素材：使用 3 张用户自有百科图片；Game8 图片仅用于资料核对，未发布到网站。
+- 站内链接：首页、Locations、Bosses 与相关攻略已接入 Rocks 页面；sitemap 已包含新 URL。
+- 资产归档：固定资产库共 231 项，已归档 224 项，待处理 7 项，失败 0 项。
+- 验证：`pnpm test`、TypeScript、Vite build、15 路由预渲染、静态断言、桌面与 390px 移动端浏览器检查均通过；生产 URL 返回 200。
+- Commit：`dfd4e80`。
+- 结论：production-verified。
