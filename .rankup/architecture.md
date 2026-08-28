@@ -4,4 +4,4 @@
 - 单一 typed content source 维护 creatures、bosses、locations 和 lures。
 - 站点信息架构：Home → Hub（Creatures/Bosses/Locations/Lures）→ Detail。
 - Creature 的主关系是 lure pool；Location 承载剧情推进、NPC、商店和 Boss。
-- 路由：`/`、`/beginner-guide`、`/creatures`、`/bosses`、`/locations`、`/lures`、`/guides/spider-crab`、`/achievements`。`src/data.ts` 是唯一的 typed entity source；`localStorage` 保存本机 creature checklist。
+- 路由：`/`、`/beginner-guide`、`/creatures`、`/bosses`、`/locations`、`/locations/lighthouse`、`/locations/rocks`、`/guides/reel-of-fortune`、`/lures`、`/bosses/spider-crab`、`/achievements` 与四个信任页。`src/data.ts` 是唯一的 typed entity source；`localStorage` 保存本机 creature checklist。

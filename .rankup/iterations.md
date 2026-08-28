@@ -1,5 +1,13 @@
 # 迭代记录
 
+## 2026-08-28 — Rocks Island 4 深度攻略
+
+- 目标：用固定资产库中的自有图鉴素材创建可独立完成第四岛的英文攻略。
+- 判据：新增可索引 `/locations/rocks`；至少 1200 个可见英文词、3 张可发布实机图、10 个 Rocks 捕获物、完整 Tuna → Albatross → Head → Volcano 链；桌面与 390px 移动端无横向溢出；第三方 Game8 图不公开。
+- 结果：本地 TypeScript、Vitest、Vite 构建、15 路由静态断言与浏览器 E2E 通过；移动 QA 发现通用 `nav` 移动规则会绝对定位文章内目录，新增末加载的 `rocks.css` 将 `.quick-nav` 恢复到文档流后复验通过。
+- 资产：Professional、Scientific、Boss 三张用户自有图鉴 WebP 增加 `/locations/rocks` 用途；固定资产库 231 项、校验失败 0。
+- 下一轮唯一改进：取得 Rocks 岛自有实机路线视频后，用真实 NPC、商店、Tuna 落地点与 Albatross 掩体关键帧替换或补充图鉴级截图。
+
 ## 2026-08-27 — MVP implementation
 
 - 完成：建立 React + TypeScript + Vite 攻略站，交付首页、七个核心内容路由、49-creature 清单、11 个 boss/special entries、五个主 locations、lure hub、28 achievements 和 SEO 静态文件。

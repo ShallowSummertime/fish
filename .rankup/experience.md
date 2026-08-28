@@ -1,5 +1,9 @@
 # 项目经验
 
+- **[2026-08-28] 移动端主导航规则必须与文章目录隔离**
+
+  全局移动端 `nav` 选择器会把攻略页的 `.quick-nav` 也设为顶部绝对定位导航，造成目录覆盖 H1。Rocks 页面在 390px 浏览器 QA 中复现；通过末加载的页面样式将 `.quick-nav` 恢复为 `position: static` 后，页面宽度保持 390px 且目录回到首张图之后。后续重构应把全局规则收窄为 `header > nav`。
+
 - **[2026-08-27] 以 lure progression 而非地点固定池组织 regular creature 内容**
 
   站点将主线 locations 与 creature pool 分开建模；locations 用于路线和剧情，lures 用于 collection intent。游戏事实基线来自项目内已记录的 Steam Community guides。

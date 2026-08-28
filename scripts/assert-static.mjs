@@ -2,7 +2,7 @@ import { readFile, stat, access } from 'node:fs/promises';
 import assert from 'node:assert/strict';
 
 const domain = 'https://howtofishwalkthrough.com';
-const routes = ['/', '/beginner-guide', '/creatures', '/bosses', '/locations', '/locations/lighthouse', '/guides/reel-of-fortune', '/lures', '/bosses/spider-crab', '/achievements', '/about', '/contact', '/privacy', '/terms'];
+const routes = ['/', '/beginner-guide', '/creatures', '/bosses', '/locations', '/locations/lighthouse', '/locations/rocks', '/guides/reel-of-fortune', '/lures', '/bosses/spider-crab', '/achievements', '/about', '/contact', '/privacy', '/terms'];
 const prerenderSource = await readFile('scripts/prerender.ts', 'utf8');
 assert.match(prerenderSource, /renderToString\(React\.createElement\(App/, 'static pages must render the shared React App tree with the hydration-compatible API');
 const clientSource = await readFile('src/client.tsx', 'utf8');
@@ -35,6 +35,7 @@ assert.match(creatures, /Drip variants/);
 assert.match(creatures, /encyclopedia-overview\.webp/);
 const home = await readFile('dist/index.html', 'utf8');
 assert.match(home, /aria-label="Original How to Fish gameplay field images"/, 'homepage must expose the original-material carousel');
+assert.match(home, /href="\/locations\/rocks"/, 'homepage must link directly to the Rocks deep guide');
 const homeImages = [...home.matchAll(/src="(\/images\/home\/[^"]+\.webp)"/g)].map(match => match[1]);
 assert.equal(homeImages.length, 4, 'homepage carousel must include all four processed gameplay frames');
 for (const src of homeImages) await access(`public${src}`);
@@ -79,6 +80,16 @@ assert.ok(textFrom(locationsGuide).split(' ').length >= 1000, '/locations must b
 for (const phrase of ['FIVE-LOCATION STORY ROUTE','Giant Piranha Skeleton','Pufferfish Fin','Albatross Head','Mutated Bowhead Whale','Developer Island is optional','Patch 1.0.10']) assert.match(locationsGuide, new RegExp(phrase));
 assert.match(locationsGuide, /five-location-route-hero\.png/);
 await access('public/images/guides/locations/five-location-route-hero.png');
+const rocks = await readFile('dist/locations/rocks/index.html', 'utf8');
+assert.ok(textFrom(rocks).split(' ').length >= 1200, '/locations/rocks must be a deep island guide');
+assert.ok((rocks.match(/<img /g) || []).length >= 3, '/locations/rocks must include owner-provided gameplay references');
+for (const phrase of ['ISLAND 4','Professional Boss Lure','Pufferfish Fin','Tuna body','Albatross Head','Volcano coordinates','Rocks troubleshooting','OWNER-PROVIDED GAMEPLAY']) assert.match(rocks, new RegExp(phrase, 'i'));
+for (const name of ['Bass','Eel','Red Snapper','Sengarat','Halibut','Tigerfish','Flying Fish','Voxelfish','Parrotfish','Dripper']) assert.match(rocks, new RegExp(name));
+for (const src of [...rocks.matchAll(/<img[^>]+src="([^"]+)"/g)].map(match => match[1])) await access(`public${src}`);
+assert.match(rocks, /href="\/locations"/);
+assert.match(rocks, /href="\/creatures"/);
+assert.match(rocks, /href="\/lures"/);
+assert.doesNotMatch(rocks, /game8\/20-tuna|game8\/21-albatross/i, 'reference-only Game8 images must not be published on Rocks');
 const reel = await readFile('dist/guides/reel-of-fortune/index.html', 'utf8');
 assert.ok(textFrom(reel).split(' ').length >= 900, '/guides/reel-of-fortune must be a deep guide');
 for (const phrase of ['Drip creature','cosmetic skin','Z or C','GOLD GOLD GOLD','no stat improvement','Claim sources and limits','Patch 1.0.10']) assert.match(reel, new RegExp(phrase, 'i'));
@@ -110,7 +121,7 @@ for (const html of [locationsGuide,reel]) {
 }
 const bossesPage = await readFile('dist/bosses/index.html', 'utf8');
 for (const [route,html] of [['/bosses',bossesPage],['/bosses/spider-crab',spider]]) assert.match(html, /<meta property="og:image" content="https:\/\/howtofishwalkthrough\.com\/images\/guides\/island-1\/08-spider-crab\.jpg">/, `${route} must expose a rights-safe OG image`);
-for (const route of ['/locations','/guides/reel-of-fortune']) {
+for (const route of ['/locations','/locations/rocks','/guides/reel-of-fortune']) {
   const html = await readFile(`dist${route}/index.html`, 'utf8');
   const title = html.match(/<title>(.*?)<\/title>/)?.[1].replace(/&amp;/g,'&') || '';
   assert.ok(title.length <= 60, `${route} title must be at most 60 characters`);

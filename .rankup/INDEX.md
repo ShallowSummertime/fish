@@ -22,3 +22,4 @@
 - 2026-08-27：生产内容审计确认八页均无图片且核心攻略过薄；计划切换到 Spider Crab 与 Beginner 深度重写。
 - 2026-08-28：核心攻略已扩展为截图/原创图解驱动内容；AdSense 申请前新增 ads.txt、隐私/关于/联系/条款页，补强薄弱 hub，并扩大为 13 个可抓取静态路由。
 - 2026-08-28：GSC 域名所有权通过 Namecheap TXT 验证；sitemap 与首页、Beginner Guide、Lighthouse Guide 已提交；完整 73 项 AdSense 审计见 `adsense-audit-2026-08-28.md`。
+- 2026-08-28：新增 `/locations/rocks` 深度攻略，使用自有图鉴素材覆盖 Professional 鱼池、Tuna、Albatross、Volcano 解锁与失败恢复；路由和 sitemap 扩展到 15 页。

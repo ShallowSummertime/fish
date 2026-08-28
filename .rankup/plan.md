@@ -13,6 +13,7 @@
 | P0 | 建立内容发布门禁 | pending | 新攻略必须通过事实来源、步骤完整性、图片权利、失败状态和版本日期检查，不以 TDK/字数作为完成标准 |
 | P1 | SEO 基础设施 | done | canonical/OG/schema/sitemap/robots 齐全 |
 | P1 | 补强 Boss/Location/Lure/Achievement hubs | done | 增加行动流程、验证边界、故障恢复与深度攻略内链 |
+| P1 | Rocks 第四岛深度攻略 | done | 自有图鉴图片、10 条 Professional 捕获物、Tuna/Albatross 战斗步骤、Head 交付、Volcano 解锁与移动端 QA 全部通过 |
 | P0 | AdSense 申请前技术与信任修复 | done | ads.txt、隐私/关于/联系/条款、爬虫元数据、13 路由静态断言全部通过 |
 | P0 | AdSense 所有权验证与申请审核 | in-progress | 线上 ads.txt 被后台识别，站点审核成功提交 |
 | P0 | GSC 合格页面提交 | in-progress | sitemap 可读取，核心内容 URL 经 URL Inspection 提交或确认已索引 |

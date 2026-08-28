@@ -257,7 +257,7 @@ function sourceGroups() {
         sourceRoot: creatureGalleryRoot,
         archiveRoot: '01-raw/user-provided/creature-gallery',
         role: 'raw', status: 'archived', rights: 'user-owned creature encyclopedia captures and offline layout source', publishability: true,
-        pageUsage: ['/creatures'], derivedFrom: null,
+        pageUsage: ['/creatures', '/locations/rocks'], derivedFrom: null,
       },
       {
         sourceRoot: path.join(desktopRoot, '新手指南'),
@@ -350,7 +350,9 @@ function sourceGroups() {
           return {
             rights: 'optimized derivative of user-owned creature encyclopedia capture',
             publishability: true,
-            pageUsage: ['/creatures'],
+            pageUsage: normalizedPath === 'creatures/encyclopedia-professional.webp' || normalizedPath === 'creatures/encyclopedia-scientific.webp' || normalizedPath === 'creatures/encyclopedia-bosses.webp'
+              ? ['/creatures', '/locations/rocks']
+              : ['/creatures'],
             derivedFrom: [`asset:01-raw/user-provided/creature-gallery/assets/${sourceName}`],
           };
         },

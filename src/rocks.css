@@ -1,0 +1,18 @@
+.article.wide-guide {
+  max-width: 1080px;
+}
+
+@media (max-width: 820px) {
+  .quick-nav {
+    display: block;
+    position: static;
+    inset: auto;
+    flex-direction: row;
+    padding: 11px 0;
+    margin: 31px 0;
+    background: transparent;
+    border-top: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
+    gap: 8px;
+  }
+}
