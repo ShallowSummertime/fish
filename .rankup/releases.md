@@ -88,4 +88,7 @@
 - 目标：为隐私、版权、无障碍和事实纠错提供不公开的站长联系渠道。
 - 变更：Contact 增加站长确认的私人邮箱，并将 GitHub Issues 明确限定为公开、非敏感技术反馈；Privacy 补充邮件数据处理、用途和保留说明；Terms 指向私人版权下架通道。
 - 门禁：静态构建必须包含私人邮箱入口、GitHub 公开警示、邮件隐私披露和版权请求路径。
-- 环境：本地实施，等待测试与生产发布。
+- 环境：Vercel Production，主域 `https://howtofishwalkthrough.com`。
+- 验证：Vitest 3/3、TypeScript、Vite build、16 路由预渲染及静态断言通过；生产 Contact、Privacy、Terms 均返回新内容，16 个 sitemap 路由无 Claim sources 回归，ads.txt 未改变。
+- Commit：`812edc8`。
+- 结论：production-verified。
