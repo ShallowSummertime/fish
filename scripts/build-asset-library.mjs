@@ -215,7 +215,8 @@ function mediaType(filePath) {
 }
 
 function assetId(record) {
-  const identity = record.archivePath ?? record.sourcePath;
+  if (record.status === 'archived/superseded') return `asset-history:${record.archivePath}`;
+  const identity = record.logicalArchivePath ?? record.archivePath ?? record.sourcePath;
   return `asset:${identity.replaceAll(path.sep, '/')}`;
 }
 
@@ -228,15 +229,20 @@ function sourceGroups() {
   const islandRawAssetId = assetId({ sourcePath: islandVideoPath, archivePath: null });
   const guideRawAssetIds = guideVideoPaths.map((sourcePath) => assetId({ sourcePath, archivePath: null }));
   const entityFrames = {
-    'keeper-npc.jpg': { entity: 'Lighthouse Keeper NPC', source: '10-boss-handoff.jpg', pageUsage: ['/locations/lighthouse', '/bosses/spider-crab'] },
-    'clam.jpg': { entity: 'unidentified clam evidence', source: '02-clams.jpg', pageUsage: ['/locations/lighthouse'] },
-    'first-rod.jpg': { entity: 'Fishing rod', source: '03-first-rod.jpg', pageUsage: ['/locations/lighthouse', '/beginner-guide'] },
-    'early-shop-weapons.jpg': { entity: 'early shop weapon evidence', source: '06-shop-upgrades.jpg', pageUsage: ['/guides/reel-of-fortune'] },
-    'empty-beer-can.jpg': { entity: 'Empty Beer Can', source: '07-empty-beer-can.jpg', pageUsage: ['/locations/lighthouse', '/bosses/spider-crab'] },
-    'spider-crab.jpg': { entity: 'Spider Crab', source: '08-spider-crab.jpg', pageUsage: ['/bosses/spider-crab', '/locations/lighthouse'] },
-    'spider-crab-attack-window.jpg': { entity: 'Spider Crab attack-window evidence', source: '09-dodge-charge.jpg', pageUsage: ['/bosses/spider-crab'] },
-    'shell-handoff.jpg': { entity: 'Spider Crab Shell handoff evidence', source: '10-boss-handoff.jpg', pageUsage: ['/bosses/spider-crab', '/locations/lighthouse'] },
-    'radar-forest-route.jpg': { entity: 'Radar / Forest route evidence', source: '11-radar-route.jpg', pageUsage: ['/locations/lighthouse', '/beginner-guide'] },
+    'clam.jpg': { entity: 'Clam', sourceFrame: 'frame-006.jpg', pageUsage: ['/locations/lighthouse', '/beginner-guide'] },
+    'keeper-npc.jpg': { entity: 'Lighthouse Keeper NPC', sourceFrame: 'frame-009.jpg', pageUsage: ['/locations/lighthouse', '/bosses/spider-crab'] },
+    'first-rod.jpg': { entity: 'Fishing rod', sourceFrame: 'frame-013.jpg', pageUsage: ['/locations/lighthouse', '/beginner-guide'] },
+    'catch-value.jpg': { entity: 'Unidentified catch inspection', sourceFrame: 'frame-019.jpg', pageUsage: ['research-only'] },
+    'reel-of-fortune.jpg': { entity: 'Reel of Fortune', sourceFrame: 'frame-021.jpg', pageUsage: ['/guides/reel-of-fortune'] },
+    'early-shop-weapons.jpg': { entity: 'Brass Knuckles shop listing', sourceFrame: 'frame-023.jpg', pageUsage: ['research-only'] },
+    'knife-shop.jpg': { entity: 'Knife shop listing', sourceFrame: 'frame-024.jpg', pageUsage: ['research-only'] },
+    'hot-dog-shop.jpg': { entity: 'Hot Dog shop listing', sourceFrame: 'frame-026.jpg', pageUsage: ['research-only'] },
+    'empty-beer-can.jpg': { entity: 'Beer exchange / Empty Beer Can evidence', sourceFrame: 'frame-027.jpg', pageUsage: ['/locations/lighthouse', '/bosses/spider-crab'] },
+    'boss-lure-cast.jpg': { entity: 'Spider Crab boss-lure cast', sourceFrame: 'frame-028.jpg', pageUsage: ['/locations/lighthouse', '/bosses/spider-crab'] },
+    'spider-crab.jpg': { entity: 'Spider Crab', sourceFrame: 'frame-003.jpg', pageUsage: ['/bosses/spider-crab', '/locations/lighthouse'] },
+    'spider-crab-attack-window.jpg': { entity: 'Spider Crab attack-window evidence', sourceFrame: 'frame-032.jpg', pageUsage: ['/bosses/spider-crab'] },
+    'shell-handoff.jpg': { entity: 'Spider Crab Shell handoff evidence', sourceFrame: 'frame-035.jpg', pageUsage: ['/bosses/spider-crab', '/locations/lighthouse'] },
+    'radar-forest-route.jpg': { entity: 'Radar / Forest route evidence', sourceFrame: 'frame-036.jpg', pageUsage: ['/locations/lighthouse', '/beginner-guide'] },
   };
   return {
     archivedTrees: [
@@ -263,10 +269,10 @@ function sourceGroups() {
             const entity = entityFrames[relativePath.slice('island-1/entities/'.length)];
             if (entity && relativePath.startsWith('island-1/entities/')) {
               return {
-                rights: 'full-frame analysis derivative of a project-owned published Island 1 frame', publishability: true,
+                rights: 'clean crop from the user-owned Island 1 recording', publishability: true,
                 pageUsage: entity.pageUsage,
-                derivedFrom: [`asset:05-published/public-images/guides/island-1/${entity.source}`],
-                entity: entity.entity, crop: 'full-frame',
+                derivedFrom: [`asset:02-analysis/island-1/frames/${entity.sourceFrame}`, islandRawAssetId],
+                entity: entity.entity, crop: '900x500 at x=250 y=100',
               };
             }
             return {
@@ -475,7 +481,7 @@ async function collectHistoricalRecords(currentRecords, archiveRoot = currentArc
         const { targetPath, stat } = await safeExistingArchiveFile(archiveRoot, archivePath);
         const hash = await sha256(targetPath);
         historicalRecords.push({
-          id: `asset:${archivePath}`,
+          id: `asset-history:${archivePath}`,
           sourcePath: null,
           archivePath,
           logicalArchivePath,
@@ -584,10 +590,14 @@ function validateKnowledgeSchema(knowledge) {
 
 function assertKnowledgeReferences(knowledge, assets) {
   validateKnowledgeSchema(knowledge);
-  const assetIds = new Set(assets.map((asset) => asset.id));
+  const assetsById = new Map(assets.map((asset) => [asset.id, asset]));
   for (const entity of knowledge.entities) {
     for (const referencedId of [...(entity.imageAssetIds ?? []), ...(entity.evidenceAssetIds ?? []), ...(entity.sourceVideoAssetId ? [entity.sourceVideoAssetId] : [])]) {
-      if (!assetIds.has(referencedId)) throw new Error(`Knowledge entity ${entity.id} references an unknown asset ID: ${referencedId}`);
+      const referencedAsset = assetsById.get(referencedId);
+      if (!referencedAsset) throw new Error(`Knowledge entity ${entity.id} references an unknown asset ID: ${referencedId}`);
+      if (referencedAsset.status === 'archived/superseded') {
+        throw new Error(`Knowledge entity ${entity.id} references a superseded asset ID: ${referencedId}`);
+      }
     }
   }
 }

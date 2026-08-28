@@ -75,9 +75,17 @@ try {
   const catalogLikeRecords = [currentRecord, ...historical];
   assert.equal(historical.length, 1);
   assert.equal(historical[0].archivePath, logicalArchivePath);
+  assert.equal(historical[0].id, `asset-history:${logicalArchivePath}`);
   assert.equal(historical[0].status, 'archived/superseded');
   assert.equal(historical[0].sourcePath, null);
-  assert.equal(historical[0].supersededBy, `asset:${currentArchivePath}`);
+  assert.equal(historical[0].supersededBy, `asset:${logicalArchivePath}`);
+  assert.throws(
+    () => assertKnowledgeReferences(
+      { entities: [entity({ imageAssetIds: [`asset-history:${logicalArchivePath}`] })], coverageGaps: [] },
+      [{ id: `asset-history:${logicalArchivePath}`, status: 'archived/superseded' }],
+    ),
+    /references a superseded asset ID/,
+  );
   const checksumPaths = catalogLikeRecords.filter((record) => record.archivePath).map((record) => record.archivePath).sort();
   assert.deepEqual(checksumPaths, [logicalArchivePath, currentArchivePath].sort());
   console.log('asset-library targeted checks passed');
