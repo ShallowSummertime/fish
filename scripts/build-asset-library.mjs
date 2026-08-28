@@ -8,6 +8,7 @@ import { fileURLToPath } from 'node:url';
 const repoRoot = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const desktopRoot = '/Users/wanglu/Desktop/how to fish';
 const weaponReferenceRoot = '/Users/wanglu/Documents/Codex/2026-08-28/ho/outputs/how-to-fish-weapons';
+const creatureGalleryRoot = '/Users/wanglu/Documents/Codex/2026-08-28/ho/outputs/how-to-fish-gallery';
 const maxFullCopyBytes = 100 * 1024 * 1024;
 const knowledgeSeedPaths = [
   path.join(repoRoot, 'research/asset-knowledge/first-island.seed.json'),
@@ -56,6 +57,7 @@ function assertSafeArchiveRoot(archiveRoot) {
     path.join(desktopRoot, '第一座岛'),
     path.join(desktopRoot, '攻略1'),
     weaponReferenceRoot,
+    creatureGalleryRoot,
   ];
   for (const sourceRoot of sourceRoots) {
     if (isWithin(archiveRoot, sourceRoot)) {
@@ -252,6 +254,12 @@ function sourceGroups() {
   return {
     archivedTrees: [
       {
+        sourceRoot: creatureGalleryRoot,
+        archiveRoot: '01-raw/user-provided/creature-gallery',
+        role: 'raw', status: 'archived', rights: 'user-owned creature encyclopedia captures and offline layout source', publishability: true,
+        pageUsage: ['/creatures'], derivedFrom: null,
+      },
+      {
         sourceRoot: path.join(desktopRoot, '新手指南'),
         archiveRoot: '01-raw/user-provided/beginner-guide',
         role: 'raw', status: 'archived', rights: 'user-provided; ownership unconfirmed', publishability: false,
@@ -327,6 +335,25 @@ function sourceGroups() {
         archiveRoot: '05-published/public-images',
         role: 'published', status: 'archived', rights: 'project-owned original or generated site asset', publishability: true,
         pageUsage: ['site-public-assets'], derivedFrom: null,
+        metadataForRelative(relativePath) {
+          const creatureSources = {
+            'creatures/encyclopedia-overview.webp': 'mobalytics-01-overview.png',
+            'creatures/encyclopedia-early.webp': 'mobalytics-02-early.png',
+            'creatures/encyclopedia-standard.webp': 'mobalytics-03-standard.png',
+            'creatures/encyclopedia-professional.webp': 'mobalytics-04-professional.png',
+            'creatures/encyclopedia-scientific.webp': 'mobalytics-05-scientific.png',
+            'creatures/encyclopedia-bosses.webp': 'mobalytics-06-bosses.png',
+          };
+          const normalizedPath = relativePath.split(path.sep).join('/');
+          const sourceName = creatureSources[normalizedPath];
+          if (!sourceName) return {};
+          return {
+            rights: 'optimized derivative of user-owned creature encyclopedia capture',
+            publishability: true,
+            pageUsage: ['/creatures'],
+            derivedFrom: [`asset:01-raw/user-provided/creature-gallery/assets/${sourceName}`],
+          };
+        },
       },
     ],
     archivedFiles: [
@@ -759,6 +786,7 @@ async function main() {
   await Promise.all([
     safeArchiveDirectory(currentArchiveRoot, '00-catalog'),
     safeArchiveDirectory(currentArchiveRoot, '01-raw/user-provided/beginner-guide'),
+    safeArchiveDirectory(currentArchiveRoot, '01-raw/user-provided/creature-gallery'),
     safeArchiveDirectory(currentArchiveRoot, '02-analysis/island-1'),
     safeArchiveDirectory(currentArchiveRoot, '02-analysis/guide-1'),
     safeArchiveDirectory(currentArchiveRoot, '03-reference/game8'),

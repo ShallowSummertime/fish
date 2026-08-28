@@ -1,0 +1,14 @@
+.creature.illustrated-card .creature-meta i,
+.creature.illustrated-card .creature-lure i {
+  position: static;
+  right: auto;
+  bottom: auto;
+  display: block;
+  max-width: none;
+  margin: 0 0 2px;
+  color: var(--muted);
+  font: 7px var(--mono);
+  font-style: normal;
+  letter-spacing: .08em;
+  text-align: left;
+}

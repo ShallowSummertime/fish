@@ -30,6 +30,9 @@ for (const route of routes) {
 const creatures = await readFile('dist/creatures/index.html', 'utf8');
 assert.match(creatures, /All 49 How to Fish/);
 assert.match(creatures, /Mutated Bowhead Whale/);
+assert.match(creatures, /Creature encyclopedia overview/);
+assert.match(creatures, /Drip variants/);
+assert.match(creatures, /encyclopedia-overview\.webp/);
 const home = await readFile('dist/index.html', 'utf8');
 assert.match(home, /aria-label="Original How to Fish gameplay field images"/, 'homepage must expose the original-material carousel');
 const homeImages = [...home.matchAll(/src="(\/images\/home\/[^"]+\.webp)"/g)].map(match => match[1]);

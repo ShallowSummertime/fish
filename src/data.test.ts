@@ -4,6 +4,9 @@ describe('How to Fish content baseline', () => {
   it('contains exactly 49 creatures with 11 boss or special entities', () => {
     expect(creatures).toHaveLength(49);
     expect(creatures.filter(c => c.kind === 'Boss / Special')).toHaveLength(11);
+    expect(creatures.every(c => c.island && c.lure && c.value > 0 && c.tier)).toBe(true);
+    expect(creatures.find(c => c.name === 'Voxelfish')).toMatchObject({ island: 'Rocks', lure: 'Professional Lure', value: 340 });
+    expect(creatures.find(c => c.name === 'Mutated Bowhead Whale')).toMatchObject({ island: 'Volcano', value: 15000 });
     expect(bosses).toHaveLength(11);
   });
   it('models the five main locations correctly', () => {
@@ -18,6 +21,7 @@ describe('How to Fish content baseline', () => {
     expect(pageMeta['/guides/reel-of-fortune'].title.length).toBeLessThanOrEqual(60);
     expect(pageMeta['/bosses'].image).toBe('/images/guides/island-1/08-spider-crab.jpg');
     expect(pageMeta['/bosses/spider-crab'].image).toBe('/images/guides/island-1/08-spider-crab.jpg');
+    expect(pageMeta['/creatures'].image).toBe('/images/creatures/encyclopedia-overview.webp');
     expect(achievements).toHaveLength(28);
   });
 });
