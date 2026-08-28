@@ -2,7 +2,7 @@ import { readFile, stat, access } from 'node:fs/promises';
 import assert from 'node:assert/strict';
 
 const domain = 'https://howtofishwalkthrough.com';
-const routes = ['/', '/beginner-guide', '/creatures', '/bosses', '/locations', '/locations/lighthouse', '/lures', '/bosses/spider-crab', '/achievements', '/about', '/contact', '/privacy', '/terms'];
+const routes = ['/', '/beginner-guide', '/creatures', '/bosses', '/locations', '/locations/lighthouse', '/guides/reel-of-fortune', '/lures', '/bosses/spider-crab', '/achievements', '/about', '/contact', '/privacy', '/terms'];
 const prerenderSource = await readFile('scripts/prerender.ts', 'utf8');
 assert.match(prerenderSource, /renderToString\(React\.createElement\(App/, 'static pages must render the shared React App tree with the hydration-compatible API');
 const clientSource = await readFile('src/client.tsx', 'utf8');
@@ -72,4 +72,15 @@ assert.ok(textFrom(lighthouse).split(' ').length >= 900, '/locations/lighthouse 
 assert.ok((lighthouse.match(/<img /g) || []).length >= 10, '/locations/lighthouse must include the extracted gameplay sequence');
 for (const phrase of ['Build the Clam-to-cash loop', 'Empty Beer Can', 'charge-and-punish', 'Boat Keys', 'FOLLOW THE GREEN FOREST MARKER']) assert.match(lighthouse, new RegExp(phrase));
 for (const src of [...lighthouse.matchAll(/<img[^>]+src="([^"]+)"/g)].map(match => match[1])) await access(`public${src}`);
+const locationsGuide = await readFile('dist/locations/index.html', 'utf8');
+assert.ok(textFrom(locationsGuide).split(' ').length >= 1000, '/locations must be a deep five-location route');
+for (const phrase of ['FIVE-LOCATION STORY ROUTE','Giant Piranha Skeleton','Pufferfish Fin','Albatross Head','Mutated Bowhead Whale','Developer Island is optional','Patch 1.0.10']) assert.match(locationsGuide, new RegExp(phrase));
+assert.match(locationsGuide, /five-location-route-hero\.png/);
+await access('public/images/guides/locations/five-location-route-hero.png');
+const reel = await readFile('dist/guides/reel-of-fortune/index.html', 'utf8');
+assert.ok(textFrom(reel).split(' ').length >= 900, '/guides/reel-of-fortune must be a deep guide');
+for (const phrase of ['Drip creature','cosmetic skin','Z or C','GOLD GOLD GOLD','no stat improvement','Claim sources and limits','Patch 1.0.10']) assert.match(reel, new RegExp(phrase, 'i'));
+assert.match(reel, /reel-machine-hero\.png/);
+assert.doesNotMatch(reel, /there is one machine (?:on|per) (?:each|every) island|skins? (?:are|is) shared (?:between|with) players|pity (?:counter|system) guarantees/i);
+await access('public/images/guides/reel-of-fortune/reel-machine-hero.png');
 console.log(`verified ${routes.length} crawlable static routes`);

@@ -12,7 +12,7 @@ describe('How to Fish content baseline', () => {
     expect(locations.filter(l => l.type === 'Island')).toHaveLength(4);
   });
   it('has metadata for every required core route', () => {
-    ['/','/beginner-guide','/creatures','/bosses','/locations','/lures','/bosses/spider-crab','/achievements','/about','/contact','/privacy','/terms'].forEach(path => expect(pageMeta[path]).toBeDefined());
+    ['/','/beginner-guide','/creatures','/bosses','/locations','/locations/lighthouse','/guides/reel-of-fortune','/lures','/bosses/spider-crab','/achievements','/about','/contact','/privacy','/terms'].forEach(path => expect(pageMeta[path]).toBeDefined());
     expect(pageMeta['/'].title).toContain('How to Fish Walkthrough');
     expect(achievements).toHaveLength(28);
   });
