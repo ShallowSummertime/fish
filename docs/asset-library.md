@@ -10,7 +10,7 @@
 - `01-raw/user-provided/beginner-guide/`：新手指南的用户提供截图。
 - `01-raw/user-provided/creature-gallery/`：用户自有的生物图鉴截图、离线页面和裁切坐标脚本；允许用于 `/creatures` 和 `/locations/rocks` 页面。
 - 原始视频**不进入资产库目录**：第一座岛、攻略 1 和所有待审视频仅以原始绝对路径、字节数与 SHA-256 指纹登记在目录中。任何 `MP4`、`MOV` 或 `WEBM` 出现在可归档来源树中都会使工具停止；必须把视频显式登记为 source-only，只归档其分析衍生图。
-- `02-analysis/island-1/` 与 `02-analysis/guide-1/`：由原视频采样生成的关键帧、联系表、分析笔记；`entities/` 保存去掉上下字幕区后的实体证据裁切，并保留来源帧关系。
+- `02-analysis/island-1/`、`02-analysis/guide-1/` 与 `02-analysis/guide-4-5/`：由原视频采样生成的关键帧、联系表、分析笔记；`entities/` 保存去掉上下字幕区后的实体证据裁切，并保留来源帧关系。Guide 4-5 源视频带社交播放器与中文编辑字幕、权利未确认，因此其关键帧只能研究，公开页一律使用重新构图的原创素材。
 - `03-reference/game8/`：Game8 参考图与说明。
 - `03-reference/how-to-fish-weapons/`：离线武器资料包、数据脚本与配套截图。该资料混合社区攻略、第三方游戏截图和官方 Steam 截图，只能用于研究与交叉核验。
 - `04-project/source-packets/`：站点研究源包。
@@ -24,6 +24,7 @@
 - 第一座岛的用户拥有录像保留在原路径；由其生成、并经审核的关键帧/实体图可发布。站点自有或生成的 `public/images` 素材也可发布。
 - 新手截图是用户提供的材料，但原始截图在确认所有权前不可发布。可据其内容重新制作自有图示。
 - 生物图鉴资料包由用户明确确认为自有图片；原始截图可发布，站点使用的 WebP 优化版必须保留到原始 PNG 的 `derivedFrom` 关系。Rocks 攻略只复用 Professional、Scientific 与 Boss 图鉴 WebP；Game8 Tuna/Albatross 图片仍保持参考专用。
+- 攻略 4-5 视频只登记 source-only 原始路径和指纹；选取的 13 张关键帧、联系表、分析笔记与结构化实体种子归入 `02-analysis/guide-4-5/` 和 `04-project/knowledge-seed/guide-4-5.seed.json`。视频显示 Patch 1.0.5，武器伤害、弹药和升级数值不得直接当作当前版本事实。
 - 攻略 1 的视频、其关键帧、联系表与分析笔记均为研究专用：其中包含手机/社交界面、字幕，且权利未确认。
 - `pending/unreviewed` 记录只说明发现了素材，不代表已获得权利、完成分析或可发布。
 

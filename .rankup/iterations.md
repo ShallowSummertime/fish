@@ -1,5 +1,15 @@
 # 迭代记录
 
+## 2026-08-28 — Rocks 补强与 Volcano Island 5 深度攻略
+
+- 目标：把攻略4-5长视频转成可追溯事实和可独立通关的第四、第五岛英文攻略。
+- 证据边界：源视频显示 Patch 1.0.5 且带播放器/中文字幕，原件只登记 source-only；13 张关键帧、联系表、分析笔记和 14 个实体只用于研究。旧伤害、弹药和升级数值不升级为当前事实。
+- Rocks：新增 1.50× 烹饪目标、Tuna/Albatross 白色逃脱计时条、红屋檐掩体、俯冲与白色投射物、Head/Meat 区分，以及 `/locations/volcano` 交接。
+- Volcano：新增 2542 可见词的 `/locations/volcano`，覆盖 Scientist 五鱼来源分歧、五种 Scientific 生物、Fish Bucket、Bowhead 跳跃、整体搬运、Mutated Bowhead 岩浆战、Whale Fin/RHIB 与 10 项故障恢复。
+- 素材：依据视频关键帧生成 4 张去 UI/字幕、贴近原游戏低多边形画面的干净截图式重建图；3 张用于 Volcano、1 张用于 Rocks；两张早期偏概念插画未进入站点。
+- 验证：Vitest、TypeScript、Vite 构建、16 路由静态断言、资产库 260 项/失败 0、桌面 1280px 与移动 390px 浏览器 QA 全通过；Volcano 4 张图片延迟加载后均为非零尺寸且无横向溢出。
+- 下一轮唯一改进：取得当前 Patch 1.0.10 的 Scientist 任务计数器自有截图，解决“任意五条”与“五条 Scientific 捕获物”的残余分歧。
+
 ## 2026-08-28 — Rocks Island 4 深度攻略
 
 - 目标：用固定资产库中的自有图鉴素材创建可独立完成第四岛的英文攻略。

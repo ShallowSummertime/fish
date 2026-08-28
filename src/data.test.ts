@@ -15,10 +15,12 @@ describe('How to Fish content baseline', () => {
     expect(locations.filter(l => l.type === 'Island')).toHaveLength(4);
   });
   it('has metadata for every required core route', () => {
-    ['/','/beginner-guide','/creatures','/bosses','/locations','/locations/lighthouse','/locations/rocks','/guides/reel-of-fortune','/lures','/bosses/spider-crab','/achievements','/about','/contact','/privacy','/terms'].forEach(path => expect(pageMeta[path]).toBeDefined());
+    ['/','/beginner-guide','/creatures','/bosses','/locations','/locations/lighthouse','/locations/rocks','/locations/volcano','/guides/reel-of-fortune','/lures','/bosses/spider-crab','/achievements','/about','/contact','/privacy','/terms'].forEach(path => expect(pageMeta[path]).toBeDefined());
     expect(pageMeta['/'].title).toContain('How to Fish Walkthrough');
     expect(pageMeta['/locations'].title.length).toBeLessThanOrEqual(60);
     expect(pageMeta['/locations/rocks'].title.length).toBeLessThanOrEqual(60);
+    expect(pageMeta['/locations/volcano'].title.length).toBeLessThanOrEqual(60);
+    expect(pageMeta['/locations/volcano'].image).toBe('/images/guides/volcano/01-volcano-arrival.png');
     expect(pageMeta['/guides/reel-of-fortune'].title.length).toBeLessThanOrEqual(60);
     expect(pageMeta['/bosses'].image).toBe('/images/guides/island-1/08-spider-crab.jpg');
     expect(pageMeta['/bosses/spider-crab'].image).toBe('/images/guides/island-1/08-spider-crab.jpg');

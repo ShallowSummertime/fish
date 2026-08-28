@@ -2,8 +2,8 @@
 
 - 项目：How to Fish Walkthrough
 - 最近更新：2026-08-28
-- 当前阶段：8 — AdSense 申请前修复与 GSC 提交
-- 当前目标：完成 ads.txt 所有权验证、信任页上线、合格内容索引提交与 AdSense 审核
+- 当前阶段：9 — 实战攻略与实体资料库扩展
+- 当前目标：用可追溯视频研究与截图式素材完成五岛主线深度攻略
 - 下一入口：PROJECT.md
 
 ## 推荐读取顺序
@@ -23,3 +23,4 @@
 - 2026-08-28：核心攻略已扩展为截图/原创图解驱动内容；AdSense 申请前新增 ads.txt、隐私/关于/联系/条款页，补强薄弱 hub，并扩大为 13 个可抓取静态路由。
 - 2026-08-28：GSC 域名所有权通过 Namecheap TXT 验证；sitemap 与首页、Beginner Guide、Lighthouse Guide 已提交；完整 73 项 AdSense 审计见 `adsense-audit-2026-08-28.md`。
 - 2026-08-28：新增 `/locations/rocks` 深度攻略，使用自有图鉴素材覆盖 Professional 鱼池、Tuna、Albatross、Volcano 解锁与失败恢复；路由和 sitemap 扩展到 15 页。
+- 2026-08-28：分析攻略4-5旧版视频并归档 13 张研究帧与实体种子；补强 Rocks，新增 `/locations/volcano` 深度攻略、3 张截图式重建素材和完整 Bowhead 双战路线；扩展到 16 个静态路由。

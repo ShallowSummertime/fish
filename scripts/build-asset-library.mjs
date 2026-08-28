@@ -13,6 +13,7 @@ const maxFullCopyBytes = 100 * 1024 * 1024;
 const knowledgeSeedPaths = [
   path.join(repoRoot, 'research/asset-knowledge/first-island.seed.json'),
   path.join(repoRoot, 'research/asset-knowledge/weapons.seed.json'),
+  path.join(repoRoot, 'research/asset-knowledge/guide-4-5.seed.json'),
 ];
 
 function usage() {
@@ -233,8 +234,10 @@ function sourceGroups() {
     path.join(desktopRoot, '攻略1/ScreenRecording_08-27-2026 19-48-42_1.MP4'),
     path.join(desktopRoot, '攻略1/d6d1b952eed288e80723f00a0e3473c6.mp4'),
   ];
+  const guide45VideoPath = path.join(desktopRoot, '攻略4-5/ScreenRecording_08-28-2026 10-48-09_1.MP4');
   const islandRawAssetId = assetId({ sourcePath: islandVideoPath, archivePath: null });
   const guideRawAssetIds = guideVideoPaths.map((sourcePath) => assetId({ sourcePath, archivePath: null }));
+  const guide45RawAssetId = assetId({ sourcePath: guide45VideoPath, archivePath: null });
   const entityFrames = {
     'clam.jpg': { entity: 'Clam', sourceFrame: 'frame-006.jpg', pageUsage: ['/locations/lighthouse', '/beginner-guide'] },
     'keeper-npc.jpg': { entity: 'Lighthouse Keeper NPC', sourceFrame: 'frame-009.jpg', pageUsage: ['/locations/lighthouse', '/bosses/spider-crab'] },
@@ -324,6 +327,12 @@ function sourceGroups() {
               pageUsage: ['research-only'], derivedFrom: guideRawAssetIds,
             };
           }
+          if (firstDirectory === 'guide-4-5') {
+            return {
+              rights: 'analysis derivative of uncertain Guide 4-5 social/player media; research-only', publishability: false,
+              pageUsage: ['research-only'], derivedFrom: [guide45RawAssetId],
+            };
+          }
           return {
             rights: 'new analysis material; rights and publishability require review', publishability: false,
             pageUsage: ['research-only'], derivedFrom: null,
@@ -377,7 +386,9 @@ function sourceGroups() {
         role: 'analysis', status: 'archived', rights: 'project-owned structured knowledge seed', publishability: false,
         pageUsage: ['research-only'], derivedFrom: path.basename(sourcePath) === 'weapons.seed.json'
           ? ['asset:03-reference/how-to-fish-weapons/assets/weapons.js']
-          : ['asset:04-project/source-packets/how-to-fish-p0.md'],
+          : path.basename(sourcePath) === 'guide-4-5.seed.json'
+            ? ['asset:02-analysis/guide-4-5/analysis-notes.md', guide45RawAssetId]
+            : ['asset:04-project/source-packets/how-to-fish-p0.md'],
       })),
     ],
     sourceOnlyFiles: [
@@ -391,6 +402,11 @@ function sourceGroups() {
         rights: 'uncertain social or phone UI media; retained only at original path', publishability: false,
         pageUsage: ['research-only'], derivedFrom: null,
       })),
+      {
+        sourcePath: guide45VideoPath, mediaType: 'video', role: 'raw', status: 'analyzed/source-only',
+        rights: 'uncertain social or phone UI media; retained only at original path; Guide 4-5 frames are research-only', publishability: false,
+        pageUsage: ['research-only'], derivedFrom: null,
+      },
     ],
     pendingFiles: [
       path.join(desktopRoot, '攻略2/ScreenRecording_08-28-2026 10-03-30_1.MP4'),

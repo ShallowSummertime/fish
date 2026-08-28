@@ -2,7 +2,7 @@ import { readFile, stat, access } from 'node:fs/promises';
 import assert from 'node:assert/strict';
 
 const domain = 'https://howtofishwalkthrough.com';
-const routes = ['/', '/beginner-guide', '/creatures', '/bosses', '/locations', '/locations/lighthouse', '/locations/rocks', '/guides/reel-of-fortune', '/lures', '/bosses/spider-crab', '/achievements', '/about', '/contact', '/privacy', '/terms'];
+const routes = ['/', '/beginner-guide', '/creatures', '/bosses', '/locations', '/locations/lighthouse', '/locations/rocks', '/locations/volcano', '/guides/reel-of-fortune', '/lures', '/bosses/spider-crab', '/achievements', '/about', '/contact', '/privacy', '/terms'];
 const prerenderSource = await readFile('scripts/prerender.ts', 'utf8');
 assert.match(prerenderSource, /renderToString\(React\.createElement\(App/, 'static pages must render the shared React App tree with the hydration-compatible API');
 const clientSource = await readFile('src/client.tsx', 'utf8');
@@ -36,6 +36,7 @@ assert.match(creatures, /encyclopedia-overview\.webp/);
 const home = await readFile('dist/index.html', 'utf8');
 assert.match(home, /aria-label="Original How to Fish gameplay field images"/, 'homepage must expose the original-material carousel');
 assert.match(home, /href="\/locations\/rocks"/, 'homepage must link directly to the Rocks deep guide');
+assert.match(home, /href="\/locations\/volcano"/, 'homepage must link directly to the Volcano deep guide');
 const homeImages = [...home.matchAll(/src="(\/images\/home\/[^"]+\.webp)"/g)].map(match => match[1]);
 assert.equal(homeImages.length, 4, 'homepage carousel must include all four processed gameplay frames');
 for (const src of homeImages) await access(`public${src}`);
@@ -90,6 +91,16 @@ assert.match(rocks, /href="\/locations"/);
 assert.match(rocks, /href="\/creatures"/);
 assert.match(rocks, /href="\/lures"/);
 assert.doesNotMatch(rocks, /game8\/20-tuna|game8\/21-albatross/i, 'reference-only Game8 images must not be published on Rocks');
+for (const phrase of ['1.50×','escape timer','falling projectiles','GAMEPLAY RECONSTRUCTION','Meat Chunks','complete Volcano Island 5 walkthrough']) assert.match(rocks, new RegExp(phrase, 'i'));
+const volcano = await readFile('dist/locations/volcano/index.html', 'utf8');
+assert.ok(textFrom(volcano).split(' ').length >= 1800, '/locations/volcano must be a deep final-island guide');
+assert.ok((volcano.match(/<img /g) || []).length >= 4, '/locations/volcano must include reconstructed gameplay and owner-provided encyclopedia visuals');
+for (const phrase of ['ISLAND 5','Scientific Lure','Scientist’s fish request','Fish Bucket','Bowhead Whale','whole body','Mutated Bowhead Whale','Whale Fin','military-boat key','Volcano troubleshooting','GAMEPLAY RECONSTRUCTION','OWNER-PROVIDED GAMEPLAY']) assert.match(volcano, new RegExp(phrase, 'i'));
+for (const name of ['Blobfish','Oarfish','Anglerfish','Stonefish','Superdwarf Fish','Goblin Shark']) assert.match(volcano, new RegExp(name));
+for (const src of [...volcano.matchAll(/<img[^>]+src="([^"]+)"/g)].map(match => match[1])) await access(`public${src}`);
+for (const href of ['/locations/rocks','/locations','/creatures','/bosses','/lures']) assert.match(volcano, new RegExp(`href="${href}"`));
+assert.doesNotMatch(volcano, /research\/video-analysis|frame-\d+\.jpg|douyin|xiaohongshu|版本 1\.0\.5/i, 'research-only frames and social identities must not be published on Volcano');
+assert.match(volcano, /source disagreement[\s\S]*any five fish[\s\S]*five native Volcano catches/i, 'Volcano guide must disclose the five-fish counter source conflict');
 const reel = await readFile('dist/guides/reel-of-fortune/index.html', 'utf8');
 assert.ok(textFrom(reel).split(' ').length >= 900, '/guides/reel-of-fortune must be a deep guide');
 for (const phrase of ['Drip creature','cosmetic skin','Z or C','GOLD GOLD GOLD','no stat improvement','Claim sources and limits','Patch 1.0.10']) assert.match(reel, new RegExp(phrase, 'i'));
@@ -110,7 +121,7 @@ assert.doesNotMatch(spiderText, /white bar (?:is|acts as) (?:a |the )?revive|dow
 assert.match(locationsText, /five native catches[\s\S]*Fish Bucket[\s\S]*Bowhead Whale body[\s\S]*crater[\s\S]*Mutated Bowhead Whale[\s\S]*Whale Fin[\s\S]*military boat key/i, 'Volcano route must include the complete dependency chain');
 assert.match(textFrom(reel), /catch[^.]*kill[^.]*carry[^.]*Drip body/i, 'Reel guide must explain the dead Drip body input');
 assert.match(textFrom(reel), /confirm[^.]*dead|that it is dead/i, 'Reel troubleshooting must verify that the creature is dead');
-for (const base of ['public/images/guides/locations/five-location-route-hero','public/images/guides/reel-of-fortune/reel-machine-hero']) {
+for (const base of ['public/images/guides/locations/five-location-route-hero','public/images/guides/reel-of-fortune/reel-machine-hero','public/images/guides/rocks/albatross-cover-guide','public/images/guides/volcano/01-volcano-arrival','public/images/guides/volcano/02-bowhead-to-crater','public/images/guides/volcano/03-mutated-bowhead-fight']) {
   for (const width of [768,1280]) await access(`${base}-${width}.webp`);
 }
 for (const html of [locationsGuide,reel]) {
@@ -121,7 +132,7 @@ for (const html of [locationsGuide,reel]) {
 }
 const bossesPage = await readFile('dist/bosses/index.html', 'utf8');
 for (const [route,html] of [['/bosses',bossesPage],['/bosses/spider-crab',spider]]) assert.match(html, /<meta property="og:image" content="https:\/\/howtofishwalkthrough\.com\/images\/guides\/island-1\/08-spider-crab\.jpg">/, `${route} must expose a rights-safe OG image`);
-for (const route of ['/locations','/locations/rocks','/guides/reel-of-fortune']) {
+for (const route of ['/locations','/locations/rocks','/locations/volcano','/guides/reel-of-fortune']) {
   const html = await readFile(`dist${route}/index.html`, 'utf8');
   const title = html.match(/<title>(.*?)<\/title>/)?.[1].replace(/&amp;/g,'&') || '';
   assert.ok(title.length <= 60, `${route} title must be at most 60 characters`);
