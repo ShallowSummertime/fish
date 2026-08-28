@@ -46,3 +46,12 @@
 - 验证：`pnpm test`、TypeScript、Vite build、16 路由静态断言、桌面与 390px 移动端浏览器检查通过；生产 Rocks/Volcano、4 张 WebP 与 sitemap 均返回 200，Volcano canonical/H1/图片加载/无横向溢出复验通过。
 - Commit：`b5a6860`。
 - 结论：production-verified。
+
+## 0.5.0 — 2026-08-28
+
+- 环境：Vercel Production，主域 `https://howtofishwalkthrough.com`。
+- 变更：强化现有静态预渲染为收录门禁；16 个路由的正文、H1 与元数据均进入首轮 HTML；全站 Title 压缩到 60 字符以内；首页扩写到 1622 个可见英文词并加入与正文一致的 FAQPage 结构化数据。
+- 质量门禁：构建阶段自动检查非空静态根节点、首页正文不少于 1200 词、FAQ 可见、FAQ schema 存在，以及每条路由的最终 Title 长度。
+- 验证：`pnpm test`、TypeScript、Vite build、16 路由预渲染和静态断言通过；生产首页首轮 HTML 含 H1、1622 词与 FAQ schema，生产 sitemap 的 16 个 URL 均返回不超过 60 字符的 Title。
+- Commit：`40707ff`。
+- 结论：production-verified；GSC sitemap 当前成功读取但仍显示 13 个已发现页面，等待重新提交以刷新 16 URL 状态。

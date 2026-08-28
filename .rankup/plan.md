@@ -19,6 +19,6 @@
 | P0 | AdSense 申请前技术与信任修复 | done | ads.txt、隐私/关于/联系/条款、爬虫元数据、13 路由静态断言全部通过 |
 | P0 | AdSense 所有权验证与申请审核 | in-progress | 线上 ads.txt 被后台识别，站点审核成功提交 |
 | P0 | GSC 合格页面提交 | in-progress | sitemap 可读取，核心内容 URL 经 URL Inspection 提交或确认已索引 |
-| P0 | 首轮 HTML 与首页内容门禁 | in-progress | 16 页静态正文、全站 Title ≤60、首页 ≥1200 词及 FAQ 在生产 HTML 中通过；部署后复验 |
+| P0 | 首轮 HTML 与首页内容门禁 | done | 16 页静态正文、全站 Title ≤60、首页 1622 词及 FAQ 已在生产 HTML 中通过 |
 | P1 | 免费目录资格筛选与提交 | in-progress | 先量真实流量与资格；只准备真实字段；BacklinkDirs/Submify 最终提交须单项确认并留证 |
 | P1 | 构建、测试和独立 E2E/review | done | 客观 gates、静态 route 断言、独立 E2E 与生产部署 review 已通过 |
