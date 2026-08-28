@@ -35,3 +35,14 @@
 - 验证：`pnpm test`、TypeScript、Vite build、15 路由预渲染、静态断言、桌面与 390px 移动端浏览器检查均通过；生产 URL 返回 200。
 - Commit：`dfd4e80`。
 - 结论：production-verified。
+
+## 0.4.0 — 2026-08-28
+
+- 环境：Vercel Production，主域 `https://howtofishwalkthrough.com`。
+- 变更：补强 `/locations/rocks` 的 1.50× 烹饪、逃脱计时条、Albatross 掩体节奏和 Head/Meat 区分；新增 `/locations/volcano` 第五岛深度攻略，覆盖 Scientist 五鱼任务、Scientific 生物、Fish Bucket、Bowhead 整体搬运、Mutated Bowhead 岩浆战、Whale Fin 与 RHIB 结局。
+- 素材：4 张贴近游戏截图的干净重建图已发布；带社交播放器、中文字幕和 Patch 1.0.5 HUD 的原帧仅研究。原视频 source-only，13 张关键帧、联系表、分析笔记和 14 个实体已进入固定资产库。
+- 资产归档：固定资产库共 260 项，已归档 252 项，待处理 8 项，校验失败 0 项。
+- 站内链接：首页、Locations、Bosses、Rocks 与 Related guides 均接入 Volcano；sitemap 扩展到 16 个可抓取静态路由。
+- 验证：`pnpm test`、TypeScript、Vite build、16 路由静态断言、桌面与 390px 移动端浏览器检查通过；生产 Rocks/Volcano、4 张 WebP 与 sitemap 均返回 200，Volcano canonical/H1/图片加载/无横向溢出复验通过。
+- Commit：`b5a6860`。
+- 结论：production-verified。
