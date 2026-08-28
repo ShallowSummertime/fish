@@ -114,6 +114,20 @@ function Meta({ path }: { path: string }) {
         author: { "@type": "Organization", name: "How to Fish Walkthrough" },
         about: { "@type": "VideoGame", name: "How to Fish" },
       });
+    if (path === "/achievements")
+      Object.assign(primary, {
+        mainEntity: {
+          "@type": "ItemList",
+          numberOfItems: achievements.length,
+          itemListElement: achievements.map((achievement, index) => ({
+            "@type": "ListItem",
+            position: index + 1,
+            name: achievement.name,
+            description: achievement.official,
+            image: `${DOMAIN}/images/achievements/${achievement.icon}.webp`,
+          })),
+        },
+      });
     const graph: any[] = [
       primary,
       {
@@ -2325,9 +2339,9 @@ function Bosses() {
         <i>Bosses</i>
       </h1>
       <p className="standfirst">
-        Every special encounter now includes the summon, a practical fight
-        plan, the result you must protect, and a recovery step if the attempt
-        fails or a quest item is lost.
+        Every special encounter now includes the summon, a practical fight plan,
+        the result you must protect, and a recovery step if the attempt fails or
+        a quest item is lost.
       </p>
       <section className="hub-note">
         <h2>How to use this boss board</h2>
@@ -2408,10 +2422,38 @@ function Locations() {
 }
 function Lures() {
   const pools = [
-    {name:"Beginner Lure",location:"Forest",targets:creatures.filter(c=>c.tier==="Beginner").map(c=>c.name),use:"Build the Forest collection and cash pool after the early Free Lure catches. It does not replace the Modified Leech needed for Giant Piranha."},
-    {name:"Standard Lure",location:"Desert",targets:creatures.filter(c=>c.tier==="Standard").map(c=>c.name),use:"Use this for the regular Desert set. Pufferfish remains a separate Carrot-triggered story encounter."},
-    {name:"Professional Lure",location:"Rocks",targets:creatures.filter(c=>c.tier==="Professional").map(c=>c.name),use:"Use this for the Rocks collection. The Professional Boss Lure is a different item used to catch the Tuna required for Albatross."},
-    {name:"Scientific Lure",location:"Volcano",targets:creatures.filter(c=>c.tier==="Scientific").map(c=>c.name),use:"Use this for the final ordinary collection pool. Scientific Boss Lure targets Goblin Shark; the whale finale uses a Fish Bucket instead."},
+    {
+      name: "Beginner Lure",
+      location: "Forest",
+      targets: creatures
+        .filter((c) => c.tier === "Beginner")
+        .map((c) => c.name),
+      use: "Build the Forest collection and cash pool after the early Free Lure catches. It does not replace the Modified Leech needed for Giant Piranha.",
+    },
+    {
+      name: "Standard Lure",
+      location: "Desert",
+      targets: creatures
+        .filter((c) => c.tier === "Standard")
+        .map((c) => c.name),
+      use: "Use this for the regular Desert set. Pufferfish remains a separate Carrot-triggered story encounter.",
+    },
+    {
+      name: "Professional Lure",
+      location: "Rocks",
+      targets: creatures
+        .filter((c) => c.tier === "Professional")
+        .map((c) => c.name),
+      use: "Use this for the Rocks collection. The Professional Boss Lure is a different item used to catch the Tuna required for Albatross.",
+    },
+    {
+      name: "Scientific Lure",
+      location: "Volcano",
+      targets: creatures
+        .filter((c) => c.tier === "Scientific")
+        .map((c) => c.name),
+      use: "Use this for the final ordinary collection pool. Scientific Boss Lure targets Goblin Shark; the whale finale uses a Fish Bucket instead.",
+    },
   ];
   return (
     <section className="hub">
@@ -2429,8 +2471,19 @@ function Lures() {
       </p>
       <Trust />
       <figure className="field-capture">
-        <img src="/images/creatures/encyclopedia-scientific.webp" alt="Owner-provided How to Fish encyclopedia capture showing late lure pools" width="1521" height="876" loading="eager" fetchPriority="high" />
-        <figcaption><span>OWNER-PROVIDED GAME CAPTURE</span>Use the Tab encyclopedia to identify a blank slot, then return here for its lure and route location.</figcaption>
+        <img
+          src="/images/creatures/encyclopedia-scientific.webp"
+          alt="Owner-provided How to Fish encyclopedia capture showing late lure pools"
+          width="1521"
+          height="876"
+          loading="eager"
+          fetchPriority="high"
+        />
+        <figcaption>
+          <span>OWNER-PROVIDED GAME CAPTURE</span>Use the Tab encyclopedia to
+          identify a blank slot, then return here for its lure and route
+          location.
+        </figcaption>
       </figure>
       <section className="hub-note">
         <h2>Regular pools and special summons are different</h2>
@@ -2442,11 +2495,11 @@ function Lures() {
           inventory space before a special attempt.
         </p>
         <p>
-          The assignments below come from the site’s 49-creature research
-          table and are shown as practical pools, not as a promise that every
-          shop price or item location will survive the next patch. Use the
-          searchable <a href="/creatures">49-creature checklist</a> to inspect
-          individual reported values.
+          The assignments below come from the site’s 49-creature research table
+          and are shown as practical pools, not as a promise that every shop
+          price or item location will survive the next patch. Use the searchable{" "}
+          <a href="/creatures">49-creature checklist</a> to inspect individual
+          reported values.
         </p>
       </section>
       <div className="lure-layout">
@@ -2455,10 +2508,16 @@ function Lures() {
             <article className="lure" key={pool.name}>
               <span>POOL 0{i + 1}</span>
               <h2>{pool.name}</h2>
-              <p><b>Route location:</b> {pool.location}</p>
+              <p>
+                <b>Route location:</b> {pool.location}
+              </p>
               <p>{pool.use}</p>
               <h3>Confirmed targets</h3>
-              <ul>{pool.targets.map(name=><li key={name}>{name}</li>)}</ul>
+              <ul>
+                {pool.targets.map((name) => (
+                  <li key={name}>{name}</li>
+                ))}
+              </ul>
               <a href="/creatures">Browse creature log →</a>
             </article>
           ))}
@@ -2483,9 +2542,20 @@ function Lures() {
       <section className="hub-note">
         <h2>Named bait and story dependencies</h2>
         <div className="special-bait-table">
-          {bosses.slice(6).map(b=><article key={b.name}><b>{b.summon}</b><span>{b.name}</span><p>{b.reward}</p></article>)}
+          {bosses.slice(6).map((b) => (
+            <article key={b.name}>
+              <b>{b.summon}</b>
+              <span>{b.name}</span>
+              <p>{b.reward}</p>
+            </article>
+          ))}
         </div>
-        <p>A named item is not an upgraded regular lure. Empty Beer Can, Modified Leech, Carrot, defeated Tuna, Fish Bucket, and the Bowhead body each advance a specific route. Do not sell, cook, or eat them until the next NPC or encounter confirms the objective.</p>
+        <p>
+          A named item is not an upgraded regular lure. Empty Beer Can, Modified
+          Leech, Carrot, defeated Tuna, Fish Bucket, and the Bowhead body each
+          advance a specific route. Do not sell, cook, or eat them until the
+          next NPC or encounter confirms the objective.
+        </p>
       </section>
       <section className="hub-note">
         <h2>Safe casting routine</h2>
@@ -2508,7 +2578,25 @@ function Lures() {
           after the shell drops.
         </p>
       </section>
-      <Evidence items={[{label:'Mobalytics — all creatures and lures',url:'https://mobalytics.gg/gamebase/guides/how-to-fish-all-fish-creatures-lures',note:'Cross-check for the 49-creature pool, regular lure tiers, named boss summons, and reported base values.'},{label:'Dazed Games — current patch announcements',url:'https://steamcommunity.com/app/4001890/announcements/',note:'Official maintenance source for changes that can affect prices, saves, balance, and route behavior.'},{label:'Destructoid — complete walkthrough',url:'https://www.destructoid.com/complete-how-to-fish-game-walkthrough-100-completion/',note:'Written cross-check for story bait, boss drops, NPC hand-ins, and the five-location route.'}]} />
+      <Evidence
+        items={[
+          {
+            label: "Mobalytics — all creatures and lures",
+            url: "https://mobalytics.gg/gamebase/guides/how-to-fish-all-fish-creatures-lures",
+            note: "Cross-check for the 49-creature pool, regular lure tiers, named boss summons, and reported base values.",
+          },
+          {
+            label: "Dazed Games — current patch announcements",
+            url: "https://steamcommunity.com/app/4001890/announcements/",
+            note: "Official maintenance source for changes that can affect prices, saves, balance, and route behavior.",
+          },
+          {
+            label: "Destructoid — complete walkthrough",
+            url: "https://www.destructoid.com/complete-how-to-fish-game-walkthrough-100-completion/",
+            note: "Written cross-check for story bait, boss drops, NPC hand-ins, and the five-location route.",
+          },
+        ]}
+      />
     </section>
   );
 }
@@ -2816,8 +2904,62 @@ function SpiderCrab() {
   );
 }
 function Achievements() {
+  const [query, setQuery] = useState("");
+  const [category, setCategory] = useState("All");
+  const [completed, setCompleted] = useState<string[]>([]);
+  const [hydrated, setHydrated] = useState(false);
+  useEffect(() => {
+    try {
+      const stored = JSON.parse(
+        localStorage.getItem("htf-achievements-done") || "[]",
+      );
+      const validNames = new Set(achievements.map((item) => item.name));
+      if (Array.isArray(stored))
+        setCompleted([
+          ...new Set(
+            stored.filter(
+              (item): item is string =>
+                typeof item === "string" && validNames.has(item),
+            ),
+          ),
+        ]);
+    } catch {
+    } finally {
+      setHydrated(true);
+    }
+  }, []);
+  useEffect(() => {
+    if (hydrated)
+      localStorage.setItem("htf-achievements-done", JSON.stringify(completed));
+  }, [completed, hydrated]);
+  const visible = useMemo(
+    () =>
+      achievements.filter((item) => {
+        const matchesCategory =
+          category === "All" || item.category === category;
+        const haystack =
+          `${item.name} ${item.official} ${item.route} ${item.location} ${item.difficulty}`.toLowerCase();
+        return matchesCategory && haystack.includes(query.trim().toLowerCase());
+      }),
+    [category, query],
+  );
+  const toggleAchievement = (name: string) =>
+    setCompleted((current) =>
+      current.includes(name)
+        ? current.filter((item) => item !== name)
+        : [...current, name],
+    );
+  const categories = [
+    "All",
+    "Story",
+    "Combat",
+    "Collection",
+    "Equipment",
+    "Economy",
+    "Stunt",
+  ];
   return (
-    <section className="hub">
+    <section className="hub achievement-page">
       <Crumb>Achievements</Crumb>
       <p className="eyebrow">COMPLETION BOARD</p>
       <h1>
@@ -2826,11 +2968,33 @@ function Achievements() {
         <i>Game Achievements</i>
       </h1>
       <p className="standfirst">
-        Every official Steam condition is paired with a practical route, a
-        cleanup category, and a warning where old community advice may no
-        longer match the current build.
+        An illustrated, searchable checklist for all 28 Steam achievements, with
+        official conditions, global completion-rate context, practical routes,
+        and current-build cautions.
       </p>
       <Trust />
+      <section
+        className="achievement-summary"
+        aria-label="Achievement guide summary"
+      >
+        <div>
+          <b>28</b>
+          <span>OFFICIAL ACHIEVEMENTS</span>
+        </div>
+        <div>
+          <b>{completed.length}</b>
+          <span>MARKED COMPLETE</span>
+        </div>
+        <div>
+          <b>
+            {
+              achievements.filter((item) => item.difficulty === "Extreme")
+                .length
+            }
+          </b>
+          <span>EXTREME CLEANUP TASKS</span>
+        </div>
+      </section>
       <section className="hub-note">
         <h2>Plan a 100% run without losing route progress</h2>
         <p>
@@ -2842,22 +3006,127 @@ function Achievements() {
         </p>
         <p>
           The quoted condition under each card comes from Steam’s official
-          global-achievements page. The route text is editorial guidance: it
-          explains a safe way to attempt the condition without presenting old
-          prices, patched exploits, or disputed co-op behavior as confirmed.
+          global-achievements page. Global rates were refreshed from Steam on
+          August 28, 2026 and will change as more players enter the game. The
+          route text remains editorial guidance, so old prices, patched
+          exploits, and disputed co-op behavior are not promoted as facts.
         </p>
       </section>
+      <section
+        className="achievement-tools"
+        aria-label="Search and filter achievements"
+      >
+        <label>
+          <span className="sr-only">Search achievements</span>
+          <input
+            type="search"
+            value={query}
+            onChange={(event) => setQuery(event.target.value)}
+            placeholder="Search name, condition, location, or route…"
+          />
+        </label>
+        <div>
+          {categories.map((value) => (
+            <button
+              type="button"
+              key={value}
+              className={category === value ? "active" : ""}
+              onClick={() => setCategory(value)}
+            >
+              {value}
+            </button>
+          ))}
+        </div>
+      </section>
+      <div className="achievement-progress">
+        <span>
+          <b>{completed.length}</b> / 28 complete
+        </span>
+        <div>
+          <i
+            style={{
+              width: `${(completed.length / achievements.length) * 100}%`,
+            }}
+          />
+        </div>
+        {completed.length > 0 && (
+          <button type="button" onClick={() => setCompleted([])}>
+            Clear marks
+          </button>
+        )}
+      </div>
+      <p className="achievement-results">
+        Showing <b>{visible.length}</b> of 28 achievements · progress is stored
+        only in this browser
+      </p>
       <ol className="achievement-guide">
-        {achievements.map((a, i) => (
-          <li key={a.name}>
-            <div><span>{String(i + 1).padStart(2, "0")}</span><em>{a.category}</em></div>
-            <h2>{a.name}</h2>
-            <p className="official-condition"><b>Official condition:</b> {a.official}.</p>
-            <p><b>Practical route:</b> {a.route}</p>
-            {a.caution&&<p className="achievement-caution"><b>Current-build caution:</b> {a.caution}</p>}
+        {visible.map((a) => (
+          <li
+            key={a.name}
+            className={completed.includes(a.name) ? "complete" : ""}
+          >
+            <div className="achievement-icon">
+              <img
+                src={`/images/achievements/${a.icon}.webp`}
+                alt={`${a.name} achievement icon`}
+                width="256"
+                height="256"
+                loading="lazy"
+                decoding="async"
+              />
+              <span>
+                {String(achievements.indexOf(a) + 1).padStart(2, "0")}
+              </span>
+            </div>
+            <div className="achievement-card-copy">
+              <div className="achievement-card-head">
+                <div>
+                  <em>{a.category}</em>
+                  <h2>{a.name}</h2>
+                </div>
+                <label>
+                  <input
+                    type="checkbox"
+                    checked={completed.includes(a.name)}
+                    onChange={() => toggleAchievement(a.name)}
+                  />{" "}
+                  Complete
+                </label>
+              </div>
+              <p className="official-condition">
+                <b>Official condition:</b> {a.official}.
+              </p>
+              <div className="achievement-meta">
+                <span>
+                  <i>GLOBAL RATE</i>
+                  <b>{a.globalRate}%</b>
+                </span>
+                <span>
+                  <i>LOCATION / STAGE</i>
+                  <b>{a.location}</b>
+                </span>
+                <span className={`difficulty-${a.difficulty.toLowerCase()}`}>
+                  <i>DIFFICULTY</i>
+                  <b>{a.difficulty}</b>
+                </span>
+              </div>
+              <p>
+                <b>Practical route:</b> {a.route}
+              </p>
+              {a.caution && (
+                <p className="achievement-caution">
+                  <b>Current-build caution:</b> {a.caution}
+                </p>
+              )}
+            </div>
           </li>
         ))}
       </ol>
+      {visible.length === 0 && (
+        <p className="achievement-empty">
+          No achievement matches this search and category.
+        </p>
+      )}
       <section className="hub-note">
         <h2>Recommended cleanup order</h2>
         <div className="editorial-grid">
@@ -2896,7 +3165,25 @@ function Achievements() {
           smallest relevant encounter before repeating the entire story.
         </p>
       </section>
-      <Evidence items={[{label:'Steam — official global achievements',url:'https://steamcommunity.com/stats/4001890/achievements',note:'Primary source for all 28 names and official unlock descriptions.'},{label:'Steam Community — 28-achievement guide',url:'https://steamcommunity.com/sharedfiles/filedetails/?id=3788027308',note:'Secondary route context from older builds; version-sensitive claims are not treated as current facts.'},{label:'Dazed Games — current patch announcements',url:'https://steamcommunity.com/app/4001890/announcements/',note:'Official source used to avoid recommending patched exploits or stale balance numbers.'}]} />
+      <Evidence
+        items={[
+          {
+            label: "Steam — official global achievements",
+            url: "https://steamcommunity.com/stats/4001890/achievements",
+            note: "Primary source refreshed August 28, 2026 for all 28 names, descriptions, icons, and global completion rates.",
+          },
+          {
+            label: "Steam Community — 28-achievement guide",
+            url: "https://steamcommunity.com/sharedfiles/filedetails/?id=3788027308",
+            note: "Secondary route context from older builds; version-sensitive claims are not treated as current facts.",
+          },
+          {
+            label: "Dazed Games — current patch announcements",
+            url: "https://steamcommunity.com/app/4001890/announcements/",
+            note: "Official source used to avoid recommending patched exploits or stale balance numbers.",
+          },
+        ]}
+      />
     </section>
   );
 }

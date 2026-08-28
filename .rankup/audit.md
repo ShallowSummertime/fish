@@ -1,5 +1,14 @@
 # Audit
 
+## 2026-08-28 — Illustrated achievement encyclopedia
+
+- Fixed `/achievements`: all 28 entries now use independently mapped official icons plus official Steam names, conditions, and an Aug 28, 2026 global-rate snapshot.
+- Added practical discovery: name/condition search, seven category filters, route location, difficulty, completion progress, clear action, and browser-local persistence guarded against overwriting restored state.
+- Preserved evidence boundaries: the supplied gallery informed icon mapping and interaction design; conflicting route text and stale figures were not copied, and Steam remained the primary condition/rate source.
+- Added crawlable output: all cards, 28 icons, global-rate labels, and a 28-item ItemList are present in prerendered HTML rather than depending on client execution.
+- Asset governance: source assets remain preserved; 28 optimized WebP derivatives are linked to their source files in the fixed-asset manifest with page usage and publishability notes.
+- Verification: Vitest, TypeScript, Vite build, 16-route prerender, achievement-specific static gates, and asset-library checksum verification pass.
+
 ## 2026-08-28 — AdSense low-value remediation follow-up
 
 - Fixed `/achievements`: replaced the 28-name list with all 28 official Steam conditions, practical attempt routes, cleanup categories, and current-build cautions for disputed or patched advice.

@@ -71,3 +71,12 @@
 - Google confirmed domain ownership automatically through the domain provider method.
 - Submitted `sitemap.xml`; immediate first processing status briefly reported unable to fetch, while the submission confirmation stated periodic processing would continue.
 - Submitted exactly three URLs: homepage and Lighthouse were discovered/not indexed and joined the priority crawl queue; Beginner Guide was already indexed and was resubmitted after its content update.
+## 2026-08-28 — 28 项图文成就图鉴
+
+- 目标：结合用户提供的成就图库，把文字密集的 Achievements hub 变成可检索、可勾选、可独立使用的图文百科。
+- 证据边界：采用图库中的 28 个官方游戏图标和交互思路；成就名称、官方条件与全球完成率重新以 Steam 官方成就页核对，未采用参考页中冲突的路线、价格或旧版本说法。
+- 实施：每项增加图标、分类、位置、难度、官方条件、实操路线、注意事项和全球完成率；加入搜索、分类筛选、浏览器本地进度、清空动作与完成统计。
+- SEO：28 张图和正文进入首轮 HTML；CollectionPage 内嵌 28 项 ItemList，成就页有独立 OG 图并保留自指 canonical。
+- 资产：28 张 256px 来源 JPG 优化为约 168 KB WebP；来源、衍生关系、权利边界和 `/achievements` 用途进入固定资产库，359 项校验失败 0。
+- 验证：Vitest 3/3、TypeScript、Vite build、16 路由静态预渲染、成就专属内容门禁和固定资产校验全部通过。
+- 下一轮唯一改进：后续版本更新时自动或人工刷新 Steam 全球完成率快照，并保留页面上的核对日期。

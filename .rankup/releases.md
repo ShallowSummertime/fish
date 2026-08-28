@@ -64,3 +64,11 @@
 - 验证：`pnpm test`、TypeScript、Vite build、16 路由预渲染和静态断言通过；生产首页首轮 HTML 含 H1、1622 词与 FAQ schema，生产 sitemap 的 16 个 URL 均返回不超过 60 字符的 Title。
 - Commit：`40707ff`。
 - 结论：production-verified；GSC sitemap 当前成功读取但仍显示 13 个已发现页面，等待重新提交以刷新 16 URL 状态。
+## 0.6.0 — 2026-08-28
+
+- 环境：本地验证完成，等待 Vercel Production 发布。
+- 变更：`/achievements` 升级为 28 项带官方图标的交互百科，加入搜索、分类、位置、难度、Steam 全球完成率快照和本地完成进度。
+- SEO：28 个完整卡片和图标进入静态 HTML，并输出 28 项 ItemList；页面 OG 图改为成就素材。
+- 资产：28 张 WebP 共约 168 KB，固定资产库共 359 项，已归档 351 项，待处理 8 项，校验失败 0 项。
+- 验证：Vitest、TypeScript、Vite build、16 路由预渲染、静态断言与固定资产校验通过。
+- 结论：local-verified，等待生产验证与 Commit 号。

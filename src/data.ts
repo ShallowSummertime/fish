@@ -23,6 +23,10 @@ export type Achievement = {
     "Story" | "Combat" | "Collection" | "Equipment" | "Economy" | "Stunt";
   route: string;
   caution?: string;
+  icon: string;
+  globalRate: number;
+  location: string;
+  difficulty: "Easy" | "Medium" | "Hard" | "Extreme";
 };
 const creatureRows: [
   Creature["name"],
@@ -329,7 +333,10 @@ export const locations = [
     detail: "The final main-route island and endgame progression.",
   },
 ];
-export const achievements: Achievement[] = [
+const achievementRows: Omit<
+  Achievement,
+  "icon" | "globalRate" | "location" | "difficulty"
+>[] = [
   {
     name: "Getting Started",
     official: "Kill your first creature",
@@ -532,6 +539,185 @@ export const achievements: Achievement[] = [
       "Old community shortcuts were patched. No current-version exploit is recommended; verify timing against the active build.",
   },
 ];
+const achievementGallery: Record<
+  string,
+  Pick<Achievement, "icon" | "globalRate" | "location" | "difficulty">
+> = {
+  "Getting Started": {
+    icon: "6dd241ec65b3f2b01f98b522d4654dee4d049b73",
+    globalRate: 98.7,
+    location: "Any location",
+    difficulty: "Easy",
+  },
+  Drip: {
+    icon: "b2d534bef56baa1529465cdf37f06a0c8e5b2ad8",
+    globalRate: 96.7,
+    location: "Any lure pool",
+    difficulty: "Easy",
+  },
+  "Who Stole My Beer": {
+    icon: "fe3f2fff4b264155ff6433c2cbdeef6462454979",
+    globalRate: 90.8,
+    location: "Lighthouse",
+    difficulty: "Easy",
+  },
+  "Getting an Upgrade": {
+    icon: "f4237c00b430233fd4cdbca4350dc37a07fc82ba",
+    globalRate: 84.5,
+    location: "Boat engine shop",
+    difficulty: "Easy",
+  },
+  Noob: {
+    icon: "02285b1970ee67fc8e26dc0b5f048f1ce4578e7d",
+    globalRate: 84.1,
+    location: "Any safe shoreline",
+    difficulty: "Easy",
+  },
+  Dinnertime: {
+    icon: "dac3b88201a5d24704692af43b62f29a4a639843",
+    globalRate: 80.9,
+    location: "Forest",
+    difficulty: "Medium",
+  },
+  "Let Me Go": {
+    icon: "b6595a889f04c3b8c639cf9ebe54d2841ecc822e",
+    globalRate: 80.2,
+    location: "Seagull route",
+    difficulty: "Easy",
+  },
+  Impressive: {
+    icon: "5e68e833d65a5892b8a75e42a4d4e3dfc4fe991a",
+    globalRate: 78.3,
+    location: "Any combat area",
+    difficulty: "Medium",
+  },
+  Grillmaster: {
+    icon: "1522c6c670294903e081b891472540313e050587",
+    globalRate: 76.6,
+    location: "Desert",
+    difficulty: "Medium",
+  },
+  Vacation: {
+    icon: "97f20b60e492d66ed5658a8b38a27aef46a6bb91",
+    globalRate: 66.1,
+    location: "Desert tourist",
+    difficulty: "Medium",
+  },
+  "GOLD GOLD GOLD": {
+    icon: "fb6197d91ad32488087439f861627f4757b03077",
+    globalRate: 65.3,
+    location: "Reel of Fortune",
+    difficulty: "Medium",
+  },
+  "360 No Scope": {
+    icon: "a55985a010ece627f4dff09393720b4c4e79d369",
+    globalRate: 60.7,
+    location: "Any combat area",
+    difficulty: "Medium",
+  },
+  "I Am Speed": {
+    icon: "669f3fd0b5a8952445dc00cfe0d423ab8cd9ab60",
+    globalRate: 56.5,
+    location: "Final engine shop",
+    difficulty: "Medium",
+  },
+  "Fully Equipped": {
+    icon: "588da3b50c3fa6eb15a43e0a74d7531fc88373e0",
+    globalRate: 53.6,
+    location: "Weapon shop",
+    difficulty: "Medium",
+  },
+  "Terrorizing Bird": {
+    icon: "e870f7f510d6256f48c73e6be911d2c50fe2de38",
+    globalRate: 48.4,
+    location: "Rocks",
+    difficulty: "Hard",
+  },
+  "Yummy in My Tummy": {
+    icon: "5ad1884e2ecbeaf019e4eade2cf34ef62106a922",
+    globalRate: 44.7,
+    location: "Any unlocked grill",
+    difficulty: "Easy",
+  },
+  "Deadliest Catch": {
+    icon: "8b8ec5975c1db36b9ee8faffb8497e07e59fa22b",
+    globalRate: 34.7,
+    location: "Volcano",
+    difficulty: "Hard",
+  },
+  "We Are So Back": {
+    icon: "717fa9271a6f07b6f3827c6c21fe36e49ab6f0ae",
+    globalRate: 33.6,
+    location: "Volcano finale",
+    difficulty: "Hard",
+  },
+  "All In": {
+    icon: "0ec14d7ad488508265fb44fe7325aba8f41284a2",
+    globalRate: 32.8,
+    location: "Roulette",
+    difficulty: "Medium",
+  },
+  Easy: {
+    icon: "fcb224953994284c7f14c237460c8e8b3ff4f3d0",
+    globalRate: 26.4,
+    location: "Any boss arena",
+    difficulty: "Hard",
+  },
+  "I’m the Bird Now": {
+    icon: "bc58e071e58ac9e5ca2797f2969fadcdec9fb038",
+    globalRate: 22.1,
+    location: "Island shoreline",
+    difficulty: "Medium",
+  },
+  "Competitive Eating": {
+    icon: "09cd177f7515ba9d693b6c2ebf7ed8bc2794b4d9",
+    globalRate: 19.6,
+    location: "Miniboss route",
+    difficulty: "Hard",
+  },
+  "Rich! Millionaire": {
+    icon: "82b360170155e88b25173c34c4540215c4d75b94",
+    globalRate: 13.4,
+    location: "Economy cleanup",
+    difficulty: "Hard",
+  },
+  Collector: {
+    icon: "4031100910abf99aa0482464a06991bc9273e417",
+    globalRate: 13.2,
+    location: "All five locations",
+    difficulty: "Hard",
+  },
+  "Everyone’s Dream": {
+    icon: "5d3f868c0630042e23a547e9dd6689efa875bea8",
+    globalRate: 5.1,
+    location: "Seagull route",
+    difficulty: "Hard",
+  },
+  Handyman: {
+    icon: "9f978a5ee40c390d66605ee42333628186ccd337",
+    globalRate: 2.4,
+    location: "Final boss",
+    difficulty: "Extreme",
+  },
+  Fishipedia: {
+    icon: "147a0ddca007ca61f1c422ec9d16e67b98905c5b",
+    globalRate: 2.0,
+    location: "All lure pools",
+    difficulty: "Extreme",
+  },
+  Bean: {
+    icon: "4da2c251978cafab300932d7bfa1d6fc4b60edf6",
+    globalRate: 1.6,
+    location: "Full game",
+    difficulty: "Extreme",
+  },
+};
+export const achievements: Achievement[] = achievementRows.map(
+  (achievement) => ({
+    ...achievement,
+    ...achievementGallery[achievement.name],
+  }),
+);
 export const sourceNotes = [
   {
     label: "Official Steam announcements (current Patch 1.0.10)",
@@ -669,6 +855,7 @@ export const pageMeta: Record<
     title: "How to Fish Achievements Guide: All 28",
     description:
       "All 28 official How to Fish Game achievement conditions with practical routes, cleanup order, patch cautions, and linked sources.",
+    image: "/images/achievements/4031100910abf99aa0482464a06991bc9273e417.webp",
   },
   "/about": {
     title: "About How to Fish Walkthrough - Independent Game Guide",
