@@ -5,7 +5,9 @@
 - 目标：AdSense 低价值内容、图文证据、媒体性能与结构化数据整改。
 - 变更：重写 Achievements/Lures/Bosses；优化九张 Beginner 轮播图；替换错误或不清晰的 Creature/Lighthouse 图证；Schema 改为按路由类型输出；新增 CMP 前禁投广告和内容质量阻断门禁。
 - 本地验证：Vitest、TypeScript、Vite build、16 路由预渲染及静态质量断言通过。
-- 部署：待本次提交推送后补生产验证与 commit。
+- Commit：`03e1155`，已推送 `main` 并由 Vercel 发布到主域。
+- 生产验证：16 个 sitemap 路由均为 200，47 个抽样内链/资产无错误，未知路径为 404；Bosses/Lures/Achievements 分别为 1305/862/1445 可见词并输出 CollectionPage；Beginner 仅引用 WebP、八张非首图均延迟加载；ads.txt 仍为授权原文。
+- 结论：production-verified；CMP 与私人联系渠道仍属于账户/所有者侧后续条件。
 
 ## 0.1.0 — 2026-08-27
 
