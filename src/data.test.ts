@@ -1,5 +1,12 @@
 import { describe, expect, it } from "vitest";
-import { achievements, bosses, creatures, locations, pageMeta } from "./data";
+import {
+  achievements,
+  bosses,
+  creatures,
+  locations,
+  pageMeta,
+  sourceNotes,
+} from "./data";
 describe("How to Fish content baseline", () => {
   it("contains exactly 49 creatures with 11 boss or special entities", () => {
     expect(creatures).toHaveLength(49);
@@ -29,6 +36,14 @@ describe("How to Fish content baseline", () => {
     expect(locations).toHaveLength(5);
     expect(locations[0].name).toBe("Lighthouse");
     expect(locations.filter((l) => l.type === "Island")).toHaveLength(4);
+  });
+  it("keeps only the approved Steam Community research reference", () => {
+    expect(sourceNotes).toEqual([
+      {
+        label: "Steam Community 49-creature field guide",
+        url: "https://steamcommunity.com/sharedfiles/filedetails/?id=3789629297",
+      },
+    ]);
   });
   it("has metadata for every required core route", () => {
     [

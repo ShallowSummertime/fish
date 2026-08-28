@@ -721,28 +721,8 @@ export const achievements: Achievement[] = achievementRows.map(
 );
 export const sourceNotes = [
   {
-    label: "Official Steam announcements (current Patch 1.0.10)",
-    url: "https://steamcommunity.com/app/4001890/announcements/",
-  },
-  {
-    label: "Skoottie — I'm Playing 100% of How to Fish (YouTube)",
-    url: "https://www.youtube.com/watch?v=mK5WaARlT9w",
-  },
-  {
     label: "Steam Community 49-creature field guide",
     url: "https://steamcommunity.com/sharedfiles/filedetails/?id=3789629297",
-  },
-  {
-    label: "Steam Community 28-achievement guide",
-    url: "https://steamcommunity.com/sharedfiles/filedetails/?id=3788027308",
-  },
-  {
-    label: "Destructoid walkthrough",
-    url: "https://www.destructoid.com/complete-how-to-fish-game-walkthrough-100-completion/",
-  },
-  {
-    label: "Destructoid boss guide",
-    url: "https://www.destructoid.com/all-bosses-in-how-to-fish-and-how-to-defeat-them/",
   },
 ];
 export const homeFaqs = [

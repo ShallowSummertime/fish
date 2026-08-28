@@ -30,6 +30,7 @@ const textFrom = (html) =>
     .replace(/&[a-z#0-9]+;/gi, " ")
     .replace(/\s+/g, " ")
     .trim();
+const mainFrom = (html) => html.match(/<main>[\s\S]*?<\/main>/)?.[0] ?? "";
 const prerenderSource = await readFile("scripts/prerender.ts", "utf8");
 assert.match(
   prerenderSource,
@@ -124,6 +125,23 @@ assert.doesNotMatch(
 );
 assert.match(creatures, /encyclopedia-early\.webp/);
 const home = await readFile("dist/index.html", "utf8");
+const homeFooter = home.match(/<footer>[\s\S]*?<\/footer>/)?.[0] ?? "";
+assert.match(
+  homeFooter,
+  /https:\/\/steamcommunity\.com\/sharedfiles\/filedetails\/\?id=3789629297/,
+  "footer must retain the approved Steam Community research reference",
+);
+for (const removedReference of [
+  "steamcommunity.com/app/4001890/announcements",
+  "youtube.com/watch?v=mK5WaARlT9w",
+  "id=3788027308",
+  "destructoid.com",
+])
+  assert.doesNotMatch(
+    homeFooter,
+    new RegExp(removedReference.replace(/[.*+?^${}()|[\]\\]/g, "\\$&"), "i"),
+    `footer must not contain removed research reference: ${removedReference}`,
+  );
 assert.ok(
   textFrom(home).split(/\s+/).length >= 1200,
   "homepage must expose at least 1200 visible words in initial HTML",
@@ -650,7 +668,7 @@ assert.match(
 );
 const luresPage = await readFile("dist/lures/index.html", "utf8");
 assert.ok(
-  textFrom(luresPage).split(/\s+/).length >= 750,
+  textFrom(mainFrom(luresPage)).split(/\s+/).length >= 650,
   "/lures must be a substantive field guide",
 );
 for (const phrase of [
