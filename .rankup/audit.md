@@ -1,5 +1,13 @@
 # Audit
 
+## 2026-08-28 — Remove visible claim-source panels
+
+- Removed every visible `Claim sources`, `Sources / Verify`, route-source, and evidence-boundary panel from the 16 public routes, including Lighthouse, Lures, Spider Crab, Achievements, Locations, Rocks, Volcano, and Reel of Fortune.
+- Preserved the actual guide instructions, related-guide navigation, structured data, canonical metadata, and internal editorial verification discipline.
+- Updated the Achievements description so it no longer promises linked sources; the page still states the date of its Steam completion-rate snapshot.
+- Added a route-wide build gate that fails if any claim-source panel or prior evidence heading returns.
+- Verification: Vitest, TypeScript, Vite build, all 16 static prerenders, and the no-source-panel regression scan pass.
+
 ## 2026-08-28 — Illustrated achievement encyclopedia
 
 - Fixed `/achievements`: all 28 entries now use independently mapped official icons plus official Steam names, conditions, and an Aug 28, 2026 global-rate snapshot.

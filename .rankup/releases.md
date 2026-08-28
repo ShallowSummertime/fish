@@ -74,3 +74,10 @@
 - 生产验证：`/achievements` 返回 200；Title 38 字符；28 张图、28 个完成率、28 项 ItemList、canonical 与 sitemap 均正确，所有图标 URL 返回 200。
 - Commit：`8e5cb26`。
 - 结论：production-verified。
+## 0.6.1 — 2026-08-28
+
+- 环境：本地验证完成，等待 Vercel Production 发布。
+- 变更：全站删除 Claim sources、Sources / Verify、route sources 和 evidence boundary 可见区块；正文、攻略步骤和相关推荐不变。
+- SEO：Achievements description 不再承诺 linked sources；16 路由增加无来源面板回归门禁。
+- 验证：Vitest、TypeScript、Vite build、16 路由预渲染与全站静态扫描通过。
+- 结论：local-verified，等待生产验证与 Commit 号。

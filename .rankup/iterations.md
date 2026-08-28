@@ -80,3 +80,11 @@
 - 资产：28 张 256px 来源 JPG 优化为约 168 KB WebP；来源、衍生关系、权利边界和 `/achievements` 用途进入固定资产库，359 项校验失败 0。
 - 验证：Vitest 3/3、TypeScript、Vite build、16 路由静态预渲染、成就专属内容门禁和固定资产校验全部通过。
 - 下一轮唯一改进：后续版本更新时自动或人工刷新 Steam 全球完成率快照，并保留页面上的核对日期。
+## 2026-08-28 — 全站删除 Claim sources 区块
+
+- 目标：从所有公开页面移除 Claim sources / Sources Verify 及同类证据边界面板。
+- 实施：删除共享 Evidence 组件、Lighthouse 手写来源块，以及 Locations、Rocks、Volcano、Reel、Lures、Spider Crab、Achievements 的来源区块；攻略正文与 Related 导航保持不变。
+- SEO：Achievements description 去掉 “linked sources” 承诺；canonical、Schema、首轮 HTML 和 sitemap 不变。
+- 门禁：16 条路由逐页断言不再出现 `.evidence`、Claim sources、Sources Verify 或旧验证标题。
+- 验证：Vitest 3/3、TypeScript、Vite build、16 路由静态预渲染和全站关键词扫描通过。
+- 下一轮唯一改进：保持后台资料与事实核验记录，不再将出版社式 claim-source 面板作为前台正文组件。

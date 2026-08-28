@@ -98,6 +98,11 @@ for (const route of routes) {
     /<meta name="robots" content="index,follow,max-image-preview:large">/,
   );
   assert.doesNotMatch(html, /<div id="root"><\/div>/);
+  assert.doesNotMatch(
+    html,
+    /class="evidence"|Claim sources|SOURCES \/ VERIFY|How this route was verified|sources and evidence boundary/i,
+    `${route} must not render a claim-sources section`,
+  );
   const renderedTitle =
     html.match(/<title>(.*?)<\/title>/)?.[1].replace(/&amp;/g, "&") || "";
   assert.ok(
@@ -214,38 +219,6 @@ const contentGate = async (route, requirements) => {
     1,
     `${route} must emit exactly one server JSON-LD node for client replacement`,
   );
-  if (requirements.sources) {
-    assert.match(
-      html,
-      /SOURCES \/ VERIFY/,
-      `${route} must expose source links`,
-    );
-    assert.match(
-      html,
-      /pcgamer\.com\/games\/sim\/how-to-fish-spider-crab/,
-      `${route} must cite PC Gamer`,
-    );
-    assert.match(
-      html,
-      /gamesradar\.com\/games\/co-op\/how-to-fish-spider-crab/,
-      `${route} must cite GamesRadar+`,
-    );
-    assert.match(
-      html,
-      /steamcommunity\.com\/app\/4001890\/announcements/,
-      `${route} must cite the official patch feed`,
-    );
-    assert.match(
-      html,
-      /Owner-supplied gameplay was used as a private visual cross-check/,
-      `${route} must state the private visual-evidence boundary`,
-    );
-    assert.doesNotMatch(
-      html,
-      /douyin|xiaohongshu|modal_id|6a8aaf56000000001700b59b/i,
-      `${route} must not expose social-platform identities or source IDs`,
-    );
-  }
   for (const src of [...html.matchAll(/<img[^>]+src="([^"]+)"/g)].map(
     (match) => match[1],
   ))
@@ -258,7 +231,6 @@ const contentGate = async (route, requirements) => {
 };
 await contentGate("/beginner-guide", {
   images: 9,
-  sources: false,
   phrases: [
     "First 20 minutes",
     "Bait and hotspots",
@@ -312,7 +284,6 @@ assert.ok(
 );
 await contentGate("/bosses/spider-crab", {
   images: 2,
-  sources: true,
   phrases: [
     "Summon Spider Crab correctly",
     "charge → stun → punish",
@@ -481,8 +452,7 @@ for (const phrase of [
   "cosmetic skin",
   "Z or C",
   "GOLD GOLD GOLD",
-  "no stat improvement",
-  "Claim sources and limits",
+  "does not increase damage",
   "Patch 1.0.10",
 ])
   assert.match(reel, new RegExp(phrase, "i"));
@@ -591,7 +561,7 @@ assert.match(
 );
 const luresPage = await readFile("dist/lures/index.html", "utf8");
 assert.ok(
-  textFrom(luresPage).split(/\s+/).length >= 800,
+  textFrom(luresPage).split(/\s+/).length >= 750,
   "/lures must be a substantive field guide",
 );
 for (const phrase of [
@@ -600,7 +570,6 @@ for (const phrase of [
   "Beginner Lure",
   "Scientific Lure",
   "Fish Bucket",
-  "SOURCES / VERIFY",
 ])
   assert.match(luresPage, new RegExp(phrase));
 assert.match(luresPage, /encyclopedia-scientific\.webp/);
@@ -631,7 +600,6 @@ for (const phrase of [
   "Current-build caution",
   "Bean",
   "Handyman",
-  "Steam — official global achievements",
   "Search name, condition, location, or route",
   "MARKED COMPLETE",
   "August 28, 2026",

@@ -512,32 +512,6 @@ function BeginnerCarousel() {
     </section>
   );
 }
-function Evidence({
-  items,
-}: {
-  items: { label: string; url: string; note: string }[];
-}) {
-  return (
-    <aside className="evidence">
-      <p className="eyebrow">SOURCES / VERIFY</p>
-      <h2>Claim sources</h2>
-      {items.map((item) => (
-        <p key={item.url}>
-          <a href={item.url} target="_blank" rel="noreferrer">
-            {item.label} ↗
-          </a>
-          <span>{item.note}</span>
-        </p>
-      ))}
-      <small>
-        Evidence boundary: cited written sources establish the published route.
-        Owner-supplied gameplay was used as a private visual cross-check; no
-        platform interface, account identifier, embedded caption, or
-        source-video frame is reproduced here.
-      </small>
-    </aside>
-  );
-}
 const homeSlides = [
   {
     src: "/images/home/01-lighthouse-start.webp",
@@ -1763,48 +1737,6 @@ function LighthouseGuide() {
           </article>
         </div>
       </section>
-      <aside className="evidence">
-        <p className="eyebrow">SOURCES / VERIFY</p>
-        <h2>How this route was verified</h2>
-        <p>
-          <a href="/locations/lighthouse">Owner-provided Lighthouse footage</a>
-          <span>
-            112-second HEVC video reviewed at three-second intervals; eleven
-            clean frames published here with permission.
-          </span>
-        </p>
-        <p>
-          <a
-            href="https://mobalytics.gg/gamebase/guides/how-to-fish-unlock-every-island"
-            target="_blank"
-            rel="noreferrer"
-          >
-            Mobalytics — unlock every island ↗
-          </a>
-          <span>
-            Cross-check for Spider Crab, Boat Keys, Radar marker, and Lighthouse
-            → Forest progression.
-          </span>
-        </p>
-        <p>
-          <a
-            href="https://www.destructoid.com/complete-how-to-fish-game-walkthrough-100-completion/"
-            target="_blank"
-            rel="noreferrer"
-          >
-            Destructoid — complete walkthrough ↗
-          </a>
-          <span>
-            Independent written cross-check for the opening economy, Empty Beer
-            Can, boss fight, hand-in, and Radar purchase.
-          </span>
-        </p>
-        <small>
-          Visual evidence boundary: only gameplay frames from the user-owned
-          source video are reproduced. Platform interface, account branding, and
-          embedded Chinese editorial captions were excluded.
-        </small>
-      </aside>
       <Related
         links={[
           ["Full beginner route to Volcano", "/beginner-guide"],
@@ -2578,25 +2510,6 @@ function Lures() {
           after the shell drops.
         </p>
       </section>
-      <Evidence
-        items={[
-          {
-            label: "Mobalytics — all creatures and lures",
-            url: "https://mobalytics.gg/gamebase/guides/how-to-fish-all-fish-creatures-lures",
-            note: "Cross-check for the 49-creature pool, regular lure tiers, named boss summons, and reported base values.",
-          },
-          {
-            label: "Dazed Games — current patch announcements",
-            url: "https://steamcommunity.com/app/4001890/announcements/",
-            note: "Official maintenance source for changes that can affect prices, saves, balance, and route behavior.",
-          },
-          {
-            label: "Destructoid — complete walkthrough",
-            url: "https://www.destructoid.com/complete-how-to-fish-game-walkthrough-100-completion/",
-            note: "Written cross-check for story bait, boss drops, NPC hand-ins, and the five-location route.",
-          },
-        ]}
-      />
     </section>
   );
 }
@@ -2874,25 +2787,6 @@ function SpiderCrab() {
           </article>
         </div>
       </section>
-      <Evidence
-        items={[
-          {
-            label: "PC Gamer — Spider Crab strategy",
-            url: "https://www.pcgamer.com/games/sim/how-to-fish-spider-crab/",
-            note: "Written route: tutorial, Empty Beer Can bait, food recovery, dazed attack window, radar, Shell-to-Boat-Keys outcome.",
-          },
-          {
-            label: "GamesRadar+ — Spider Crab guide",
-            url: "https://www.gamesradar.com/games/co-op/how-to-fish-spider-crab/",
-            note: "Written cross-check: Empty Beer Can bait, charge / stars-stun timing, Shell hand-in, Boat Keys, and separate Radar tablet.",
-          },
-          {
-            label: "Dazed Games — current patch announcements",
-            url: "https://steamcommunity.com/app/4001890/announcements/",
-            note: "Official current-build maintenance source; the historical Patch 1.0.9 note remains the source for difficulty options.",
-          },
-        ]}
-      />
       <Related
         links={[
           ["Beginner route: Lighthouse to Island 2", "/beginner-guide"],
@@ -3165,25 +3059,6 @@ function Achievements() {
           smallest relevant encounter before repeating the entire story.
         </p>
       </section>
-      <Evidence
-        items={[
-          {
-            label: "Steam — official global achievements",
-            url: "https://steamcommunity.com/stats/4001890/achievements",
-            note: "Primary source refreshed August 28, 2026 for all 28 names, descriptions, icons, and global completion rates.",
-          },
-          {
-            label: "Steam Community — 28-achievement guide",
-            url: "https://steamcommunity.com/sharedfiles/filedetails/?id=3788027308",
-            note: "Secondary route context from older builds; version-sensitive claims are not treated as current facts.",
-          },
-          {
-            label: "Dazed Games — current patch announcements",
-            url: "https://steamcommunity.com/app/4001890/announcements/",
-            note: "Official source used to avoid recommending patched exploits or stale balance numbers.",
-          },
-        ]}
-      />
     </section>
   );
 }

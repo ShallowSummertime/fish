@@ -854,7 +854,7 @@ export const pageMeta: Record<
   "/achievements": {
     title: "How to Fish Achievements Guide: All 28",
     description:
-      "All 28 official How to Fish Game achievement conditions with practical routes, cleanup order, patch cautions, and linked sources.",
+      "All 28 official How to Fish Game achievement conditions with practical routes, cleanup order, patch cautions, and global completion rates.",
     image: "/images/achievements/4031100910abf99aa0482464a06991bc9273e417.webp",
   },
   "/about": {
