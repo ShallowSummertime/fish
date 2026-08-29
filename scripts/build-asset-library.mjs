@@ -22,6 +22,7 @@ const knowledgeSeedPaths = [
   path.join(repoRoot, "research/asset-knowledge/weapons.seed.json"),
   path.join(repoRoot, "research/asset-knowledge/guide-4-5.seed.json"),
   path.join(repoRoot, "research/asset-knowledge/guide-2.seed.json"),
+  path.join(repoRoot, "research/asset-knowledge/forest-full.seed.json"),
   path.join(repoRoot, "research/asset-knowledge/guide-3.seed.json"),
 ];
 
@@ -344,6 +345,10 @@ function sourceGroups() {
     desktopRoot,
     "攻略3/ScreenRecording_08-28-2026 10-09-46_1.MP4",
   );
+  const forestFullVideoPath = path.join(
+    desktopRoot,
+    "ScreenRecording_08-29-2026 07-54-44_1.MP4",
+  );
   const islandRawAssetId = assetId({
     sourcePath: islandVideoPath,
     archivePath: null,
@@ -357,6 +362,10 @@ function sourceGroups() {
   });
   const guide2RawAssetId = assetId({ sourcePath: guide2VideoPath, archivePath: null });
   const guide3RawAssetId = assetId({ sourcePath: guide3VideoPath, archivePath: null });
+  const forestFullRawAssetId = assetId({
+    sourcePath: forestFullVideoPath,
+    archivePath: null,
+  });
   const entityFrames = {
     "clam.jpg": {
       entity: "Clam",
@@ -599,6 +608,15 @@ function sourceGroups() {
               derivedFrom: [guide3RawAssetId],
             };
           }
+          if (firstDirectory === "forest-full-2026-08-29") {
+            return {
+              rights:
+                "analysis derivative of third-party social Forest full-route media; platform UI and creator subtitles make every frame research-only",
+              publishability: false,
+              pageUsage: ["research-only"],
+              derivedFrom: [forestFullRawAssetId],
+            };
+          }
           return {
             rights:
               "new analysis material; rights and publishability require review",
@@ -760,6 +778,11 @@ function sourceGroups() {
                       "asset:02-analysis/guide-3/analysis-notes.md",
                       guide3RawAssetId,
                     ]
+                  : path.basename(sourcePath) === "forest-full.seed.json"
+                    ? [
+                        "asset:02-analysis/forest-full-2026-08-29/analysis-notes.md",
+                        forestFullRawAssetId,
+                      ]
               : ["asset:04-project/source-packets/how-to-fish-p0.md"],
       })),
     ],
@@ -814,6 +837,17 @@ function sourceGroups() {
         status: "analyzed/source-only",
         rights:
           "third-party Douyin screen recording retained only at original path; every derivative is research-only",
+        publishability: false,
+        pageUsage: ["research-only"],
+        derivedFrom: null,
+      },
+      {
+        sourcePath: forestFullVideoPath,
+        mediaType: "video",
+        role: "raw",
+        status: "analyzed/source-only",
+        rights:
+          "third-party social screen recording retained only at original path; every derivative is research-only",
         publishability: false,
         pageUsage: ["research-only"],
         derivedFrom: null,
