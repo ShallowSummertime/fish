@@ -27,4 +27,11 @@
 | P1 | 补首页分享图 | pending | 首页存在独立 1200px+ `og:image` 与 `twitter:image`，生产 URL 返回 200；信任页可复用默认站点图 |
 | P1 | 校正 Meta Description 长度 | pending | Bosses 不少于 110 字符；Beginner、Lighthouse、Volcano 不超过 160 字符；构建按解码后长度阻断回归 |
 | P1 | 刷新 GSC sitemap 发现量 | pending | GSC 成功读取当前 19 URL sitemap；等待覆盖报告生成后再决定逐页提交，不用 `site:` 数量代替 GSC |
+| P0 | Giant Piranha 深度 Boss 页 | pending | 900–1400 可见词、4–8 张自有/可发布图、召唤链、minion/攻击循环、Skeleton 保护、Desert 交付与失败恢复 |
+| P0 | Pufferfish 深度 Boss 页 | pending | 900–1400 可见词、4–8 张自有/可发布图、Carrot 前置、滚动攻击与掩体、Fin 保护、Rocks 解锁与失败恢复 |
+| P0 | Albatross 深度 Boss 页 | pending | 900–1400 可见词、4–8 张自有/可发布图、Tuna 诱饵、远程战、Head 交付、Volcano 解锁与失败恢复 |
+| P0 | Mutated Bowhead Whale 正常打法页 | pending | 与 Handyman 裸手路线区分；覆盖 Scientist/Bowhead/crater、岩浆攻击循环、Whale Fin、RHIB ending 和失败恢复 |
+| P1 | Money 与 Cooking 任务页 | pending | 只使用已验证 grill/cooking/Killscore 规则；不宣传未复现的 casino 收益路线 |
+| P1 | 首批高证据 creature 详情页 | pending | 先做 5–10 个有独立素材与路线用途的实体；每页必须有信息增益，禁止复制数据库字段成模板薄页 |
+| P2 | 下一步路线检查器调研 | pending | 用五岛 hand-in 与 quest-item 数据定义可验证原型；与竞品 calculator 形成不同任务价值 |
 | P2 | 增加生产安全响应头 | pending | 评估并配置 Content-Security-Policy、X-Content-Type-Options、Referrer-Policy 和 Permissions-Policy，确保不破坏 Vercel、未来 CMP 或 AdSense |

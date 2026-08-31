@@ -1,5 +1,15 @@
 # 迭代记录
 
+## 2026-08-31 — 当前竞品与搜索盘面复查
+
+- 目标：识别当前真正抢占 How to Fish 攻略搜索的站点，并决定下一批内容应扩页面数量还是提高一手信息增益。
+- 观察：本站 Git、路由和生产 Sitemap 一致为 19 个索引 URL。howtofish.org 已达 127 URL，howtofishguides.wiki 36，howtofishgameguide.com 14，howtofishhq.wiki 13；Game8 的 How to Fish 页面未在本次精确站内搜索中稳定出现。媒体站已用独立 Spider Crab、Pufferfish、Beginner 和完整 walkthrough 页面验证长尾需求。
+- 结果：证伪“继续把 Game8 当唯一当前竞品”和“按 49 个实体一次铺开”的假设。本站下一批优先用现有视频证据完成 Giant Piranha、Pufferfish、Albatross、Mutated Bowhead Whale 四个 Boss 深度页。
+- 证据：`.rankup/topics/competitor-analysis-2026-08-31.md`；四个竞品 Sitemap；Web.Cafe `how to fish game` 美国英语 SERP 快照。
+- 工具状态：Rankup 2.32.0 检出 2.63.0，但因本机 npm cache 含 root-owned 文件而更新失败；保留当前版本继续，未伪称更新成功。
+- 学习决定：run-specific；本次结论属于游戏发行窗口和当前 SERP，不晋升全局 Skill。
+- 下一轮唯一改进：先从素材库盘点四个 Boss 的可发布关键帧，素材不足项单独列出后再开始写页。
+
 ## 2026-08-31 — 七篇 P0 攻略收敛实施
 
 - 目标：停止用薄 URL 扩张，保留独立 Handyman 搜索任务，并把五个重复意图集中到既有权威页；Casino 在可复现前不参与索引。

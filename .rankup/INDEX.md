@@ -3,7 +3,7 @@
 - 项目：How to Fish Walkthrough
 - 最近更新：2026-08-31
 - 当前阶段：9 — 实战攻略与实体资料库扩展
-- 当前目标：以 19 个可索引 URL 集中内容权重，并继续补首页分享图与元描述门禁
+- 当前目标：以 19 个高质量索引 URL 为基线，优先用已有视频证据扩展四个独立 Boss 深度页
 - 下一入口：PROJECT.md
 
 ## 推荐读取顺序
@@ -17,6 +17,7 @@
 
 - `.rankup/scripts/audit-production.mjs --base <origin> --out <json>`：全量核对线上 sitemap、页面状态、canonical、H1、Schema、OG 图、图片状态、ads.txt 与真实 404；已验证 2026-08-31，不依赖登录态。
 - `.rankup/scripts/analyze-content-overlap.mjs --base <origin> --focus <path,path>`：按正文三词组比较 sitemap 页面之间的文本重叠，辅助识别重复选题和合并候选；已验证 2026-08-31，不依赖登录态。
+- `.rankup/topics/competitor-analysis-2026-08-31.md`：当前五个垂直站、媒体站、Game8 可见性、Sitemap 规模和本站 P0–P2 竞争策略快照。
 
 ## 最近变化
 
@@ -38,3 +39,4 @@
 - 2026-08-31：GSC 最近可用数据（8 月 26–28 日）为 174 曝光、1 点击、0.6% CTR、平均排名 12.6；仅 5 个 URL 获得曝光。索引覆盖报告仍在处理，sitemap 成功但只显示发现 18 页。
 - 2026-08-31：逐页复核七篇新稿后，内容策略从“七页全部扩写”收敛为：Handyman 深写；五个重复意图合并并 301；Casino 当前补丁复现前隔离索引。
 - 2026-08-31：完成七页收敛实现：Handyman 扩为 1200+ 静态词并使用 4 张现有素材与 2 张原创 SVG 图解；五个薄页永久导向权威页；Casino 保留直达但 `noindex,follow` 且退出 sitemap/首页；索引清单收敛为 19 URL。
+- 2026-08-31：复查当前竞品后，最大垂直威胁更新为 127 URL 的 howtofish.org 与 36 URL 的 howtofishguides.wiki；Game8 不再作为唯一当前标杆。下一内容批次收敛为 Giant Piranha、Pufferfish、Albatross、Mutated Bowhead Whale 四个有现成视频证据的深度页。
