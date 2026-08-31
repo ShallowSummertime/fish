@@ -1,0 +1,9 @@
+{
+  "redirects": [
+    { "source": "/guides/unlock-weapon-skins-fast", "destination": "/guides/reel-of-fortune#fast-skins", "permanent": true },
+    { "source": "/guides/summon-spider-crab", "destination": "/bosses/spider-crab#summon", "permanent": true },
+    { "source": "/guides/killscore-multipliers", "destination": "/beginner-guide#profit-multipliers", "permanent": true },
+    { "source": "/guides/all-bosses-weapons-endgame", "destination": "/bosses#boss-run", "permanent": true },
+    { "source": "/guides/five-boss-challenge", "destination": "/bosses#boss-run", "permanent": true }
+  ]
+}

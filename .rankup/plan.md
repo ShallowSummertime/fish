@@ -1,7 +1,7 @@
 # 当前计划
 
 - 目标：把技术可用的 MVP 升级为玩家能够独立完成任务的实战攻略站。
-- 更新时间：2026-08-28
+- 更新时间：2026-08-31
 
 | 优先级 | 工作项 | 状态 | 验收标准 |
 |---|---|---|---|
@@ -22,3 +22,9 @@
 | P0 | 首轮 HTML 与首页内容门禁 | done | 16 页静态正文、全站 Title ≤60、首页 1622 词及 FAQ 已在生产 HTML 中通过 |
 | P1 | 免费目录资格筛选与提交 | in-progress | 先量真实流量与资格；只准备真实字段；BacklinkDirs/Submify 最终提交须单项确认并留证 |
 | P1 | 构建、测试和独立 E2E/review | done | 客观 gates、静态 route 断言、独立 E2E 与生产部署 review 已通过 |
+| P0 | 七篇视频攻略收敛与重写 | done | Handyman 独立深写；Weapon Skins、Spider Summon、Killscore、All Bosses、Five-Boss 合并到现有权威页并永久重定向；Casino 当前补丁复现前隔离索引；不保留 200 薄副本 |
+| P0 | 修复保留攻略的标题层级 | done | Handyman 的 H1 后使用连续 H2；合并后的权威页保持现有语义标题结构；静态检查通过 |
+| P1 | 补首页分享图 | pending | 首页存在独立 1200px+ `og:image` 与 `twitter:image`，生产 URL 返回 200；信任页可复用默认站点图 |
+| P1 | 校正 Meta Description 长度 | pending | Bosses 不少于 110 字符；Beginner、Lighthouse、Volcano 不超过 160 字符；构建按解码后长度阻断回归 |
+| P1 | 刷新 GSC sitemap 发现量 | pending | GSC 成功读取当前 19 URL sitemap；等待覆盖报告生成后再决定逐页提交，不用 `site:` 数量代替 GSC |
+| P2 | 增加生产安全响应头 | pending | 评估并配置 Content-Security-Policy、X-Content-Type-Options、Referrer-Policy 和 Permissions-Policy，确保不破坏 Vercel、未来 CMP 或 AdSense |

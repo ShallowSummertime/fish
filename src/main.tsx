@@ -17,13 +17,8 @@ import {
   VolcanoGuide,
 } from "./guidePages";
 import {
-  AllBossesWeaponsEndgameGuide,
   CasinoMoneyRouteGuide,
-  FiveBossChallengeGuide,
-  KillscoreMultipliersGuide,
   MutatedWhaleHandymanGuide,
-  SummonSpiderCrabGuide,
-  UnlockWeaponSkinsFastGuide,
 } from "./videoGuidePages";
 
 const DOMAIN = "https://howtofishwalkthrough.com";
@@ -42,13 +37,8 @@ const articlePaths = new Set([
   "/locations/rocks",
   "/locations/volcano",
   "/guides/reel-of-fortune",
-  "/guides/all-bosses-weapons-endgame",
   "/guides/casino-money-route",
   "/guides/mutated-whale-handyman",
-  "/guides/unlock-weapon-skins-fast",
-  "/guides/killscore-multipliers",
-  "/guides/summon-spider-crab",
-  "/guides/five-boss-challenge",
   "/bosses/spider-crab",
 ]);
 const collectionPaths = new Set([
@@ -71,6 +61,7 @@ const schemaType = (path: string) =>
             ? "ContactPage"
             : "WebPage";
 function Meta({ path }: { path: string }) {
+  const noindex = path === "/guides/casino-money-route";
   const known = Boolean(pageMeta[path]);
   const m = pageMeta[path] ?? {
     title: "Page Not Found | How to Fish Walkthrough",
@@ -101,10 +92,7 @@ function Meta({ path }: { path: string }) {
     );
     set("og:url", url, true);
     set("twitter:card", "summary_large_image");
-    set(
-      "robots",
-      known ? "index,follow,max-image-preview:large" : "noindex,follow",
-    );
+    set("robots", known && !noindex ? "index,follow,max-image-preview:large" : "noindex,follow");
     if (image) {
       set("og:image", image, true);
       set("twitter:image", image);
@@ -737,19 +725,17 @@ function Home() {
       </section>
       <section className="home-video-guides">
         <div className="video-guides-heading">
-          <p className="eyebrow">NEW FIELD ROUTES</p>
-          <h2>Seven focused guides<br/><i>from recorded runs.</i></h2>
-          <p>Each page answers one task: a full boss route, a money test, an achievement, a cosmetic unlock, combat timing, the first summon, or a five-boss challenge.</p>
+          <p className="eyebrow">DEEPER FIELD ROUTES</p>
+          <h2>One task per page.<br/><i>One clear next step.</i></h2>
+          <p>Use the route that matches the thing you are doing now: the first boss, the full five-stop progression, cosmetic skins, or the final achievement attempt.</p>
         </div>
         <div className="video-guides-list">
           {[
-            ["01", "All bosses, weapons & endgame", "/guides/all-bosses-weapons-endgame"],
-            ["02", "Casino money route", "/guides/casino-money-route"],
+            ["01", "Spider Crab: summon, fight, hand-in", "/bosses/spider-crab"],
+            ["02", "All bosses and five-stop route", "/bosses#boss-run"],
             ["03", "Mutated Whale Handyman", "/guides/mutated-whale-handyman"],
-            ["04", "Unlock weapon skins fast", "/guides/unlock-weapon-skins-fast"],
-            ["05", "Killscore multipliers", "/guides/killscore-multipliers"],
-            ["06", "Summon Spider Crab", "/guides/summon-spider-crab"],
-            ["07", "Five-boss challenge", "/guides/five-boss-challenge"],
+            ["04", "Reel of Fortune weapon skins", "/guides/reel-of-fortune#fast-skins"],
+            ["05", "Beginner value and multi-kill chain", "/beginner-guide#profit-multipliers"],
           ].map(([n, label, href]) => <a href={href} key={href}><span>{n}</span><b>{label}</b><i>→</i></a>)}
         </div>
       </section>
@@ -1024,7 +1010,7 @@ function Beginner() {
         <b>ON THIS PAGE</b>
         <a href="#first-20">First 20 minutes</a>
         <a href="#bait">Bait &amp; hotspots</a>
-        <a href="#profit">Make more money</a>
+        <a href="#profit-multipliers">Make more money</a>
         <a href="#spider-prep">Spider Crab</a>
         <a href="#five-islands">Five-island route</a>
         <a href="#upgrades">Weapons</a>
@@ -1126,7 +1112,7 @@ function Beginner() {
           </div>
         </div>
       </section>
-      <section id="profit">
+      <section id="profit-multipliers">
         <h2>Make more money from the catch you already landed</h2>
         <p>
           Progression purchases become easier when you improve value before
@@ -1174,6 +1160,25 @@ function Beginner() {
           multipliers. Use trick shots and grilling only after the basic
           catch-and-sell loop feels automatic.
         </div>
+        <h3>Multi-kill chain bonus: a patch-sensitive combat value layer</h3>
+        <p>
+          A short recorded combat note shows a separate <strong>multi-kill
+          chain</strong>: the next target must die within about three seconds
+          of the previous kill. Its visible rows were ×1.05 for two kills,
+          ×1.10 for three, and ×1.15 for four; the same note reports ×1.50 at
+          ten or more. These are clip-reported values, not a promise that the
+          current build has unchanged timing, intermediate rows, or cap.
+        </p>
+        <div className="multiplier-table" role="table" aria-label="Clip-reported multi-kill chain values"><div role="row"><b>Kills</b><b>Multiplier</b><b>Recorded condition</b></div><div role="row"><span>2</span><strong>×1.05</strong><span>Next kill within about 3 seconds</span></div><div role="row"><span>3</span><strong>×1.10</strong><span>Continue the same short window</span></div><div role="row"><span>4</span><strong>×1.15</strong><span>Continue the same short window</span></div><div role="row"><span>10+</span><strong>×1.50</strong><span>Reported cap; recheck after patches</span></div></div>
+        <p>
+          Set up low-risk ordinary targets on open ground, weaken them first,
+          then finish them without a reload, long turn, or water crossing. Do
+          not use bosses or protected quest creatures as a test group. This is
+          not the same as the official <strong>Impressive</strong> achievement,
+          whose condition is to get a 5x killscore multiplier on one creature.
+          Treat the clip as a practical chain note and use the achievement page
+          for the official completion condition.
+        </p>
       </section>
       <section id="spider-prep">
         <h2>Prepare for Spider Crab before you cast</h2>
@@ -2395,6 +2400,33 @@ function Bosses() {
         ))}
       </div>
       <BossProgression />
+      <section className="hub-note" id="boss-run">
+        <h2>Weapon planning and a normal-game five-stop boss run</h2>
+        <p>
+          Build the loadout around the next encounter rather than an unverified
+          price table. Early ordinary catches call for a controllable close-range
+          tool; Forest, Desert, Rocks, and Volcano reward dependable ranged
+          damage, ammunition, recovery food, and an open inventory slot for the
+          unique drop. Buy the core solution first, then add handling or magazine
+          improvements only when they help the next fight. This guide deliberately
+          does not publish patch-sensitive damage, attachment, or shop-price
+          numbers that the current evidence cannot verify.
+        </p>
+        <ol>
+          <li><b>Lighthouse:</b> prepare the Empty Beer Can, dodge Spider Crab’s charge, protect the Shell, and complete the Boat Keys hand-in.</li>
+          <li><b>Forest:</b> verify the current Leech objective and special bait, keep moving during Giant Piranha, then secure the Skeleton hand-in.</li>
+          <li><b>Desert:</b> use the Carrot route for Pufferfish, reset away from gas, and retain the Fin for the next marker.</li>
+          <li><b>Rocks:</b> prepare the Tuna for Albatross, fight near hard cover, and return the Head for Volcano coordinates.</li>
+          <li><b>Volcano:</b> finish the Scientist chain, protect the Bowhead body for the crater, and hand the Whale Fin back only after the mutated stage is complete.</li>
+        </ol>
+        <p>
+          This is a normal-game preparation checklist, not a mod challenge or a
+          speedrun rule set. If you time a personal route, decide whether the
+          clock ends at the final boss defeat or the final NPC hand-in before
+          starting, and record co-op help or reloads so later attempts remain
+          comparable.
+        </p>
+      </section>
       <section className="hub-note">
         <h2>Progression safety checklist</h2>
         <ol>
@@ -3412,13 +3444,8 @@ export function App({ initialPath }: { initialPath?: string }) {
       "/locations/rocks": RocksGuide,
       "/locations/volcano": VolcanoGuide,
       "/guides/reel-of-fortune": ReelOfFortuneGuide,
-      "/guides/all-bosses-weapons-endgame": AllBossesWeaponsEndgameGuide,
       "/guides/casino-money-route": CasinoMoneyRouteGuide,
       "/guides/mutated-whale-handyman": MutatedWhaleHandymanGuide,
-      "/guides/unlock-weapon-skins-fast": UnlockWeaponSkinsFastGuide,
-      "/guides/killscore-multipliers": KillscoreMultipliersGuide,
-      "/guides/summon-spider-crab": SummonSpiderCrabGuide,
-      "/guides/five-boss-challenge": FiveBossChallengeGuide,
       "/lures": Lures,
       "/bosses/spider-crab": SpiderCrab,
       "/achievements": Achievements,

@@ -14,13 +14,8 @@ const routes = [
   "/locations/rocks",
   "/locations/volcano",
   "/guides/reel-of-fortune",
-  "/guides/all-bosses-weapons-endgame",
   "/guides/casino-money-route",
   "/guides/mutated-whale-handyman",
-  "/guides/unlock-weapon-skins-fast",
-  "/guides/killscore-multipliers",
-  "/guides/summon-spider-crab",
-  "/guides/five-boss-challenge",
   "/lures",
   "/bosses/spider-crab",
   "/achievements",
@@ -103,10 +98,9 @@ for (const route of routes) {
     /<meta name="twitter:card" content="summary_large_image">/,
   );
   assert.match(html, /application\/ld\+json/);
-  assert.match(
-    html,
-    /<meta name="robots" content="index,follow,max-image-preview:large">/,
-  );
+  assert.match(html, route === "/guides/casino-money-route"
+    ? /<meta name="robots" content="noindex,follow">/
+    : /<meta name="robots" content="index,follow,max-image-preview:large">/);
   assert.doesNotMatch(html, /<div id="root"><\/div>/);
   assert.doesNotMatch(
     html,
@@ -132,6 +126,14 @@ assert.doesNotMatch(
 );
 assert.match(creatures, /encyclopedia-early\.webp/);
 const home = await readFile("dist/index.html", "utf8");
+for (const nonPublicPath of [
+  "/guides/casino-money-route",
+  "/guides/all-bosses-weapons-endgame",
+  "/guides/unlock-weapon-skins-fast",
+  "/guides/killscore-multipliers",
+  "/guides/summon-spider-crab",
+  "/guides/five-boss-challenge",
+]) assert.doesNotMatch(home, new RegExp(`href="${nonPublicPath.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")}"`), `${nonPublicPath} must not appear in public home navigation`);
 const homeFooter = home.match(/<footer>[\s\S]*?<\/footer>/)?.[0] ?? "";
 assert.match(
   homeFooter,
@@ -571,11 +573,49 @@ for (const phrase of [
 ])
   assert.match(reel, new RegExp(phrase, "i"));
 assert.match(reel, /reel-machine-hero\.png/);
+assert.match(reel, /Fast weapon-skin loop/);
+assert.match(reel, /Rare Drip confirmed[\s\S]*dead body preserved[\s\S]*Z or C visibly changes/i);
 assert.doesNotMatch(
   reel,
   /there is one machine (?:on|per) (?:each|every) island|skins? (?:are|is) shared (?:between|with) players|pity (?:counter|system) guarantees/i,
 );
 await access("public/images/guides/reel-of-fortune/reel-machine-hero.png");
+const handyman = await readFile("dist/guides/mutated-whale-handyman/index.html", "utf8");
+assert.ok(
+  textFrom(handyman).split(/\s+/).length >= 700,
+  "/guides/mutated-whale-handyman must provide an actionable deep route",
+);
+for (const phrase of [
+  "defeat the final boss with your bare hands",
+  "conservative route",
+  "co-op credit",
+  "rock geometry",
+  "short burst of punches",
+  "achievement popup",
+  "Whale Fin",
+]) assert.match(handyman, new RegExp(phrase, "i"));
+assert.ok(
+  (handyman.match(/<img /g) || []).length >= 4 && (handyman.match(/<svg /g) || []).length >= 2,
+  "Handyman must use at least five relevant gameplay, achievement, or original diagram visuals",
+);
+const casino = await readFile("dist/guides/casino-money-route/index.html", "utf8");
+assert.match(casino, /<meta name="robots" content="noindex,follow">/);
+assert.match(casino, /current-patch verification pending/i);
+const sitemap = await readFile("public/sitemap.xml", "utf8");
+const sitemapUrls = [...sitemap.matchAll(/<loc>([^<]+)<\/loc>/g)].map((match) => match[1]);
+assert.equal(sitemapUrls.length, 19, "sitemap must contain exactly 19 indexable URLs");
+for (const removed of [
+  "/guides/all-bosses-weapons-endgame",
+  "/guides/casino-money-route",
+  "/guides/unlock-weapon-skins-fast",
+  "/guides/killscore-multipliers",
+  "/guides/summon-spider-crab",
+  "/guides/five-boss-challenge",
+]) assert.ok(!sitemapUrls.some((url) => url.endsWith(removed)), `${removed} must stay out of sitemap`);
+assert.equal(routes.length, 20, "20 routes must be prerendered, including the direct but noindex casino notes");
+const redirects = JSON.parse(await readFile("vercel.json", "utf8"));
+assert.equal(redirects.redirects.length, 5, "five duplicate guide URLs must have permanent redirects");
+for (const redirect of redirects.redirects) assert.equal(redirect.permanent, true);
 const spiderText = textFrom(spider);
 const beginnerText = textFrom(beginner);
 const lighthouseText = textFrom(lighthouse);

@@ -15,13 +15,8 @@ const articlePaths = new Set([
   "/locations/rocks",
   "/locations/volcano",
   "/guides/reel-of-fortune",
-  "/guides/all-bosses-weapons-endgame",
   "/guides/casino-money-route",
   "/guides/mutated-whale-handyman",
-  "/guides/unlock-weapon-skins-fast",
-  "/guides/killscore-multipliers",
-  "/guides/summon-spider-crab",
-  "/guides/five-boss-challenge",
   "/bosses/spider-crab",
 ]);
 const collectionPaths = new Set([
@@ -52,6 +47,7 @@ const escape = (value: string) =>
 const template = await readFile("dist/index.html", "utf8");
 for (const path of Object.keys(pageMeta)) {
   const meta = pageMeta[path];
+  const noindex = path === "/guides/casino-money-route";
   const canonical = `${domain}${path}`;
   const image = meta.image ? `${domain}${meta.image}` : undefined;
   if (meta.image) await stat(`public${meta.image}`);
@@ -127,7 +123,7 @@ for (const path of Object.keys(pageMeta)) {
   const socialImage = image
     ? `<meta property="og:image" content="${image}"><meta name="twitter:image" content="${image}">`
     : "";
-  const head = `<meta name="description" content="${escape(meta.description)}"><meta name="robots" content="index,follow,max-image-preview:large"><link rel="canonical" href="${canonical}"><meta property="og:title" content="${escape(meta.title)}"><meta property="og:description" content="${escape(meta.description)}"><meta property="og:type" content="${type === "Article" ? "article" : "website"}"><meta property="og:url" content="${canonical}">${socialImage}<meta name="twitter:card" content="summary_large_image"><script id="ld-json" type="application/ld+json">${jsonLd}</script>`;
+  const head = `<meta name="description" content="${escape(meta.description)}"><meta name="robots" content="${noindex ? "noindex,follow" : "index,follow,max-image-preview:large"}"><link rel="canonical" href="${canonical}"><meta property="og:title" content="${escape(meta.title)}"><meta property="og:description" content="${escape(meta.description)}"><meta property="og:type" content="${type === "Article" ? "article" : "website"}"><meta property="og:url" content="${canonical}">${socialImage}<meta name="twitter:card" content="summary_large_image"><script id="ld-json" type="application/ld+json">${jsonLd}</script>`;
   const markup = renderToString(
     React.createElement(App, { initialPath: path }),
   );
