@@ -598,6 +598,16 @@ assert.ok(
   (handyman.match(/<img /g) || []).length >= 4 && (handyman.match(/<svg /g) || []).length >= 2,
   "Handyman must use at least five relevant gameplay, achievement, or original diagram visuals",
 );
+for (const [src, width, height] of [
+  ["/images/guides/volcano/01-volcano-arrival.png", 1672, 941],
+  ["/images/guides/volcano/02-bowhead-to-crater.png", 1672, 941],
+  ["/images/guides/volcano/03-mutated-bowhead-fight.png", 1672, 941],
+  ["/images/achievements/9f978a5ee40c390d66605ee42333628186ccd337.webp", 256, 256],
+]) assert.match(
+  handyman,
+  new RegExp(`<img[^>]+src="${src.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")}"[^>]+width="${width}"[^>]+height="${height}"`),
+  `${src} must reserve its real intrinsic dimensions`,
+);
 const casino = await readFile("dist/guides/casino-money-route/index.html", "utf8");
 assert.match(casino, /<meta name="robots" content="noindex,follow">/);
 assert.match(casino, /current-patch verification pending/i);

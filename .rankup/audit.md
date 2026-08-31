@@ -6,7 +6,7 @@
 - 已合并：Weapon Skins → Reel of Fortune；Spider Summon → Spider Crab；Killscore → Beginner；All Bosses 与 Five-Boss → Bosses。权威页吸收可用内容，旧 URL 使用 Vercel 永久重定向，不再保留 200 薄副本。
 - 已隔离：Casino 保留 20 页预渲染清单中的直达页面，但改为当前补丁待复现说明，首轮 HTML 输出 `noindex,follow`，并退出 sitemap 与首页公开入口。
 - 索引面：sitemap 从 25 收敛到 19 URL；静态构建仍生成 20 页。自动断言覆盖 robots、sitemap 数量、重定向配置、首页无隔离/合并页入口、Handyman 深度与媒体数。
-- 视觉修复：浏览器 QA 发现原创 SVG 的长标签越界并在移动端过度缩小；标签已拆行，390px 下图解使用自身 720px 横向滚动区，页面根节点保持无横向溢出。
+- 视觉修复：浏览器 QA 发现原创 SVG 的长标签越界并在移动端过度缩小；标签已拆行，390px 下图解使用自身 720px 横向滚动区，页面根节点保持无横向溢出。独立 review 另发现四张 Handyman 图共用错误固有宽高；现已按三张 Volcano 图 1672×941、成就图 256×256 输出并加入静态回归断言。
 - 本地证据：Vitest 4/4、TypeScript、Vite build、20 路由预渲染、静态断言与 `git diff --check` 通过；桌面 1440×900 与移动 390×844 浏览器检查无页面级横向溢出，全部四张位图加载成功。
 
 ## 2026-08-31 — 七篇视频攻略逐页裁决

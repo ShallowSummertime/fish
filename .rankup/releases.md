@@ -5,7 +5,7 @@
 - 目标：收敛七篇视频主题薄页并集中内部权重。
 - 变更：Handyman 深度重写；五个重复主题合并到 Reel、Beginner、Bosses 与 Spider Crab 并配置永久重定向；Casino 改为核验待定说明、`noindex,follow`、退出 sitemap 与首页。
 - SEO：sitemap 从 25 收敛为 19 个可索引 URL；构建保留 20 个静态页面；重定向与 robots 进入自动阻断门禁。
-- 视觉：Handyman 使用三张 Volcano 实机图、官方成就图和两张原创 SVG；SVG 已通过桌面与 390px 移动端可读性/溢出修复。
+- 视觉：Handyman 使用三张 Volcano 实机图、官方成就图和两张原创 SVG；SVG 已通过桌面与 390px 移动端可读性/溢出修复，四张位图按真实 1672×941 / 256×256 固有尺寸预留布局空间。
 - 本地验证：Vitest 4/4、TypeScript、Vite build、20 路由预渲染、静态检查与 `git diff --check` 通过。
 - 发布方式：本记录与产品改动同一交付提交推送 `main`，由 Vercel 自动发布；生产终态以部署后 19 URL sitemap、五条 308、Casino noindex 和 Handyman 首轮 HTML 复验为准。
 
