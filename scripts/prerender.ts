@@ -15,6 +15,13 @@ const articlePaths = new Set([
   "/locations/rocks",
   "/locations/volcano",
   "/guides/reel-of-fortune",
+  "/guides/all-bosses-weapons-endgame",
+  "/guides/casino-money-route",
+  "/guides/mutated-whale-handyman",
+  "/guides/unlock-weapon-skins-fast",
+  "/guides/killscore-multipliers",
+  "/guides/summon-spider-crab",
+  "/guides/five-boss-challenge",
   "/bosses/spider-crab",
 ]);
 const collectionPaths = new Set([
@@ -58,7 +65,9 @@ for (const path of Object.keys(pageMeta)) {
           mainEntityOfPage: canonical,
           image,
           dateModified:
-            path === "/locations/forest" || path === "/locations/desert"
+            path.startsWith("/guides/")
+              ? "2026-08-31"
+              : path === "/locations/forest" || path === "/locations/desert"
               ? "2026-08-29"
               : "2026-08-28",
           author: { "@type": "Organization", name: "How to Fish Walkthrough" },

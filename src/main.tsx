@@ -16,6 +16,15 @@ import {
   RocksGuide,
   VolcanoGuide,
 } from "./guidePages";
+import {
+  AllBossesWeaponsEndgameGuide,
+  CasinoMoneyRouteGuide,
+  FiveBossChallengeGuide,
+  KillscoreMultipliersGuide,
+  MutatedWhaleHandymanGuide,
+  SummonSpiderCrabGuide,
+  UnlockWeaponSkinsFastGuide,
+} from "./videoGuidePages";
 
 const DOMAIN = "https://howtofishwalkthrough.com";
 const nav = [
@@ -33,6 +42,13 @@ const articlePaths = new Set([
   "/locations/rocks",
   "/locations/volcano",
   "/guides/reel-of-fortune",
+  "/guides/all-bosses-weapons-endgame",
+  "/guides/casino-money-route",
+  "/guides/mutated-whale-handyman",
+  "/guides/unlock-weapon-skins-fast",
+  "/guides/killscore-multipliers",
+  "/guides/summon-spider-crab",
+  "/guides/five-boss-challenge",
   "/bosses/spider-crab",
 ]);
 const collectionPaths = new Set([
@@ -115,7 +131,9 @@ function Meta({ path }: { path: string }) {
         mainEntityOfPage: url,
         image,
         dateModified:
-          path === "/locations/forest" || path === "/locations/desert"
+          path.startsWith("/guides/")
+            ? "2026-08-31"
+            : path === "/locations/forest" || path === "/locations/desert"
             ? "2026-08-29"
             : "2026-08-28",
         author: { "@type": "Organization", name: "How to Fish Walkthrough" },
@@ -716,6 +734,24 @@ function Home() {
           href="/bosses"
           accent="coral"
         />
+      </section>
+      <section className="home-video-guides">
+        <div className="video-guides-heading">
+          <p className="eyebrow">NEW FIELD ROUTES</p>
+          <h2>Seven focused guides<br/><i>from recorded runs.</i></h2>
+          <p>Each page answers one task: a full boss route, a money test, an achievement, a cosmetic unlock, combat timing, the first summon, or a five-boss challenge.</p>
+        </div>
+        <div className="video-guides-list">
+          {[
+            ["01", "All bosses, weapons & endgame", "/guides/all-bosses-weapons-endgame"],
+            ["02", "Casino money route", "/guides/casino-money-route"],
+            ["03", "Mutated Whale Handyman", "/guides/mutated-whale-handyman"],
+            ["04", "Unlock weapon skins fast", "/guides/unlock-weapon-skins-fast"],
+            ["05", "Killscore multipliers", "/guides/killscore-multipliers"],
+            ["06", "Summon Spider Crab", "/guides/summon-spider-crab"],
+            ["07", "Five-boss challenge", "/guides/five-boss-challenge"],
+          ].map(([n, label, href]) => <a href={href} key={href}><span>{n}</span><b>{label}</b><i>→</i></a>)}
+        </div>
       </section>
       <section className="home-split">
         <div>
@@ -3376,6 +3412,13 @@ export function App({ initialPath }: { initialPath?: string }) {
       "/locations/rocks": RocksGuide,
       "/locations/volcano": VolcanoGuide,
       "/guides/reel-of-fortune": ReelOfFortuneGuide,
+      "/guides/all-bosses-weapons-endgame": AllBossesWeaponsEndgameGuide,
+      "/guides/casino-money-route": CasinoMoneyRouteGuide,
+      "/guides/mutated-whale-handyman": MutatedWhaleHandymanGuide,
+      "/guides/unlock-weapon-skins-fast": UnlockWeaponSkinsFastGuide,
+      "/guides/killscore-multipliers": KillscoreMultipliersGuide,
+      "/guides/summon-spider-crab": SummonSpiderCrabGuide,
+      "/guides/five-boss-challenge": FiveBossChallengeGuide,
       "/lures": Lures,
       "/bosses/spider-crab": SpiderCrab,
       "/achievements": Achievements,

@@ -832,6 +832,48 @@ export const pageMeta: Record<
       "Use one rare Drip creature at the Reel of Fortune, identify the random cosmetic skin, equip it with Z or C, and understand GOLD GOLD GOLD.",
     image: "/images/guides/reel-of-fortune/reel-machine-hero.png",
   },
+  "/guides/all-bosses-weapons-endgame": {
+    title: "All Bosses, Weapons & Endgame | How to Fish",
+    description:
+      "Five-location How to Fish boss route with practical weapon upgrades, summon steps, protected drops, hand-ins, and Volcano endgame preparation.",
+    image: "/images/guides/locations/five-location-route-hero.png",
+  },
+  "/guides/casino-money-route": {
+    title: "Casino Money Route & Save Safety | How to Fish",
+    description:
+      "Test the How to Fish casino money route safely: record your balance, protect the save, travel with a small stake, verify results, and avoid losing quest items.",
+    image: "/images/guides/reel-of-fortune/reel-machine-hero.png",
+  },
+  "/guides/mutated-whale-handyman": {
+    title: "Mutated Whale Handyman Guide | How to Fish",
+    description:
+      "Unlock Handyman by defeating Mutated Bowhead Whale with bare hands using safe crater positioning, short punch windows, and a solo credit-safe setup.",
+    image: "/images/guides/volcano/03-mutated-bowhead-fight.png",
+  },
+  "/guides/unlock-weapon-skins-fast": {
+    title: "Unlock Weapon Skins Fast | How to Fish",
+    description:
+      "Catch a Drip creature, preserve its body, use the Reel of Fortune, identify the cosmetic reward, and cycle weapon skins with Z or C.",
+    image: "/images/guides/reel-of-fortune/reel-machine-hero.png",
+  },
+  "/guides/killscore-multipliers": {
+    title: "Killscore Multipliers & Timing | How to Fish",
+    description:
+      "How to Fish multi-kill timing guide with the confirmed three-second chain, visible 1.05 to 1.15 values, reported 1.50 cap, and a safe setup routine.",
+    image: "/images/guides/beginner/localized/04-profit-multipliers-cover-en.png",
+  },
+  "/guides/summon-spider-crab": {
+    title: "How to Summon Spider Crab | How to Fish",
+    description:
+      "Get the Empty Beer Can, complete the Lighthouse Keeper exchange, verify the special bait, cast safely, and finish the Spider Crab Shell hand-in.",
+    image: "/images/guides/island-1/08-spider-crab.jpg",
+  },
+  "/guides/five-boss-challenge": {
+    title: "Five-Boss Challenge Route | How to Fish",
+    description:
+      "Run Spider Crab, Giant Piranha, Pufferfish, Albatross, and the Volcano whale finale in order with a safe no-mod loadout and timing rules.",
+    image: "/images/guides/locations/five-location-route-hero.png",
+  },
   "/lures": {
     title: "How to Fish Lures & Bait Guide",
     description:

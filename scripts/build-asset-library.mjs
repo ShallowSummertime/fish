@@ -25,6 +25,7 @@ const knowledgeSeedPaths = [
   path.join(repoRoot, "research/asset-knowledge/forest-full.seed.json"),
   path.join(repoRoot, "research/asset-knowledge/guide-3.seed.json"),
   path.join(repoRoot, "research/asset-knowledge/rocks-full.seed.json"),
+  path.join(repoRoot, "research/asset-knowledge/mixed-video-guides.seed.json"),
 ];
 
 function usage() {
@@ -354,6 +355,15 @@ function sourceGroups() {
     desktopRoot,
     "第四/ScreenRecording_08-31-2026 08-08-38_1.MP4",
   );
+  const mixedGuideVideoPaths = [
+    "ScreenRecording_08-28-2026 10-22-35_1.MP4",
+    "ScreenRecording_08-28-2026 10-35-54_1.MP4",
+    "ScreenRecording_08-31-2026 08-47-11_1.MP4",
+    "ScreenRecording_08-31-2026 08-53-37_1.MP4",
+    "ScreenRecording_08-31-2026 08-59-21_1.MP4",
+    "ScreenRecording_08-31-2026 09-00-49_1.MP4",
+    "ScreenRecording_08-31-2026 09-06-05_1.MP4",
+  ].map((name) => path.join(desktopRoot, "什么都有", name));
   const islandRawAssetId = assetId({
     sourcePath: islandVideoPath,
     archivePath: null,
@@ -375,6 +385,9 @@ function sourceGroups() {
     sourcePath: rocksFullVideoPath,
     archivePath: null,
   });
+  const mixedGuideRawAssetIds = mixedGuideVideoPaths.map((sourcePath) =>
+    assetId({ sourcePath, archivePath: null }),
+  );
   const entityFrames = {
     "clam.jpg": {
       entity: "Clam",
@@ -816,6 +829,11 @@ function sourceGroups() {
                           "asset:02-analysis/rocks-full-2026-08-31/analysis-notes.md",
                           rocksFullRawAssetId,
                         ]
+                      : path.basename(sourcePath) === "mixed-video-guides.seed.json"
+                        ? [
+                            "asset:02-analysis/mixed-guides-2026-08-31/analysis-notes.md",
+                            ...mixedGuideRawAssetIds,
+                          ]
               : ["asset:04-project/source-packets/how-to-fish-p0.md"],
       })),
     ],
@@ -896,17 +914,19 @@ function sourceGroups() {
         pageUsage: ["research-only"],
         derivedFrom: null,
       },
+      ...mixedGuideVideoPaths.map((sourcePath) => ({
+        sourcePath,
+        mediaType: "video",
+        role: "raw",
+        status: "analyzed/source-only",
+        rights:
+          "third-party social or player screen recording retained only at original path; every direct frame is research-only",
+        publishability: false,
+        pageUsage: ["research-only"],
+        derivedFrom: null,
+      })),
     ],
-    pendingFiles: [
-      path.join(
-        desktopRoot,
-        "什么都有/ScreenRecording_08-28-2026 10-22-35_1.MP4",
-      ),
-      path.join(
-        desktopRoot,
-        "什么都有/ScreenRecording_08-28-2026 10-35-54_1.MP4",
-      ),
-    ],
+    pendingFiles: [],
   };
 }
 
