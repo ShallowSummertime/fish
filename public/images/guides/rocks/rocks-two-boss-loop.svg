@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 675" role="img" aria-labelledby="title desc">
+  <title id="title">Rocks two-boss combat loop</title>
+  <desc id="desc">An original field diagram showing the Tuna encounter, protected Tuna body, Albatross cover cycle, Albatross Head, and Volcano hand-in.</desc>
+  <rect width="1200" height="675" fill="#111c27"/>
+  <text x="65" y="74" fill="#f4bd63" font-family="system-ui,sans-serif" font-size="21" font-weight="800" letter-spacing="2">ROCKS · TWO-BOSS DEPENDENCY</text>
+  <text x="65" y="124" fill="#fff" font-family="system-ui,sans-serif" font-size="42" font-weight="850">The first body starts the second fight</text>
+  <g font-family="system-ui,sans-serif">
+    <g transform="translate(65 205)">
+      <rect width="210" height="245" rx="22" fill="#f8f1df"/>
+      <circle cx="105" cy="72" r="43" fill="#76c7c0"/><path d="M75 74q30-35 66 0-36 34-66 0m66 0 28-21-4 34z" fill="#123b4a"/>
+      <text x="105" y="145" text-anchor="middle" fill="#192b36" font-size="22" font-weight="850">TUNA</text>
+      <text x="105" y="180" text-anchor="middle" fill="#52636b" font-size="16">health + white timer</text>
+      <text x="105" y="207" text-anchor="middle" fill="#52636b" font-size="16">use space / structure</text>
+    </g>
+    <g transform="translate(345 205)">
+      <rect width="210" height="245" rx="22" fill="#283746" stroke="#f4bd63" stroke-width="3"/>
+      <path d="M76 55h58l25 42-54 42-54-42z" fill="#f4bd63"/><path d="M92 64h26l18 31-31 24-31-24z" fill="#9d6532"/>
+      <text x="105" y="145" text-anchor="middle" fill="#fff" font-size="22" font-weight="850">KEEP BODY</text>
+      <text x="105" y="180" text-anchor="middle" fill="#c7d3dc" font-size="16">do not sell or cook</text>
+      <text x="105" y="207" text-anchor="middle" fill="#c7d3dc" font-size="16">move beside cover</text>
+    </g>
+    <g transform="translate(625 205)">
+      <rect width="210" height="245" rx="22" fill="#f8f1df"/>
+      <path d="M52 82q53-60 106 0-43-22-53 38-10-60-53-38z" fill="#253d54"/><circle cx="105" cy="76" r="8" fill="#f4bd63"/>
+      <text x="105" y="145" text-anchor="middle" fill="#192b36" font-size="22" font-weight="850">ALBATROSS</text>
+      <text x="105" y="180" text-anchor="middle" fill="#52636b" font-size="16">roof blocks pressure</text>
+      <text x="105" y="207" text-anchor="middle" fill="#52636b" font-size="16">fire during reset</text>
+    </g>
+    <g transform="translate(905 205)">
+      <rect width="210" height="245" rx="22" fill="#283746" stroke="#79d3b0" stroke-width="3"/>
+      <path d="M105 42l32 40-15 54H88L73 82z" fill="#79d3b0"/><circle cx="94" cy="81" r="5" fill="#172631"/>
+      <text x="105" y="145" text-anchor="middle" fill="#fff" font-size="22" font-weight="850">HEAD → NPC</text>
+      <text x="105" y="180" text-anchor="middle" fill="#c7d3dc" font-size="16">secure before meat</text>
+      <text x="105" y="207" text-anchor="middle" fill="#c7d3dc" font-size="16">confirm Volcano</text>
+    </g>
+    <g fill="#f4bd63" font-size="38" font-weight="850" text-anchor="middle"><text x="310" y="335">→</text><text x="590" y="335">→</text><text x="870" y="335">→</text></g>
+    <rect x="65" y="510" width="1050" height="92" rx="18" fill="#20303e"/>
+    <text x="95" y="548" fill="#fff" font-size="19" font-weight="750">COVER LOOP</text>
+    <text x="95" y="580" fill="#bfd0dc" font-size="18">Projectile begins → move fully under roof or into doorway → let the pass clear → step out, fire, reset.</text>
+  </g>
+</svg>

@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 675" role="img" aria-labelledby="title desc">
+  <title id="title">Rocks Island field layout</title>
+  <desc id="desc">An original diagram of the useful Rocks Island landmarks: arrival dock, lower shop, grill awning, grass landing lane, doorway cover, and upper bait building.</desc>
+  <defs>
+    <linearGradient id="sea" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#16334a"/><stop offset="1" stop-color="#071923"/></linearGradient>
+    <linearGradient id="rock" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#6d7175"/><stop offset="1" stop-color="#353d43"/></linearGradient>
+    <filter id="shadow"><feDropShadow dx="0" dy="8" stdDeviation="8" flood-opacity=".25"/></filter>
+  </defs>
+  <rect width="1200" height="675" fill="url(#sea)"/>
+  <path d="M170 565L260 410 415 350 535 210 745 190 855 315 1035 410 1115 565Z" fill="url(#rock)"/>
+  <path d="M285 505Q410 425 565 435T850 415Q950 430 1025 505L960 575H315Z" fill="#607c4e"/>
+  <path d="M65 580H330V625H65Z" fill="#8a6b4c"/><path d="M250 505H555V535H250Z" fill="#9b7652"/>
+  <g filter="url(#shadow)">
+    <path d="M135 430h180v120H135z" fill="#8c2932"/><path d="M120 430l105-75 105 75z" fill="#d7a269"/><rect x="185" y="475" width="56" height="75" fill="#231d1d"/>
+    <path d="M760 245h220v145H760z" fill="#a9363d"/><path d="M740 245l130-85 130 85z" fill="#d7a269"/><rect x="835" y="305" width="70" height="85" fill="#291f1f"/>
+    <path d="M360 520h150v78H360z" fill="#4f2024"/><path d="M342 520l93-55 93 55z" fill="#cb8f58"/><rect x="414" y="554" width="42" height="44" fill="#17191b"/>
+    <path d="M875 465h150v18H875z" fill="#d34f3d"/><path d="M895 420h110v20H895z" fill="#1a2025"/><path d="M900 440v82m100-82v82" stroke="#1a2025" stroke-width="12"/>
+  </g>
+  <g font-family="system-ui,sans-serif">
+    <text x="60" y="70" fill="#f4bd63" font-size="20" font-weight="800" letter-spacing="2">ROCKS · FIELD LAYOUT</text>
+    <text x="60" y="120" fill="#fff" font-size="42" font-weight="850">Mark cover before the boss lure</text>
+    <g font-size="18" font-weight="750">
+      <g transform="translate(72 350)"><rect width="190" height="54" rx="12" fill="#f8f1df"/><text x="95" y="34" text-anchor="middle" fill="#172631">LOWER SHOP</text></g>
+      <g transform="translate(785 100)"><rect width="190" height="54" rx="12" fill="#f8f1df"/><text x="95" y="34" text-anchor="middle" fill="#172631">UPPER BAIT CABIN</text></g>
+      <g transform="translate(360 590)"><rect width="150" height="50" rx="12" fill="#f8f1df"/><text x="75" y="32" text-anchor="middle" fill="#172631">DOORWAY</text></g>
+      <g transform="translate(870 535)"><rect width="165" height="50" rx="12" fill="#f8f1df"/><text x="82" y="32" text-anchor="middle" fill="#172631">GRILL AWNING</text></g>
+      <g transform="translate(535 485)"><rect width="245" height="50" rx="12" fill="#d9f0df"/><text x="122" y="32" text-anchor="middle" fill="#17392c">GRASS LANDING LANE</text></g>
+      <g transform="translate(75 610)"><text fill="#a9c9d8" font-size="16">ARRIVAL DOCK →</text></g>
+    </g>
+  </g>
+  <path d="M600 455C620 380 675 315 785 285" fill="none" stroke="#f4bd63" stroke-width="7" stroke-dasharray="12 10"/><path d="M775 274l35 4-22 27z" fill="#f4bd63"/>
+</svg>

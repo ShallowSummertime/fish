@@ -24,6 +24,7 @@ const knowledgeSeedPaths = [
   path.join(repoRoot, "research/asset-knowledge/guide-2.seed.json"),
   path.join(repoRoot, "research/asset-knowledge/forest-full.seed.json"),
   path.join(repoRoot, "research/asset-knowledge/guide-3.seed.json"),
+  path.join(repoRoot, "research/asset-knowledge/rocks-full.seed.json"),
 ];
 
 function usage() {
@@ -349,6 +350,10 @@ function sourceGroups() {
     desktopRoot,
     "ScreenRecording_08-29-2026 07-54-44_1.MP4",
   );
+  const rocksFullVideoPath = path.join(
+    desktopRoot,
+    "第四/ScreenRecording_08-31-2026 08-08-38_1.MP4",
+  );
   const islandRawAssetId = assetId({
     sourcePath: islandVideoPath,
     archivePath: null,
@@ -364,6 +369,10 @@ function sourceGroups() {
   const guide3RawAssetId = assetId({ sourcePath: guide3VideoPath, archivePath: null });
   const forestFullRawAssetId = assetId({
     sourcePath: forestFullVideoPath,
+    archivePath: null,
+  });
+  const rocksFullRawAssetId = assetId({
+    sourcePath: rocksFullVideoPath,
     archivePath: null,
   });
   const entityFrames = {
@@ -617,6 +626,15 @@ function sourceGroups() {
               derivedFrom: [forestFullRawAssetId],
             };
           }
+          if (firstDirectory === "rocks-full-2026-08-31") {
+            return {
+              rights:
+                "analysis derivative of third-party social Rocks full-route media; creator subtitles and player UI make every frame research-only",
+              publishability: false,
+              pageUsage: ["research-only"],
+              derivedFrom: [rocksFullRawAssetId],
+            };
+          }
           return {
             rights:
               "new analysis material; rights and publishability require review",
@@ -679,6 +697,16 @@ function sourceGroups() {
               pageUsage: "/locations/desert",
               seed: "guide-3.seed.json",
               notes: "guide-3",
+            },
+            "guides/rocks/rocks-field-layout.svg": {
+              pageUsage: "/locations/rocks",
+              seed: "rocks-full.seed.json",
+              notes: "rocks-full-2026-08-31",
+            },
+            "guides/rocks/rocks-two-boss-loop.svg": {
+              pageUsage: "/locations/rocks",
+              seed: "rocks-full.seed.json",
+              notes: "rocks-full-2026-08-31",
             },
           };
           const fieldDiagram = fieldDiagrams[normalizedPath];
@@ -783,6 +811,11 @@ function sourceGroups() {
                         "asset:02-analysis/forest-full-2026-08-29/analysis-notes.md",
                         forestFullRawAssetId,
                       ]
+                    : path.basename(sourcePath) === "rocks-full.seed.json"
+                      ? [
+                          "asset:02-analysis/rocks-full-2026-08-31/analysis-notes.md",
+                          rocksFullRawAssetId,
+                        ]
               : ["asset:04-project/source-packets/how-to-fish-p0.md"],
       })),
     ],
@@ -843,6 +876,17 @@ function sourceGroups() {
       },
       {
         sourcePath: forestFullVideoPath,
+        mediaType: "video",
+        role: "raw",
+        status: "analyzed/source-only",
+        rights:
+          "third-party social screen recording retained only at original path; every derivative is research-only",
+        publishability: false,
+        pageUsage: ["research-only"],
+        derivedFrom: null,
+      },
+      {
+        sourcePath: rocksFullVideoPath,
         mediaType: "video",
         role: "raw",
         status: "analyzed/source-only",

@@ -46,7 +46,7 @@
     },
     {
       "id": "entity:forest-full-piranha-adds",
-      "category": "creature",
+      "category": "fish/creature",
       "canonicalName": "Piranha adds",
       "aliases": ["small Piranhas", "食人鲳"],
       "imageAssetIds": ["asset:02-analysis/forest-full-2026-08-29/frames/frame-530.jpg", "asset:02-analysis/forest-full-2026-08-29/frames/frame-624.jpg"],
