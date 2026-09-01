@@ -804,12 +804,18 @@ for (const [route, type] of [
     `${route} must use ${type} schema`,
   );
 }
-for (const html of [home, beginner, bossesPage, luresPage, achievementsPage])
-  assert.doesNotMatch(
+for (const html of [home, beginner, bossesPage, luresPage, achievementsPage]) {
+  assert.match(
     html,
-    /adsbygoogle|pagead2\.googlesyndication\.com/,
-    "AdSense runtime must remain disabled until a certified CMP is configured",
+    /<meta name="google-adsense-account" content="ca-pub-5329936944958399"\/?>/,
+    "Every crawlable page must expose the verified AdSense publisher account",
   );
+  assert.match(
+    html,
+    /<script async src="https:\/\/pagead2\.googlesyndication\.com\/pagead\/js\/adsbygoogle\.js\?client=ca-pub-5329936944958399" crossorigin="anonymous"><\/script>/,
+    "AdSense runtime must load once the Google-certified CMP is published",
+  );
+}
 for (const [route, html] of [
   ["/bosses", bossesPage],
   ["/bosses/spider-crab", spider],
