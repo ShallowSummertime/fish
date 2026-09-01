@@ -18,6 +18,10 @@ const articlePaths = new Set([
   "/guides/casino-money-route",
   "/guides/mutated-whale-handyman",
   "/bosses/spider-crab",
+  "/bosses/giant-piranha",
+  "/bosses/pufferfish",
+  "/bosses/albatross",
+  "/bosses/mutated-bowhead-whale",
 ]);
 const collectionPaths = new Set([
   "/creatures",
@@ -61,7 +65,9 @@ for (const path of Object.keys(pageMeta)) {
           mainEntityOfPage: canonical,
           image,
           dateModified:
-            path.startsWith("/guides/")
+            path.startsWith("/bosses/") && path !== "/bosses/spider-crab"
+              ? "2026-09-01"
+              : path.startsWith("/guides/")
               ? "2026-08-31"
               : path === "/locations/forest" || path === "/locations/desert"
               ? "2026-08-29"

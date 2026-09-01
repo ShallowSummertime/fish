@@ -1,5 +1,14 @@
 # 迭代记录
 
+## 2026-09-01 — 四个 Boss 深度页发布
+
+- 目标：用已归档、权利安全的素材把 Giant Piranha、Pufferfish、Albatross、Mutated Bowhead Whale 从地点页中的章节扩展成四个独立搜索入口。
+- 实施：新增四个静态 Article 路由；每页提供 900+ 可见英文词、4 张可发布素材、触发链、攻击循环、唯一掉落保护、NPC 交付、完成检查和故障恢复。Boss hub 改为直接链接独立页；正常 Mutated Bowhead 路线与 Handyman 裸手成就页保持明确边界。
+- SEO：sitemap 从 19 扩至 23 个可索引 URL；四页具备独立 Title、description、canonical、OG/Twitter 图、Article 与 BreadcrumbList Schema，`dateModified` 为 2026-09-01。
+- 资产：没有公开第三方研究帧；复用原创路线图、用户自有图鉴衍生图和已发布截图式重建图，并将新页面用途同步进固定资产库。资产库 488 项、归档 472、待处理 16、校验失败 0。
+- 验证：Vitest 4/4、TypeScript、Vite build、24 路由预渲染、静态内容/媒体/Schema/无研究帧门禁与固定资产库校验通过。浏览器控制入口本轮不可用，视觉风险由既有组件和静态尺寸门禁约束，生产终态仍需真实响应审计。
+- 下一轮唯一改进：部署后观察四页的 GSC 发现、索引和查询数据，再选择首批高证据 creature 详情页。
+
 ## 2026-08-31 — 当前竞品与搜索盘面复查
 
 - 目标：识别当前真正抢占 How to Fish 攻略搜索的站点，并决定下一批内容应扩页面数量还是提高一手信息增益。

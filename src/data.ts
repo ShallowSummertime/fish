@@ -856,6 +856,26 @@ export const pageMeta: Record<
       "Beat the How to Fish Game Spider Crab: get the Empty Beer Can, dodge its charge, punish the stun, turn in the shell, and use the boat keys.",
     image: "/images/guides/island-1/08-spider-crab.jpg",
   },
+  "/bosses/giant-piranha": {
+    title: "How to Beat Giant Piranha | How to Fish Game",
+    description: "Beat Giant Piranha in How to Fish: finish the Forest Leech chain, control small-fish adds, protect the Skeleton, and unlock Desert.",
+    image: "/images/guides/forest/giant-piranha-loop.svg",
+  },
+  "/bosses/pufferfish": {
+    title: "How to Beat Pufferfish | How to Fish Game",
+    description: "Beat Pufferfish in How to Fish: get the Carrot, counter rolling and poison pressure, protect the Fin, and unlock Rocks Island.",
+    image: "/images/guides/desert/pufferfish-loop.svg",
+  },
+  "/bosses/albatross": {
+    title: "How to Beat Albatross | How to Fish Game",
+    description: "Beat Albatross in How to Fish: preserve the Tuna trigger, fight aerial passes from hard cover, protect the Head, and unlock Volcano.",
+    image: "/images/guides/rocks/albatross-cover-guide-1280.webp",
+  },
+  "/bosses/mutated-bowhead-whale": {
+    title: "How to Beat Mutated Bowhead Whale | HTF Game",
+    description: "Beat Mutated Bowhead Whale in How to Fish: finish the Scientist chain, carry Bowhead to the crater, secure the Fin, and unlock the ending boat.",
+    image: "/images/guides/volcano/03-mutated-bowhead-fight-1280.webp",
+  },
   "/achievements": {
     title: "How to Fish Achievements Guide: All 28",
     description:

@@ -74,17 +74,17 @@ try {
   assert.doesNotThrow(() => assertKnowledgeReferences({ entities: [entity()], coverageGaps: [] }, [{ id: 'asset:fixture-image' }]));
 
   const fieldDiagramIds = [
-    ['guides/forest/forest-route.svg', '/locations/forest'],
-    ['guides/forest/giant-piranha-loop.svg', '/locations/forest'],
-    ['guides/forest/forest-recovery.svg', '/locations/forest'],
-    ['guides/desert/desert-route.svg', '/locations/desert'],
-    ['guides/desert/pufferfish-loop.svg', '/locations/desert'],
-    ['guides/desert/desert-recovery.svg', '/locations/desert'],
+    ['guides/forest/forest-route.svg', ['/locations/forest', '/bosses/giant-piranha']],
+    ['guides/forest/giant-piranha-loop.svg', ['/locations/forest', '/bosses/giant-piranha']],
+    ['guides/forest/forest-recovery.svg', ['/locations/forest', '/bosses/giant-piranha']],
+    ['guides/desert/desert-route.svg', ['/locations/desert', '/bosses/pufferfish']],
+    ['guides/desert/pufferfish-loop.svg', ['/locations/desert', '/bosses/pufferfish']],
+    ['guides/desert/desert-recovery.svg', ['/locations/desert', '/bosses/pufferfish']],
   ];
   const fieldDiagramRecords = fieldDiagramIds.map(([relativePath, pageUsage]) => ({
     id: `asset:05-published/public-images/${relativePath}`,
     publishability: true,
-    pageUsage: [pageUsage],
+    pageUsage,
     derivedFrom: ['asset:02-analysis/guide/analysis-notes.md'],
     rights: 'project-owned original editorial field diagram; independently composed from research notes and structured knowledge, not copied from or cropped out of any source frame',
   }));

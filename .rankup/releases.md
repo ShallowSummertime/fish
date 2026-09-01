@@ -1,5 +1,14 @@
 # Release record
 
+## 0.8.0 — 2026-09-01
+
+- 目标：发布 Giant Piranha、Pufferfish、Albatross、Mutated Bowhead Whale 四个独立深度 Boss 攻略。
+- 变更：新增四个 Article 路由与 Boss hub 直达内链；每页覆盖任务触发、战斗循环、唯一掉落、NPC hand-in、下一地点和失败恢复；最终 Boss 正常打法与 Handyman 裸手路线分离。
+- SEO：sitemap 从 19 扩展为 23 个可索引 URL；四页输出独立 canonical、OG/Twitter 图、Article/BreadcrumbList Schema 与 2026-09-01 修改日期。
+- 资产：仅复用已确认可发布素材；固定资产库页面用途已同步，488 项记录、472 项归档、16 项待处理、校验失败 0。
+- 本地验证：Vitest 4/4、TypeScript、Vite build、24 路由预渲染、静态质量门禁、`git diff --check` 和固定资产库验证通过。
+- 发布方式：推送 `main` 触发 Vercel Production；生产终态以部署后四页 200、23 URL sitemap、canonical、H1、Schema、图片与真实 404 复验为准。
+
 ## 0.7.0 — 2026-08-31
 
 - 目标：收敛七篇视频主题薄页并集中内部权重。

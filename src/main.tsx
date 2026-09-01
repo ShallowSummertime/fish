@@ -20,6 +20,12 @@ import {
   CasinoMoneyRouteGuide,
   MutatedWhaleHandymanGuide,
 } from "./videoGuidePages";
+import {
+  AlbatrossGuide,
+  GiantPiranhaGuide,
+  MutatedBowheadWhaleGuide,
+  PufferfishGuide,
+} from "./bossGuidePages";
 
 const DOMAIN = "https://howtofishwalkthrough.com";
 const nav = [
@@ -40,6 +46,10 @@ const articlePaths = new Set([
   "/guides/casino-money-route",
   "/guides/mutated-whale-handyman",
   "/bosses/spider-crab",
+  "/bosses/giant-piranha",
+  "/bosses/pufferfish",
+  "/bosses/albatross",
+  "/bosses/mutated-bowhead-whale",
 ]);
 const collectionPaths = new Set([
   "/creatures",
@@ -119,7 +129,9 @@ function Meta({ path }: { path: string }) {
         mainEntityOfPage: url,
         image,
         dateModified:
-          path.startsWith("/guides/")
+          path.startsWith("/bosses/") && path !== "/bosses/spider-crab"
+            ? "2026-09-01"
+            : path.startsWith("/guides/")
             ? "2026-08-31"
             : path === "/locations/forest" || path === "/locations/desert"
             ? "2026-08-29"
@@ -2383,17 +2395,11 @@ function Bosses() {
             {b.name === "Spider Crab" && (
               <a href="/bosses/spider-crab">Read full guide →</a>
             )}
-            {b.name === "Giant Piranha" && (
-              <a href="/locations/forest">Read Forest &amp; Giant Piranha guide →</a>
-            )}
-            {b.name === "Pufferfish" && (
-              <a href="/locations/desert">Read Desert &amp; Pufferfish guide →</a>
-            )}
-            {b.name === "Albatross" && (
-              <a href="/locations/rocks">Read Rocks &amp; Albatross guide →</a>
-            )}
-            {(b.name === "Bowhead Whale" ||
-              b.name === "Mutated Bowhead Whale") && (
+            {b.name === "Giant Piranha" && <a href="/bosses/giant-piranha">Read full guide →</a>}
+            {b.name === "Pufferfish" && <a href="/bosses/pufferfish">Read full guide →</a>}
+            {b.name === "Albatross" && <a href="/bosses/albatross">Read full guide →</a>}
+            {b.name === "Mutated Bowhead Whale" && <a href="/bosses/mutated-bowhead-whale">Read full guide →</a>}
+            {b.name === "Bowhead Whale" && (
               <a href="/locations/volcano">Read Volcano whale guide →</a>
             )}
           </article>
@@ -3448,6 +3454,10 @@ export function App({ initialPath }: { initialPath?: string }) {
       "/guides/mutated-whale-handyman": MutatedWhaleHandymanGuide,
       "/lures": Lures,
       "/bosses/spider-crab": SpiderCrab,
+      "/bosses/giant-piranha": GiantPiranhaGuide,
+      "/bosses/pufferfish": PufferfishGuide,
+      "/bosses/albatross": AlbatrossGuide,
+      "/bosses/mutated-bowhead-whale": MutatedBowheadWhaleGuide,
       "/achievements": Achievements,
       "/about": About,
       "/contact": Contact,

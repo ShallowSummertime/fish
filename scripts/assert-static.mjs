@@ -18,6 +18,10 @@ const routes = [
   "/guides/mutated-whale-handyman",
   "/lures",
   "/bosses/spider-crab",
+  "/bosses/giant-piranha",
+  "/bosses/pufferfish",
+  "/bosses/albatross",
+  "/bosses/mutated-bowhead-whale",
   "/achievements",
   "/about",
   "/contact",
@@ -334,6 +338,22 @@ await contentGate("/bosses/spider-crab", {
     "boat keys",
   ],
 });
+for (const [route, phrases] of [
+  ["/bosses/giant-piranha", ["Finish the live Leech objective", "small-fish adds", "Giant Piranha Skeleton", "FOREST COMPLETE"]],
+  ["/bosses/pufferfish", ["Coconut → Bing Bong → Carrot", "rolling before attacking", "Pufferfish Fin", "DESERT COMPLETE"]],
+  ["/bosses/albatross", ["preserve the whole body", "Fight the pass", "Albatross Head", "ROCKS COMPLETE"]],
+  ["/bosses/mutated-bowhead-whale", ["Complete the Scientist request", "whole regular Bowhead body", "Whale Fin", "VOLCANO COMPLETE"]],
+]) await contentGate(route, { images: 4, phrases });
+for (const route of [
+  "/bosses/giant-piranha",
+  "/bosses/pufferfish",
+  "/bosses/albatross",
+  "/bosses/mutated-bowhead-whale",
+]) {
+  const html = await readFile(`dist${route}/index.html`, "utf8");
+  assert.ok(textFrom(html).split(/\s+/).length >= 900, `${route} must expose at least 900 visible words`);
+  assert.doesNotMatch(html, /research\/video-analysis|frame-\d+\.jpg|game8\/|douyin|tiktok/i, `${route} must not publish research-only media or identities`);
+}
 const lighthouse = await readFile(
   "dist/locations/lighthouse/index.html",
   "utf8",
@@ -613,7 +633,7 @@ assert.match(casino, /<meta name="robots" content="noindex,follow">/);
 assert.match(casino, /current-patch verification pending/i);
 const sitemap = await readFile("public/sitemap.xml", "utf8");
 const sitemapUrls = [...sitemap.matchAll(/<loc>([^<]+)<\/loc>/g)].map((match) => match[1]);
-assert.equal(sitemapUrls.length, 19, "sitemap must contain exactly 19 indexable URLs");
+assert.equal(sitemapUrls.length, 23, "sitemap must contain exactly 23 indexable URLs");
 for (const removed of [
   "/guides/all-bosses-weapons-endgame",
   "/guides/casino-money-route",
@@ -622,7 +642,7 @@ for (const removed of [
   "/guides/summon-spider-crab",
   "/guides/five-boss-challenge",
 ]) assert.ok(!sitemapUrls.some((url) => url.endsWith(removed)), `${removed} must stay out of sitemap`);
-assert.equal(routes.length, 20, "20 routes must be prerendered, including the direct but noindex casino notes");
+assert.equal(routes.length, 24, "24 routes must be prerendered, including the direct but noindex casino notes");
 const redirects = JSON.parse(await readFile("vercel.json", "utf8"));
 assert.equal(redirects.redirects.length, 5, "five duplicate guide URLs must have permanent redirects");
 for (const redirect of redirects.redirects) assert.equal(redirect.permanent, true);
@@ -825,6 +845,15 @@ for (const [route, html] of [
     /<meta property="og:image" content="https:\/\/howtofishwalkthrough\.com\/images\/guides\/island-1\/08-spider-crab\.jpg">/,
     `${route} must expose a rights-safe OG image`,
   );
+for (const [route, image] of [
+  ["/bosses/giant-piranha", "forest/giant-piranha-loop.svg"],
+  ["/bosses/pufferfish", "desert/pufferfish-loop.svg"],
+  ["/bosses/albatross", "rocks/albatross-cover-guide-1280.webp"],
+  ["/bosses/mutated-bowhead-whale", "volcano/03-mutated-bowhead-fight-1280.webp"],
+]) {
+  const html = await readFile(`dist${route}/index.html`, "utf8");
+  assert.match(html, new RegExp(`<meta property="og:image" content="https:\\/\\/howtofishwalkthrough\\.com\\/images\\/guides\\/${image.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")}">`));
+}
 for (const route of [
   "/locations",
   "/locations/forest",
