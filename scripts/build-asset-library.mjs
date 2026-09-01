@@ -26,6 +26,7 @@ const knowledgeSeedPaths = [
   path.join(repoRoot, "research/asset-knowledge/guide-3.seed.json"),
   path.join(repoRoot, "research/asset-knowledge/rocks-full.seed.json"),
   path.join(repoRoot, "research/asset-knowledge/mixed-video-guides.seed.json"),
+  path.join(repoRoot, "research/asset-knowledge/practical-tips.seed.json"),
 ];
 
 function usage() {
@@ -364,6 +365,10 @@ function sourceGroups() {
     "ScreenRecording_08-31-2026 09-00-49_1.MP4",
     "ScreenRecording_08-31-2026 09-06-05_1.MP4",
   ].map((name) => path.join(desktopRoot, "什么都有", name));
+  const practicalTipsVideoPath = path.join(
+    desktopRoot,
+    "什么都有/ScreenRecording_09-01-2026 18-06-27_1.MP4",
+  );
   const islandRawAssetId = assetId({
     sourcePath: islandVideoPath,
     archivePath: null,
@@ -388,6 +393,10 @@ function sourceGroups() {
   const mixedGuideRawAssetIds = mixedGuideVideoPaths.map((sourcePath) =>
     assetId({ sourcePath, archivePath: null }),
   );
+  const practicalTipsRawAssetId = assetId({
+    sourcePath: practicalTipsVideoPath,
+    archivePath: null,
+  });
   const entityFrames = {
     "clam.jpg": {
       entity: "Clam",
@@ -834,6 +843,11 @@ function sourceGroups() {
                             "asset:02-analysis/mixed-guides-2026-08-31/analysis-notes.md",
                             ...mixedGuideRawAssetIds,
                           ]
+                        : path.basename(sourcePath) === "practical-tips.seed.json"
+                          ? [
+                              "asset:02-analysis/practical-tips-2026-09-01/analysis-notes.md",
+                              practicalTipsRawAssetId,
+                            ]
               : ["asset:04-project/source-packets/how-to-fish-p0.md"],
       })),
     ],
@@ -925,6 +939,17 @@ function sourceGroups() {
         pageUsage: ["research-only"],
         derivedFrom: null,
       })),
+      {
+        sourcePath: practicalTipsVideoPath,
+        mediaType: "video",
+        role: "raw",
+        status: "analyzed/source-only",
+        rights:
+          "user-supplied screen recording retained only at original path; direct frames contain creator captions/player UI and remain research-only",
+        publishability: false,
+        pageUsage: ["research-only"],
+        derivedFrom: null,
+      },
     ],
     pendingFiles: [],
   };
