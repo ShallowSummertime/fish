@@ -7,7 +7,9 @@
 - SEO：sitemap 从 19 扩展为 23 个可索引 URL；四页输出独立 canonical、OG/Twitter 图、Article/BreadcrumbList Schema 与 2026-09-01 修改日期。
 - 资产：仅复用已确认可发布素材；固定资产库页面用途已同步，488 项记录、472 项归档、16 项待处理、校验失败 0。
 - 本地验证：Vitest 4/4、TypeScript、Vite build、24 路由预渲染、静态质量门禁、`git diff --check` 和固定资产库验证通过。
-- 发布方式：推送 `main` 触发 Vercel Production；生产终态以部署后四页 200、23 URL sitemap、canonical、H1、Schema、图片与真实 404 复验为准。
+- Commit：`56bae0c`，已推送 `main` 并由 Vercel 发布到主域。
+- 生产验证：四个新 URL 均返回 200、自指 canonical、Article Schema 和 4 张图片；生产 sitemap 为 23 URL。全站生产审计 23/23 无坏页、无重复 Title、无断图，未知 URL 为 404，ads.txt 保持有效。
+- 结论：production-verified。
 
 ## 0.7.0 — 2026-08-31
 

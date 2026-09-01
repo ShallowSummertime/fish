@@ -22,3 +22,10 @@
 - Nine of the ten non-indexed URLs are `Discovered - currently not indexed`. `/locations/volcano` is currently `URL is unknown to Google` even though it is present in the successfully read sitemap.
 - The aggregate Page indexing report is older (last updated 2026-08-28): it shows 9 indexed and 6 excluded known URLs. Its single redirect example is the expected `https://www.howtofishwalkthrough.com/` redirect and is not an indexing defect. Its Rocks classification is stale relative to URL Inspection.
 - A fresh production crawl found no HTTP, canonical, robots, H1, structured-data, broken-image, or sitemap blocker across the 19 URLs. The current non-indexing pattern is primarily crawl prioritization on a new site; `/about` is also only 175 visible words and `/lures` is the lightest game-content hub at 686 words.
+
+## 2026-09-01 four-boss production baseline
+
+- Production sitemap expanded from 19 to 23 indexable URLs after publishing Giant Piranha, Pufferfish, Albatross, and Mutated Bowhead Whale deep guides.
+- All four new routes return 200 with self-canonical metadata, Article schema, one H1, four rights-safe images, and index/follow robots.
+- Full production audit passed all 23 sitemap URLs with no bad page, duplicate title, or broken image; unknown routes remain 404 and ads.txt remains present.
+- GSC discovery and indexing counts have not yet refreshed for the four new URLs; the prior 9 indexed / 10 non-indexed snapshot remains the pre-release search baseline.
