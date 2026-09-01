@@ -131,3 +131,11 @@
 - 门禁：16 条路由逐页断言不再出现 `.evidence`、Claim sources、Sources Verify 或旧验证标题。
 - 验证：Vitest 3/3、TypeScript、Vite build、16 路由静态预渲染和全站关键词扫描通过。
 - 下一轮唯一改进：保持后台资料与事实核验记录，不再将出版社式 claim-source 面板作为前台正文组件。
+
+## 2026-09-01 — GSC 19 页逐 URL 收录核对
+
+- 目标：不用公开 `site:` 估算或旧覆盖率汇总，逐页确认当前 sitemap URL 的真实索引状态与未收录原因。
+- 对账：Git 和构建声明 19 个索引 URL；生产 sitemap 同样为 19 个；GSC 在 2026-09-01 成功读取并发现全部 19 个 URL。生产审计未发现状态码、canonical、robots、H1、Schema、图片或 sitemap 阻挡。
+- 结果：9 页已收录；10 页未收录。未收录页为 Achievements、Spider Crab、Creatures、Lures、Rocks、Desert、Volcano、Reel of Fortune、Mutated Whale Handyman 和 About。
+- 原因：除 Volcano 显示 `URL is unknown to Google` 外，其余九页均为 `Discovered - currently not indexed`。旧的网页索引报告仍停在 8 月 28 日，并将 Rocks 记为 `Crawled - currently not indexed`；逐 URL Inspection 是本轮当前证据。
+- 裁决：这是新站抓取优先级问题，不是全站技术收录故障。下一轮优先提交/加强有搜索意图和原创素材的游戏页；About 不作为首批索引资源竞争优先级。

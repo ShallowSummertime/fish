@@ -1,7 +1,7 @@
 # Rankup 项目索引
 
 - 项目：How to Fish Walkthrough
-- 最近更新：2026-08-31
+- 最近更新：2026-09-01
 - 当前阶段：9 — 实战攻略与实体资料库扩展
 - 当前目标：以 19 个高质量索引 URL 为基线，优先用已有视频证据扩展四个独立 Boss 深度页
 - 下一入口：PROJECT.md
@@ -21,6 +21,7 @@
 
 ## 最近变化
 
+- 2026-09-01：GSC 成功读取当前 19 URL sitemap；逐 URL Inspection 确认 9 页已收录、10 页未收录，主要原因为 `Discovered - currently not indexed`，生产技术审计未发现全站阻挡。
 - 2026-08-27：建立项目定位、实体模型与 MVP 实现边界。
 - 2026-08-27：实现 Vite + React 静态攻略站；49-creature 清单、核心 hubs、SEO 文件与本地验证已完成。
 - 2026-08-27：八个路由完成静态预渲染；独立 E2E 与阻断式 review 通过。

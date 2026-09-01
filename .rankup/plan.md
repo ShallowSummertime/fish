@@ -26,7 +26,7 @@
 | P0 | 修复保留攻略的标题层级 | done | Handyman 的 H1 后使用连续 H2；合并后的权威页保持现有语义标题结构；静态检查通过 |
 | P1 | 补首页分享图 | pending | 首页存在独立 1200px+ `og:image` 与 `twitter:image`，生产 URL 返回 200；信任页可复用默认站点图 |
 | P1 | 校正 Meta Description 长度 | pending | Bosses 不少于 110 字符；Beginner、Lighthouse、Volcano 不超过 160 字符；构建按解码后长度阻断回归 |
-| P1 | 刷新 GSC sitemap 发现量 | pending | GSC 成功读取当前 19 URL sitemap；等待覆盖报告生成后再决定逐页提交，不用 `site:` 数量代替 GSC |
+| P1 | 刷新 GSC sitemap 发现量 | done | GSC 于 2026-09-01 成功读取并发现当前全部 19 URL；逐 URL Inspection 已建立 9 indexed / 10 non-indexed 基线 |
 | P0 | Giant Piranha 深度 Boss 页 | pending | 900–1400 可见词、4–8 张自有/可发布图、召唤链、minion/攻击循环、Skeleton 保护、Desert 交付与失败恢复 |
 | P0 | Pufferfish 深度 Boss 页 | pending | 900–1400 可见词、4–8 张自有/可发布图、Carrot 前置、滚动攻击与掩体、Fin 保护、Rocks 解锁与失败恢复 |
 | P0 | Albatross 深度 Boss 页 | pending | 900–1400 可见词、4–8 张自有/可发布图、Tuna 诱饵、远程战、Head 交付、Volcano 解锁与失败恢复 |
