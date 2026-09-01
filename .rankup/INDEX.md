@@ -3,7 +3,7 @@
 - 项目：How to Fish Walkthrough
 - 最近更新：2026-09-01
 - 当前阶段：9 — 实战攻略与实体资料库扩展
-- 当前目标：以 23 个高质量索引 URL 为基线，观察四个新 Boss 深度页的收录与查询表现，再决定首批 creature 详情页
+- 当前目标：以 24 个高质量索引 URL 为基线，观察 Tips、Beginner、Desert 与四个 Boss 深度页的收录和查询表现，再决定首批 creature 详情页
 - 下一入口：PROJECT.md
 
 ## 推荐读取顺序
@@ -21,6 +21,7 @@
 
 ## 最近变化
 
+- 2026-09-01：新增 `/guides/tips-and-tricks` 深度页，并以 Patch 1.0.10 自有视频证据回填 Beginner 安全控制与 Desert Coconut → Bing Bong → Carrot 路线；索引面扩展到 24 URL。
 - 2026-09-01：发布 Giant Piranha、Pufferfish、Albatross、Mutated Bowhead Whale 四个独立 Boss 深度页；索引面由 19 扩展至 23 URL，固定资产库同步新页面用途。
 - 2026-09-01：GSC 成功读取当前 19 URL sitemap；逐 URL Inspection 确认 9 页已收录、10 页未收录，主要原因为 `Discovered - currently not indexed`，生产技术审计未发现全站阻挡。
 - 2026-08-27：建立项目定位、实体模型与 MVP 实现边界。

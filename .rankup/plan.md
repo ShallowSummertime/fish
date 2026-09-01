@@ -1,7 +1,7 @@
 # 当前计划
 
 - 目标：把技术可用的 MVP 升级为玩家能够独立完成任务的实战攻略站。
-- 更新时间：2026-08-31
+- 更新时间：2026-09-01
 
 | 优先级 | 工作项 | 状态 | 验收标准 |
 |---|---|---|---|
@@ -31,6 +31,7 @@
 | P0 | Pufferfish 深度 Boss 页 | done | 900–1400 可见词、4–8 张自有/可发布图、Carrot 前置、滚动攻击与掩体、Fin 保护、Rocks 解锁与失败恢复 |
 | P0 | Albatross 深度 Boss 页 | done | 900–1400 可见词、4–8 张自有/可发布图、Tuna 诱饵、远程战、Head 交付、Volcano 解锁与失败恢复 |
 | P0 | Mutated Bowhead Whale 正常打法页 | done | 与 Handyman 裸手路线区分；覆盖 Scientist/Bowhead/crater、岩浆攻击循环、Whale Fin、RHIB ending 和失败恢复 |
+| P0 | Tips & Tricks 深度页与双页回填 | done | 新页 1400+ 静态词、6 个 Patch 1.0.10 技巧、3 张可发布图与原创 SVG；Beginner 回填安全控制，Desert 回填 Coconut → Bing Bong → Carrot；桌面/390px 深链无溢出或 hydration 错误 |
 | P1 | Money 与 Cooking 任务页 | pending | 只使用已验证 grill/cooking/Killscore 规则；不宣传未复现的 casino 收益路线 |
 | P1 | 首批高证据 creature 详情页 | pending | 先做 5–10 个有独立素材与路线用途的实体；每页必须有信息增益，禁止复制数据库字段成模板薄页 |
 | P2 | 下一步路线检查器调研 | pending | 用五岛 hand-in 与 quest-item 数据定义可验证原型；与竞品 calculator 形成不同任务价值 |

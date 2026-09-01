@@ -59,6 +59,7 @@ describe("How to Fish content baseline", () => {
       "/locations/volcano",
       "/guides/reel-of-fortune",
       "/guides/casino-money-route",
+      "/guides/tips-and-tricks",
       "/guides/mutated-whale-handyman",
       "/lures",
       "/bosses/spider-crab",

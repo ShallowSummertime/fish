@@ -811,7 +811,7 @@ export const pageMeta: Record<
   "/locations/desert": {
     title: "How to Fish Desert Guide: Pufferfish Route",
     description:
-      "Evidence-bounded How to Fish Desert walkthrough: quest verification, Standard pool boundary, Pufferfish gas phase, Fin safety, and Rocks departure checks.",
+      "How to Fish Desert walkthrough: Coconut, Bing Bong and Carrot quest, Pufferfish gas phase, Fin safety, and Rocks departure checks.",
     image: "/images/guides/locations/five-location-route-hero.png",
   },
   "/locations/rocks": {
@@ -843,6 +843,12 @@ export const pageMeta: Record<
     description:
       "Unlock Handyman by defeating Mutated Bowhead Whale with bare hands using safe crater positioning, short punch windows, and a solo credit-safe setup.",
     image: "/images/guides/volcano/03-mutated-bowhead-fight.png",
+  },
+  "/guides/tips-and-tricks": {
+    title: "How to Fish Tips & Tricks - 6 Practical Techniques",
+    description:
+      "Learn six Patch 1.0.10 How to Fish Game techniques for shore fishing, longer throws, boat recovery, sniper follow-ups, shotgun jumps, and cooked weapons.",
+    image: "/images/guides/beginner/localized/03-bait-hotspots-cover-en.webp",
   },
   "/lures": {
     title: "How to Fish Lures & Bait Guide",

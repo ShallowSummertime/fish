@@ -19,6 +19,7 @@ import {
 import {
   CasinoMoneyRouteGuide,
   MutatedWhaleHandymanGuide,
+  TipsAndTricksGuide,
 } from "./videoGuidePages";
 import {
   AlbatrossGuide,
@@ -45,6 +46,7 @@ const articlePaths = new Set([
   "/guides/reel-of-fortune",
   "/guides/casino-money-route",
   "/guides/mutated-whale-handyman",
+  "/guides/tips-and-tricks",
   "/bosses/spider-crab",
   "/bosses/giant-piranha",
   "/bosses/pufferfish",
@@ -129,11 +131,13 @@ function Meta({ path }: { path: string }) {
         mainEntityOfPage: url,
         image,
         dateModified:
-          path.startsWith("/bosses/") && path !== "/bosses/spider-crab"
+          path === "/guides/tips-and-tricks" || path === "/locations/desert"
+            ? "2026-09-01"
+            : path.startsWith("/bosses/") && path !== "/bosses/spider-crab"
             ? "2026-09-01"
             : path.startsWith("/guides/")
             ? "2026-08-31"
-            : path === "/locations/forest" || path === "/locations/desert"
+            : path === "/locations/forest"
             ? "2026-08-29"
             : "2026-08-28",
         author: { "@type": "Organization", name: "How to Fish Walkthrough" },
@@ -748,6 +752,7 @@ function Home() {
             ["03", "Mutated Whale Handyman", "/guides/mutated-whale-handyman"],
             ["04", "Reel of Fortune weapon skins", "/guides/reel-of-fortune#fast-skins"],
             ["05", "Beginner value and multi-kill chain", "/beginner-guide#profit-multipliers"],
+            ["06", "Six practical tips and tricks", "/guides/tips-and-tricks"],
           ].map(([n, label, href]) => <a href={href} key={href}><span>{n}</span><b>{label}</b><i>→</i></a>)}
         </div>
       </section>
@@ -1027,6 +1032,7 @@ function Beginner() {
         <a href="#five-islands">Five-island route</a>
         <a href="#upgrades">Weapons</a>
         <a href="#survival">Survival</a>
+        <a href="#practical-tips">Practical tips</a>
         <a href="#if-stuck">Troubleshooting</a>
       </div>
       <BeginnerCarousel />
@@ -1191,6 +1197,23 @@ function Beginner() {
           Treat the clip as a practical chain note and use the achievement page
           for the official completion condition.
         </p>
+      </section>
+      <section id="practical-tips">
+        <h2>Three safe controls to learn before advanced tricks</h2>
+        <p>
+          A Patch 1.0.10 gameplay run confirms three useful PC controls that fit
+          the beginner route. Ordinary fishing works from a short shore
+          placement, so you can keep the landing lane close and visible.
+          Right-click releases an unwanted catch in the recorded binding, and
+          holding Q shows a charge circle before a longer throw. Check the live
+          prompt if you changed controls or use another platform.
+        </p>
+        <ol className="steps compact">
+          <li><b>Use a short shore cast.</b><span>Place ordinary bait in reachable water with clear dry ground behind you; a long cast is not required for the interaction shown.</span></li>
+          <li><b>Release before spending effort.</b><span>Right-click an unwanted ordinary catch, then compare the bait count before and after instead of assuming every release preserves it.</span></li>
+          <li><b>Practice a charged throw with a cheap object.</b><span>Hold Q until the circle grows, aim at open level ground, release, and retrieve the object. Never learn with a boss trophy.</span></li>
+        </ol>
+        <div className="callout"><b>Save advanced tests for later:</b> sniper slot switching, shotgun recoil jumps, cooked-weapon cooling, and punch-based boat recovery are version-sensitive techniques. The <a href="/guides/tips-and-tricks">full tips and tricks guide</a> gives each one a clean-save test and failure boundary.</div>
       </section>
       <section id="spider-prep">
         <h2>Prepare for Spider Crab before you cast</h2>
@@ -3452,6 +3475,7 @@ export function App({ initialPath }: { initialPath?: string }) {
       "/guides/reel-of-fortune": ReelOfFortuneGuide,
       "/guides/casino-money-route": CasinoMoneyRouteGuide,
       "/guides/mutated-whale-handyman": MutatedWhaleHandymanGuide,
+      "/guides/tips-and-tricks": TipsAndTricksGuide,
       "/lures": Lures,
       "/bosses/spider-crab": SpiderCrab,
       "/bosses/giant-piranha": GiantPiranhaGuide,

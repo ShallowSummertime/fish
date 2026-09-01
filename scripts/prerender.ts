@@ -17,6 +17,7 @@ const articlePaths = new Set([
   "/guides/reel-of-fortune",
   "/guides/casino-money-route",
   "/guides/mutated-whale-handyman",
+  "/guides/tips-and-tricks",
   "/bosses/spider-crab",
   "/bosses/giant-piranha",
   "/bosses/pufferfish",
@@ -65,11 +66,13 @@ for (const path of Object.keys(pageMeta)) {
           mainEntityOfPage: canonical,
           image,
           dateModified:
-            path.startsWith("/bosses/") && path !== "/bosses/spider-crab"
+            path === "/guides/tips-and-tricks" || path === "/locations/desert"
+              ? "2026-09-01"
+              : path.startsWith("/bosses/") && path !== "/bosses/spider-crab"
               ? "2026-09-01"
               : path.startsWith("/guides/")
               ? "2026-08-31"
-              : path === "/locations/forest" || path === "/locations/desert"
+              : path === "/locations/forest"
               ? "2026-08-29"
               : "2026-08-28",
           author: { "@type": "Organization", name: "How to Fish Walkthrough" },

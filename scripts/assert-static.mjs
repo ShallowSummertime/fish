@@ -16,6 +16,7 @@ const routes = [
   "/guides/reel-of-fortune",
   "/guides/casino-money-route",
   "/guides/mutated-whale-handyman",
+  "/guides/tips-and-tricks",
   "/lures",
   "/bosses/spider-crab",
   "/bosses/giant-piranha",
@@ -288,8 +289,29 @@ await contentGate("/beginner-guide", {
     "Empty Beer Can",
     "Spider Crab Shell",
     "VOLCANO",
+    "Three safe controls to learn before advanced tricks",
+    "Right-click",
+    "holding Q",
   ],
 });
+await contentGate("/guides/tips-and-tricks", {
+  images: 3,
+  phrases: [
+    "Fish from the shore without a long cast",
+    "Cool a cooked weapon in water",
+    "Double-tap the sniper slot",
+    "Punch a beached boat",
+    "shotgun recoil",
+    "Hold Q to charge",
+    "Coconut → Bing Bong → Carrot",
+    "route-skip shown in the source is intentionally excluded",
+  ],
+});
+const practicalTips = await readFile("dist/guides/tips-and-tricks/index.html", "utf8");
+assert.ok(textFrom(practicalTips).split(/\s+/).length >= 1400, "/guides/tips-and-tricks must expose at least 1400 visible words");
+assert.doesNotMatch(practicalTips, /research\/video-analysis|frame-\d+\.jpg|douyin|tiktok|@NONO/i, "tips page must not publish research-only frames or social identities");
+for (const href of ["/beginner-guide#practical-tips", "/locations/desert#tourist", "/lures", "/locations"])
+  assert.match(practicalTips, new RegExp(`href="${href}"`));
 const beginner = await readFile("dist/beginner-guide/index.html", "utf8");
 assert.doesNotMatch(
   beginner,
@@ -425,16 +447,20 @@ assert.ok(
   "/locations/desert must include three rights-safe field diagrams",
 );
 for (const phrase of [
+  "Coconut",
+  "Bing Bong",
+  "Carrot",
   "Pufferfish",
   "poison gas",
   "after health has been reduced",
   "Pufferfish Fin",
   "Blue Shark is optional",
-  "EVIDENCE BOUNDARY",
+  "VIDEO-CHECKED",
   "Desert troubleshooting",
 ])
   assert.match(desert, new RegExp(phrase, "i"));
 for (const href of [
+  "/guides/tips-and-tricks",
   "/locations/forest",
   "/locations/rocks",
   "/locations",
@@ -633,7 +659,7 @@ assert.match(casino, /<meta name="robots" content="noindex,follow">/);
 assert.match(casino, /current-patch verification pending/i);
 const sitemap = await readFile("public/sitemap.xml", "utf8");
 const sitemapUrls = [...sitemap.matchAll(/<loc>([^<]+)<\/loc>/g)].map((match) => match[1]);
-assert.equal(sitemapUrls.length, 23, "sitemap must contain exactly 23 indexable URLs");
+assert.equal(sitemapUrls.length, 24, "sitemap must contain exactly 24 indexable URLs");
 for (const removed of [
   "/guides/all-bosses-weapons-endgame",
   "/guides/casino-money-route",
@@ -642,7 +668,7 @@ for (const removed of [
   "/guides/summon-spider-crab",
   "/guides/five-boss-challenge",
 ]) assert.ok(!sitemapUrls.some((url) => url.endsWith(removed)), `${removed} must stay out of sitemap`);
-assert.equal(routes.length, 24, "24 routes must be prerendered, including the direct but noindex casino notes");
+assert.equal(routes.length, 25, "25 routes must be prerendered, including the direct but noindex casino notes");
 const redirects = JSON.parse(await readFile("vercel.json", "utf8"));
 assert.equal(redirects.redirects.length, 5, "five duplicate guide URLs must have permanent redirects");
 for (const redirect of redirects.redirects) assert.equal(redirect.permanent, true);

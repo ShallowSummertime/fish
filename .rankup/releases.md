@@ -1,5 +1,14 @@
 # Release record
 
+## 0.9.0 — 2026-09-01
+
+- 目标：把 Patch 1.0.10 实用技巧视频转成独立搜索入口，并用同一证据补齐 Beginner 与 Desert 的关键步骤。
+- 变更：新增 `/guides/tips-and-tricks`，覆盖短岸钓与右键放生、武器入水恢复、狙击枪编号槽双击、船只脱困、霰弹枪后坐力跳和 Q 蓄力投掷；明确排除无钥匙跨岛路线。Beginner 仅回填前三类安全基础操作；Desert 回填 Coconut → Bing Bong → islander → Carrot 的五步链路。
+- SEO：sitemap 从 23 扩展为 24 个可索引 URL；新页输出独立 Title、description、canonical、OG/Twitter 图、Article/BreadcrumbList Schema 与 2026-09-01 修改日期；首页、Beginner、Desert 建立双向内链。
+- 素材：不公开带字幕或播放器边缘的研究帧；复用三张已确认可发布素材和一张原创内联 SVG。固定资产库仍为 488 项、472 项归档、16 项待处理、校验失败 0，三张图片已增加新页用途。
+- 本地验证：Vitest 4/4、TypeScript、Vite build、25 路由预渲染、静态质量门禁与固定资产库全量校验通过；静态深链服务器下桌面与 390px 检查无根级横向溢出、无 hydration/console 错误。
+- 发布方式：本记录与产品改动同一交付提交推送 `main`，由 Vercel 自动发布；生产终态以 24 URL sitemap 和三个更新页面复验为准。
+
 ## 0.8.0 — 2026-09-01
 
 - 目标：发布 Giant Piranha、Pufferfish、Albatross、Mutated Bowhead Whale 四个独立深度 Boss 攻略。

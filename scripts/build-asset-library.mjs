@@ -689,6 +689,13 @@ function sourceGroups() {
             "creatures/encyclopedia-bosses.webp": "mobalytics-06-bosses.png",
           };
           const normalizedPath = relativePath.split(path.sep).join("/");
+          if (
+            normalizedPath === "guides/beginner/localized/03-bait-hotspots-cover-en.webp" ||
+            normalizedPath === "guides/beginner/localized/06-firepower-death-cover-en.webp"
+          )
+            return {
+              pageUsage: ["/beginner-guide", "/guides/tips-and-tricks"],
+            };
           const fieldDiagrams = {
             "guides/forest/forest-route.svg": {
               pageUsage: ["/locations/forest", "/bosses/giant-piranha"],
@@ -769,6 +776,7 @@ function sourceGroups() {
                 "/locations/volcano",
                 "/bosses/mutated-bowhead-whale",
                 "/guides/mutated-whale-handyman",
+                ...(normalizedPath === "guides/volcano/01-volcano-arrival.png" ? ["/guides/tips-and-tricks"] : []),
               ],
             };
           const sourceName = creatureSources[normalizedPath];

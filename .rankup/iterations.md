@@ -1,5 +1,15 @@
 # 迭代记录
 
+## 2026-09-01 — 实用技巧页与 Beginner / Desert 回填
+
+- 目标：把一条 93.6 秒 Patch 1.0.10 自有视频中的可执行技巧按搜索意图独立成页，同时避免 Beginner 膨胀和 Desert 重复内容。
+- 实施：新增 1844 可见英文词的 `/guides/tips-and-tricks`，六个技巧均有操作步骤、失败恢复和版本边界；无钥匙跨岛只作为排除项。Beginner 增加短岸钓、右键放生与 Q 蓄力投掷；Desert 将原待验证段落升级为 Coconut → Bing Bong → islander → Carrot 的五步主线路线。
+- SEO 与内链：新 URL 进入 sitemap、Article/Breadcrumb Schema 和首页深度攻略矩阵；Beginner、Desert 与新页按意图互链。Title 51 字符，正文与三张可发布图片进入首轮 HTML。
+- 资产：研究视频仍 source-only，关键帧保持 research-only；两张 Beginner 图和一张 Volcano 图的固定资产用途增加 `/guides/tips-and-tricks`，488 项全量校验失败 0。
+- 验证：静态测试曾因 Vite Preview 对目录深链返回首页 fallback 触发 hydration 假阳性；改用按目录提供 `index.html` 的静态服务器后，新页、Beginner 和 Desert 深链均零 console 错误。桌面 1280px 与移动 390px 无根级横向溢出，宽 SVG 在自身容器内滚动。
+- 学习决定：no-promotion；静态深链必须由真正提供目录 `index.html` 的服务器验收这一点已属于项目预渲染架构的任务内注意事项，本轮没有新增跨项目 Skill 规则或 eval。
+- 下一轮唯一改进：生产部署后将新 URL 与更新后的 Beginner、Desert 提交 GSC，并观察三页是否获得独立查询与索引状态。
+
 ## 2026-09-01 — 四个 Boss 深度页发布
 
 - 目标：用已归档、权利安全的素材把 Giant Piranha、Pufferfish、Albatross、Mutated Bowhead Whale 从地点页中的章节扩展成四个独立搜索入口。
