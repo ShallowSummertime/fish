@@ -1,5 +1,18 @@
 # Release record
 
+## 1.0.0 — 2026-09-03
+
+- 目标：发布首批两个高证据 creature 详情页，以及跨岛任务物恢复和安全经济两篇问题型攻略。
+- 变更：新增 `/creatures/tuna`、`/creatures/bowhead-whale`、`/guides/lost-boss-items`、`/guides/money-and-cooking`；补齐 Boss/Beginner 内链、独立元数据、Article/BreadcrumbList Schema、预渲染和内容门禁。
+- 事实边界：不声明未验证售价、刷新概率或精确刷新时间；Casino 盈利路线继续排除；只使用项目自有或确认可发布素材。
+- SEO：生产 sitemap 从 24 扩展到 28 个可索引 URL；四页均为自指 canonical、`index,follow,max-image-preview:large`，分别为 931/924/1166/1190 个线上可见词与 4/4/5/4 张图片。
+- 资产：固定资产库页面用途已同步；488 项记录、472 项归档、16 项待分析/仅源文件状态、校验失败 0。
+- 本地验证：Vitest 4/4、TypeScript、Vite build、29 路由预渲染、静态内容门禁、固定资产库定向测试与全量校验、`git diff --check` 全部通过。
+- Commit：`2f7833f3459b1b4b330e6c80354fb6c0469bb81a`，已推送 `main`；Vercel deployment `DXhfGioFLk3tFX9kZVaXMf4XtpyY` 状态为 success。
+- 生产验证：全站 28/28 sitemap 页面返回 200 且无坏页、断图或重复 Title；未知 URL 为真实 404，robots 与 ads.txt 有效。四个新增 URL 的 H1、canonical、OG 图、JSON-LD 和图片尺寸/alt 均通过。
+- 回滚：上一生产内容提交为 `c7e82e6`；如需回滚，使用 `git revert 2f7833f` 创建可审计反向提交后推送 `main`，不重置分支历史。
+- 结论：production-verified。
+
 ## 0.9.0 — 2026-09-01
 
 - 目标：把 Patch 1.0.10 实用技巧视频转成独立搜索入口，并用同一证据补齐 Beginner 与 Desert 的关键步骤。

@@ -164,4 +164,4 @@
 - Evidence boundary: reused only project-owned or cleared site assets; kept unknown prices, spawn percentages, and exact respawn timing unclaimed; excluded research-only frames and unreproduced Casino profit routes.
 - Content: each page exceeds 900 static words and uses 4–5 relevant images, actionable success states, failure recovery, and links into the existing location and boss route graph.
 - Technical: added metadata, canonical/static prerender coverage, sitemap entries, hub links, per-route content gates, and fixed-asset page-usage mappings.
-- Status: local source-verified; 29 crawlable static routes and 28 planned sitemap URLs; not committed, deployed, or production-verified in this iteration.
+- Status: production-verified from commit `2f7833f`; Vercel deployment completed, the production sitemap contains 28 URLs, and the reusable audit reported 28/28 good pages, no broken images, no duplicate titles, a real 404, and valid ads.txt.

@@ -1,5 +1,12 @@
 # Audit
 
+## 2026-09-03 — Production release audit
+
+- Commit `2f7833f3459b1b4b330e6c80354fb6c0469bb81a` completed its Vercel production deployment successfully.
+- The production sitemap contains 28 URLs. The reusable production audit checked all 28: no bad pages, broken images, or duplicate titles; unknown routes return 404; robots and ads.txt remain valid.
+- New page checks: Tuna 931 words/4 images, Bowhead Whale 924/4, lost boss items 1166/5, Money & Cooking 1190/4. Every new page returns 200 with one H1, self-canonical, indexable robots, OG image, JSON-LD, image alt text, and explicit image dimensions.
+- Existing known backlog remains unchanged: default OG images for the home and trust pages, short trust-page copy, and image metadata cleanup on the creature hub and a few older guides.
+
 ## 2026-08-31 — P0 七页收敛整改
 
 - 已修复：Handyman 从 325 词单图薄页升级为 1200+ 静态词深度路线，明确官方条件与保守打法边界，覆盖 Volcano 前置、裸手准备、岩石站位、出拳窗口、失败恢复、联机归属风险和完成确认；使用三张现有 Volcano 实机素材、官方成就图和两张原创 SVG 图解。
