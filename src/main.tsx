@@ -27,6 +27,12 @@ import {
   MutatedBowheadWhaleGuide,
   PufferfishGuide,
 } from "./bossGuidePages";
+import {
+  BowheadWhaleGuide,
+  LostBossItemsGuide,
+  MoneyAndCookingGuide,
+  TunaGuide,
+} from "./contentGuidePages";
 
 const DOMAIN = "https://howtofishwalkthrough.com";
 const nav = [
@@ -52,6 +58,10 @@ const articlePaths = new Set([
   "/bosses/pufferfish",
   "/bosses/albatross",
   "/bosses/mutated-bowhead-whale",
+  "/creatures/tuna",
+  "/creatures/bowhead-whale",
+  "/guides/lost-boss-items",
+  "/guides/money-and-cooking",
 ]);
 const collectionPaths = new Set([
   "/creatures",
@@ -131,7 +141,9 @@ function Meta({ path }: { path: string }) {
         mainEntityOfPage: url,
         image,
         dateModified:
-          path === "/guides/tips-and-tricks" || path === "/locations/desert"
+          ["/creatures/tuna", "/creatures/bowhead-whale", "/guides/lost-boss-items", "/guides/money-and-cooking"].includes(path)
+            ? "2026-09-03"
+            : path === "/guides/tips-and-tricks" || path === "/locations/desert"
             ? "2026-09-01"
             : path.startsWith("/bosses/") && path !== "/bosses/spider-crab"
             ? "2026-09-01"
@@ -1505,6 +1517,8 @@ function Beginner() {
       <Related
         links={[
           ["Spider Crab: summon, combat, hand-in", "/bosses/spider-crab"],
+          ["Money and cooking without losing quest items", "/guides/money-and-cooking"],
+          ["Recover lost boss items and stalled routes", "/guides/lost-boss-items"],
           ["All five locations in order", "/locations"],
           ["Reel of Fortune & cosmetic skins", "/guides/reel-of-fortune"],
         ]}
@@ -2421,9 +2435,10 @@ function Bosses() {
             {b.name === "Giant Piranha" && <a href="/bosses/giant-piranha">Read full guide →</a>}
             {b.name === "Pufferfish" && <a href="/bosses/pufferfish">Read full guide →</a>}
             {b.name === "Albatross" && <a href="/bosses/albatross">Read full guide →</a>}
+            {b.name === "Tuna" && <a href="/creatures/tuna">Read Tuna quest guide →</a>}
             {b.name === "Mutated Bowhead Whale" && <a href="/bosses/mutated-bowhead-whale">Read full guide →</a>}
             {b.name === "Bowhead Whale" && (
-              <a href="/locations/volcano">Read Volcano whale guide →</a>
+              <a href="/creatures/bowhead-whale">Read Bowhead quest guide →</a>
             )}
           </article>
         ))}
@@ -3482,6 +3497,10 @@ export function App({ initialPath }: { initialPath?: string }) {
       "/bosses/pufferfish": PufferfishGuide,
       "/bosses/albatross": AlbatrossGuide,
       "/bosses/mutated-bowhead-whale": MutatedBowheadWhaleGuide,
+      "/creatures/tuna": TunaGuide,
+      "/creatures/bowhead-whale": BowheadWhaleGuide,
+      "/guides/lost-boss-items": LostBossItemsGuide,
+      "/guides/money-and-cooking": MoneyAndCookingGuide,
       "/achievements": Achievements,
       "/about": About,
       "/contact": Contact,

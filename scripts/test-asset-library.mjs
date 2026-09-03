@@ -76,10 +76,10 @@ try {
   const fieldDiagramIds = [
     ['guides/forest/forest-route.svg', ['/locations/forest', '/bosses/giant-piranha']],
     ['guides/forest/giant-piranha-loop.svg', ['/locations/forest', '/bosses/giant-piranha']],
-    ['guides/forest/forest-recovery.svg', ['/locations/forest', '/bosses/giant-piranha']],
+    ['guides/forest/forest-recovery.svg', ['/locations/forest', '/bosses/giant-piranha', '/guides/lost-boss-items']],
     ['guides/desert/desert-route.svg', ['/locations/desert', '/bosses/pufferfish']],
     ['guides/desert/pufferfish-loop.svg', ['/locations/desert', '/bosses/pufferfish']],
-    ['guides/desert/desert-recovery.svg', ['/locations/desert', '/bosses/pufferfish']],
+    ['guides/desert/desert-recovery.svg', ['/locations/desert', '/bosses/pufferfish', '/guides/lost-boss-items']],
   ];
   const fieldDiagramRecords = fieldDiagramIds.map(([relativePath, pageUsage]) => ({
     id: `asset:05-published/public-images/${relativePath}`,

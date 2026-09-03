@@ -784,6 +784,16 @@ export const pageMeta: Record<
       "Illustrated How to Fish Game creature encyclopedia with all 49 creatures, locations, lures, reported base values, bosses, and a saved checklist.",
     image: "/images/creatures/encyclopedia-early.webp",
   },
+  "/creatures/tuna": {
+    title: "How to Catch Tuna | How to Fish Game",
+    description: "Catch Tuna in How to Fish on Rocks, preserve the whole body, move it to the quest trigger, summon Albatross, and recover a lost Tuna safely.",
+    image: "/images/guides/rocks/rocks-two-boss-loop.svg",
+  },
+  "/creatures/bowhead-whale": {
+    title: "How to Catch Bowhead Whale | How to Fish Game",
+    description: "Catch Bowhead Whale in How to Fish with the Fish Bucket, preserve the whole body, carry it to the Volcano crater, and trigger the final boss.",
+    image: "/images/guides/volcano/02-bowhead-to-crater-1280.webp",
+  },
   "/bosses": {
     title: "How to Fish Boss Guide & Progression | HTF Wiki",
     description:
@@ -849,6 +859,16 @@ export const pageMeta: Record<
     description:
       "Learn six Patch 1.0.10 How to Fish Game techniques for shore fishing, longer throws, boat recovery, sniper follow-ups, shotgun jumps, and cooked weapons.",
     image: "/images/guides/beginner/localized/03-bait-hotspots-cover-en.webp",
+  },
+  "/guides/lost-boss-items": {
+    title: "Lost Boss Item & Boss Not Spawning | HTF Game",
+    description: "Recover lost boss items and stalled quests in How to Fish: fix missing summons, drops, NPC hand-ins, island markers, and the ending-boat unlock.",
+    image: "/images/guides/spider-crab-handoff.svg",
+  },
+  "/guides/money-and-cooking": {
+    title: "How to Make Money & Cook | How to Fish Game",
+    description: "Make money safely in How to Fish with ordinary catches, value checks, careful cooking, Killscore boundaries, and protection for every quest item.",
+    image: "/images/guides/beginner/localized/04-profit-multipliers-cover-en.webp",
   },
   "/lures": {
     title: "How to Fish Lures & Bait Guide",

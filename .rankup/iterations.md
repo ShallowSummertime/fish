@@ -158,3 +158,10 @@
 - 结果：9 页已收录；10 页未收录。未收录页为 Achievements、Spider Crab、Creatures、Lures、Rocks、Desert、Volcano、Reel of Fortune、Mutated Whale Handyman 和 About。
 - 原因：除 Volcano 显示 `URL is unknown to Google` 外，其余九页均为 `Discovered - currently not indexed`。旧的网页索引报告仍停在 8 月 28 日，并将 Rocks 记为 `Crawled - currently not indexed`；逐 URL Inspection 是本轮当前证据。
 - 裁决：这是新站抓取优先级问题，不是全站技术收录故障。下一轮优先提交/加强有搜索意图和原创素材的游戏页；About 不作为首批索引资源竞争优先级。
+# 2026-09-03 — Tuna, Bowhead Whale, task-item recovery, and economy guides
+
+- Scope: added four locally complete, English search-intent pages at `/creatures/tuna`, `/creatures/bowhead-whale`, `/guides/lost-boss-items`, and `/guides/money-and-cooking`.
+- Evidence boundary: reused only project-owned or cleared site assets; kept unknown prices, spawn percentages, and exact respawn timing unclaimed; excluded research-only frames and unreproduced Casino profit routes.
+- Content: each page exceeds 900 static words and uses 4–5 relevant images, actionable success states, failure recovery, and links into the existing location and boss route graph.
+- Technical: added metadata, canonical/static prerender coverage, sitemap entries, hub links, per-route content gates, and fixed-asset page-usage mappings.
+- Status: local source-verified; 29 crawlable static routes and 28 planned sitemap URLs; not committed, deployed, or production-verified in this iteration.

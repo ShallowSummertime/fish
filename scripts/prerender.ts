@@ -23,6 +23,10 @@ const articlePaths = new Set([
   "/bosses/pufferfish",
   "/bosses/albatross",
   "/bosses/mutated-bowhead-whale",
+  "/creatures/tuna",
+  "/creatures/bowhead-whale",
+  "/guides/lost-boss-items",
+  "/guides/money-and-cooking",
 ]);
 const collectionPaths = new Set([
   "/creatures",
@@ -66,7 +70,9 @@ for (const path of Object.keys(pageMeta)) {
           mainEntityOfPage: canonical,
           image,
           dateModified:
-            path === "/guides/tips-and-tricks" || path === "/locations/desert"
+            ["/creatures/tuna", "/creatures/bowhead-whale", "/guides/lost-boss-items", "/guides/money-and-cooking"].includes(path)
+              ? "2026-09-03"
+              : path === "/guides/tips-and-tricks" || path === "/locations/desert"
               ? "2026-09-01"
               : path.startsWith("/bosses/") && path !== "/bosses/spider-crab"
               ? "2026-09-01"

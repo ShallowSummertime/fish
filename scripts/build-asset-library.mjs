@@ -689,13 +689,27 @@ function sourceGroups() {
             "creatures/encyclopedia-bosses.webp": "mobalytics-06-bosses.png",
           };
           const normalizedPath = relativePath.split(path.sep).join("/");
-          if (
-            normalizedPath === "guides/beginner/localized/03-bait-hotspots-cover-en.webp" ||
-            normalizedPath === "guides/beginner/localized/06-firepower-death-cover-en.webp"
-          )
-            return {
-              pageUsage: ["/beginner-guide", "/guides/tips-and-tricks"],
-            };
+          const beginnerGuideUsage = {
+            "guides/beginner/localized/02-survival-loop-cover-en.webp": [
+              "/beginner-guide",
+              "/guides/money-and-cooking",
+            ],
+            "guides/beginner/localized/03-bait-hotspots-cover-en.webp": [
+              "/beginner-guide",
+              "/guides/tips-and-tricks",
+            ],
+            "guides/beginner/localized/04-profit-multipliers-cover-en.webp": [
+              "/beginner-guide",
+              "/guides/money-and-cooking",
+            ],
+            "guides/beginner/localized/06-firepower-death-cover-en.webp": [
+              "/beginner-guide",
+              "/guides/tips-and-tricks",
+              "/guides/money-and-cooking",
+            ],
+          };
+          if (beginnerGuideUsage[normalizedPath])
+            return { pageUsage: beginnerGuideUsage[normalizedPath] };
           const fieldDiagrams = {
             "guides/forest/forest-route.svg": {
               pageUsage: ["/locations/forest", "/bosses/giant-piranha"],
@@ -708,7 +722,11 @@ function sourceGroups() {
               notes: "guide-2",
             },
             "guides/forest/forest-recovery.svg": {
-              pageUsage: ["/locations/forest", "/bosses/giant-piranha"],
+              pageUsage: [
+                "/locations/forest",
+                "/bosses/giant-piranha",
+                "/guides/lost-boss-items",
+              ],
               seed: "guide-2.seed.json",
               notes: "guide-2",
             },
@@ -723,17 +741,30 @@ function sourceGroups() {
               notes: "guide-3",
             },
             "guides/desert/desert-recovery.svg": {
-              pageUsage: ["/locations/desert", "/bosses/pufferfish"],
+              pageUsage: [
+                "/locations/desert",
+                "/bosses/pufferfish",
+                "/guides/lost-boss-items",
+              ],
               seed: "guide-3.seed.json",
               notes: "guide-3",
             },
             "guides/rocks/rocks-field-layout.svg": {
-              pageUsage: ["/locations/rocks", "/bosses/albatross"],
+              pageUsage: [
+                "/locations/rocks",
+                "/bosses/albatross",
+                "/creatures/tuna",
+              ],
               seed: "rocks-full.seed.json",
               notes: "rocks-full-2026-08-31",
             },
             "guides/rocks/rocks-two-boss-loop.svg": {
-              pageUsage: ["/locations/rocks", "/bosses/albatross"],
+              pageUsage: [
+                "/locations/rocks",
+                "/bosses/albatross",
+                "/creatures/tuna",
+                "/guides/lost-boss-items",
+              ],
               seed: "rocks-full.seed.json",
               notes: "rocks-full-2026-08-31",
             },
@@ -768,14 +799,30 @@ function sourceGroups() {
               ],
             };
           }
+          if (normalizedPath === "guides/spider-crab-handoff.svg")
+            return {
+              pageUsage: [
+                "/bosses/spider-crab",
+                "/locations/lighthouse",
+                "/guides/lost-boss-items",
+              ],
+            };
           if (normalizedPath.startsWith("guides/rocks/albatross-cover-guide"))
-            return { pageUsage: ["/locations/rocks", "/bosses/albatross"] };
+            return {
+              pageUsage: [
+                "/locations/rocks",
+                "/bosses/albatross",
+                "/creatures/tuna",
+              ],
+            };
           if (normalizedPath.startsWith("guides/volcano/"))
             return {
               pageUsage: [
                 "/locations/volcano",
                 "/bosses/mutated-bowhead-whale",
                 "/guides/mutated-whale-handyman",
+                "/creatures/bowhead-whale",
+                ...(normalizedPath === "guides/volcano/02-bowhead-to-crater.png" ? ["/guides/lost-boss-items"] : []),
                 ...(normalizedPath === "guides/volcano/01-volcano-arrival.png" ? ["/guides/tips-and-tricks"] : []),
               ],
             };
@@ -790,8 +837,10 @@ function sourceGroups() {
               normalizedPath === "creatures/encyclopedia-scientific.webp" ||
               normalizedPath === "creatures/encyclopedia-bosses.webp"
                 ? normalizedPath === "creatures/encyclopedia-bosses.webp"
-                  ? ["/creatures", "/locations/rocks", "/bosses/giant-piranha", "/bosses/pufferfish", "/bosses/albatross"]
-                  : ["/creatures", "/locations/rocks"]
+                  ? ["/creatures", "/locations/rocks", "/bosses/giant-piranha", "/bosses/pufferfish", "/bosses/albatross", "/creatures/bowhead-whale"]
+                  : normalizedPath === "creatures/encyclopedia-professional.webp"
+                    ? ["/creatures", "/locations/rocks", "/creatures/tuna", "/guides/money-and-cooking"]
+                    : ["/creatures", "/locations/rocks"]
                 : ["/creatures"],
             derivedFrom: [
               `asset:01-raw/user-provided/creature-gallery/assets/${sourceName}`,
@@ -1279,10 +1328,10 @@ function catalogReadme() {
 const requiredFieldDiagrams = new Map([
   ["asset:05-published/public-images/guides/forest/forest-route.svg", ["/locations/forest", "/bosses/giant-piranha"]],
   ["asset:05-published/public-images/guides/forest/giant-piranha-loop.svg", ["/locations/forest", "/bosses/giant-piranha"]],
-  ["asset:05-published/public-images/guides/forest/forest-recovery.svg", ["/locations/forest", "/bosses/giant-piranha"]],
+  ["asset:05-published/public-images/guides/forest/forest-recovery.svg", ["/locations/forest", "/bosses/giant-piranha", "/guides/lost-boss-items"]],
   ["asset:05-published/public-images/guides/desert/desert-route.svg", ["/locations/desert", "/bosses/pufferfish"]],
   ["asset:05-published/public-images/guides/desert/pufferfish-loop.svg", ["/locations/desert", "/bosses/pufferfish"]],
-  ["asset:05-published/public-images/guides/desert/desert-recovery.svg", ["/locations/desert", "/bosses/pufferfish"]],
+  ["asset:05-published/public-images/guides/desert/desert-recovery.svg", ["/locations/desert", "/bosses/pufferfish", "/guides/lost-boss-items"]],
 ]);
 
 function assertFieldDiagramPublicationMetadata(records) {

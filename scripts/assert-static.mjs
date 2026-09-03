@@ -6,6 +6,8 @@ const routes = [
   "/",
   "/beginner-guide",
   "/creatures",
+  "/creatures/tuna",
+  "/creatures/bowhead-whale",
   "/bosses",
   "/locations",
   "/locations/lighthouse",
@@ -17,6 +19,8 @@ const routes = [
   "/guides/casino-money-route",
   "/guides/mutated-whale-handyman",
   "/guides/tips-and-tricks",
+  "/guides/lost-boss-items",
+  "/guides/money-and-cooking",
   "/lures",
   "/bosses/spider-crab",
   "/bosses/giant-piranha",
@@ -376,6 +380,17 @@ for (const route of [
   assert.ok(textFrom(html).split(/\s+/).length >= 900, `${route} must expose at least 900 visible words`);
   assert.doesNotMatch(html, /research\/video-analysis|frame-\d+\.jpg|game8\/|douyin|tiktok/i, `${route} must not publish research-only media or identities`);
 }
+for (const [route, images, phrases] of [
+  ["/creatures/tuna", 4, ["Prepare a flat Tuna landing lane", "whole Tuna", "Albatross appears", "TUNA STEP COMPLETE"]],
+  ["/creatures/bowhead-whale", 4, ["Scientist’s regular-lure request", "Fish Bucket", "Transport the intact body", "BOWHEAD STEP COMPLETE"]],
+  ["/guides/lost-boss-items", 5, ["route-state checklist", "Giant Piranha Skeleton", "Albatross Head", "Whale Fin", "RECOVERY COMPLETE"]],
+  ["/guides/money-and-cooking", 4, ["Stabilize hunger", "Decide: eat, sell, preserve, or discard", "Use cooking only", "SAFE ECONOMY LOOP"]],
+]) {
+  await contentGate(route, { images, phrases });
+  const html = await readFile(`dist${route}/index.html`, "utf8");
+  assert.ok(textFrom(html).split(/\s+/).length >= 900, `${route} must expose at least 900 visible words`);
+  assert.doesNotMatch(html, /research\/video-analysis|frame-\d+\.jpg|game8\/|douyin|tiktok|fastest infinite money/i, `${route} must not publish research-only media or unsupported promises`);
+}
 const lighthouse = await readFile(
   "dist/locations/lighthouse/index.html",
   "utf8",
@@ -659,7 +674,7 @@ assert.match(casino, /<meta name="robots" content="noindex,follow">/);
 assert.match(casino, /current-patch verification pending/i);
 const sitemap = await readFile("public/sitemap.xml", "utf8");
 const sitemapUrls = [...sitemap.matchAll(/<loc>([^<]+)<\/loc>/g)].map((match) => match[1]);
-assert.equal(sitemapUrls.length, 24, "sitemap must contain exactly 24 indexable URLs");
+assert.equal(sitemapUrls.length, 28, "sitemap must contain exactly 28 indexable URLs");
 for (const removed of [
   "/guides/all-bosses-weapons-endgame",
   "/guides/casino-money-route",
@@ -668,7 +683,7 @@ for (const removed of [
   "/guides/summon-spider-crab",
   "/guides/five-boss-challenge",
 ]) assert.ok(!sitemapUrls.some((url) => url.endsWith(removed)), `${removed} must stay out of sitemap`);
-assert.equal(routes.length, 25, "25 routes must be prerendered, including the direct but noindex casino notes");
+assert.equal(routes.length, 29, "29 routes must be prerendered, including the direct but noindex casino notes");
 const redirects = JSON.parse(await readFile("vercel.json", "utf8"));
 assert.equal(redirects.redirects.length, 5, "five duplicate guide URLs must have permanent redirects");
 for (const redirect of redirects.redirects) assert.equal(redirect.permanent, true);
