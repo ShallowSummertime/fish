@@ -70,8 +70,20 @@ describe("How to Fish content baseline", () => {
       "/terms",
     ].forEach((path) => expect(pageMeta[path]).toBeDefined());
     expect(pageMeta["/"].title).toContain("How to Fish Walkthrough");
-    for (const [path, meta] of Object.entries(pageMeta))
+    expect(pageMeta["/"].image).toBe(
+      "/images/guides/locations/five-location-route-hero-1280.webp",
+    );
+    for (const [path, meta] of Object.entries(pageMeta)) {
       expect(meta.title.length, `${path} title`).toBeLessThanOrEqual(60);
+      expect(
+        meta.description.length,
+        `${path} description minimum`,
+      ).toBeGreaterThanOrEqual(110);
+      expect(
+        meta.description.length,
+        `${path} description maximum`,
+      ).toBeLessThanOrEqual(160);
+    }
     expect(pageMeta["/locations/volcano"].image).toBe(
       "/images/guides/volcano/01-volcano-arrival.png",
     );

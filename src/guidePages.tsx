@@ -28,7 +28,12 @@ export function LocationsGuide(){return <article className="article guide-articl
 
 const rocksCatches=creatures.filter(creature=>creature.island==='Rocks'&&creature.kind==='Creature');
 const volcanoCatches=creatures.filter(creature=>creature.island==='Volcano'&&creature.kind==='Creature');
-const RocksCapture=({src,alt,caption}:{src:string;alt:string;caption:string})=><figure className="rocks-capture"><img src={src} alt={alt} loading="lazy" decoding="async"/><figcaption><span>OWNER-PROVIDED GAMEPLAY</span>{caption}</figcaption></figure>;
+const captureDimensions = {
+  "/images/creatures/encyclopedia-professional.webp": [1348, 750],
+  "/images/creatures/encyclopedia-scientific.webp": [1521, 769],
+  "/images/creatures/encyclopedia-bosses.webp": [1462, 762],
+} as const;
+const RocksCapture=({src,alt,caption}:{src:keyof typeof captureDimensions;alt:string;caption:string})=>{const [width,height]=captureDimensions[src];return <figure className="rocks-capture"><img src={src} alt={alt} width={width} height={height} loading="lazy" decoding="async"/><figcaption><span>OWNER-PROVIDED GAMEPLAY</span>{caption}</figcaption></figure>};
 const GameplayReconstruction=({src,alt,caption,eager=false}:{src:string;alt:string;caption:string;eager?:boolean})=>{const base=src.replace(/\.png$/,'');return <figure className="rocks-capture reconstruction-capture"><picture><source type="image/webp" srcSet={`${base}-768.webp 768w, ${base}-1280.webp 1280w`} sizes="(max-width: 820px) 100vw, 1080px"/><img src={src} width="1680" height="945" alt={alt} loading={eager?'eager':'lazy'} decoding="async" fetchPriority={eager?'high':'auto'}/></picture><figcaption><span>GAMEPLAY RECONSTRUCTION</span>{caption}</figcaption></figure>};
 const FieldDiagram=({src,alt,caption,eager=false}:{src:string;alt:string;caption:string;eager?:boolean})=><figure className="rocks-capture reconstruction-capture"><img src={src} width="1200" height="675" alt={alt} loading={eager?'eager':'lazy'} decoding="async" fetchPriority={eager?'high':'auto'}/><figcaption><span>ORIGINAL FIELD DIAGRAM</span>{caption}</figcaption></figure>;
 const CatalogVisual=({src,alt,caption}:{src:string;alt:string;caption:string})=><figure className="rocks-capture"><img src={src} width="1536" height="1024" alt={alt} loading="lazy" decoding="async"/><figcaption><span>CATALOGED SITE ASSET</span>{caption}</figcaption></figure>;

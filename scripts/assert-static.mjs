@@ -122,6 +122,29 @@ for (const route of routes) {
     renderedTitle.length <= 60,
     `${route} final rendered title must be at most 60 characters`,
   );
+  const renderedDescription =
+    html.match(/<meta name="description" content="([^"]+)">/)?.[1] || "";
+  assert.ok(
+    renderedDescription.length >= 110 && renderedDescription.length <= 160,
+    `${route} meta description must be 110-160 characters`,
+  );
+  for (const imageTag of html.match(/<img\b[^>]*>/g) || []) {
+    assert.match(
+      imageTag,
+      /\salt="[^"]+"/,
+      `${route} image must have useful alt text`,
+    );
+    assert.match(
+      imageTag,
+      /\swidth="\d+"/,
+      `${route} image must have intrinsic width`,
+    );
+    assert.match(
+      imageTag,
+      /\sheight="\d+"/,
+      `${route} image must have intrinsic height`,
+    );
+  }
 }
 const creatures = await readFile("dist/creatures/index.html", "utf8");
 assert.match(creatures, /All 49 How to Fish/);
@@ -135,6 +158,11 @@ assert.doesNotMatch(
 );
 assert.match(creatures, /encyclopedia-early\.webp/);
 const home = await readFile("dist/index.html", "utf8");
+assert.match(
+  home,
+  /<meta property="og:image" content="https:\/\/howtofishwalkthrough\.com\/images\/guides\/locations\/five-location-route-hero-1280\.webp">/,
+  "homepage must expose a large rights-safe OG image",
+);
 for (const nonPublicPath of [
   "/guides/casino-money-route",
   "/guides/all-bosses-weapons-endgame",

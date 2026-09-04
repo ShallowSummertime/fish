@@ -771,11 +771,12 @@ export const pageMeta: Record<
     title: "How to Fish Walkthrough & Game Guides Wiki",
     description:
       "Complete How to Fish Game wiki and walkthrough: boss guides, all creatures, locations, lures, and a beginner route for the 2026 Dazed Games fishing sim.",
+    image: "/images/guides/locations/five-location-route-hero-1280.webp",
   },
   "/beginner-guide": {
     title: "How to Fish Beginner Guide: Five-Location Route",
     description:
-      "A step-by-step How to Fish Game beginner walkthrough covering the Lighthouse opening, Spider Crab, upgrades, survival tips, and the five-location route to Volcano.",
+      "Step-by-step How to Fish Game beginner walkthrough for the Lighthouse opening, Spider Crab, upgrades, survival, and the five-location route to Volcano.",
     image: "/images/guides/beginner/localized/01-beginner-cover-en.webp",
   },
   "/creatures": {
@@ -797,7 +798,7 @@ export const pageMeta: Record<
   "/bosses": {
     title: "How to Fish Boss Guide & Progression | HTF Wiki",
     description:
-      "Actionable How to Fish Game boss board with every summon, route, combat plan, reward, and recovery step.",
+      "Actionable How to Fish Game boss guide covering every summon, route, combat plan, unique reward, hand-in, and recovery step across all five locations.",
     image: "/images/guides/island-1/08-spider-crab.jpg",
   },
   "/locations": {
@@ -809,7 +810,7 @@ export const pageMeta: Record<
   "/locations/lighthouse": {
     title: "How to Fish Lighthouse Guide: First Location",
     description:
-      "Complete How to Fish Game Lighthouse walkthrough: survival HUD, Clam cash route, first rod, catch controls, upgrades, Empty Beer Can, Spider Crab, Boat Keys, and Radar.",
+      "Complete How to Fish Game Lighthouse walkthrough: HUD, Clam cash route, first rod, catch controls, upgrades, Spider Crab, Boat Keys, and Radar.",
     image: "/images/guides/island-1/08-spider-crab.jpg",
   },
   "/locations/forest": {
@@ -833,7 +834,7 @@ export const pageMeta: Record<
   "/locations/volcano": {
     title: "How to Fish Volcano Island Guide | HTF Wiki",
     description:
-      "Complete Volcano Island 5 walkthrough for How to Fish Game: Scientific catches, Scientist quest, Bowhead Whale, crater carry, Mutated Bowhead fight, and Whale Fin ending.",
+      "Complete Volcano Island 5 walkthrough: Scientific catches, the Scientist quest, Bowhead Whale crater carry, Mutated Bowhead fight, Whale Fin, and ending boat.",
     image: "/images/guides/volcano/01-volcano-arrival.png",
   },
   "/guides/reel-of-fortune": {

@@ -312,7 +312,14 @@ function GuideVisual({
   if (src.includes("/beginner/localized/")) return null;
   return (
     <figure className="guide-visual">
-      <img src={src} alt={alt} />
+      <img
+        src={src}
+        alt={alt}
+        width="1200"
+        height="675"
+        loading="lazy"
+        decoding="async"
+      />
       <figcaption>
         <span>ORIGINAL FIELD DIAGRAM</span>
         {caption}
@@ -1896,26 +1903,31 @@ const creatureSheets = {
   early: {
     src: "/images/creatures/encyclopedia-early.webp",
     width: 1394,
+    height: 748,
     scale: 0.36,
   },
   standard: {
     src: "/images/creatures/encyclopedia-standard.webp",
     width: 1363,
+    height: 742,
     scale: 0.36,
   },
   professional: {
     src: "/images/creatures/encyclopedia-professional.webp",
     width: 1348,
+    height: 750,
     scale: 0.36,
   },
   scientific: {
     src: "/images/creatures/encyclopedia-scientific.webp",
     width: 1521,
+    height: 769,
     scale: 0.34,
   },
   bosses: {
     src: "/images/creatures/encyclopedia-bosses.webp",
     width: 1462,
+    height: 762,
     scale: 0.34,
   },
 } as const;
@@ -2062,8 +2074,9 @@ function CreatureThumb({ name }: { name: string }) {
     >
       <img
         src={sheet.src}
-        alt=""
-        aria-hidden="true"
+        alt={`${name} encyclopedia preview`}
+        width={sheet.width}
+        height={sheet.height}
         loading="lazy"
         style={{
           width: `${sheet.width * scale}px`,
