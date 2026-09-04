@@ -1,5 +1,14 @@
 # Audit
 
+## 2026-09-04 — Metadata, image markup, production, and GSC audit
+
+- Commit `989df00` was pushed to `main` and observed on production through its homepage OG image and updated descriptions.
+- The homepage now exposes a 1280px rights-safe route image through both Open Graph and Twitter metadata. Bosses, Beginner, Lighthouse, and Volcano descriptions were brought into the 110–160 character target; a route-wide build gate now prevents description regressions.
+- Every prerendered content image now has non-empty alt text plus intrinsic width and height. This closes the 49 creature-preview findings, three Rocks captures, one Volcano capture, and two Spider Crab diagrams from the prior production audit.
+- Local checks passed: Vitest 4/4, TypeScript, Vite build, 29 route prerenders, static SEO/image gates, asset-library targeted tests, and the 488-record full asset-library verification with zero failures.
+- Production checks passed: all 28 sitemap URLs are healthy with no bad page, broken image, or duplicate title; the unknown-route probe returns 404, and robots/ads.txt remain valid. The remaining thin/missing-OG findings are limited to the four trust/utility pages and were not part of this release.
+- GSC: sitemap resubmission succeeded with 28 discovered URLs. The nine newly added pages were all not indexed at inspection time and were individually accepted into the priority crawl queue; seven were explicitly `Discovered - currently not indexed`, while Pufferfish and Money & Cooking showed the generic not-indexed state.
+
 ## 2026-09-03 — Production release audit
 
 - Commit `2f7833f3459b1b4b330e6c80354fb6c0469bb81a` completed its Vercel production deployment successfully.

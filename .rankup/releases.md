@@ -1,5 +1,18 @@
 # Release record
 
+## 1.0.1 — 2026-09-04
+
+- 目标：完成 28 URL 内容批次后的社交元数据、摘要长度、图片可访问性与 GSC 发现清理。
+- 变更：首页接入 1280px 自有路线图作为 OG/Twitter 分享图；Bosses、Beginner、Lighthouse、Volcano 描述修正到 110–160 字符；补齐 creature 缩略图、Rocks/Volcano 捕获图和 Spider Crab 图解的 alt、width、height。
+- 门禁：29 个预渲染路由统一校验 Meta Description 110–160 字符，所有正文图片必须具有非空 alt 与固有尺寸，首页必须保留指定大图 OG 元数据。
+- 资产：固定资产库 488 项、472 项归档、16 项待分析/仅源文件，定向测试与全量校验失败 0；未新增或改写原始素材。
+- 本地验证：Vitest 4/4、TypeScript、Vite build、29 路由预渲染、静态门禁、固定资产库测试与 `git diff --check` 全部通过。
+- Commit：`989df00` 已推送 `main`；生产首页已返回新 OG 图与元数据。
+- 生产验证：sitemap 28/28 页面正常，无坏页、断图或重复标题；未知 URL 为 404，robots 与 ads.txt 有效。
+- GSC：`sitemap.xml` 重新提交成功并发现 28 URL；自 19 URL 基线后新增的 9 个页面全部成功加入优先抓取队列。
+- 回滚：上一生产记录提交为 `8c65066`；如需回滚，使用 `git revert 989df00` 创建可审计反向提交后推送 `main`，不重置分支历史。
+- 结论：production-verified；收录请求已提交，实际收录结果等待 Google 抓取与处理。
+
 ## 1.0.0 — 2026-09-03
 
 - 目标：发布首批两个高证据 creature 详情页，以及跨岛任务物恢复和安全经济两篇问题型攻略。

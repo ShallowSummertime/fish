@@ -165,3 +165,11 @@
 - Content: each page exceeds 900 static words and uses 4–5 relevant images, actionable success states, failure recovery, and links into the existing location and boss route graph.
 - Technical: added metadata, canonical/static prerender coverage, sitemap entries, hub links, per-route content gates, and fixed-asset page-usage mappings.
 - Status: production-verified from commit `2f7833f`; Vercel deployment completed, the production sitemap contains 28 URLs, and the reusable audit reported 28/28 good pages, no broken images, no duplicate titles, a real 404, and valid ads.txt.
+
+## 2026-09-04 — Metadata cleanup and focused indexing
+
+- Closed the commercially relevant social-preview gap by assigning the homepage a 1280px rights-safe route image for OG and Twitter cards.
+- Normalized the four outlier descriptions and added a 110–160 character regression gate across all 29 prerendered routes.
+- Added useful alt text and real intrinsic dimensions to the previously flagged creature thumbnails and older guide images; the static gate now checks every rendered image.
+- Verified 488 fixed-asset records with zero failures, deployed commit `989df00`, and passed the 28-URL production audit.
+- Successfully resubmitted the 28-URL sitemap in GSC and queued all nine pages added after the 19-URL baseline for priority crawling. Indexing remains an asynchronous Google decision.
