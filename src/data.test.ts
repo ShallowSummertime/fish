@@ -58,7 +58,6 @@ describe("How to Fish content baseline", () => {
       "/locations/rocks",
       "/locations/volcano",
       "/guides/reel-of-fortune",
-      "/guides/casino-money-route",
       "/guides/tips-and-tricks",
       "/guides/mutated-whale-handyman",
       "/lures",
@@ -68,6 +67,7 @@ describe("How to Fish content baseline", () => {
       "/contact",
       "/privacy",
       "/terms",
+      "/updates",
     ].forEach((path) => expect(pageMeta[path]).toBeDefined());
     expect(pageMeta["/"].title).toContain("How to Fish Walkthrough");
     expect(pageMeta["/"].image).toBe(

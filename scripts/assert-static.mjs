@@ -16,7 +16,6 @@ const routes = [
   "/locations/rocks",
   "/locations/volcano",
   "/guides/reel-of-fortune",
-  "/guides/casino-money-route",
   "/guides/mutated-whale-handyman",
   "/guides/tips-and-tricks",
   "/guides/lost-boss-items",
@@ -32,6 +31,7 @@ const routes = [
   "/contact",
   "/privacy",
   "/terms",
+  "/updates",
 ];
 const textFrom = (html) =>
   html
@@ -107,9 +107,7 @@ for (const route of routes) {
     /<meta name="twitter:card" content="summary_large_image">/,
   );
   assert.match(html, /application\/ld\+json/);
-  assert.match(html, route === "/guides/casino-money-route"
-    ? /<meta name="robots" content="noindex,follow">/
-    : /<meta name="robots" content="index,follow,max-image-preview:large">/);
+  assert.match(html, /<meta name="robots" content="index,follow,max-image-preview:large">/);
   assert.doesNotMatch(html, /<div id="root"><\/div>/);
   assert.doesNotMatch(
     html,
@@ -336,7 +334,7 @@ await contentGate("/guides/tips-and-tricks", {
     "shotgun recoil",
     "Hold Q to charge",
     "Coconut → Bing Bong → Carrot",
-    "route-skip shown in the source is intentionally excluded",
+    "that skip is not part of this guide",
   ],
 });
 const practicalTips = await readFile("dist/guides/tips-and-tricks/index.html", "utf8");
@@ -383,7 +381,7 @@ assert.ok(
   "all nine beginner WebP assets must stay below 1.5 MB total",
 );
 await contentGate("/bosses/spider-crab", {
-  images: 2,
+  images: 4,
   phrases: [
     "Summon Spider Crab correctly",
     "charge → stun → punish",
@@ -392,6 +390,14 @@ await contentGate("/bosses/spider-crab", {
     "boat keys",
   ],
 });
+for (const image of [
+  "07-empty-beer-can.jpg",
+  "09-dodge-charge.jpg",
+  "10-boss-handoff.jpg",
+  "11-radar-route.jpg",
+]) assert.match(spider, new RegExp(image.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")));
+assert.match(spider, /owner-recorded Lighthouse run/i);
+assert.doesNotMatch(spider, /PC Gamer|GamesRadar/i);
 for (const [route, phrases] of [
   ["/bosses/giant-piranha", ["Finish the live Leech objective", "small-fish adds", "Giant Piranha Skeleton", "FOREST COMPLETE"]],
   ["/bosses/pufferfish", ["Coconut → Bing Bong → Carrot", "rolling before attacking", "Pufferfish Fin", "DESERT COMPLETE"]],
@@ -697,12 +703,28 @@ for (const [src, width, height] of [
   new RegExp(`<img[^>]+src="${src.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")}"[^>]+width="${width}"[^>]+height="${height}"`),
   `${src} must reserve its real intrinsic dimensions`,
 );
-const casino = await readFile("dist/guides/casino-money-route/index.html", "utf8");
-assert.match(casino, /<meta name="robots" content="noindex,follow">/);
-assert.match(casino, /current-patch verification pending/i);
+await assert.rejects(
+  stat("dist/guides/casino-money-route/index.html"),
+  "unverified casino notes must not be emitted into the public build",
+);
+const updates = await readFile("dist/updates/index.html", "utf8");
+assert.ok(
+  textFrom(updates).split(/\s+/).length >= 500,
+  "/updates must explain the current patch and affected guide boundaries",
+);
+for (const phrase of [
+  "Patch 1.0.12",
+  "Steam Cloud",
+  "Piranha and Tuna balance",
+  "Dropped-item velocity limit",
+  "Final-boss explosive damage",
+  "How older gameplay footage is handled",
+]) assert.match(updates, new RegExp(phrase, "i"));
+assert.match(updates, /"dateModified":"2026-09-12"/);
+assert.match(updates, /"@type":"Person","name":"How to Fish Walkthrough Editor"/);
 const sitemap = await readFile("public/sitemap.xml", "utf8");
 const sitemapUrls = [...sitemap.matchAll(/<loc>([^<]+)<\/loc>/g)].map((match) => match[1]);
-assert.equal(sitemapUrls.length, 28, "sitemap must contain exactly 28 indexable URLs");
+assert.equal(sitemapUrls.length, 29, "sitemap must contain exactly 29 indexable URLs");
 for (const removed of [
   "/guides/all-bosses-weapons-endgame",
   "/guides/casino-money-route",
@@ -711,7 +733,7 @@ for (const removed of [
   "/guides/summon-spider-crab",
   "/guides/five-boss-challenge",
 ]) assert.ok(!sitemapUrls.some((url) => url.endsWith(removed)), `${removed} must stay out of sitemap`);
-assert.equal(routes.length, 29, "29 routes must be prerendered, including the direct but noindex casino notes");
+assert.equal(routes.length, 29, "29 indexable routes must be prerendered");
 const redirects = JSON.parse(await readFile("vercel.json", "utf8"));
 assert.equal(redirects.redirects.length, 5, "five duplicate guide URLs must have permanent redirects");
 for (const redirect of redirects.redirects) assert.equal(redirect.permanent, true);
@@ -893,17 +915,28 @@ for (const [route, type] of [
     `${route} must use ${type} schema`,
   );
 }
-for (const html of [home, beginner, bossesPage, luresPage, achievementsPage]) {
+for (const route of routes) {
+  const html = await readFile(
+    route === "/" ? "dist/index.html" : `dist${route}/index.html`,
+    "utf8",
+  );
   assert.match(
     html,
     /<meta name="google-adsense-account" content="ca-pub-5329936944958399"\/?>/,
     "Every crawlable page must expose the verified AdSense publisher account",
   );
-  assert.match(
-    html,
-    /<script async src="https:\/\/pagead2\.googlesyndication\.com\/pagead\/js\/adsbygoogle\.js\?client=ca-pub-5329936944958399" crossorigin="anonymous"><\/script>/,
-    "AdSense runtime must load once the Google-certified CMP is published",
-  );
+  if (["/", "/beginner-guide", "/locations/lighthouse"].includes(route))
+    assert.match(
+      html,
+      /<script id="adsense-runtime" async src="https:\/\/pagead2\.googlesyndication\.com\/pagead\/js\/adsbygoogle\.js\?client=ca-pub-5329936944958399" crossorigin="anonymous"><\/script>/,
+      `${route} must load the AdSense runtime`,
+    );
+  else
+    assert.doesNotMatch(
+      html,
+      /pagead2\.googlesyndication\.com\/pagead\/js\/adsbygoogle\.js/,
+      `${route} must remain outside the current advertising inventory`,
+    );
 }
 for (const [route, html] of [
   ["/bosses", bossesPage],

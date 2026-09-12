@@ -843,12 +843,6 @@ export const pageMeta: Record<
       "Use one rare Drip creature at the Reel of Fortune, identify the random cosmetic skin, equip it with Z or C, and understand GOLD GOLD GOLD.",
     image: "/images/guides/reel-of-fortune/reel-machine-hero.png",
   },
-  "/guides/casino-money-route": {
-    title: "Casino Route Verification Notes | How to Fish",
-    description:
-      "Archived How to Fish casino-route verification notes: protect the save, use a small stake, test one variable at a time, and avoid story-item risk.",
-    image: "/images/guides/reel-of-fortune/reel-machine-hero.png",
-  },
   "/guides/mutated-whale-handyman": {
     title: "Mutated Whale Handyman Guide | How to Fish",
     description:
@@ -858,7 +852,7 @@ export const pageMeta: Record<
   "/guides/tips-and-tricks": {
     title: "How to Fish Tips & Tricks - 6 Practical Techniques",
     description:
-      "Learn six Patch 1.0.10 How to Fish Game techniques for shore fishing, longer throws, boat recovery, sniper follow-ups, shotgun jumps, and cooked weapons.",
+      "Six How to Fish techniques recorded on Patch 1.0.10, with current 1.0.12 boundaries for shore fishing, throws, recovery, weapon swaps, and jumps.",
     image: "/images/guides/beginner/localized/03-bait-hotspots-cover-en.webp",
   },
   "/guides/lost-boss-items": {
@@ -928,5 +922,11 @@ export const pageMeta: Record<
     title: "Terms & Disclaimer | How to Fish Walkthrough",
     description:
       "Terms, game-trademark disclaimer, source policy, and limitations for the independent How to Fish Walkthrough guide site.",
+  },
+  "/updates": {
+    title: "How to Fish Patch 1.0.12 Guide Updates",
+    description:
+      "Current How to Fish Patch 1.0.12 guide status, affected routes, earlier footage boundaries, and the checks used before walkthrough advice is updated.",
+    image: "/images/guides/locations/five-location-route-hero-1280.webp",
   },
 };

@@ -17,7 +17,6 @@ import {
   VolcanoGuide,
 } from "./guidePages";
 import {
-  CasinoMoneyRouteGuide,
   MutatedWhaleHandymanGuide,
   TipsAndTricksGuide,
 } from "./videoGuidePages";
@@ -50,7 +49,6 @@ const articlePaths = new Set([
   "/locations/rocks",
   "/locations/volcano",
   "/guides/reel-of-fortune",
-  "/guides/casino-money-route",
   "/guides/mutated-whale-handyman",
   "/guides/tips-and-tricks",
   "/bosses/spider-crab",
@@ -62,6 +60,7 @@ const articlePaths = new Set([
   "/creatures/bowhead-whale",
   "/guides/lost-boss-items",
   "/guides/money-and-cooking",
+  "/updates",
 ]);
 const collectionPaths = new Set([
   "/creatures",
@@ -83,7 +82,6 @@ const schemaType = (path: string) =>
             ? "ContactPage"
             : "WebPage";
 function Meta({ path }: { path: string }) {
-  const noindex = path === "/guides/casino-money-route";
   const known = Boolean(pageMeta[path]);
   const m = pageMeta[path] ?? {
     title: "Page Not Found | How to Fish Walkthrough",
@@ -114,7 +112,7 @@ function Meta({ path }: { path: string }) {
     );
     set("og:url", url, true);
     set("twitter:card", "summary_large_image");
-    set("robots", known && !noindex ? "index,follow,max-image-preview:large" : "noindex,follow");
+    set("robots", known ? "index,follow,max-image-preview:large" : "noindex,follow");
     if (image) {
       set("og:image", image, true);
       set("twitter:image", image);
@@ -141,7 +139,9 @@ function Meta({ path }: { path: string }) {
         mainEntityOfPage: url,
         image,
         dateModified:
-          ["/creatures/tuna", "/creatures/bowhead-whale", "/guides/lost-boss-items", "/guides/money-and-cooking"].includes(path)
+          ["/updates", "/bosses/spider-crab"].includes(path)
+            ? "2026-09-12"
+            : ["/creatures/tuna", "/creatures/bowhead-whale", "/guides/lost-boss-items", "/guides/money-and-cooking"].includes(path)
             ? "2026-09-03"
             : path === "/guides/tips-and-tricks" || path === "/locations/desert"
             ? "2026-09-01"
@@ -152,7 +152,11 @@ function Meta({ path }: { path: string }) {
             : path === "/locations/forest"
             ? "2026-08-29"
             : "2026-08-28",
-        author: { "@type": "Organization", name: "How to Fish Walkthrough" },
+        author: {
+          "@type": "Person",
+          name: "How to Fish Walkthrough Editor",
+          url: `${DOMAIN}/about`,
+        },
         about: { "@type": "VideoGame", name: "How to Fish" },
       });
     if (path === "/achievements")
@@ -254,6 +258,7 @@ function Footer() {
         <a href="/contact">Contact</a>
         <a href="/privacy">Privacy</a>
         <a href="/terms">Terms &amp; Disclaimer</a>
+        <a href="/updates">Updates</a>
       </nav>
       <div className="source-links">
         Research references:{" "}
@@ -278,15 +283,34 @@ const Crumb = ({ children }: { children: React.ReactNode }) => (
 );
 const Trust = () => (
   <div className="trust">
-    <b>UPDATED AUG 28, 2026 · PATCH 1.0.10</b>
+    <b>CURRENT RELEASE REFERENCE · PATCH 1.0.12</b>
     <span>
-      Patch 1.0.10 is the current maintenance reference. The earlier 1.0.9
-      footage still verifies the Lighthouse, Empty Beer Can, knife, and
-      post-charge daze visuals, and its Easy/Hard difficulty note remains
-      relevant; no platform frames are republished here.
+      Patch 1.0.12 is the current official release reference. Page-specific
+      footage may show an earlier build and is labeled where that matters;
+      stable route dependencies are separated from version-sensitive prices,
+      balance, inputs, and movement shortcuts.
     </span>
   </div>
 );
+function EditorialByline({ path }: { path: string }) {
+  return (
+    <aside className="editorial-byline" aria-label="Guide authorship and review method">
+      <div>
+        <span>WRITTEN &amp; TESTED BY</span>
+        <b>How to Fish Walkthrough Editor</b>
+      </div>
+      <p>
+        Editorial standard updated September 12, 2026. Current release
+        reference: Patch 1.0.12. The exact gameplay build used for a route is
+        shown inside the guide when it differs. <a href="/about">How we test</a>
+        {" · "}<a href="/updates">Patch status</a>
+        {path === "/locations/lighthouse" || path === "/bosses/spider-crab"
+          ? " · Owner-recorded Lighthouse frames"
+          : ""}
+      </p>
+    </aside>
+  );
+}
 const Related = ({ links }: { links: [string, string][] }) => (
   <aside className="related">
     <p className="eyebrow">RELATED GUIDES</p>
@@ -1058,11 +1082,11 @@ function Beginner() {
       <section id="first-20">
         <h2>First 20 minutes: make the loop safe</h2>
         <p>
-          The opening tutorial establishes the economy and the hand-in rhythm
-          you will reuse. Finish the sailor’s onboarding tasks before treating
-          Lighthouse as an open-ended collection zone. PC Gamer’s route
-          specifically starts with feeding clams, buying the fishing rod, and
-          returning to the sailor before buying the beer for this boss path.
+          The opening tutorial establishes the economy and hand-in rhythm used
+          throughout the game. The owner-recorded Lighthouse run shows the
+          exact early sequence: collect the nearby Clams, complete the keeper’s
+          hand-in, buy the first rod, land an ordinary catch, and return before
+          spending money on the beer for the boss route.
         </p>
         <ol className="steps">
           <li>
@@ -1076,16 +1100,17 @@ function Beginner() {
           <li>
             <b>Use ordinary catches to fund the next route step.</b>
             <span>
-              PC Gamer recommends feeding the sailor clams or fish for more
-              profitable meals before buying the beer. The purpose is one
-              prepared attempt, not filling the creature log.
+              The recorded route uses the opening hand-in and ordinary catches
+              to fund the next purchase. Stop when one prepared boss attempt is
+              affordable rather than filling the creature log first.
             </span>
           </li>
           <li>
             <b>Keep a recovery option.</b>
             <span>
-              PC Gamer recommends eating seafood before the fight and holding a
-              clam or two for recovery if you are having trouble.
+              Keep one replaceable edible catch or Clam outside the sale pile,
+              fill hunger before the special cast, and leave one inventory slot
+              free for the boss result.
             </span>
           </li>
           <li>
@@ -1249,15 +1274,16 @@ function Beginner() {
             <ul>
               <li>Food or a saved catch for recovery.</li>
               <li>
-                A melee weapon if you are playing solo; PC Gamer recommends a
-                knife or brass knuckles after its author’s fist-only attempts
-                failed.
+                One dependable melee weapon if you are playing solo. The
+                Lighthouse shop footage shows a Knife and Brass Knuckles as
+                early options; use whichever you can control without spending
+                the money reserved for the beer.
               </li>
               <li>The Empty Beer Can equipped as the special lure.</li>
             </ul>
           </div>
           <div>
-            <h3>The cited errand chain</h3>
+            <h3>The recorded errand chain</h3>
             <ol>
               <li>Buy the full beer after the early tutorial route.</li>
               <li>Give it to the Lighthouse keeper.</li>
@@ -1275,11 +1301,11 @@ function Beginner() {
       <section>
         <h2>Fight with a repeatable rhythm</h2>
         <p>
-          GamesRadar+ describes Spider Crab’s main attack as a straight charge.
-          Move out of its path, then attack only when stars show the crab is
-          stunned. As it recovers and starts to turn, move away and wait for the
-          next charge. PC Gamer independently describes the post-attack dazed
-          window and recommends patient, short attack attempts.
+          The owner-recorded encounter shows Spider Crab committing to a
+          straight charge and entering a visible dazed window after it misses.
+          Move out of its path, attack only while the stars and dazed posture
+          are visible, then leave as it recovers and starts to turn. Short,
+          repeatable punish windows are safer than trading damage head-on.
         </p>
         <div className="checkpoint">
           <span>CHECKPOINT B</span>
@@ -2719,24 +2745,30 @@ function SpiderCrab() {
       <section id="summon">
         <h2>1. Summon Spider Crab correctly</h2>
         <p>
-          PC Gamer and GamesRadar+ agree on the gate: complete the opening
-          tutorial route, give the fisherman a full beer, then use the returned{" "}
-          <strong>Empty Beer Can</strong> as bait. Standard bait is not the boss
-          trigger.
+          The owner-recorded Lighthouse run shows the full gate: finish the
+          opening route, obtain a full beer, give it to the Lighthouse Keeper,
+          and keep the returned <strong>Empty Beer Can</strong>. The full can and
+          ordinary lure are not the boss trigger; the returned empty item is.
         </p>
+        <VideoFrame
+          src="/images/guides/island-1/07-empty-beer-can.jpg"
+          step="01"
+          title="KEEP THE EMPTY BEER CAN"
+          caption="The recorded run confirms the returned Empty Beer Can before the special cast. Check the item name instead of assuming any drink or normal lure will summon the boss."
+        />
         <ol className="steps">
           <li>
             <b>Finish the opening tutorial.</b>
             <span>
-              PC Gamer begins its route with the sailor tutorial and early clam
-              / fishing-rod objectives.
+              Complete the nearby Clam, rod, and catch instructions until the
+              keeper's exchange is available.
             </span>
           </li>
           <li>
             <b>Prepare recovery.</b>
             <span>
-              PC Gamer recommends eating seafood before the fight and keeping a
-              clam or two available if needed.
+              Fill hunger, keep one edible catch, and clear a flat shore lane
+              before consuming the one-purpose boss bait.
             </span>
           </li>
           <li>
@@ -2749,27 +2781,32 @@ function SpiderCrab() {
           <li>
             <b>Equip and cast the empty can.</b>
             <span>
-              GamesRadar+ and PC Gamer both identify it as the bait used to reel
-              in Spider Crab.
+              Read the equipped item name, cast from the prepared lane, and pull
+              the encounter onto dry ground.
             </span>
           </li>
         </ol>
         <div className="callout">
-          <b>Source boundary:</b> cited written sources establish the item
-          chain. Owner-supplied gameplay privately cross-checks the Empty Beer
-          Can, Lighthouse, knife, and post-charge daze visuals; no source-video
-          frame or account identifier is reproduced.
+          <b>Direct gameplay boundary:</b> the published frame comes from the
+          user's Lighthouse recording with platform chrome and editorial
+          subtitles removed. It verifies the visible item chain, not a permanent
+          price, damage value, or fixed number of attacks.
         </div>
       </section>
       <section id="combat">
         <h2>2. Use the charge → stun → punish loop</h2>
         <p>
-          GamesRadar+ describes Spider Crab’s main attack as a straight charge.
-          Move out of that line, then attack once stars show the crab is
-          stunned; leave again as it recovers. PC Gamer independently describes
-          the post-attack dazed window and recommends patient hit-and-run
-          attempts.
+          The recorded encounter shows Spider Crab committing to a straight
+          charge, missing when the player leaves its line, and entering a visible
+          dazed window. Move first, confirm the missed attack, take a short
+          damage window, and leave before the boss turns again.
         </p>
+        <VideoFrame
+          src="/images/guides/island-1/09-dodge-charge.jpg"
+          step="02"
+          title="SIDESTEP, THEN USE THE DAZE"
+          caption="The gameplay frame captures the safe moment after the charge. Rebuild spacing as soon as the crab begins recovering instead of trading hits."
+        />
         <div className="combat-grid">
           <article>
             <span>WAIT</span>
@@ -2782,25 +2819,24 @@ function SpiderCrab() {
           <article>
             <span>DODGE</span>
             <b>Move out of the charge.</b>
-            <p>
-              GamesRadar+ identifies this move as the boss’s primary attack and
-              advises getting out of the way.
+              <p>
+              Move laterally into the clear lane and keep water, clutter, and
+              teammates out of the escape side.
             </p>
           </article>
           <article>
             <span>PUNISH</span>
             <b>Attack while it is stunned.</b>
-            <p>
-              Use the short window marked by stars / the dazed state, as
-              described by GamesRadar+ and PC Gamer.
+              <p>
+              Use the short window marked by stars and the visibly dazed posture.
             </p>
           </article>
           <article>
             <span>RESET</span>
             <b>Leave as it recovers.</b>
-            <p>
-              GamesRadar+ advises running away when it starts turning again,
-              then waiting for the next charge.
+              <p>
+              Back out when it starts turning, then make it commit to the next
+              readable charge.
             </p>
           </article>
         </div>
@@ -2809,11 +2845,17 @@ function SpiderCrab() {
         <h2>3. The reward is a hand-in, not just a kill</h2>
         <p>
           When Spider Crab goes down, keep the{" "}
-          <strong>Spider Crab shell</strong> for the fisherman. PC Gamer and
-          GamesRadar+ identify the shell hand-in as the step that awards boat
-          keys. GamesRadar+ separately describes the radar tablet as the
-          follow-up purchase for navigation.
+          <strong>Spider Crab Shell</strong> separate from ordinary meat and sale
+          items. The recorded route hands that unique result to the Lighthouse
+          Keeper, receives Boat Keys, and then uses the Radar as the separate
+          navigation check before departure.
         </p>
+        <VideoFrame
+          src="/images/guides/island-1/10-boss-handoff.jpg"
+          step="03"
+          title="HAND THE SHELL TO THE KEEPER"
+          caption="The route is complete only after the unique Spider Crab result reaches the Lighthouse Keeper and the Boat Keys are awarded."
+        />
         <GuideVisual
           src="/images/guides/spider-crab-handoff.svg"
           alt="Original diagram showing Spider Crab shell becoming boat keys and radar navigation"
@@ -2843,6 +2885,12 @@ function SpiderCrab() {
             </span>
           </li>
         </ol>
+        <VideoFrame
+          src="/images/guides/island-1/11-radar-route.jpg"
+          step="04"
+          title="VERIFY THE FOREST RADAR MARKER"
+          caption="Boat Keys provide access; the Radar marker confirms the next destination. Save after both checks rather than sailing away on the boss kill alone."
+        />
       </section>
       <section id="coop-recovery">
         <h2>Co-op recovery: create a revive window without losing the boss</h2>
@@ -3232,6 +3280,17 @@ function About() {
         research notes.
       </p>
       <section>
+        <h2>Who publishes the guides</h2>
+        <p>
+          The site is maintained by one independent player-editor under the
+          stable byline <strong>How to Fish Walkthrough Editor</strong>. The
+          byline is a publishing identity, not a claim that this is an official
+          Dazed Games team or a large commercial wiki. The editor reviews the
+          footage, writes the routes, checks the public build, and handles
+          corrections through the contact address shown on this site.
+        </p>
+      </section>
+      <section>
         <h2>What we publish</h2>
         <p>
           We focus on steps a player can execute: what to prepare, where to go,
@@ -3243,11 +3302,31 @@ function About() {
       <section>
         <h2>How guides are made</h2>
         <p>
-          Instructions are checked against owner-provided gameplay footage,
-          official patch notes, and independent written walkthroughs. Original
-          diagrams and processed frames explain mechanics. A visible checked
-          date and evidence boundary distinguish frame-verified instructions
-          from concise reference lists.
+          Instructions begin with gameplay evidence: owner-recorded footage
+          where it is available, item and objective text visible in the game,
+          and official patch announcements for version changes. Useful moments
+          are turned into clean step images, route diagrams, troubleshooting
+          notes, and compact checklists. Reference-only third-party material is
+          used for research and is not republished as site artwork.
+        </p>
+        <p>
+          Every detailed route separates three things that are easy to confuse:
+          what the captured run directly shows, what an official update changed,
+          and what still needs a new in-game check. Unknown prices, damage
+          numbers, spawn odds, and trigger distances are not guessed. Older
+          footage remains useful for stable quest order, but the page labels its
+          recorded build when current balance or controls may differ.
+        </p>
+      </section>
+      <section>
+        <h2>Current version and correction cycle</h2>
+        <p>
+          The current release reference is Patch 1.0.12. The dedicated
+          <a href="/updates"> update status page</a> records which mechanics
+          changed and which walkthroughs need another gameplay pass. A page is
+          revised when new footage changes an instruction—not merely to replace
+          a date. Reports should include the affected URL, game version, visible
+          objective, and the step that behaved differently.
         </p>
       </section>
       <section>
@@ -3270,7 +3349,7 @@ function Contact() {
       <h1>
         Contact the
         <br />
-        <i>guide team</i>
+        <i>independent editor</i>
       </h1>
       <p className="standfirst">
         Send a specific report for factual corrections, broken links,
@@ -3323,7 +3402,7 @@ function Privacy() {
   return (
     <article className="article policy-page">
       <Crumb>Privacy Policy</Crumb>
-      <p className="eyebrow">LAST UPDATED AUGUST 29, 2026</p>
+      <p className="eyebrow">LAST UPDATED SEPTEMBER 12, 2026</p>
       <h1>
         Privacy
         <br />
@@ -3392,6 +3471,13 @@ function Privacy() {
             My Ad Center ↗
           </a>{" "}
           and browser cookies through browser settings.
+        </p>
+        <p>
+          The advertising runtime is limited to the homepage, Beginner Guide,
+          and Lighthouse walkthrough. Policy, contact, update, error, and other
+          guide pages do not request the AdSense runtime. The publisher-account
+          verification tag may still appear in page metadata so Google can
+          verify site ownership.
         </p>
       </section>
       <section>
@@ -3467,6 +3553,102 @@ function Terms() {
     </article>
   );
 }
+function Updates() {
+  return (
+    <article className="article policy-page update-page">
+      <Crumb>Updates</Crumb>
+      <p className="eyebrow">CURRENT RELEASE REFERENCE · SEPTEMBER 12, 2026</p>
+      <h1>
+        How to Fish
+        <br />
+        <i>Patch 1.0.12 Guide Status</i>
+      </h1>
+      <p className="standfirst">
+        Patch 1.0.12, released September 4, is the current maintenance
+        reference for this walkthrough. It adds Steam Cloud support and changes
+        several mechanics that touch the Piranha, Tuna, dropped items, voice
+        chat, frame-rate behavior, music loading, and final-boss damage.
+      </p>
+      <section>
+        <h2>What changed in Patch 1.0.12</h2>
+        <div className="editorial-grid">
+          <article>
+            <b>Steam Cloud saves</b>
+            <p>
+              Existing saves need one normal play-and-exit cycle on their
+              original PC before they upload. Recovery advice now treats Cloud
+              sync as a backup aid, not proof that a missing quest object can be
+              restored automatically.
+            </p>
+          </article>
+          <article>
+            <b>Piranha and Tuna balance</b>
+            <p>
+              Piranha was rebalanced and Tuna was slightly nerfed. The stable
+              summon, landing, body-protection, and hand-in routes remain useful,
+              but old hit counts and damage assumptions are not published as
+              current facts.
+            </p>
+          </article>
+          <article>
+            <b>Dropped-item velocity limit</b>
+            <p>
+              The new limit should make physical items harder to lose. Players
+              should still land bosses on flat ground, inspect the unique drop,
+              and complete the NPC hand-in before handling ordinary loot.
+            </p>
+          </article>
+          <article>
+            <b>Final-boss explosive damage</b>
+            <p>
+              Explosives should now damage the final boss even when they land on
+              its tail. The normal ranged route can use that fix; the Handyman
+              achievement route remains a separate bare-hands attempt.
+            </p>
+          </article>
+        </div>
+      </section>
+      <section>
+        <h2>How older gameplay footage is handled</h2>
+        <p>
+          Some owner-provided recordings were captured on Patches 1.0.8,
+          1.0.9, or 1.0.10. Those frames can still prove a visible location,
+          NPC, item name, quest dependency, or attack tell. They cannot prove
+          that an old price, damage value, animation shortcut, drop behavior,
+          or weapon balance remains unchanged in 1.0.12.
+        </p>
+        <p>
+          For that reason, the site keeps the recorded build beside
+          version-sensitive techniques and uses Patch 1.0.12 only as the current
+          release reference. A route is not labeled retested unless a new run
+          actually reproduces it. This distinction is more useful than silently
+          replacing every older patch number with the newest one.
+        </p>
+      </section>
+      <section>
+        <h2>Pages affected by the current patch</h2>
+        <ul>
+          <li><a href="/bosses/giant-piranha">Giant Piranha</a>: recheck combat pace and avoid fixed hit-count claims.</li>
+          <li><a href="/creatures/tuna">Tuna</a>: preserve the route body, but treat older combat difficulty as historical.</li>
+          <li><a href="/guides/lost-boss-items">Lost boss items</a>: use the new velocity limit and Steam Cloud as supporting safeguards, not guarantees.</li>
+          <li><a href="/bosses/mutated-bowhead-whale">Mutated Bowhead Whale</a>: final-boss explosives now have an official tail-hit fix.</li>
+          <li><a href="/guides/tips-and-tricks">Tips and tricks</a>: movement and animation shortcuts remain labeled as 1.0.10 observations until retested.</li>
+        </ul>
+      </section>
+      <section>
+        <h2>Publication rule for future updates</h2>
+        <p>
+          Stable quest order is updated only when an objective or a verified run
+          changes it. Patch-sensitive claims need a visible current-build result
+          before they are promoted. If the evidence is incomplete, the guide
+          states the boundary or leaves the value out. Use the
+          <a href="/contact"> contact page</a> to report a different 1.0.12
+          result with the page URL and exact objective state.
+        </p>
+      </section>
+    </article>
+  );
+}
 function NotFound() {
   return (
     <section className="hub empty">
@@ -3501,7 +3683,6 @@ export function App({ initialPath }: { initialPath?: string }) {
       "/locations/rocks": RocksGuide,
       "/locations/volcano": VolcanoGuide,
       "/guides/reel-of-fortune": ReelOfFortuneGuide,
-      "/guides/casino-money-route": CasinoMoneyRouteGuide,
       "/guides/mutated-whale-handyman": MutatedWhaleHandymanGuide,
       "/guides/tips-and-tricks": TipsAndTricksGuide,
       "/lures": Lures,
@@ -3519,6 +3700,7 @@ export function App({ initialPath }: { initialPath?: string }) {
       "/contact": Contact,
       "/privacy": Privacy,
       "/terms": Terms,
+      "/updates": Updates,
     }[path] || NotFound;
   return (
     <>
@@ -3526,6 +3708,7 @@ export function App({ initialPath }: { initialPath?: string }) {
       <Header />
       <main>
         <Page />
+        {articlePaths.has(path) && <EditorialByline path={path} />}
       </main>
       <Footer />
     </>

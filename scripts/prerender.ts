@@ -15,7 +15,6 @@ const articlePaths = new Set([
   "/locations/rocks",
   "/locations/volcano",
   "/guides/reel-of-fortune",
-  "/guides/casino-money-route",
   "/guides/mutated-whale-handyman",
   "/guides/tips-and-tricks",
   "/bosses/spider-crab",
@@ -27,7 +26,9 @@ const articlePaths = new Set([
   "/creatures/bowhead-whale",
   "/guides/lost-boss-items",
   "/guides/money-and-cooking",
+  "/updates",
 ]);
+const monetizedPaths = new Set(["/", "/beginner-guide", "/locations/lighthouse"]);
 const collectionPaths = new Set([
   "/creatures",
   "/bosses",
@@ -56,7 +57,6 @@ const escape = (value: string) =>
 const template = await readFile("dist/index.html", "utf8");
 for (const path of Object.keys(pageMeta)) {
   const meta = pageMeta[path];
-  const noindex = path === "/guides/casino-money-route";
   const canonical = `${domain}${path}`;
   const image = meta.image ? `${domain}${meta.image}` : undefined;
   if (meta.image) await stat(`public${meta.image}`);
@@ -70,7 +70,9 @@ for (const path of Object.keys(pageMeta)) {
           mainEntityOfPage: canonical,
           image,
           dateModified:
-            ["/creatures/tuna", "/creatures/bowhead-whale", "/guides/lost-boss-items", "/guides/money-and-cooking"].includes(path)
+            ["/updates", "/bosses/spider-crab"].includes(path)
+              ? "2026-09-12"
+              : ["/creatures/tuna", "/creatures/bowhead-whale", "/guides/lost-boss-items", "/guides/money-and-cooking"].includes(path)
               ? "2026-09-03"
               : path === "/guides/tips-and-tricks" || path === "/locations/desert"
               ? "2026-09-01"
@@ -81,7 +83,11 @@ for (const path of Object.keys(pageMeta)) {
               : path === "/locations/forest"
               ? "2026-08-29"
               : "2026-08-28",
-          author: { "@type": "Organization", name: "How to Fish Walkthrough" },
+          author: {
+            "@type": "Person",
+            name: "How to Fish Walkthrough Editor",
+            url: `${domain}/about`,
+          },
           about: { "@type": "VideoGame", name: "How to Fish" },
         }
       : {
@@ -138,7 +144,10 @@ for (const path of Object.keys(pageMeta)) {
   const socialImage = image
     ? `<meta property="og:image" content="${image}"><meta name="twitter:image" content="${image}">`
     : "";
-  const head = `<meta name="description" content="${escape(meta.description)}"><meta name="robots" content="${noindex ? "noindex,follow" : "index,follow,max-image-preview:large"}"><link rel="canonical" href="${canonical}"><meta property="og:title" content="${escape(meta.title)}"><meta property="og:description" content="${escape(meta.description)}"><meta property="og:type" content="${type === "Article" ? "article" : "website"}"><meta property="og:url" content="${canonical}">${socialImage}<meta name="twitter:card" content="summary_large_image"><script id="ld-json" type="application/ld+json">${jsonLd}</script>`;
+  const adRuntime = monetizedPaths.has(path)
+    ? `<script id="adsense-runtime" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5329936944958399" crossorigin="anonymous"></script>`
+    : "";
+  const head = `<meta name="description" content="${escape(meta.description)}"><meta name="robots" content="index,follow,max-image-preview:large"><link rel="canonical" href="${canonical}"><meta property="og:title" content="${escape(meta.title)}"><meta property="og:description" content="${escape(meta.description)}"><meta property="og:type" content="${type === "Article" ? "article" : "website"}"><meta property="og:url" content="${canonical}">${socialImage}<meta name="twitter:card" content="summary_large_image">${adRuntime}<script id="ld-json" type="application/ld+json">${jsonLd}</script>`;
   const markup = renderToString(
     React.createElement(App, { initialPath: path }),
   );
