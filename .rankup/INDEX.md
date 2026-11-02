@@ -2,19 +2,19 @@
 
 - 项目：How to Fish Walkthrough
 - 最近更新：2026-11-02
-- 当前阶段：5 — COS 私有媒体鉴权与生产密钥已配置，等待契约对象与真实播放验收
+- 当前阶段：5 — 第一级 Yellow 私有视频已接通并通过真实播放验收
 - 当前目标：保留现有攻略站并把 Wow Family 作为 `/english/` 子应用合入同一 Vercel 仓库，媒体改用腾讯云 COS 契约
 - 下一入口：PROJECT.md
 
 ## 接力
 
-- 当前任务：先把已上传的第一级 Yellow 33 个视频映射到 `/english/` 私有播放链路，并完成真实媒体验收。
-- 验收：33 个课程 ID 与 COS 原对象逐项对应；仍只允许目录白名单签名；本地测试/构建通过；Vercel 正式部署后至少验证首集与下一集真实播放、Range/seek 和失败提示。
+- 当前任务：第一级 Yellow 33 个视频映射与真实媒体验收已完成，等待用户复测后决定是否按相同模式接入后续级别。
+- 验收：33 个课程 ID 与 COS 原对象逐项对应；目录白名单签名；本地完整测试/构建通过；Vercel 正式部署后已验证首集、Garden、特殊引号文件名、拖动续播和自动下一集。
 - 约束：桶 `english-1257786947` / `ap-hongkong` 保持私有；不复制、移动或删除原始视频，不提交或输出 SecretId、SecretKey、访问码、会话密钥，不覆盖仓库未归属改动；只扩大到第一级现有对象的只读权限。
 - 部署设计：`docs/unified-wow-deployment.md`；私有 COS 鉴权新设计：`docs/private-cos-auth.md`。
-- 当前状态：提交 `b764160` 已以最新项目设置重新部署为 Vercel Production Ready。Vercel Production 已配置家庭访问、会话签名和 COS 服务端变量；腾讯云子用户 `wow-english-vercel-signer` 仅直接关联自定义策略 `WowEnglishVercelGetLessons`，权限限定为 `english-1257786947/lessons/*` 的 `GetObject`。正式域已生成带签名的默认 COS URL，且 COS 返回 `NoSuchKey` 而非 `AccessDenied`，证明登录、会话、白名单、签名和权限链路已生效。当前桶内目录对象未映射到应用契约，精确对象 `lessons/c17532fcfabb66fc.mp4` 不存在，故真实播放、CORS、Range 206 和 seek 仍未通过。
-- 阻塞：缺少与课程 ID 对应的 `lessons/<lessonId>.mp4` 对象；默认 COS 域名的浏览器预览限制和真实 Range 行为仍需用存在的媒体对象验证。CAM 子用户还有一把创建时未保存 SecretKey 的旧密钥，当前未删除或禁用。
-- 下一条要执行的动作：生成第一级 33 个课程 ID → `Wow/01.第一级 黄色Wow!Yellow（3-4岁）33集全/<原文件名>` 映射并通过本地安全测试；随后把 CAM 策略只读范围扩到该目录、部署并做真实播放验收。
+- 当前状态：提交 `b4d3634` 已部署为 Vercel Production Ready。第一级 33 个课程 ID 已映射到 `Wow/01.第一级 黄色Wow!Yellow（3-4岁）33集全/<原文件名>`；CAM 策略版本 2 只增加该目录 `GetObject`，不含列举、写入或删除。正式域实测首集元数据 234.858 秒、播放推进、拖动至 55.6 秒后续播，播完自动进入第 2 集并继续播放；Garden 示例加载 286.293 秒并真实播放；含单引号文件名的第 12 集也正常加载。未直接记录 HTTP 206 状态，但跨段 seek 已成功。
+- 阻塞：无第一级播放阻塞。CAM 子用户仍有一把创建时未保存 SecretKey 的旧密钥，当前未删除或禁用；后续级别尚未增加映射或只读范围。
+- 下一条要执行的动作：由用户在正式域复测第一级；确认体验后，按同样的显式课程映射和逐级只读策略接入第二级，不复制或重命名 COS 原对象。
 
 ## 推荐读取顺序
 
@@ -31,6 +31,7 @@
 
 ## 最近变化
 
+- 2026-11-02：第一级 Yellow 33 集按原 COS 对象名接入私有签名播放；本地 12 项测试和 241 课静态断言通过，正式域完成首集播放、seek、自动下一集、Garden 和特殊文件名验收。
 - 2026-11-02：完成 Wow Family 私有 COS 的生产配置：建立仅允许 `lessons/*` `GetObject` 的 CAM 子用户与策略，密钥直接写入 Vercel Secret，重新部署后正式域成功生成签名 URL；精确对象缺失返回 `NoSuchKey`，未宣称真实播放成功。
 - 2026-09-04：补齐首页 1280px OG/Twitter 分享图、全站 Meta Description 长度门禁及所有正文图片的 alt/固有尺寸门禁；生产审计 28/28 通过。GSC 重新提交 sitemap，确认发现 28 URL，并将 9 个新增页面全部加入优先抓取队列。
 - 2026-09-03：发布 Tuna、Bowhead Whale、遗失 Boss 任务物/不刷新排错、Money & Cooking 四篇深度攻略；线上 sitemap 扩展到 28 URL，全站生产审计 28/28 无坏页、断图或重复标题。
