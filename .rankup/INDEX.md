@@ -8,13 +8,13 @@
 
 ## 接力
 
-- 当前任务：完成 `/english/` 私有 COS 的契约对象映射和真实媒体验收；鉴权代码与生产密钥已部署。
-- 验收：未登录拒绝、会话和课程对象白名单、5 分钟签名、本地测试/构建、Vercel 正式部署、生产安全降级与独立审查通过；桶为空时不宣称真实播放成功。
-- 约束：桶 `english-1257786947` / `ap-hongkong` 保持私有；不上传文件，不提交或输出 SecretId、SecretKey、访问码、会话密钥，不覆盖仓库未归属改动。
+- 当前任务：先把已上传的第一级 Yellow 33 个视频映射到 `/english/` 私有播放链路，并完成真实媒体验收。
+- 验收：33 个课程 ID 与 COS 原对象逐项对应；仍只允许目录白名单签名；本地测试/构建通过；Vercel 正式部署后至少验证首集与下一集真实播放、Range/seek 和失败提示。
+- 约束：桶 `english-1257786947` / `ap-hongkong` 保持私有；不复制、移动或删除原始视频，不提交或输出 SecretId、SecretKey、访问码、会话密钥，不覆盖仓库未归属改动；只扩大到第一级现有对象的只读权限。
 - 部署设计：`docs/unified-wow-deployment.md`；私有 COS 鉴权新设计：`docs/private-cos-auth.md`。
 - 当前状态：提交 `b764160` 已以最新项目设置重新部署为 Vercel Production Ready。Vercel Production 已配置家庭访问、会话签名和 COS 服务端变量；腾讯云子用户 `wow-english-vercel-signer` 仅直接关联自定义策略 `WowEnglishVercelGetLessons`，权限限定为 `english-1257786947/lessons/*` 的 `GetObject`。正式域已生成带签名的默认 COS URL，且 COS 返回 `NoSuchKey` 而非 `AccessDenied`，证明登录、会话、白名单、签名和权限链路已生效。当前桶内目录对象未映射到应用契约，精确对象 `lessons/c17532fcfabb66fc.mp4` 不存在，故真实播放、CORS、Range 206 和 seek 仍未通过。
 - 阻塞：缺少与课程 ID 对应的 `lessons/<lessonId>.mp4` 对象；默认 COS 域名的浏览器预览限制和真实 Range 行为仍需用存在的媒体对象验证。CAM 子用户还有一把创建时未保存 SecretKey 的旧密钥，当前未删除或禁用。
-- 下一条要执行的动作：将一条有分发权的视频上传或复制为 `lessons/c17532fcfabb66fc.mp4`，再验证签名 GET、Range 206、seek 和真实浏览器播放；确认新密钥稳定后再单独授权清理旧密钥。
+- 下一条要执行的动作：生成第一级 33 个课程 ID → `Wow/01.第一级 黄色Wow!Yellow（3-4岁）33集全/<原文件名>` 映射并通过本地安全测试；随后把 CAM 策略只读范围扩到该目录、部署并做真实播放验收。
 
 ## 推荐读取顺序
 

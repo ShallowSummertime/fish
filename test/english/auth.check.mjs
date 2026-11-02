@@ -16,7 +16,7 @@ const token = async (claims={}) => new SignJWT({}).setProtectedHeader({alg:'HS25
 const cookie = t => `__Host-wow_session=${t}`;
 test('login, cookie, logout and offline COS signing', async () => {
  let r = await call(login,{code}); assert.equal(r.status,200); assert.match(r.headers.get('cache-control'),/no-store/); const c=r.headers.get('set-cookie'); assert.match(c,/Path=\/; HttpOnly; Secure; SameSite=Strict; Max-Age=43200/);
- r=await call(playback,{lessonId:'616d50ebbf266515'},{Cookie:c.split(';')[0]}); assert.equal(r.status,200); const data=await r.json(), u=new URL(data.url); assert.equal(u.host,'english-1257786947.cos.ap-hongkong.myqcloud.com'); assert.equal(u.pathname,'/lessons/616d50ebbf266515.mp4'); const [start,end]=u.searchParams.get('q-sign-time').split(';').map(Number); assert.equal(end-start,300); assert.equal(u.searchParams.get('q-header-list'),'host'); assert(Date.parse(data.expiresAt)<=end*1000);
+ r=await call(playback,{lessonId:'616d50ebbf266515'},{Cookie:c.split(';')[0]}); assert.equal(r.status,200); const data=await r.json(), u=new URL(data.url); assert.equal(u.host,'english-1257786947.cos.ap-hongkong.myqcloud.com'); assert.equal(decodeURIComponent(u.pathname),'/Wow/01.第一级 黄色Wow!Yellow（3-4岁）33集全/001.Wow!Yellow Unit 1 hello video_story.mp4'); const [start,end]=u.searchParams.get('q-sign-time').split(';').map(Number); assert.equal(end-start,300); assert.equal(u.searchParams.get('q-header-list'),'host'); assert(Date.parse(data.expiresAt)<=end*1000);
  process.env.COS_MEDIA_DOMAIN='https://media.example.com'; r=await call(playback,{lessonId:'616d50ebbf266515'},{Cookie:c.split(';')[0]}); assert.equal(new URL((await r.json()).url).host,'media.example.com'); delete process.env.COS_MEDIA_DOMAIN;
  r=await call(logout,{}); assert.equal(r.status,200); assert.match(r.headers.get('set-cookie'),/Max-Age=0/);
 });
@@ -42,6 +42,9 @@ test('session expiry, integrity, scope, and exact catalog authorization', async 
  process.env.COS_MEDIA_DOMAIN='http://bad.test'; assert.equal((await call(playback,{lessonId},{Cookie:cookie(good)})).status,503); delete process.env.COS_MEDIA_DOMAIN;
  assert.throws(()=>buildCatalog({totalLessons:2,levels:[{lessons:[{id:'a',videoKey:'lessons/a.mp4'},{id:'a',videoKey:'lessons/a.mp4'}]}]}));
  assert.throws(()=>buildCatalog({totalLessons:1,levels:[{lessons:[{id:'a',videoKey:'../a'}]}]}));
+ assert.throws(()=>buildCatalog({totalLessons:1,levels:[{lessons:[{id:'a',videoKey:'Wow/01.第一级 黄色Wow!Yellow（3-4岁）33集全/../secret.mp4'}]}]}));
+ assert.throws(()=>buildCatalog({totalLessons:1,levels:[{lessons:[{id:'a',videoKey:'Wow/02.第二级 蓝色Wow!Blue(4-6岁) 33集全/a.mp4'}]}]}));
+ assert.equal(buildCatalog({totalLessons:1,levels:[{lessons:[{id:'a',videoKey:"Wow/01.第一级 黄色Wow!Yellow（3-4岁）33集全/012.Wow!Yellow Unit 4 'toys' - part 2 video_story.mp4"}]}]}).get('a'),"Wow/01.第一级 黄色Wow!Yellow（3-4岁）33集全/012.Wow!Yellow Unit 4 'toys' - part 2 video_story.mp4");
 });
 
 test('streamed body limit and SDK signing errors fail closed without disclosure', async () => {
