@@ -1,11 +1,12 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { createHash } from 'node:crypto';
-import { SignJWT } from 'jose';
+import { decodeJwt, SignJWT } from 'jose';
 import login from '../../api/english/login.js';
 import logout from '../../api/english/logout.js';
 import playback from '../../api/english/playback.js';
 import { buildCatalog } from '../../lib/english/catalog.js';
+import { SESSION_DURATION_SECONDS } from '../../lib/english/auth.js';
 const origin = 'https://site.test';
 const code = 'test-only-access-code-with-strong-randomness';
 const key = Buffer.alloc(32, 7);
@@ -15,7 +16,7 @@ const call = (handler, body, headers, method) => handler.fetch(request(body,head
 const token = async (claims={}) => new SignJWT({}).setProtectedHeader({alg:'HS256'}).setIssuer('wow-family').setAudience('wow-family-english').setSubject('family').setIssuedAt(claims.iat ?? Math.floor(Date.now()/1000)).setExpirationTime(claims.exp ?? Math.floor(Date.now()/1000)+60).sign(key);
 const cookie = t => `__Host-wow_session=${t}`;
 test('login, cookie, logout and offline COS signing', async () => {
- let r = await call(login,{code}); assert.equal(r.status,200); assert.match(r.headers.get('cache-control'),/no-store/); const c=r.headers.get('set-cookie'); assert.match(c,/Path=\/; HttpOnly; Secure; SameSite=Strict; Max-Age=43200/);
+ let r = await call(login,{code}); assert.equal(r.status,200); assert.match(r.headers.get('cache-control'),/no-store/); const c=r.headers.get('set-cookie'); assert.equal(SESSION_DURATION_SECONDS,2592000); assert.match(c,/Path=\/; HttpOnly; Secure; SameSite=Strict; Max-Age=2592000/); const session=decodeJwt(c.split(';')[0].split('=')[1]); assert.equal(session.exp-session.iat,2592000);
  r=await call(playback,{lessonId:'616d50ebbf266515'},{Cookie:c.split(';')[0]}); assert.equal(r.status,200); const data=await r.json(), u=new URL(data.url); assert.equal(u.host,'english-1257786947.cos.ap-hongkong.myqcloud.com'); assert.equal(decodeURIComponent(u.pathname),'/Wow/01.第一级 黄色Wow!Yellow（3-4岁）33集全/001.Wow!Yellow Unit 1 hello video_story.mp4'); const [start,end]=u.searchParams.get('q-sign-time').split(';').map(Number); assert.equal(end-start,300); assert.equal(u.searchParams.get('q-header-list'),'host'); assert(Date.parse(data.expiresAt)<=end*1000);
  process.env.COS_MEDIA_DOMAIN='https://media.example.com'; r=await call(playback,{lessonId:'616d50ebbf266515'},{Cookie:c.split(';')[0]}); assert.equal(new URL((await r.json()).url).host,'media.example.com'); delete process.env.COS_MEDIA_DOMAIN;
  r=await call(logout,{}); assert.equal(r.status,200); assert.match(r.headers.get('set-cookie'),/Max-Age=0/);
@@ -34,7 +35,7 @@ test('request validation, malformed bodies and no configuration', async () => {
 });
 test('session expiry, integrity, scope, and exact catalog authorization', async () => {
  const lessonId='616d50ebbf266515'; assert.equal((await call(playback,{lessonId})).status,401);
- const good=await token(); for (const t of [good+'x', await token({iat:1,exp:2}), await new SignJWT({}).setProtectedHeader({alg:'HS256'}).setIssuer('wrong').setAudience('wow-family-english').setSubject('family').setIssuedAt().setExpirationTime('1h').sign(key)]) assert.equal((await call(playback,{lessonId},{Cookie:cookie(t)})).status,401);
+ const now=Math.floor(Date.now()/1000), good=await token(); for (const t of [good+'x', await token({iat:1,exp:2}), await token({iat:now,exp:now+SESSION_DURATION_SECONDS+1}), await new SignJWT({}).setProtectedHeader({alg:'HS256'}).setIssuer('wrong').setAudience('wow-family-english').setSubject('family').setIssuedAt().setExpirationTime('1h').sign(key)]) assert.equal((await call(playback,{lessonId},{Cookie:cookie(t)})).status,401);
  assert.equal((await call(playback,{lessonId},{Cookie:`${cookie(good)}; ${cookie(good)}`})).status,401);
  for (const id of ['../x','not-in-catalog','lessons/616d50ebbf266515.mp4',null]) assert.equal((await call(playback,{lessonId:id},{Cookie:cookie(good)})).status,404);
  assert.equal((await call(playback,{lessonId,key:'x'},{Cookie:cookie(good)})).status,400);
