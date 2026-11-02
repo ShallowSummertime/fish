@@ -43,3 +43,60 @@ html,body{width:100%;overflow-x:clip}
 .filters label:first-child{min-width:0}
 .player{width:100%;max-width:min(1600px,max(880px,calc((100dvh - 180px)*16/9)))}
 @media(max-width:700px){.filters{grid-template-columns:minmax(0,1fr)}.player{max-width:none}}
+
+/* Lesson player: the video is the primary task, with settings and progress kept outside the picture. */
+.lesson-content{padding-top:clamp(18px,3vw,36px);padding-bottom:56px}
+.lesson-page{width:100%;max-width:1600px;margin:0 auto}
+.lesson-page>.back{display:inline-flex;align-items:center;margin:0 0 18px;padding:.55rem .7rem;border:1px solid transparent;font-weight:650}
+.lesson-page>.back:hover{background:#f0edfc;color:#5143a7}
+.lesson-heading{margin-bottom:20px}
+.lesson-heading h1{max-width:24ch;margin:.35rem 0 0;font-size:clamp(1.7rem,3vw,2.8rem);line-height:1.12;letter-spacing:-.025em}
+.lesson-heading .eyebrow{display:block}
+.player{margin:0;max-width:none}
+.video-stage{box-shadow:0 22px 60px rgba(38,34,61,.15)}
+.player-controls{display:grid;grid-template-columns:auto minmax(120px,1fr) auto auto auto;align-items:center;gap:10px;padding:12px clamp(12px,2vw,20px);background:linear-gradient(180deg,rgba(25,22,38,0),rgba(25,22,38,.94) 35%)}
+.player-controls button{white-space:nowrap}
+.player-controls .seek-label{min-width:0}
+.player-tools{display:flex;align-items:center;justify-content:space-between;gap:16px;margin-top:14px;padding:14px 16px;border:1px solid #e5e0ee;border-radius:14px;background:#fff}
+.player-tools label{display:flex;align-items:center;gap:12px;color:#625c74;font-size:.9rem;font-weight:650}
+.player-tools select{min-height:44px;padding:.55rem 2.2rem .55rem .75rem;border:1px solid #d8d1e8;border-radius:9px;background:#f8f6fc;color:#30294f}
+.player-feedback{display:flex;align-items:center;gap:10px;min-height:24px}
+.player-feedback #video-status{flex:1;margin:0}
+.learning-panel{display:flex;align-items:center;justify-content:space-between;gap:24px;margin-top:18px;padding:20px;border:1px solid #e5e0ee;border-radius:16px;background:#fff}
+.learning-panel strong{display:block;color:#30294f}
+.learning-panel .notice{margin:.25rem 0 0}
+.learning-panel .primary{min-width:132px}
+.primary,.secondary,#logout,#retry-video,.language,.back{transition:transform .12s ease,background-color .12s ease,border-color .12s ease}
+.primary:active,.secondary:active,#logout:active,#retry-video:active,.language:active,.back:active{transform:scale(.98)}
+
+@media(max-width:700px){
+  .header{display:grid;grid-template-columns:minmax(0,1fr) auto;padding:10px 16px 8px;gap:6px 10px}
+  .brand{font-size:1.1rem}
+  .language{grid-column:2;grid-row:1;min-height:40px;margin-left:0;padding:.45rem .7rem}
+  .header nav{grid-column:1/-1;grid-row:2;order:initial;gap:4px;margin-top:2px}
+  .header nav button{min-height:40px;padding:.45rem .65rem}
+  .lesson-content{padding:14px 12px 32px}
+  .lesson-page>.back{min-height:40px;margin-bottom:12px;padding:.35rem .45rem}
+  .lesson-heading{margin-bottom:14px;padding-inline:4px}
+  .lesson-heading h1{font-size:clamp(1.55rem,7vw,2rem);line-height:1.16}
+  .lesson-heading .eyebrow{font-size:.7rem;line-height:1.4}
+  .video-stage{border-radius:14px;box-shadow:0 14px 32px rgba(38,34,61,.14)}
+  .player-controls{grid-template-columns:auto minmax(0,1fr) auto;gap:6px;padding:24px 8px 8px}
+  .player-controls #mute,#time-display{display:none}
+  .player-controls button{min-height:40px;padding:.4rem .6rem;font-size:.88rem}
+  .player-controls input[type=range]{min-height:40px}
+  .player-tools{margin-top:10px;padding:10px 12px}
+  .player-tools label{flex:1;justify-content:space-between;gap:8px}
+  .player-tools select{max-width:158px;min-width:0}
+  #logout{min-height:40px;padding:.45rem .65rem;white-space:nowrap}
+  .player-feedback{min-height:16px}
+  .learning-panel{align-items:stretch;flex-direction:column;gap:14px;margin-top:12px;padding:16px}
+  .learning-panel .primary{width:100%}
+}
+
+@media(max-width:390px){
+  .player-tools{align-items:stretch;flex-direction:column;gap:8px}
+  .player-tools label{width:100%}
+  .player-tools select{max-width:none;flex:1}
+  #logout{align-self:flex-end;border-color:transparent;background:transparent}
+}
