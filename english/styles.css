@@ -33,3 +33,13 @@ button:disabled { opacity:.5; cursor:not-allowed }
 .sr-only { position:absolute; width:1px; height:1px; overflow:hidden; clip:rect(0,0,0,0); white-space:nowrap }
 @media(max-width:700px){ .hero { min-width:0 } .hero-count { flex-shrink:0 } .player-controls { left:0; right:0; justify-content:flex-start; gap:6px } .player-controls label { flex-wrap:nowrap } .player-controls .seek-label { min-width:80px } .selection-bar button { flex:1 1 auto } }
 @media(prefers-reduced-motion:reduce){ *, *::before, *::after { scroll-behavior:auto !important; transition-duration:0.01ms !important; animation-duration:0.01ms !important; animation-iteration-count:1 !important } }
+
+/* Fluid application shell: use the available screen instead of preserving a desktop-sized island. */
+html,body{width:100%;overflow-x:clip}
+.header{padding-inline:clamp(16px,3vw,72px)}
+.content{width:100%;max-width:none;padding-inline:clamp(16px,3vw,72px)}
+.grid{grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr))}
+.filters{display:grid;grid-template-columns:minmax(280px,2fr) minmax(210px,1fr);align-items:end}
+.filters label:first-child{min-width:0}
+.player{width:100%;max-width:min(1600px,max(880px,calc((100dvh - 180px)*16/9)))}
+@media(max-width:700px){.filters{grid-template-columns:minmax(0,1fr)}.player{max-width:none}}

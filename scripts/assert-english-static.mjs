@@ -29,4 +29,8 @@ assert.equal(catalog.levels.find(level => level.id === 'level-1').lessons.length
 assert.deepEqual(catalog.levels.map(level => level.lessons.length),[33,33,33,32,33,25,26,26]);
 const manifest=JSON.parse(await readFile(`${root}/manifest.webmanifest`));
 assert.equal(manifest.scope,'/english/'); assert.equal(manifest.start_url,'/english/'); assert.equal(manifest.id,'/english/');
+const styles=await readFile(`${root}/styles.css`,'utf8');
+assert.match(styles,/\.content\{width:100%;max-width:none;/, 'English shell must remain fluid on wide screens');
+assert.match(styles,/grid-template-columns:repeat\(auto-fit,minmax\(min\(100%,260px\),1fr\)\)/, 'Lesson columns must adapt to available width');
+assert.match(styles,/max-width:min\(1600px,max\(880px,calc\(\(100dvh - 180px\)\*16\/9\)\)\)/, 'Player must adapt to viewport width and height');
 console.log(`English static assertions passed: ${lessons.length} lessons`);
