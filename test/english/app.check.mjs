@@ -18,7 +18,7 @@ test('plan empty state, contextual progress, search and selection pagination', a
  document.querySelector('#toggle-select').click(); assert.equal(document.activeElement.id,'toggle-select'); document.querySelector('#select-visible').click(); assert.equal(document.activeElement.id,'select-visible');
  document.querySelector('#clear-selection').click(); assert.equal(document.activeElement.id,'clear-selection'); document.querySelector('#select-visible').click();
  assert.equal(document.querySelectorAll('[data-select]:checked').length,24); document.querySelector('#next').click(); assert.equal(document.activeElement.id,'previous');
- assert(document.querySelector('#add-selected').textContent.includes('24')); document.querySelector('#add-selected').click();
+ assert(document.querySelector('#add-selected').textContent.includes('24')); document.querySelector('#add-selected').click(); assert.equal(document.activeElement.id,'toggle-select');
  assert.match(document.querySelector('.feedback').textContent,/24/); assert.equal(document.querySelector('.selection-bar'),null);
  document.querySelector('[data-view="plan"]').click(); assert.equal(document.querySelector('.hero-count strong').textContent,'24'); assert.match(document.querySelector('.hero p').textContent,/0 \/ 24/);
  dom.window.close();
