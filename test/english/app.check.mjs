@@ -21,6 +21,8 @@ test('plan empty state, contextual progress, search and selection pagination', a
  assert(document.querySelector('#add-selected').textContent.includes('24')); document.querySelector('#add-selected').click(); assert.equal(document.activeElement.id,'toggle-select');
  assert.match(document.querySelector('.feedback').textContent,/24/); assert.equal(document.querySelector('.selection-bar'),null);
  document.querySelector('[data-view="plan"]').click(); assert.equal(document.querySelector('.hero-count strong').textContent,'24'); assert.match(document.querySelector('.hero p').textContent,/0 \/ 24/);
+ document.querySelector('[data-view="library"]').click(); document.querySelector('#toggle-select').click(); const weekly=document.querySelector('[data-select]'); weekly.checked=true; weekly.dispatchEvent(new dom.window.Event('change')); document.querySelector('#add-selected-week').click();
+ assert.match(document.querySelector('.feedback').textContent,/本周计划/); document.querySelector('[data-view="week"]').click(); assert.equal(document.querySelector('.hero-count strong').textContent,'1'); assert.match(document.querySelector('.hero p').textContent,/本周已完成 0 \/ 1/); assert.equal(document.querySelectorAll('.plan-grid .card').length,1);
  dom.window.close();
 });
 test('catalog, plan, deep link, completion and bilingual UI work without old requests', async () => {
@@ -56,7 +58,7 @@ test('batch plan changes and confirmed clear preserve learning history', async (
  initial.planProgress[`week:${week}`] = [b.id]; initial.completed[a.id] = true; initial.completed[b.id] = true; initial.watched[a.id] = 17; initial.watched[b.id] = 42;
  localStorage.setItem('wow-family-progress-v1',JSON.stringify(initial));
  await import('../../english/app.js?batch');
- document.querySelector('[data-view="plan"]').click(); assert.equal(document.querySelector('#clear-plan').disabled,false, 'week-only plan can be cleared');
+ document.querySelector('[data-view="week"]').click(); assert.equal(document.querySelectorAll('.plan-grid .card').length,1); assert.equal(document.querySelector('#clear-plan').disabled,false, 'week-only plan can be cleared');
  document.querySelector('[data-view="library"]').click();
  document.querySelector('#toggle-select').click();
  for (const item of [a,b]) { const box=document.querySelector(`[data-select="${item.id}"]`); box.checked=true; box.dispatchEvent(new dom.window.Event('change')); }
