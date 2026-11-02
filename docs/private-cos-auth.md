@@ -1,10 +1,10 @@
 # Wow Family 私有 COS 鉴权设计
 
-状态：2026-11-02 已完成本地实现；尚未部署或进行真实 COS 播放验收。此前 `unified-wow-deployment.md` 中公共媒体配置属于 public web v1 的历史范围，本设计取代其未来公开媒体方案，不代表已上线。
+状态：2026-11-02 提交 `945ad84` 已部署为 Vercel Production Ready。正式域的根站、英语页、课程深链、重定向、真实 404，以及缺配置时 API `503 NOT_CONFIGURED` 与页面安全降级均已验证；Vercel 项目环境变量当前为空。真实 COS 对象、GET/Range、CORS、自定义域名和浏览器播放尚未验证。此前 `unified-wow-deployment.md` 中公共媒体配置属于 public web v1 的历史范围，本设计取代其未来公开媒体方案。
 
 ## 边界与现状
 
-- `/english/` 是独立静态应用，目录 `english/data/catalog.json` 当前有 241 课，键为 `lessons/<id>.mp4`；客户端 `english/app.js` 目前从 `config.json` 和 `mediaUrl` 拼公开地址，自动下一集也走该路径。`scripts/assert-english-static.mjs` 当前禁止所有 `/api/` 字符串，需改为只允许本设计三个同源端点并继续禁止旧端点和公开回退。
+- `/english/` 是独立静态应用，目录 `english/data/catalog.json` 当前有 241 课，键为 `lessons/<id>.mp4`。public web v1 曾从 `config.json` 和 `mediaUrl` 拼公开地址；当前实现已移除该路径，只允许本设计的三个同源端点，并由静态检查继续禁止旧端点和公开回退。
 - 用户提供：私有桶 `english-1257786947`，`ap-hongkong`，默认域名 `https://english-1257786947.cos.ap-hongkong.myqcloud.com`；CORS 允许生产源 `https://howtofishwalkthrough.com` 的 GET/HEAD/Range；桶为空，自定义媒体域名未完成。上述为用户提供的状态，未由本轮联网验证。
 - 登录保护签发接口，签名 URL 本身是有效期内的 bearer 凭证，可被已登录者转发；登出或会话撤销不能撤回已签发 URL。此方案不是 DRM，也不隐藏浏览器网络面板中的地址；COS 预签名 URL 包含 `q-ak`（SecretId 标识）和短期签名参数，这是 bearer 凭证的一部分，并非 SecretKey。SecretKey 和长期签名能力不得进入前端；测试、日志和文档不得输出真实 q-ak 或完整签名 URL。如需隐藏该标识，需要另行设计媒体代理。仅在明确有权分发的素材上启用。
 - 默认域名可能受腾讯云 2024-01-01 后新建桶浏览器预览限制，签名成功不等于 video 可播放。须通过自定义域名及真实对象实测解决或确认；不得以签名、构建、模拟器或部署成功代替验证。
@@ -73,6 +73,6 @@ CAM 最小权限目标仅允许此桶 `lessons/*` 的 `cos:GetObject`；不允�
 
 上线前记录当前已验证 production deployment ID/SHA、域名与环境变量名称（无值），按目标环境配置秘密并验证受限权限；回滚到上一个已验证部署并核对主域、根站和英语页。旧版 public media 功能不得因旧环境变量在回滚后暴露私有素材：上线前确认 `WOW_PUBLIC_MEDIA_BASE_URL` 在所有环境为空，且桶仍私有；保留现有部署以备回滚。轮换 session secret 吊销所有会话；轮换 CAM 凭据需更新部署并禁旧凭据；短期 URL 最多 300 秒仍可能有效，不能承诺立即撤销。不要删除对象或改变桶公开权限。
 
-未决：真实对象和分发权、2024 年默认域名预览行为及自定义域名配置、生产 secret 和实际 CAM 权限、生产/预览 Origin 与 CORS、Vercel 函数打包、限流能力、浏览器实测播放/Range。所有均未验证；任何缺项对应验收保持 pending。
+未决：真实对象和分发权、2024 年默认域名预览行为及自定义域名配置、生产 secret 和实际 CAM 权限、生产/预览 Origin 与 CORS、限流能力、浏览器实测播放/Range。Vercel 函数已部署并在生产执行安全降级路径，但含完整 secret 的成功签名路径仍未验证；任何缺项对应验收保持 pending。
 
 参考：[腾讯云 Node SDK 预签名](https://cloud.tencent.com/document/product/436/36121)、[腾讯云对象访问 URL](https://intl.cloud.tencent.com/ind/document/product/436/40945)、[Vercel 函数文件打包](https://vercel.com/kb/guide/how-can-i-use-files-in-serverless-functions)、[jose 文档](https://github.com/panva/jose/blob/main/docs/README.md)。
