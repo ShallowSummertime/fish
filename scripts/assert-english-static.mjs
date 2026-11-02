@@ -41,4 +41,5 @@ assert.match(englishApp,/class="player-tools"/, 'Lesson player must render a ded
 assert.match(englishApp,/class="learning-panel"/, 'Lesson progress must render as a grouped action panel');
 assert.match(englishApp,/data-view="week"/, 'Weekly plan must remain available in the global navigation');
 assert.match(englishApp,/id="add-selected-week"/, 'Batch selection must support adding lessons to the weekly plan');
+assert.match(englishApp,/id="center-toggle"/, 'Touch playback must expose a large central play and pause control');
 console.log(`English static assertions passed: ${lessons.length} lessons`);

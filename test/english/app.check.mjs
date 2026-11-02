@@ -99,6 +99,7 @@ test('player decisions, fullscreen, mode persistence and replay', async () => {
  document.querySelector('#add-selected').click();document.querySelector(`[data-open="${a.id}"]`).click();
  await new Promise(resolve=>setTimeout(resolve,0)); const video=document.querySelector('video'), stage=document.querySelector('#video-stage');
  Object.defineProperty(video,'duration',{value:120,configurable:true}); video.currentTime=30; video.dispatchEvent(new dom.window.Event('timeupdate')); const seek=document.querySelector('#seek'); assert.equal(seek.getAttribute('aria-label'),'播放进度'); assert.equal(seek.getAttribute('aria-valuetext'),'0:30，共 2:00'); seek.value='500'; seek.dispatchEvent(new dom.window.Event('input')); assert.equal(seek.getAttribute('aria-valuetext'),'1:00，共 2:00');
+ const centerToggle=document.querySelector('#center-toggle'); assert(centerToggle); video.dispatchEvent(new dom.window.Event('play')); assert.equal(centerToggle.textContent,'暂停'); video.dispatchEvent(new dom.window.Event('pause')); assert.equal(centerToggle.textContent,'播放');
  stage.requestFullscreen=async()=>{full=stage;document.dispatchEvent(new dom.window.Event('fullscreenchange'));};
  stage.dispatchEvent(new dom.window.Event('pointerdown')); assert(document.querySelector('#player-controls').classList.contains('visible'));
  document.querySelector('#fullscreen').click(); await new Promise(resolve=>setTimeout(resolve,0));
