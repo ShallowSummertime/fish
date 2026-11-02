@@ -2,7 +2,7 @@
 
 | name | purpose | environment | provider/storage location | owner | access status | rotated at | next rotation |
 |---|---|---|---|---|---|---|---|
-| `WOW_FAMILY_CODE_SHA256` | Digest of high-entropy family access code | Production | Vercel project environment | project owner | configured | 2026-11-02 | after disclosure or access rotation |
+| `WOW_FAMILY_CODE_SHA256` | Digest of high-entropy family access code | Production | Vercel project environment | project owner | rotated; new raw code stored only in macOS Keychain | 2026-11-02 | after disclosure or access rotation |
 | `WOW_SESSION_SECRET` | Signs 12-hour family sessions | Production | Vercel project environment | project owner | configured | 2026-11-02 | after disclosure; invalidates all sessions |
 | `COS_SECRET_ID` | Restricted CAM identity for COS object reads | Production | Vercel project environment | project owner | configured | 2026-11-02 | per CAM policy or disclosure |
 | `COS_SECRET_KEY` | Restricted CAM key for COS object reads | Production | Vercel project environment | project owner | configured | 2026-11-02 | per CAM policy or disclosure |
