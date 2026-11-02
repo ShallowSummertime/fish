@@ -2,19 +2,11 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
 import { JSDOM } from 'jsdom';
-import { mediaUrl } from '../../english/media.js';
-
-test('COS URLs use a validated public base and encoded object keys', () => {
- assert.equal(mediaUrl('', 'lessons/abc.mp4'), null);
- assert.equal(mediaUrl('https://cdn.test/base/', 'lessons/a b.mp4'), 'https://cdn.test/base/lessons/a%20b.mp4');
- for (const base of ['http://cdn.test/', 'https://user:pass@cdn.test/', 'https://cdn.test/base', 'https://cdn.test/?secret=x']) assert.throws(() => mediaUrl(base,'lessons/a.mp4'));
- for (const key of ['/a', '../a', 'a/../b', 'a//b', 'a\\b']) assert.throws(() => mediaUrl('https://cdn.test/base/',key));
-});
 test('catalog, plan, deep link, completion and bilingual UI work without old requests', async () => {
  const catalog = JSON.parse(await readFile('english/data/catalog.json','utf8'));
  const dom = new JSDOM('<main id="app"></main>', { url:'https://site.test/english/' });
  for (const name of ['window','document','navigator','location','history','localStorage']) Object.defineProperty(globalThis, name, { value: dom.window[name], configurable: true, writable: true });
- const requests=[]; globalThis.fetch = async url => { requests.push(url); return { ok:true, json:async () => url.endsWith('catalog.json') ? catalog : {mediaBaseUrl:''} }; };
+ const requests=[]; globalThis.fetch = async url => { requests.push(url); return url.endsWith('catalog.json') ? {ok:true,json:async()=>catalog} : {ok:false,status:503,json:async()=>({error:{code:'NOT_CONFIGURED'}})}; };
  await import('../../english/app.js');
  assert.equal(document.querySelectorAll('[data-open]').length,catalog.totalLessons);
  const id = catalog.levels[0].lessons[0].id;
@@ -23,13 +15,13 @@ test('catalog, plan, deep link, completion and bilingual UI work without old req
  assert.equal(document.querySelectorAll('[data-open]').length,1);
  document.querySelector(`[data-open="${id}"]`).click();
  assert.equal(new URL(location.href).searchParams.get('lesson'),id);
- assert.match(document.querySelector('[role="status"]').textContent,/视频尚未配置/);
- assert.equal(document.querySelector('video'),null);
+ await new Promise(resolve=>setTimeout(resolve,0)); assert.match(document.querySelector('[role="status"]').textContent,/视频尚未配置/);
+ assert.equal(document.querySelector('video').hasAttribute('src'),false);
  document.querySelector('#complete').click();
  assert.equal(JSON.parse(localStorage.getItem('wow-family-progress-v1')).completed[id],true);
  document.querySelector('#language').click();
- assert.match(document.querySelector('[role="status"]').textContent,/not configured/);
- assert.deepEqual(requests,['/english/data/catalog.json','/english/config.json']);
+ await new Promise(resolve=>setTimeout(resolve,0)); assert.match(document.querySelector('[role="status"]').textContent,/not configured/);
+ assert(requests.includes('/api/english/playback')); assert(!requests.some(x=>x.includes('config.json')));
  dom.window.close();
 });
 
@@ -37,7 +29,7 @@ test('batch plan changes and confirmed clear preserve learning history', async (
  const catalog = JSON.parse(await readFile('english/data/catalog.json','utf8'));
  const dom = new JSDOM('<main id="app"></main>', { url:'https://site.test/english/' });
  for (const name of ['window','document','navigator','location','history','localStorage']) Object.defineProperty(globalThis,name,{value:dom.window[name],configurable:true,writable:true});
- globalThis.fetch = async url => ({ok:true,json:async () => url.endsWith('catalog.json') ? catalog : {mediaBaseUrl:''}});
+ globalThis.fetch = async url => url.endsWith('catalog.json') ? {ok:true,json:async()=>catalog} : {ok:false,status:401,json:async()=>({})};
  const { freshState, dateKey, weekKey } = await import('../../english/state.js');
  const [a,b] = catalog.levels[0].lessons, initial = freshState(), today = dateKey(), week = weekKey();
  initial.plans.week = {key:week,lessonIds:[b.id],reviewLessonIds:[]};
@@ -74,7 +66,7 @@ test('player decisions, fullscreen, mode persistence and replay', async () => {
  const catalog=JSON.parse(await readFile('english/data/catalog.json','utf8'));
  const dom=new JSDOM('<main id="app"></main>',{url:'https://site.test/english/'});
  for (const name of ['window','document','navigator','location','history','localStorage']) Object.defineProperty(globalThis,name,{value:dom.window[name],configurable:true,writable:true});
- globalThis.fetch=async url=>({ok:true,json:async()=>url.endsWith('catalog.json')?catalog:{mediaBaseUrl:'https://cdn.test/base/'}});
+ const signed=[]; globalThis.fetch=async (url,opts)=>url.endsWith('catalog.json')?{ok:true,json:async()=>catalog}:{ok:true,json:async()=>{ if(url.endsWith('playback')) signed.push(JSON.parse(opts.body).lessonId); return {url:'https://media.example.com/video?signature=test',expiresAt:new Date(Date.now()+300000).toISOString()}; }};
  let plays=0; dom.window.HTMLMediaElement.prototype.play=function(){ plays++; this.dispatchEvent(new dom.window.Event('play')); return Promise.resolve(); };
  let full=null; Object.defineProperty(document,'fullscreenElement',{get:()=>full,configurable:true});
  document.exitFullscreen=async()=>{full=null;document.dispatchEvent(new dom.window.Event('fullscreenchange'));};
@@ -82,7 +74,7 @@ test('player decisions, fullscreen, mode persistence and replay', async () => {
  const [a,b]=catalog.levels[0].lessons;
  for (const item of [a,b]) {const box=document.querySelector(`[data-select="${item.id}"]`);box.checked=true;box.dispatchEvent(new dom.window.Event('change'));}
  document.querySelector('#add-selected').click();document.querySelector(`[data-open="${a.id}"]`).click();
- const video=document.querySelector('video'), stage=document.querySelector('#video-stage');
+ await new Promise(resolve=>setTimeout(resolve,0)); const video=document.querySelector('video'), stage=document.querySelector('#video-stage');
  stage.requestFullscreen=async()=>{full=stage;document.dispatchEvent(new dom.window.Event('fullscreenchange'));};
  stage.dispatchEvent(new dom.window.Event('pointerdown')); assert(document.querySelector('#player-controls').classList.contains('visible'));
  document.querySelector('#fullscreen').click(); await new Promise(resolve=>setTimeout(resolve,0));
@@ -90,14 +82,82 @@ test('player decisions, fullscreen, mode persistence and replay', async () => {
  document.querySelector('#fullscreen').click(); await new Promise(resolve=>setTimeout(resolve,0)); assert.equal(document.querySelector('#fullscreen').getAttribute('aria-pressed'),'false');
  const mode=document.querySelector('#playback-mode'); mode.value='loop-list';mode.dispatchEvent(new dom.window.Event('change'));
  assert.equal(JSON.parse(localStorage.getItem('wow-family-progress-v1')).settings.playbackMode,'loop-list');
- video.dispatchEvent(new dom.window.Event('ended')); assert.equal(new URL(location.href).searchParams.get('lesson'),b.id);
- video.dispatchEvent(new dom.window.Event('ended')); assert.equal(new URL(location.href).searchParams.get('lesson'),a.id);
- mode.value='repeat-one';mode.dispatchEvent(new dom.window.Event('change'));video.currentTime=20;video.dispatchEvent(new dom.window.Event('ended'));assert.equal(video.currentTime,0);
+ video.dispatchEvent(new dom.window.Event('ended')); await new Promise(resolve=>setTimeout(resolve,0)); assert.equal(new URL(location.href).searchParams.get('lesson'),b.id);
+ video.dispatchEvent(new dom.window.Event('ended')); await new Promise(resolve=>setTimeout(resolve,0)); assert.equal(new URL(location.href).searchParams.get('lesson'),a.id);
+ mode.value='repeat-one';mode.dispatchEvent(new dom.window.Event('change'));video.currentTime=20;video.dispatchEvent(new dom.window.Event('ended')); await new Promise(resolve=>setTimeout(resolve,0)); assert.equal(signed.at(-1),a.id);
  mode.value='loop-list';mode.dispatchEvent(new dom.window.Event('change')); window.confirm=()=>true;
  // A current lesson outside the plan stops on end; a subsequent play must restart at zero.
  const saved=JSON.parse(localStorage.getItem('wow-family-progress-v1'));saved.plans.today.lessonIds=[];localStorage.setItem('wow-family-progress-v1',JSON.stringify(saved));
  // Remove the plan through the UI so the in-memory state is also updated.
  document.querySelector('[data-view="plan"]').click();document.querySelector('#clear-plan').click();document.querySelector('[data-view="library"]').click();document.querySelector(`[data-open="${a.id}"]`).click();
- const replay=document.querySelector('video');replay.currentTime=20;replay.dispatchEvent(new dom.window.Event('ended'));replay.dispatchEvent(new dom.window.Event('play'));assert.equal(replay.currentTime,0);
+ await new Promise(resolve=>setTimeout(resolve,0)); const replay=document.querySelector('video'); replay.dispatchEvent(new dom.window.Event('ended')); assert.equal(replay.hasAttribute('src'),false); document.querySelector('#retry-video').click(); await new Promise(resolve=>setTimeout(resolve,0)); assert.equal(signed.at(-1),a.id);
  dom.window.close();
+});
+
+test('login, logout and stale playback responses stay scoped to current lesson', async () => {
+ const catalog=JSON.parse(await readFile('english/data/catalog.json','utf8'));
+ const dom=new JSDOM('<main id="app"></main>',{url:'https://site.test/english/'});
+ for (const name of ['window','document','navigator','location','history','localStorage']) Object.defineProperty(globalThis,name,{value:dom.window[name],configurable:true,writable:true});
+ dom.window.HTMLMediaElement.prototype.pause=function(){};
+ const [a,b]=catalog.levels[0].lessons; let signedIn=false, pending; const calls=[];
+ globalThis.fetch=async (url,options)=>{
+  if(url.endsWith('catalog.json')) return {ok:true,json:async()=>catalog};
+  calls.push({url,options});
+  if(url.endsWith('/login')) { signedIn=true; return {ok:true,json:async()=>({authenticated:true})}; }
+  if(url.endsWith('/logout')) { signedIn=false; return {ok:true,json:async()=>({authenticated:false})}; }
+  if(!signedIn) return {ok:false,status:401,json:async()=>({error:{code:'UNAUTHENTICATED'}})};
+  const id=JSON.parse(options.body).lessonId;
+  if(id===a.id) return new Promise(resolve=>{pending=resolve;});
+  return {ok:true,json:async()=>({url:'https://media.test/b?sig=test',expiresAt:new Date(Date.now()+300000).toISOString()})};
+ };
+ await import('../../english/app.js?authflow'); document.querySelector(`[data-open="${a.id}"]`).click(); await new Promise(r=>setTimeout(r,0));
+ assert(document.querySelector('#login-form')); document.querySelector('#access-code').value='test access code'; document.querySelector('#login-form').dispatchEvent(new dom.window.Event('submit',{bubbles:true,cancelable:true})); await new Promise(r=>setTimeout(r,0));
+ assert(pending); document.querySelector('#back').click(); document.querySelector(`[data-open="${b.id}"]`).click(); await new Promise(r=>setTimeout(r,0));
+ pending({ok:true,json:async()=>({url:'https://media.test/a?sig=test',expiresAt:new Date(Date.now()+300000).toISOString()})}); await new Promise(r=>setTimeout(r,0)); assert.match(document.querySelector('video').src,/\/b\?/);
+ document.querySelector('#logout').click(); await new Promise(r=>setTimeout(r,0)); assert(document.querySelector('#login-form')); assert.equal(document.querySelector('video'),null);
+ for(const {options} of calls) { assert.equal(options.cache,'no-store'); assert.equal(options.credentials,'same-origin'); assert.equal(options.method,'POST'); }
+ dom.window.close();
+});
+
+test('expired media triggers at most one automatic refresh until retry', async () => {
+ const catalog=JSON.parse(await readFile('english/data/catalog.json','utf8'));
+ const dom=new JSDOM('<main id="app"></main>',{url:'https://site.test/english/'});
+ for(const name of ['window','document','navigator','location','history','localStorage']) Object.defineProperty(globalThis,name,{value:dom.window[name],configurable:true,writable:true});
+ let count=0; globalThis.fetch=async url=>url.endsWith('catalog.json')?{ok:true,json:async()=>catalog}:{ok:true,json:async()=>({url:`https://media.test/a?signature=${++count}`,expiresAt:new Date(Date.now()-1000).toISOString()})};
+ await import('../../english/app.js?expiry'); document.querySelector(`[data-open="${catalog.levels[0].lessons[0].id}"]`).click(); await new Promise(r=>setTimeout(r,0));
+ const video=document.querySelector('video'); assert.equal(count,1); video.dispatchEvent(new dom.window.Event('error')); await new Promise(r=>setTimeout(r,0)); assert.equal(count,2);
+ video.dispatchEvent(new dom.window.Event('error')); await new Promise(r=>setTimeout(r,0)); assert.equal(count,2); assert.equal(document.querySelector('#retry-video').hidden,false); dom.window.close();
+});
+
+test('renewal retains play intent through paused errors across successive signature cycles', async () => {
+ const catalog=JSON.parse(await readFile('english/data/catalog.json','utf8'));
+ const dom=new JSDOM('<main id="app"></main>',{url:'https://site.test/english/'});
+ for(const name of ['window','document','navigator','location','history','localStorage']) Object.defineProperty(globalThis,name,{value:dom.window[name],configurable:true,writable:true});
+ let count=0, plays=0; dom.window.HTMLMediaElement.prototype.play=function(){plays++; this.dispatchEvent(new dom.window.Event('play')); return Promise.resolve();};
+ globalThis.fetch=async url=>url.endsWith('catalog.json')?{ok:true,json:async()=>catalog}:{ok:true,json:async()=>({url:`https://media.test/a?signature=${++count}`,expiresAt:new Date(Date.now()-1000).toISOString()})};
+ await import('../../english/app.js?cycles'); document.querySelector(`[data-open="${catalog.levels[0].lessons[0].id}"]`).click(); await new Promise(r=>setTimeout(r,0));
+ const video=document.querySelector('video'); Object.defineProperty(video,'duration',{value:120,configurable:true}); let mediaError=null; Object.defineProperty(video,'error',{get:()=>mediaError});
+ video.dispatchEvent(new dom.window.Event('loadedmetadata')); video.dispatchEvent(new dom.window.Event('play')); video.currentTime=24;
+ for(let cycle=0;cycle<2;cycle++) { mediaError={code:2}; assert.equal(video.paused,true); video.dispatchEvent(new dom.window.Event('pause')); video.dispatchEvent(new dom.window.Event('error')); await new Promise(r=>setTimeout(r,0)); assert.equal(count,cycle+2); mediaError=null; video.dispatchEvent(new dom.window.Event('loadedmetadata')); assert.equal(video.currentTime,24); assert.equal(plays,cycle+1); }
+ dom.window.close();
+});
+
+test('failed refresh keeps resume state for retry and prevents repeated automatic requests', async () => {
+ const catalog=JSON.parse(await readFile('english/data/catalog.json','utf8')); const dom=new JSDOM('<main id="app"></main>',{url:'https://site.test/english/'});
+ for(const name of ['window','document','navigator','location','history','localStorage']) Object.defineProperty(globalThis,name,{value:dom.window[name],configurable:true,writable:true});
+ let calls=0, plays=0; dom.window.HTMLMediaElement.prototype.play=function(){plays++; this.dispatchEvent(new dom.window.Event('play')); return Promise.resolve();};
+ globalThis.fetch=async url=>{ if(url.endsWith('catalog.json')) return {ok:true,json:async()=>catalog}; calls++; return calls===2?{ok:false,status:503,json:async()=>({})}:{ok:true,json:async()=>({url:`https://media.test/a?signature=${calls}`,expiresAt:new Date(Date.now()-1000).toISOString()})}; };
+ await import('../../english/app.js?retry-resume'); document.querySelector(`[data-open="${catalog.levels[0].lessons[0].id}"]`).click(); await new Promise(r=>setTimeout(r,0));
+ const video=document.querySelector('video'); Object.defineProperty(video,'duration',{value:120,configurable:true}); video.dispatchEvent(new dom.window.Event('loadedmetadata')); video.dispatchEvent(new dom.window.Event('play')); video.currentTime=37; video.dispatchEvent(new dom.window.Event('error')); await new Promise(r=>setTimeout(r,0));
+ assert.equal(calls,2); video.currentTime=0; video.dispatchEvent(new dom.window.Event('error')); await new Promise(r=>setTimeout(r,0)); assert.equal(calls,2); document.querySelector('#retry-video').click(); await new Promise(r=>setTimeout(r,0)); video.dispatchEvent(new dom.window.Event('loadedmetadata')); assert.equal(video.currentTime,37); assert.equal(plays,1); dom.window.close();
+});
+
+test('expired session login preserves pending video position and play intent', async () => {
+ const catalog=JSON.parse(await readFile('english/data/catalog.json','utf8')); const dom=new JSDOM('<main id="app"></main>',{url:'https://site.test/english/'});
+ for(const name of ['window','document','navigator','location','history','localStorage']) Object.defineProperty(globalThis,name,{value:dom.window[name],configurable:true,writable:true});
+ let calls=0,plays=0; dom.window.HTMLMediaElement.prototype.play=function(){plays++; this.dispatchEvent(new dom.window.Event('play')); return Promise.resolve();};
+ globalThis.fetch=async url=>{ if(url.endsWith('catalog.json')) return {ok:true,json:async()=>catalog}; if(url.endsWith('login')) return {ok:true,json:async()=>({})}; calls++; return calls===2?{ok:false,status:401,json:async()=>({})}:{ok:true,json:async()=>({url:`https://media.test/a?signature=${calls}`,expiresAt:new Date(Date.now()-1000).toISOString()})}; };
+ await import('../../english/app.js?login-resume'); document.querySelector(`[data-open="${catalog.levels[0].lessons[0].id}"]`).click(); await new Promise(r=>setTimeout(r,0));
+ let video=document.querySelector('video'); Object.defineProperty(video,'duration',{value:120,configurable:true}); video.dispatchEvent(new dom.window.Event('loadedmetadata')); video.dispatchEvent(new dom.window.Event('play')); video.currentTime=29; video.dispatchEvent(new dom.window.Event('error')); await new Promise(r=>setTimeout(r,0));
+ assert(document.querySelector('#login-form')); document.querySelector('#access-code').value='test'; document.querySelector('#login-form').dispatchEvent(new dom.window.Event('submit',{bubbles:true,cancelable:true})); await new Promise(r=>setTimeout(r,0)); video=document.querySelector('video'); Object.defineProperty(video,'duration',{value:120,configurable:true}); video.dispatchEvent(new dom.window.Event('loadedmetadata')); assert.equal(video.currentTime,29); assert.equal(plays,1); dom.window.close();
 });

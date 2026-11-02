@@ -30,5 +30,10 @@
       "destination": "/bosses#boss-run",
       "permanent": true
     }
-  ]
+  ],
+  "functions": {
+    "api/english/playback.js": {
+      "includeFiles": "english/data/catalog.json"
+    }
+  }
 }

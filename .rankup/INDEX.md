@@ -2,19 +2,19 @@
 
 - 项目：How to Fish Walkthrough
 - 最近更新：2026-11-02
-- 当前阶段：5 — 合并部署完成，等待 COS 私有媒体接入
+- 当前阶段：5 — COS 私有媒体鉴权接入中
 - 当前目标：保留现有攻略站并把 Wow Family 作为 `/english/` 子应用合入同一 Vercel 仓库，媒体改用腾讯云 COS 契约
 - 下一入口：PROJECT.md
 
 ## 接力
 
-- 当前任务：把 Wow English 与 fish 合为一个部署仓库，根路径保留攻略站，`/english/` 提供家庭英语学习应用。
-- 验收：统一构建、本地测试、Vercel 正式部署、根站与 `/english/` 生产 E2E、独立审查通过。
-- 约束：不复制23GB原始视频，不提交腾讯云密钥或本机绝对路径，不覆盖 Wow 与 fish 工作树里的未归属改动。
-- 部署设计：`docs/unified-wow-deployment.md`。
-- 当前状态：public web v1 已由提交 `ae732bd` 部署到 `https://howtofishwalkthrough.com/english/`；根站、英语页、批量计划、Garden 深链、双语、空媒体降级、308、旧攻略重定向和真实 404 均已在正式域验证。Vercel 未配置 COS 基址，本次未公开视频；字幕、逐句跟读、录音、学习包未迁移。
+- 当前任务：为 `/english/` 接入私有腾讯云 COS：家庭访问码登录、HttpOnly 会话、Vercel 服务端生成短期签名播放地址。
+- 验收：未登录拒绝、会话和课程对象白名单、5 分钟签名、本地测试/构建、Vercel 正式部署、生产安全降级与独立审查通过；桶为空时不宣称真实播放成功。
+- 约束：桶 `english-1257786947` / `ap-hongkong` 保持私有；不上传文件，不提交或输出 SecretId、SecretKey、访问码、会话密钥，不覆盖仓库未归属改动。
+- 部署设计：`docs/unified-wow-deployment.md`；私有 COS 鉴权新设计：`docs/private-cos-auth.md`。
+- 当前状态：public web v1 已上线；私有 COS 鉴权已实现并通过本地测试，尚未部署及真实播放验证。采用服务端预签名 URL，默认域名可能受 2024 年后存储桶浏览器预览限制；自定义域名和真实对象尚未配置。任务状态见 `progress-cos-auth.md`。
 - 阻塞：OpenCLI 未安装；Vercel应优先沿 GitHub 自动部署链路验证，必要时再使用可用浏览器驱动。
-- 下一条要执行的动作：确定腾讯云 COS 的公开或私有策略；家庭/受限素材必须先设计鉴权与短期签名 URL，再配置媒体域名并验证 CORS、Range 206 和播放器。
+- 下一条要执行的动作：独立审查本地实现和测试，随后按任务授权进行范围内交付及部署验证；缺真实 secret 时核实安全降级。
 
 ## 推荐读取顺序
 

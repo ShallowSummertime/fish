@@ -1,6 +1,6 @@
 # Fish + Wow Family 统一部署设计
 
-状态：public web v1 已于 2026-11-02 部署到 `https://howtofishwalkthrough.com/english/`。本地测试、构建、独立审查及正式域根站/英语页/重定向/404 已验证；COS 媒体基址保持为空，真实媒体、字幕、录音和本地学习包未上线。
+状态：私有 COS 方案及本地实现见 `docs/private-cos-auth.md`，尚未部署；下文 public web v1 为历史基线。public web v1 已于 2026-11-02 部署到 `https://howtofishwalkthrough.com/english/`。本地测试、构建、独立审查及正式域根站/英语页/重定向/404 已验证；COS 媒体基址保持为空，真实媒体、字幕、录音和本地学习包未上线。
 
 ## 目标与范围
 
