@@ -156,6 +156,9 @@ test('login, logout and stale playback responses stay scoped to current lesson',
  assert(document.querySelector('#login-form')); assert.equal(document.querySelector('#learning-controls').hidden,true); document.querySelector('#access-code').value='test access code'; document.querySelector('#login-form').dispatchEvent(new dom.window.Event('submit',{bubbles:true,cancelable:true})); await new Promise(r=>setTimeout(r,0));
  assert(pending); document.querySelector('#back').click(); document.querySelector(`[data-open="${b.id}"]`).click(); await new Promise(r=>setTimeout(r,0));
  pending({ok:true,json:async()=>({url:'https://media.test/a?sig=test',expiresAt:new Date(Date.now()+300000).toISOString()})}); await new Promise(r=>setTimeout(r,0)); assert.match(document.querySelector('video').src,/\/b\?/); assert.equal(document.querySelector('#learning-controls').hidden,false); assert.equal(document.querySelector('video').hasAttribute('controls'),false);
+ document.querySelector('#back').click(); assert(document.querySelector('#logout'),'logout stays in the global header on the library');
+ document.querySelector('[data-view="plan"]').click(); assert(document.querySelector('#logout'),'logout stays in the global header on the plan');
+ document.querySelector('[data-view="library"]').click(); document.querySelector(`[data-open="${b.id}"]`).click(); await new Promise(r=>setTimeout(r,0));
  document.querySelector('#logout').click(); await new Promise(r=>setTimeout(r,0)); assert(document.querySelector('#login-form')); assert.equal(document.querySelector('video'),null);
  for(const {options} of calls) { assert.equal(options.cache,'no-store'); assert.equal(options.credentials,'same-origin'); assert.equal(options.method,'POST'); }
  dom.window.close();
