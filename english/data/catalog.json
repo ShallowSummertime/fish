@@ -1,0 +1,2472 @@
+{
+  "version": 1,
+  "totalLessons": 241,
+  "levels": [
+    {
+      "id": "level-1",
+      "number": 1,
+      "name": "Level 1 · Yellow",
+      "lessons": [
+        {
+          "id": "616d50ebbf266515",
+          "title": "Wow!Yellow Unit 1 hello video story",
+          "type": "Story",
+          "unit": "1",
+          "number": "001",
+          "videoKey": "lessons/616d50ebbf266515.mp4",
+          "hasSubtitle": false,
+          "hasChineseSubtitle": false
+        },
+        {
+          "id": "d92815fcb1f5a593",
+          "title": "Wow!Yellow Unit 1 hello video song1",
+          "type": "Video",
+          "unit": "1",
+          "number": "002",
+          "videoKey": "lessons/d92815fcb1f5a593.mp4",
+          "hasSubtitle": false,
+          "hasChineseSubtitle": false
+        },
+        {
+          "id": "f3bd4dd1c0311a93",
+          "title": "Wow!Yellow Unit 1 hello video song2",
+          "type": "Video",
+          "unit": "1",
+          "number": "003",
+          "videoKey": "lessons/f3bd4dd1c0311a93.mp4",
+          "hasSubtitle": false,
+          "hasChineseSubtitle": false
+        },
+        {
+          "id": "6388f21982bce8a0",
+          "title": "Wow!Yellow Unit 2 colour video story",
+          "type": "Story",
+          "unit": "2",
+          "number": "004",
+          "videoKey": "lessons/6388f21982bce8a0.mp4",
+          "hasSubtitle": false,
+          "hasChineseSubtitle": false
+        },
+        {
+          "id": "0dd15cc2b58721e9",
+          "title": "Wow!Yellow Unit 2 colour video song",
+          "type": "Song",
+          "unit": "2",
+          "number": "005",
+          "videoKey": "lessons/0dd15cc2b58721e9.mp4",
+          "hasSubtitle": false,
+          "hasChineseSubtitle": false
+        },
+        {
+          "id": "c17532fcfabb66fc",
+          "title": "Wow!Yellow Unit 3 garden — part 1 video story",
+          "type": "Story",
+          "unit": "3",
+          "number": "006",
+          "videoKey": "lessons/c17532fcfabb66fc.mp4",
+          "hasSubtitle": false,
+          "hasChineseSubtitle": false
+        },
+        {
+          "id": "7ddda666ee6d8d21",
+          "title": "Wow!Yellow Unit 3 garden — part 1 video song",
+          "type": "Song",
+          "unit": "3",
+          "number": "007",
+          "videoKey": "lessons/7ddda666ee6d8d21.mp4",
+          "hasSubtitle": false,
+          "hasChineseSubtitle": false
+        },
+        {
+          "id": "3c5586a7ca3cc12c",
+          "title": "Wow!Yellow Unit 3 garden — part 2 video story",
+          "type": "Story",
+          "unit": "3",
+          "number": "008",
+          "videoKey": "lessons/3c5586a7ca3cc12c.mp4",
+          "hasSubtitle": false,
+          "hasChineseSubtitle": false
+        },
+        {
+          "id": "a7db560caf9adefd",
+          "title": "Wow!Yellow Unit 3 garden — part 2 video song",
+          "type": "Song",
+          "unit": "3",
+          "number": "009",
+          "videoKey": "lessons/a7db560caf9adefd.mp4",
+          "hasSubtitle": false,
+          "hasChineseSubtitle": false
+        },
+        {
+          "id": "774178e1c702f040",
+          "title": "Wow!Yellow Unit 4 toys — part 1 video story",
+          "type": "Story",
+          "unit": "4",
+          "number": "010",
+          "videoKey": "lessons/774178e1c702f040.mp4",
+          "hasSubtitle": false,
+          "hasChineseSubtitle": false
+        },
+        {
+          "id": "a9e30cecfe296130",
+          "title": "Wow!Yellow Unit 4 toys — part 1 video song",
+          "type": "Song",
+          "unit": "4",
+          "number": "011",
+          "videoKey": "lessons/a9e30cecfe296130.mp4",
+          "hasSubtitle": false,
+          "hasChineseSubtitle": false
+        },
+        {
+          "id": "f696701568528c0f",
+          "title": "Wow!Yellow Unit 4 'toys' — part 2 video story",
+          "type": "Story",
+          "unit": "4",
+          "number": "012",
+          "videoKey": "lessons/f696701568528c0f.mp4",
+          "hasSubtitle": false,
+          "hasChineseSubtitle": false
+        },
+        {
+          "id": "2ccb6b6b06197290",
+          "title": "Wow!Yellow Unit 4 'toys' — part 2 video song",
+          "type": "Song",
+          "unit": "4",
+          "number": "013",
+          "videoKey": "lessons/2ccb6b6b06197290.mp4",
+          "hasSubtitle": false,
+          "hasChineseSubtitle": false
+        },
+        {
+          "id": "f747eb38d490dd0b",
+          "title": "Wow!Yellow Unit 5 'body' — part 1 video story",
+          "type": "Story",
+          "unit": "5",
+          "number": "014",
+          "videoKey": "lessons/f747eb38d490dd0b.mp4",
+          "hasSubtitle": false,
+          "hasChineseSubtitle": false
+        },
+        {
+          "id": "d06170f2e2193519",
+          "title": "Wow!Yellow Unit 5 'body' — part 1 video song",
+          "type": "Song",
+          "unit": "5",
+          "number": "015",
+          "videoKey": "lessons/d06170f2e2193519.mp4",
+          "hasSubtitle": false,
+          "hasChineseSubtitle": false
+        },
+        {
+          "id": "7291e755e1c23f6b",
+          "title": "Wow!Yellow Unit 5 'body' — part 2 video story",
+          "type": "Story",
+          "unit": "5",
+          "number": "016",
+          "videoKey": "lessons/7291e755e1c23f6b.mp4",
+          "hasSubtitle": false,
+          "hasChineseSubtitle": false
+        },
+        {
+          "id": "3afa772709116448",
+          "title": "Wow!Yellow Unit 5 'body' — part 2 video song",
+          "type": "Song",
+          "unit": "5",
+          "number": "017",
+          "videoKey": "lessons/3afa772709116448.mp4",
+          "hasSubtitle": false,
+          "hasChineseSubtitle": false
+        },
+        {
+          "id": "12cf60b6eba6658a",
+          "title": "Wow!Yellow Unit 6 'food' — part 1 video story",
+          "type": "Story",
+          "unit": "6",
+          "number": "018",
+          "videoKey": "lessons/12cf60b6eba6658a.mp4",
+          "hasSubtitle": false,
+          "hasChineseSubtitle": false
+        },
+        {
+          "id": "8b9bf9908f8f154b",
+          "title": "Wow!Yellow Unit 6 'food' — part 1 video song",
+          "type": "Song",
+          "unit": "6",
+          "number": "019",
+          "videoKey": "lessons/8b9bf9908f8f154b.mp4",
+          "hasSubtitle": false,
+          "hasChineseSubtitle": false
+        },
+        {
+          "id": "cb40f40d87a5b29c",
+          "title": "Wow!Yellow Unit 6 'food' — part 2 video story 6 2",
+          "type": "Story",
+          "unit": "6",
+          "number": "020",
+          "videoKey": "lessons/cb40f40d87a5b29c.mp4",
+          "hasSubtitle": false,
+          "hasChineseSubtitle": false
+        },
+        {
+          "id": "09b753a74445472b",
+          "title": "Wow!Yellow Unit 6 'food' — part 2 video song 6 2",
+          "type": "Song",
+          "unit": "6",
+          "number": "021",
+          "videoKey": "lessons/09b753a74445472b.mp4",
+          "hasSubtitle": false,
+          "hasChineseSubtitle": false
+        },
+        {
+          "id": "71cfef89a392ba78",
+          "title": "Wow!Yellow Unit 7 'bugs' — part 1 video story 7 1",
+          "type": "Story",
+          "unit": "7",
+          "number": "022",
+          "videoKey": "lessons/71cfef89a392ba78.mp4",
+          "hasSubtitle": false,
+          "hasChineseSubtitle": false
+        },
+        {
+          "id": "53015bc3021443cc",
+          "title": "Wow!Yellow Unit 7 'bugs' — part 1 video song 7 1",
+          "type": "Song",
+          "unit": "7",
+          "number": "023",
+          "videoKey": "lessons/53015bc3021443cc.mp4",
+          "hasSubtitle": false,
+          "hasChineseSubtitle": false
+        },
+        {
+          "id": "50ced13dbb892c4c",
+          "title": "Wow!Yellow Unit 7 bugs — part 2 video story 7 2",
+          "type": "Story",
+          "unit": "7",
+          "number": "024",
+          "videoKey": "lessons/50ced13dbb892c4c.mp4",
+          "hasSubtitle": false,
+          "hasChineseSubtitle": false
+        },
+        {
+          "id": "948ba556a4a17f4a",
+          "title": "Wow!Yellow Unit 7 bugs — part 2 video song 7 2",
+          "type": "Song",
+          "unit": "7",
+          "number": "025",
+          "videoKey": "lessons/948ba556a4a17f4a.mp4",
+          "hasSubtitle": false,
+          "hasChineseSubtitle": false
+        },
+        {
+          "id": "b58769246ca3a0bb",
+          "title": "Wow!Yellow Unit 8 'feelings' — part 1 video story 8 1",
+          "type": "Story",
+          "unit": "8",
+          "number": "026",
+          "videoKey": "lessons/b58769246ca3a0bb.mp4",
+          "hasSubtitle": false,
+          "hasChineseSubtitle": false
+        },
+        {
+          "id": "305e88ace5cd31ea",
+          "title": "Wow!Yellow Unit 8 'feelings' — part 1 video song 8 1",
+          "type": "Song",
+          "unit": "8",
+          "number": "027",
+          "videoKey": "lessons/305e88ace5cd31ea.mp4",
+          "hasSubtitle": false,
+          "hasChineseSubtitle": false
+        },
+        {
+          "id": "d57b6368970465e1",
+          "title": "Wow!Yellow Unit 8 'feelings' — part 2 video story 8 2",
+          "type": "Story",
+          "unit": "8",
+          "number": "028",
+          "videoKey": "lessons/d57b6368970465e1.mp4",
+          "hasSubtitle": false,
+          "hasChineseSubtitle": false
+        },
+        {
+          "id": "210d92e218ae5b1f",
+          "title": "Wow!Yellow Unit 8 'feelings' — part 2 video song 8 2",
+          "type": "Song",
+          "unit": "8",
+          "number": "029",
+          "videoKey": "lessons/210d92e218ae5b1f.mp4",
+          "hasSubtitle": false,
+          "hasChineseSubtitle": false
+        },
+        {
+          "id": "e1ea57fb355804e2",
+          "title": "Wow!Yellow Unit 9 'clothes' — part 1 video story 9 1",
+          "type": "Story",
+          "unit": "9",
+          "number": "030",
+          "videoKey": "lessons/e1ea57fb355804e2.mp4",
+          "hasSubtitle": false,
+          "hasChineseSubtitle": false
+        },
+        {
+          "id": "9c42ea023860d866",
+          "title": "Wow!Yellow Unit 9 'clothes' — part 1 video song 9 1",
+          "type": "Song",
+          "unit": "9",
+          "number": "031",
+          "videoKey": "lessons/9c42ea023860d866.mp4",
+          "hasSubtitle": false,
+          "hasChineseSubtitle": false
+        },
+        {
+          "id": "9eb3279946637913",
+          "title": "Wow!Yellow Unit 9 'clothes' — part 2 video story 9 2",
+          "type": "Story",
+          "unit": "9",
+          "number": "032",
+          "videoKey": "lessons/9eb3279946637913.mp4",
+          "hasSubtitle": false,
+          "hasChineseSubtitle": false
+        },
+        {
+          "id": "10a16ea8b2fd120f",
+          "title": "Wow!Yellow Unit 9 'clothes' — part 2 video song 9 2",
+          "type": "Song",
+          "unit": "9",
+          "number": "033",
+          "videoKey": "lessons/10a16ea8b2fd120f.mp4",
+          "hasSubtitle": false,
+          "hasChineseSubtitle": false
+        }
+      ]
+    },
+    {
+      "id": "level-2",
+      "number": 2,
+      "name": "Level 2 · Blue",
+      "lessons": [
+        {
+          "id": "832976a4b0c82ecb",
+          "title": "Wow!Blue — Unit 1 story",
+          "type": "Story",
+          "unit": "1",
+          "number": "001",
+          "videoKey": "lessons/832976a4b0c82ecb.mp4",
+          "hasSubtitle": false,
+          "hasChineseSubtitle": false
+        },
+        {
+          "id": "c4ba6c20a313ac31",
+          "title": "Wow!Blue — Unit 1 song1",
+          "type": "Video",
+          "unit": "1",
+          "number": "002",
+          "videoKey": "lessons/c4ba6c20a313ac31.mp4",
+          "hasSubtitle": false,
+          "hasChineseSubtitle": false
+        },
+        {
+          "id": "57a5a4fd9efca265",
+          "title": "Wow!Blue — Unit 1 song2",
+          "type": "Video",
+          "unit": "1",
+          "number": "003",
+          "videoKey": "lessons/57a5a4fd9efca265.mp4",
+          "hasSubtitle": false,
+          "hasChineseSubtitle": false
+        },
+        {
+          "id": "1fbdf7d25615cb07",
+          "title": "Wow!Blue — Unit 2 story",
+          "type": "Story",
+          "unit": "2",
+          "number": "004",
+          "videoKey": "lessons/1fbdf7d25615cb07.mp4",
+          "hasSubtitle": false,
+          "hasChineseSubtitle": false
+        },
+        {
+          "id": "754d67c28f116c57",
+          "title": "Wow!Blue — Unit 2 song",
+          "type": "Song",
+          "unit": "2",
+          "number": "005",
+          "videoKey": "lessons/754d67c28f116c57.mp4",
+          "hasSubtitle": false,
+          "hasChineseSubtitle": false
+        },
+        {
+          "id": "2a60937f452cee15",
+          "title": "Wow!Blue — Unit 3 — part 1 story",
+          "type": "Story",
+          "unit": "3",
+          "number": "006",
+          "videoKey": "lessons/2a60937f452cee15.mp4",
+          "hasSubtitle": false,
+          "hasChineseSubtitle": false
+        },
+        {
+          "id": "3336839710c8754f",
+          "title": "Wow!Blue — Unit 3 — part 1 song",
+          "type": "Song",
+          "unit": "3",
+          "number": "007",
+          "videoKey": "lessons/3336839710c8754f.mp4",
+          "hasSubtitle": false,
+          "hasChineseSubtitle": false
+        },
+        {
+          "id": "acb481459443ac81",
+          "title": "Wow!Blue — Unit 3 — part 2 story",
+          "type": "Story",
+          "unit": "3",
+          "number": "008",
+          "videoKey": "lessons/acb481459443ac81.mp4",
+          "hasSubtitle": false,
+          "hasChineseSubtitle": false
+        },
+        {
+          "id": "788339c7570d0919",
+          "title": "Wow!Blue — Unit 3 — part 2 song",
+          "type": "Song",
+          "unit": "3",
+          "number": "009",
+          "videoKey": "lessons/788339c7570d0919.mp4",
+          "hasSubtitle": false,
+          "hasChineseSubtitle": false
+        },
+        {
+          "id": "7192cef5a7f6be76",
+          "title": "Wow!Blue — Unit 4 — part 1 story",
+          "type": "Story",
+          "unit": "4",
+          "number": "010",
+          "videoKey": "lessons/7192cef5a7f6be76.mp4",
+          "hasSubtitle": false,
+          "hasChineseSubtitle": false
+        },
+        {
+          "id": "a6dfd78864dbeb8e",
+          "title": "Wow!Blue — Unit 4 — part 1 song",
+          "type": "Song",
+          "unit": "4",
+          "number": "011",
+          "videoKey": "lessons/a6dfd78864dbeb8e.mp4",
+          "hasSubtitle": false,
+          "hasChineseSubtitle": false
+        },
+        {
+          "id": "9cb86a31e4679f44",
+          "title": "Wow!Blue — Unit 4 — part 2 story",
+          "type": "Story",
+          "unit": "4",
+          "number": "012",
+          "videoKey": "lessons/9cb86a31e4679f44.mp4",
+          "hasSubtitle": false,
+          "hasChineseSubtitle": false
+        },
+        {
+          "id": "d40eb2b791cd4cc8",
+          "title": "Wow!Blue — Unit 4 — part 2 song",
+          "type": "Song",
+          "unit": "4",
+          "number": "013",
+          "videoKey": "lessons/d40eb2b791cd4cc8.mp4",
+          "hasSubtitle": false,
+          "hasChineseSubtitle": false
+        },
+        {
+          "id": "1c503e01942ced17",
+          "title": "Wow!Blue — Unit 5 — part 1 story 5 1",
+          "type": "Story",
+          "unit": "5",
+          "number": "014",
+          "videoKey": "lessons/1c503e01942ced17.mp4",
+          "hasSubtitle": false,
+          "hasChineseSubtitle": false
+        },
+        {
+          "id": "44f28e05b51303ff",
+          "title": "Wow!Blue — Unit 5 — part 1 song 5 1",
+          "type": "Song",
+          "unit": "5",
+          "number": "015",
+          "videoKey": "lessons/44f28e05b51303ff.mp4",
+          "hasSubtitle": false,
+          "hasChineseSubtitle": false
+        },
+        {
+          "id": "0db8e220241a9f8e",
+          "title": "Wow!Blue — Unit 5 — part 2 story 5 2",
+          "type": "Story",
+          "unit": "5",
+          "number": "016",
+          "videoKey": "lessons/0db8e220241a9f8e.mp4",
+          "hasSubtitle": false,
+          "hasChineseSubtitle": false
+        },
+        {
+          "id": "3ca51ec8e9182a56",
+          "title": "Wow!Blue — Unit 5 — part 2 song 5 2",
+          "type": "Song",
+          "unit": "5",
+          "number": "017",
+          "videoKey": "lessons/3ca51ec8e9182a56.mp4",
+          "hasSubtitle": false,
+          "hasChineseSubtitle": false
+        },
+        {
+          "id": "a7d4f15e38771eb4",
+          "title": "Wow!Blue — Unit 6 — part 1 story 6 1",
+          "type": "Story",
+          "unit": "6",
+          "number": "018",
+          "videoKey": "lessons/a7d4f15e38771eb4.mp4",
+          "hasSubtitle": false,
+          "hasChineseSubtitle": false
+        },
+        {
+          "id": "eae84adb6e5cd108",
+          "title": "Wow!Blue — Unit 6 — part 1 song 6 1",
+          "type": "Song",
+          "unit": "6",
+          "number": "019",
+          "videoKey": "lessons/eae84adb6e5cd108.mp4",
+          "hasSubtitle": false,
+          "hasChineseSubtitle": false
+        },
+        {
+          "id": "cf995ac5c6978d51",
+          "title": "Wow!Blue — Unit 6 — part 2 story 6 2",
+          "type": "Story",
+          "unit": "6",
+          "number": "020",
+          "videoKey": "lessons/cf995ac5c6978d51.mp4",
+          "hasSubtitle": false,
+          "hasChineseSubtitle": false
+        },
+        {
+          "id": "38c4c0d8cb7e4624",
+          "title": "Wow!Blue — Unit 6 — part 2 song 6 2",
+          "type": "Song",
+          "unit": "6",
+          "number": "021",
+          "videoKey": "lessons/38c4c0d8cb7e4624.mp4",
+          "hasSubtitle": false,
+          "hasChineseSubtitle": false
+        },
+        {
+          "id": "47d24b5567c36a81",
+          "title": "Wow!Blue — Unit 7 — part 1 story 7 1",
+          "type": "Story",
+          "unit": "7",
+          "number": "022",
+          "videoKey": "lessons/47d24b5567c36a81.mp4",
+          "hasSubtitle": false,
+          "hasChineseSubtitle": false
+        },
+        {
+          "id": "11d9522924a434d4",
+          "title": "Wow!Blue — Unit 7 — part 1 song 7 1",
+          "type": "Song",
+          "unit": "7",
+          "number": "023",
+          "videoKey": "lessons/11d9522924a434d4.mp4",
+          "hasSubtitle": false,
+          "hasChineseSubtitle": false
+        },
+        {
+          "id": "e7db986aafe1b97e",
+          "title": "Wow!Blue — Unit 7 — part 2 story 7 2",
+          "type": "Story",
+          "unit": "7",
+          "number": "024",
+          "videoKey": "lessons/e7db986aafe1b97e.mp4",
+          "hasSubtitle": false,
+          "hasChineseSubtitle": false
+        },
+        {
+          "id": "d1d9a7283a79bfa3",
+          "title": "Wow!Blue — Unit 7 — part 2 song 7 2",
+          "type": "Song",
+          "unit": "7",
+          "number": "025",
+          "videoKey": "lessons/d1d9a7283a79bfa3.mp4",
+          "hasSubtitle": false,
+          "hasChineseSubtitle": false
+        },
+        {
+          "id": "0ed14daaa691f42d",
+          "title": "Wow!Blue — Unit 8 — part 1 story 8 1",
+          "type": "Story",
+          "unit": "8",
+          "number": "026",
+          "videoKey": "lessons/0ed14daaa691f42d.mp4",
+          "hasSubtitle": false,
+          "hasChineseSubtitle": false
+        },
+        {
+          "id": "a18126b0b120ad1a",
+          "title": "Wow!Blue — Unit 8 — part 1 song 8 1",
+          "type": "Song",
+          "unit": "8",
+          "number": "027",
+          "videoKey": "lessons/a18126b0b120ad1a.mp4",
+          "hasSubtitle": false,
+          "hasChineseSubtitle": false
+        },
+        {
+          "id": "965a3a27ac083ed8",
+          "title": "Wow!Blue — Unit 8 — part 2 story 8 2",
+          "type": "Story",
+          "unit": "8",
+          "number": "028",
+          "videoKey": "lessons/965a3a27ac083ed8.mp4",
+          "hasSubtitle": false,
+          "hasChineseSubtitle": false
+        },
+        {
+          "id": "f04d4ca38e775db5",
+          "title": "Wow!Blue — Unit 8 — part 2 song 8 2",
+          "type": "Song",
+          "unit": "8",
+          "number": "029",
+          "videoKey": "lessons/f04d4ca38e775db5.mp4",
+          "hasSubtitle": false,
+          "hasChineseSubtitle": false
+        },
+        {
+          "id": "f33222cf79f8b448",
+          "title": "Wow!Blue — Unit 9 — part 1 story 9 1",
+          "type": "Story",
+          "unit": "9",
+          "number": "030",
+          "videoKey": "lessons/f33222cf79f8b448.mp4",
+          "hasSubtitle": false,
+          "hasChineseSubtitle": false
+        },
+        {
+          "id": "e3f36b457d92e56a",
+          "title": "Wow!Blue — Unit 9 — part 1 song 9 1",
+          "type": "Song",
+          "unit": "9",
+          "number": "031",
+          "videoKey": "lessons/e3f36b457d92e56a.mp4",
+          "hasSubtitle": false,
+          "hasChineseSubtitle": false
+        },
+        {
+          "id": "1f25e79d10c2d525",
+          "title": "Wow!Blue — Unit 9 — part 2 story 9 2",
+          "type": "Story",
+          "unit": "9",
+          "number": "032",
+          "videoKey": "lessons/1f25e79d10c2d525.mp4",
+          "hasSubtitle": false,
+          "hasChineseSubtitle": false
+        },
+        {
+          "id": "e8c03a891ac9cc8d",
+          "title": "Wow!Blue — Unit 9 — part 2 song 9 2",
+          "type": "Song",
+          "unit": "9",
+          "number": "033",
+          "videoKey": "lessons/e8c03a891ac9cc8d.mp4",
+          "hasSubtitle": false,
+          "hasChineseSubtitle": false
+        }
+      ]
+    },
+    {
+      "id": "level-3",
+      "number": 3,
+      "name": "Level 3 · Red",
+      "lessons": [
+        {
+          "id": "2e11aa85e2c733c6",
+          "title": "Wow!Red — Unit 1 'hello' story 1 1",
+          "type": "Story",
+          "unit": "1",
+          "number": "001",
+          "videoKey": "lessons/2e11aa85e2c733c6.mp4",
+          "hasSubtitle": false,
+          "hasChineseSubtitle": false
+        },
+        {
+          "id": "b2cbb9aea8cec25b",
+          "title": "Wow!Red — Unit 1 'hello' song 1 1a",
+          "type": "Song",
+          "unit": "1",
+          "number": "002",
+          "videoKey": "lessons/b2cbb9aea8cec25b.mp4",
+          "hasSubtitle": false,
+          "hasChineseSubtitle": false
+        },
+        {
+          "id": "5521bea329811615",
+          "title": "Wow!Red — Unit 1 'hello' song 1 1b",
+          "type": "Song",
+          "unit": "1",
+          "number": "003",
+          "videoKey": "lessons/5521bea329811615.mp4",
+          "hasSubtitle": false,
+          "hasChineseSubtitle": false
+        },
+        {
+          "id": "bf1a3909367fa810",
+          "title": "Wow!Red — Unit 2 'colours' story 2 1",
+          "type": "Story",
+          "unit": "2",
+          "number": "004",
+          "videoKey": "lessons/bf1a3909367fa810.mp4",
+          "hasSubtitle": false,
+          "hasChineseSubtitle": false
+        },
+        {
+          "id": "d076b0f7f3b096ee",
+          "title": "Wow!Red — Unit 2 'colours' song 2 1",
+          "type": "Song",
+          "unit": "2",
+          "number": "005",
+          "videoKey": "lessons/d076b0f7f3b096ee.mp4",
+          "hasSubtitle": false,
+          "hasChineseSubtitle": false
+        },
+        {
+          "id": "8bcf7a74ff01c1dc",
+          "title": "Wow!Red — Unit 3 'at home' — part 1 story 3 1",
+          "type": "Story",
+          "unit": "3",
+          "number": "006",
+          "videoKey": "lessons/8bcf7a74ff01c1dc.mp4",
+          "hasSubtitle": false,
+          "hasChineseSubtitle": false
+        },
+        {
+          "id": "35b394481debc4e4",
+          "title": "Wow!Red — Unit 3 'at home' — part 1 song 3 1",
+          "type": "Song",
+          "unit": "3",
+          "number": "007",
+          "videoKey": "lessons/35b394481debc4e4.mp4",
+          "hasSubtitle": false,
+          "hasChineseSubtitle": false
+        },
+        {
+          "id": "8b0b7626d86830df",
+          "title": "Wow!Red — Unit 3 'at home' — part 2 story 3 2",
+          "type": "Story",
+          "unit": "3",
+          "number": "008",
+          "videoKey": "lessons/8b0b7626d86830df.mp4",
+          "hasSubtitle": false,
+          "hasChineseSubtitle": false
+        },
+        {
+          "id": "b36f4a2637dc38f0",
+          "title": "Wow!Red — Unit 3 'at home' — part 2 song 3 2",
+          "type": "Song",
+          "unit": "3",
+          "number": "009",
+          "videoKey": "lessons/b36f4a2637dc38f0.mp4",
+          "hasSubtitle": false,
+          "hasChineseSubtitle": false
+        },
+        {
+          "id": "d3ae1cb53196d90a",
+          "title": "Wow!Red — Unit 4 'music' — part 1 story 4 1",
+          "type": "Story",
+          "unit": "4",
+          "number": "010",
+          "videoKey": "lessons/d3ae1cb53196d90a.mp4",
+          "hasSubtitle": false,
+          "hasChineseSubtitle": false
+        },
+        {
+          "id": "cd29e033d7d0070e",
+          "title": "Wow!Red — Unit 4 'music' — part 1 song 4 1",
+          "type": "Song",
+          "unit": "4",
+          "number": "011",
+          "videoKey": "lessons/cd29e033d7d0070e.mp4",
+          "hasSubtitle": false,
+          "hasChineseSubtitle": false
+        },
+        {
+          "id": "5c6715039077fe2d",
+          "title": "Wow!Red — Unit 4 'music' — part 2 story 4 2",
+          "type": "Story",
+          "unit": "4",
+          "number": "012",
+          "videoKey": "lessons/5c6715039077fe2d.mp4",
+          "hasSubtitle": false,
+          "hasChineseSubtitle": false
+        },
+        {
+          "id": "f2f23ae5996981ce",
+          "title": "Wow!Red — Unit 4 'music' — part 2 song 4 2",
+          "type": "Song",
+          "unit": "4",
+          "number": "013",
+          "videoKey": "lessons/f2f23ae5996981ce.mp4",
+          "hasSubtitle": false,
+          "hasChineseSubtitle": false
+        },
+        {
+          "id": "65cdc4417ff69a22",
+          "title": "Wow!Red — Unit 5 'face' — part 1 story 5 1",
+          "type": "Story",
+          "unit": "5",
+          "number": "014",
+          "videoKey": "lessons/65cdc4417ff69a22.mp4",
+          "hasSubtitle": false,
+          "hasChineseSubtitle": false
+        },
+        {
+          "id": "60aa7e58357020e0",
+          "title": "Wow!Red — Unit 5 'face' — part 1 song 5 1",
+          "type": "Song",
+          "unit": "5",
+          "number": "015",
+          "videoKey": "lessons/60aa7e58357020e0.mp4",
+          "hasSubtitle": false,
+          "hasChineseSubtitle": false
+        },
+        {
+          "id": "dee80750d1e629c0",
+          "title": "Wow!Red — Unit 5 'face' — part 2 story 5 2",
+          "type": "Story",
+          "unit": "5",
+          "number": "016",
+          "videoKey": "lessons/dee80750d1e629c0.mp4",
+          "hasSubtitle": false,
+          "hasChineseSubtitle": false
+        },
+        {
+          "id": "ec788762f0b662e4",
+          "title": "Wow!Red — Unit 5 'face' — part 2 song 5 2",
+          "type": "Song",
+          "unit": "5",
+          "number": "017",
+          "videoKey": "lessons/ec788762f0b662e4.mp4",
+          "hasSubtitle": false,
+          "hasChineseSubtitle": false
+        },
+        {
+          "id": "11ffd587910e2291",
+          "title": "Wow!Red — Unit 6 'fruit' — part 1 story 6 1",
+          "type": "Story",
+          "unit": "6",
+          "number": "018",
+          "videoKey": "lessons/11ffd587910e2291.mp4",
+          "hasSubtitle": false,
+          "hasChineseSubtitle": false
+        },
+        {
+          "id": "f433eee9d80d682f",
+          "title": "Wow!Red — Unit 6 'fruit' — part 1 song 6 1",
+          "type": "Song",
+          "unit": "6",
+          "number": "019",
+          "videoKey": "lessons/f433eee9d80d682f.mp4",
+          "hasSubtitle": false,
+          "hasChineseSubtitle": false
+        },
+        {
+          "id": "263ec4b0f91e020c",
+          "title": "Wow!Red — Unit 6 'fruit' — part 2 story 6 2",
+          "type": "Story",
+          "unit": "6",
+          "number": "020",
+          "videoKey": "lessons/263ec4b0f91e020c.mp4",
+          "hasSubtitle": false,
+          "hasChineseSubtitle": false
+        },
+        {
+          "id": "86fe27df1f2e0dd7",
+          "title": "Wow!Red — Unit 6 'fruit' — part 2 song 6 2",
+          "type": "Song",
+          "unit": "6",
+          "number": "021",
+          "videoKey": "lessons/86fe27df1f2e0dd7.mp4",
+          "hasSubtitle": false,
+          "hasChineseSubtitle": false
+        },
+        {
+          "id": "36663b2a25c28cc9",
+          "title": "Wow!Red — Unit 7 'farm' — part 1 story 7 1",
+          "type": "Story",
+          "unit": "7",
+          "number": "022",
+          "videoKey": "lessons/36663b2a25c28cc9.mp4",
+          "hasSubtitle": false,
+          "hasChineseSubtitle": false
+        },
+        {
+          "id": "aa6d0b5772a10d52",
+          "title": "Wow!Red — Unit 7 'farm' — part 1 song 7 1",
+          "type": "Song",
+          "unit": "7",
+          "number": "023",
+          "videoKey": "lessons/aa6d0b5772a10d52.mp4",
+          "hasSubtitle": false,
+          "hasChineseSubtitle": false
+        },
+        {
+          "id": "f7eda4f0d1427306",
+          "title": "Wow!Red — Unit 7 'farm' — part 2 story 7 2",
+          "type": "Story",
+          "unit": "7",
+          "number": "024",
+          "videoKey": "lessons/f7eda4f0d1427306.mp4",
+          "hasSubtitle": false,
+          "hasChineseSubtitle": false
+        },
+        {
+          "id": "cba4b18ce6e0714a",
+          "title": "Wow!Red — Unit 7 'farm' — part 2 song 7 2",
+          "type": "Song",
+          "unit": "7",
+          "number": "025",
+          "videoKey": "lessons/cba4b18ce6e0714a.mp4",
+          "hasSubtitle": false,
+          "hasChineseSubtitle": false
+        },
+        {
+          "id": "346bab6cd4fae0d1",
+          "title": "Wow!Red — Unit 8 'feelings' — part 1 story 8 1",
+          "type": "Story",
+          "unit": "8",
+          "number": "026",
+          "videoKey": "lessons/346bab6cd4fae0d1.mp4",
+          "hasSubtitle": false,
+          "hasChineseSubtitle": false
+        },
+        {
+          "id": "de1138a0d8dcf94e",
+          "title": "Wow!Red — Unit 8 'feelings' — part 1 song 8 1",
+          "type": "Song",
+          "unit": "8",
+          "number": "027",
+          "videoKey": "lessons/de1138a0d8dcf94e.mp4",
+          "hasSubtitle": false,
+          "hasChineseSubtitle": false
+        },
+        {
+          "id": "898299e7b96aba74",
+          "title": "Wow!Red — Unit 8 'feelings' — part 2 story 8 2",
+          "type": "Story",
+          "unit": "8",
+          "number": "028",
+          "videoKey": "lessons/898299e7b96aba74.mp4",
+          "hasSubtitle": false,
+          "hasChineseSubtitle": false
+        },
+        {
+          "id": "57ee6e145d632e92",
+          "title": "Wow!Red — Unit 8 'feelings' — part 2 song 8 2",
+          "type": "Song",
+          "unit": "8",
+          "number": "029",
+          "videoKey": "lessons/57ee6e145d632e92.mp4",
+          "hasSubtitle": false,
+          "hasChineseSubtitle": false
+        },
+        {
+          "id": "a4159462c463f56b",
+          "title": "Wow!Red — Unit 9 'weather' — part 1 story 9 1",
+          "type": "Story",
+          "unit": "9",
+          "number": "030",
+          "videoKey": "lessons/a4159462c463f56b.mp4",
+          "hasSubtitle": false,
+          "hasChineseSubtitle": false
+        },
+        {
+          "id": "5e0380437ef67098",
+          "title": "Wow!Red — Unit 9 'weather' — part 1 song 9 1",
+          "type": "Song",
+          "unit": "9",
+          "number": "031",
+          "videoKey": "lessons/5e0380437ef67098.mp4",
+          "hasSubtitle": false,
+          "hasChineseSubtitle": false
+        },
+        {
+          "id": "08b30e103c078d1e",
+          "title": "Wow!Red — Unit 9 'weather' — part 1 story 9 2",
+          "type": "Story",
+          "unit": "9",
+          "number": "032",
+          "videoKey": "lessons/08b30e103c078d1e.mp4",
+          "hasSubtitle": false,
+          "hasChineseSubtitle": false
+        },
+        {
+          "id": "601a1dd22ff6c980",
+          "title": "Wow!Red — Unit 9 'weather' — part 1 song 9 2",
+          "type": "Song",
+          "unit": "9",
+          "number": "033",
+          "videoKey": "lessons/601a1dd22ff6c980.mp4",
+          "hasSubtitle": false,
+          "hasChineseSubtitle": false
+        }
+      ]
+    },
+    {
+      "id": "level-4",
+      "number": 4,
+      "name": "Level 4 · Green",
+      "lessons": [
+        {
+          "id": "1be06808878a2e08",
+          "title": "Wow!Green — Unit 1 story",
+          "type": "Story",
+          "unit": "1",
+          "number": "001",
+          "videoKey": "lessons/1be06808878a2e08.mp4",
+          "hasSubtitle": false,
+          "hasChineseSubtitle": false
+        },
+        {
+          "id": "3960d69d6810f6a3",
+          "title": "Wow!Green — Unit 1 song",
+          "type": "Song",
+          "unit": "1",
+          "number": "002",
+          "videoKey": "lessons/3960d69d6810f6a3.mp4",
+          "hasSubtitle": false,
+          "hasChineseSubtitle": false
+        },
+        {
+          "id": "897e36d4a6a7dc1d",
+          "title": "Wow!Green — Unit 2 story",
+          "type": "Story",
+          "unit": "2",
+          "number": "003",
+          "videoKey": "lessons/897e36d4a6a7dc1d.mp4",
+          "hasSubtitle": false,
+          "hasChineseSubtitle": false
+        },
+        {
+          "id": "7cbb18d8b59857e7",
+          "title": "Wow!Green — Unit 2 song",
+          "type": "Song",
+          "unit": "2",
+          "number": "004",
+          "videoKey": "lessons/7cbb18d8b59857e7.mp4",
+          "hasSubtitle": false,
+          "hasChineseSubtitle": false
+        },
+        {
+          "id": "fcbd30a75ecf54f5",
+          "title": "Wow!Green — Unit 3 story1",
+          "type": "Video",
+          "unit": "3",
+          "number": "005",
+          "videoKey": "lessons/fcbd30a75ecf54f5.mp4",
+          "hasSubtitle": false,
+          "hasChineseSubtitle": false
+        },
+        {
+          "id": "5f273f7dc0c25d04",
+          "title": "Wow!Green — Unit 3 story2",
+          "type": "Video",
+          "unit": "3",
+          "number": "006",
+          "videoKey": "lessons/5f273f7dc0c25d04.mp4",
+          "hasSubtitle": false,
+          "hasChineseSubtitle": false
+        },
+        {
+          "id": "98427c9e9d3d03de",
+          "title": "Wow!Green — Unit 3 song1",
+          "type": "Video",
+          "unit": "3",
+          "number": "007",
+          "videoKey": "lessons/98427c9e9d3d03de.mp4",
+          "hasSubtitle": false,
+          "hasChineseSubtitle": false
+        },
+        {
+          "id": "60b77d2e940a9ca5",
+          "title": "Wow!Green — Unit 3 song2",
+          "type": "Video",
+          "unit": "3",
+          "number": "008",
+          "videoKey": "lessons/60b77d2e940a9ca5.mp4",
+          "hasSubtitle": false,
+          "hasChineseSubtitle": false
+        },
+        {
+          "id": "a4e65325a828c479",
+          "title": "Wow!Green — Unit 4 story1",
+          "type": "Video",
+          "unit": "4",
+          "number": "009",
+          "videoKey": "lessons/a4e65325a828c479.mp4",
+          "hasSubtitle": false,
+          "hasChineseSubtitle": false
+        },
+        {
+          "id": "a59cb0eff1a6d516",
+          "title": "Wow!Green — Unit 4 story2",
+          "type": "Video",
+          "unit": "4",
+          "number": "010",
+          "videoKey": "lessons/a59cb0eff1a6d516.mp4",
+          "hasSubtitle": false,
+          "hasChineseSubtitle": false
+        },
+        {
+          "id": "f4c41ad0b8ba19ed",
+          "title": "Wow!Green — Unit 4 song1",
+          "type": "Video",
+          "unit": "4",
+          "number": "011",
+          "videoKey": "lessons/f4c41ad0b8ba19ed.mp4",
+          "hasSubtitle": false,
+          "hasChineseSubtitle": false
+        },
+        {
+          "id": "03ee2d7de63beb66",
+          "title": "Wow!Green — Unit 4 song2",
+          "type": "Video",
+          "unit": "4",
+          "number": "012",
+          "videoKey": "lessons/03ee2d7de63beb66.mp4",
+          "hasSubtitle": false,
+          "hasChineseSubtitle": false
+        },
+        {
+          "id": "f8d2126b03d6b2ed",
+          "title": "Wow!Green — Unit 5 story1",
+          "type": "Video",
+          "unit": "5",
+          "number": "013",
+          "videoKey": "lessons/f8d2126b03d6b2ed.mp4",
+          "hasSubtitle": false,
+          "hasChineseSubtitle": false
+        },
+        {
+          "id": "0c2701e522a0f633",
+          "title": "Wow!Green — Unit 5 story2",
+          "type": "Video",
+          "unit": "5",
+          "number": "014",
+          "videoKey": "lessons/0c2701e522a0f633.mp4",
+          "hasSubtitle": false,
+          "hasChineseSubtitle": false
+        },
+        {
+          "id": "2da51f5fa7b0ac09",
+          "title": "Wow!Green — Unit 5 song1",
+          "type": "Video",
+          "unit": "5",
+          "number": "015",
+          "videoKey": "lessons/2da51f5fa7b0ac09.mp4",
+          "hasSubtitle": false,
+          "hasChineseSubtitle": false
+        },
+        {
+          "id": "ca8a9406024138f0",
+          "title": "Wow!Green — Unit 5song2",
+          "type": "Video",
+          "unit": "5",
+          "number": "016",
+          "videoKey": "lessons/ca8a9406024138f0.mp4",
+          "hasSubtitle": false,
+          "hasChineseSubtitle": false
+        },
+        {
+          "id": "09276e5f2f1559d0",
+          "title": "Wow!Green — Unit 6 story1",
+          "type": "Video",
+          "unit": "6",
+          "number": "017",
+          "videoKey": "lessons/09276e5f2f1559d0.mp4",
+          "hasSubtitle": false,
+          "hasChineseSubtitle": false
+        },
+        {
+          "id": "d16f21936beb15a2",
+          "title": "Wow!Green — Unit 6 story2",
+          "type": "Video",
+          "unit": "6",
+          "number": "018",
+          "videoKey": "lessons/d16f21936beb15a2.mp4",
+          "hasSubtitle": false,
+          "hasChineseSubtitle": false
+        },
+        {
+          "id": "2d2e55b6692092e7",
+          "title": "Wow!Green — Unit 6 song1",
+          "type": "Video",
+          "unit": "6",
+          "number": "019",
+          "videoKey": "lessons/2d2e55b6692092e7.mp4",
+          "hasSubtitle": false,
+          "hasChineseSubtitle": false
+        },
+        {
+          "id": "1b6e3ec9a05ccd58",
+          "title": "Wow!Green — Unit 6 song2",
+          "type": "Video",
+          "unit": "6",
+          "number": "020",
+          "videoKey": "lessons/1b6e3ec9a05ccd58.mp4",
+          "hasSubtitle": false,
+          "hasChineseSubtitle": false
+        },
+        {
+          "id": "9220525f1f81a59f",
+          "title": "Wow!Green — Unit 7 story1",
+          "type": "Video",
+          "unit": "7",
+          "number": "021",
+          "videoKey": "lessons/9220525f1f81a59f.mp4",
+          "hasSubtitle": false,
+          "hasChineseSubtitle": false
+        },
+        {
+          "id": "12eb3f9f611eda65",
+          "title": "Wow!Green — Unit 7 story2",
+          "type": "Video",
+          "unit": "7",
+          "number": "022",
+          "videoKey": "lessons/12eb3f9f611eda65.mp4",
+          "hasSubtitle": false,
+          "hasChineseSubtitle": false
+        },
+        {
+          "id": "71aa926ebfe8bd92",
+          "title": "Wow!Green — Unit 7 song1",
+          "type": "Video",
+          "unit": "7",
+          "number": "023",
+          "videoKey": "lessons/71aa926ebfe8bd92.mp4",
+          "hasSubtitle": false,
+          "hasChineseSubtitle": false
+        },
+        {
+          "id": "2eaf6f4db5540128",
+          "title": "Wow!Green — Unit 7 song2",
+          "type": "Video",
+          "unit": "7",
+          "number": "024",
+          "videoKey": "lessons/2eaf6f4db5540128.mp4",
+          "hasSubtitle": false,
+          "hasChineseSubtitle": false
+        },
+        {
+          "id": "b2bf7499e6bef7d8",
+          "title": "Wow!Green — Unit 8 story1",
+          "type": "Video",
+          "unit": "8",
+          "number": "025",
+          "videoKey": "lessons/b2bf7499e6bef7d8.mp4",
+          "hasSubtitle": false,
+          "hasChineseSubtitle": false
+        },
+        {
+          "id": "65f8f65376fd8aad",
+          "title": "Wow!Green — Unit 8 story2",
+          "type": "Video",
+          "unit": "8",
+          "number": "026",
+          "videoKey": "lessons/65f8f65376fd8aad.mp4",
+          "hasSubtitle": false,
+          "hasChineseSubtitle": false
+        },
+        {
+          "id": "dec032f85174e66c",
+          "title": "Wow!Green — Unit 8 song1",
+          "type": "Video",
+          "unit": "8",
+          "number": "027",
+          "videoKey": "lessons/dec032f85174e66c.mp4",
+          "hasSubtitle": false,
+          "hasChineseSubtitle": false
+        },
+        {
+          "id": "68bdc963b258f0d1",
+          "title": "Wow!Green — Unit 8 song2",
+          "type": "Video",
+          "unit": "8",
+          "number": "028",
+          "videoKey": "lessons/68bdc963b258f0d1.mp4",
+          "hasSubtitle": false,
+          "hasChineseSubtitle": false
+        },
+        {
+          "id": "0d584f71e8e1c0bf",
+          "title": "Wow!Green — Unit 9 story1",
+          "type": "Video",
+          "unit": "9",
+          "number": "029",
+          "videoKey": "lessons/0d584f71e8e1c0bf.mp4",
+          "hasSubtitle": false,
+          "hasChineseSubtitle": false
+        },
+        {
+          "id": "7a745f951f4300d0",
+          "title": "Wow!Green — Unit 9 story2",
+          "type": "Video",
+          "unit": "9",
+          "number": "030",
+          "videoKey": "lessons/7a745f951f4300d0.mp4",
+          "hasSubtitle": false,
+          "hasChineseSubtitle": false
+        },
+        {
+          "id": "4b24bdfbcd921f74",
+          "title": "Wow!Green — Unit 9 song1",
+          "type": "Video",
+          "unit": "9",
+          "number": "031",
+          "videoKey": "lessons/4b24bdfbcd921f74.mp4",
+          "hasSubtitle": false,
+          "hasChineseSubtitle": false
+        },
+        {
+          "id": "90948f6999ba0f85",
+          "title": "Wow!Green — Unit 9 song2",
+          "type": "Video",
+          "unit": "9",
+          "number": "032",
+          "videoKey": "lessons/90948f6999ba0f85.mp4",
+          "hasSubtitle": false,
+          "hasChineseSubtitle": false
+        }
+      ]
+    },
+    {
+      "id": "level-5",
+      "number": 5,
+      "name": "Level 5 · Orange",
+      "lessons": [
+        {
+          "id": "202e24ab8b4e3c73",
+          "title": "Wow!Orange — Unit 1 intro",
+          "type": "Video",
+          "unit": "1",
+          "number": "001",
+          "videoKey": "lessons/202e24ab8b4e3c73.mp4",
+          "hasSubtitle": false,
+          "hasChineseSubtitle": false
+        },
+        {
+          "id": "2612ac1df8cd3104",
+          "title": "Wow!Orange — Unit 1 story",
+          "type": "Story",
+          "unit": "1",
+          "number": "002",
+          "videoKey": "lessons/2612ac1df8cd3104.mp4",
+          "hasSubtitle": false,
+          "hasChineseSubtitle": false
+        },
+        {
+          "id": "4137c34a810a66d9",
+          "title": "Wow!Orange — Unit 1 song",
+          "type": "Song",
+          "unit": "1",
+          "number": "003",
+          "videoKey": "lessons/4137c34a810a66d9.mp4",
+          "hasSubtitle": false,
+          "hasChineseSubtitle": false
+        },
+        {
+          "id": "d12a7c062b0e7c45",
+          "title": "Wow!Orange — Unit 2 story 2 1",
+          "type": "Story",
+          "unit": "2",
+          "number": "004",
+          "videoKey": "lessons/d12a7c062b0e7c45.mp4",
+          "hasSubtitle": false,
+          "hasChineseSubtitle": false
+        },
+        {
+          "id": "3df6e92afefbf1af",
+          "title": "Wow!Orange — Unit 2 song 2 1",
+          "type": "Song",
+          "unit": "2",
+          "number": "005",
+          "videoKey": "lessons/3df6e92afefbf1af.mp4",
+          "hasSubtitle": false,
+          "hasChineseSubtitle": false
+        },
+        {
+          "id": "f4b862e5314f1013",
+          "title": "Wow!Orange — Unit 3 video story 3 1a",
+          "type": "Story",
+          "unit": "3",
+          "number": "006",
+          "videoKey": "lessons/f4b862e5314f1013.mp4",
+          "hasSubtitle": false,
+          "hasChineseSubtitle": false
+        },
+        {
+          "id": "4761b4ba9ea515e0",
+          "title": "Wow!Orange — Unit 3 story 3 1b",
+          "type": "Story",
+          "unit": "3",
+          "number": "007",
+          "videoKey": "lessons/4761b4ba9ea515e0.mp4",
+          "hasSubtitle": false,
+          "hasChineseSubtitle": false
+        },
+        {
+          "id": "8a0d8d81b1348645",
+          "title": "Wow!Orange — Unit 3 song 3 1a",
+          "type": "Song",
+          "unit": "3",
+          "number": "008",
+          "videoKey": "lessons/8a0d8d81b1348645.mp4",
+          "hasSubtitle": false,
+          "hasChineseSubtitle": false
+        },
+        {
+          "id": "487b3549fbef26cc",
+          "title": "Wow!Orange — Unit 3 song 3 1b",
+          "type": "Song",
+          "unit": "3",
+          "number": "009",
+          "videoKey": "lessons/487b3549fbef26cc.mp4",
+          "hasSubtitle": false,
+          "hasChineseSubtitle": false
+        },
+        {
+          "id": "0e5c3f9bf2534125",
+          "title": "Wow!Orange — Unit 4 story 4 1a",
+          "type": "Story",
+          "unit": "4",
+          "number": "010",
+          "videoKey": "lessons/0e5c3f9bf2534125.mp4",
+          "hasSubtitle": false,
+          "hasChineseSubtitle": false
+        },
+        {
+          "id": "f7df82a39270f4e3",
+          "title": "Wow!Orange — Unit 4 story 4 1b",
+          "type": "Story",
+          "unit": "4",
+          "number": "011",
+          "videoKey": "lessons/f7df82a39270f4e3.mp4",
+          "hasSubtitle": false,
+          "hasChineseSubtitle": false
+        },
+        {
+          "id": "83e12c2a4b672375",
+          "title": "Wow!Orange — Unit 4 song 4 1a",
+          "type": "Song",
+          "unit": "4",
+          "number": "012",
+          "videoKey": "lessons/83e12c2a4b672375.mp4",
+          "hasSubtitle": false,
+          "hasChineseSubtitle": false
+        },
+        {
+          "id": "1978ca9c15d59ed9",
+          "title": "Wow!Orange — Unit 4 song 4 1b",
+          "type": "Song",
+          "unit": "4",
+          "number": "013",
+          "videoKey": "lessons/1978ca9c15d59ed9.mp4",
+          "hasSubtitle": false,
+          "hasChineseSubtitle": false
+        },
+        {
+          "id": "e9de519226a524d5",
+          "title": "Wow!Orange — Unit 5 story 5 1a",
+          "type": "Story",
+          "unit": "5",
+          "number": "014",
+          "videoKey": "lessons/e9de519226a524d5.mp4",
+          "hasSubtitle": false,
+          "hasChineseSubtitle": false
+        },
+        {
+          "id": "77cea0496dafa253",
+          "title": "Wow!Orange — Unit 5 story 5 1b",
+          "type": "Story",
+          "unit": "5",
+          "number": "015",
+          "videoKey": "lessons/77cea0496dafa253.mp4",
+          "hasSubtitle": false,
+          "hasChineseSubtitle": false
+        },
+        {
+          "id": "88d1c9201002fd35",
+          "title": "Wow!Orange — Unit 5 song 5 1a",
+          "type": "Song",
+          "unit": "5",
+          "number": "016",
+          "videoKey": "lessons/88d1c9201002fd35.mp4",
+          "hasSubtitle": false,
+          "hasChineseSubtitle": false
+        },
+        {
+          "id": "9e13a4540c114ca8",
+          "title": "Wow!Orange — Unit 5 song 5 1b",
+          "type": "Song",
+          "unit": "5",
+          "number": "017",
+          "videoKey": "lessons/9e13a4540c114ca8.mp4",
+          "hasSubtitle": false,
+          "hasChineseSubtitle": false
+        },
+        {
+          "id": "67adf44edfba6488",
+          "title": "Wow!Orange — Unit 6 story 6 1a",
+          "type": "Story",
+          "unit": "6",
+          "number": "018",
+          "videoKey": "lessons/67adf44edfba6488.mp4",
+          "hasSubtitle": false,
+          "hasChineseSubtitle": false
+        },
+        {
+          "id": "c4d82512a982c8a7",
+          "title": "Wow!Orange — Unit 6 story 6 1b",
+          "type": "Story",
+          "unit": "6",
+          "number": "019",
+          "videoKey": "lessons/c4d82512a982c8a7.mp4",
+          "hasSubtitle": false,
+          "hasChineseSubtitle": false
+        },
+        {
+          "id": "6e61b7849ccc6dd8",
+          "title": "Wow!Orange — Unit 6 song 6 1a",
+          "type": "Song",
+          "unit": "6",
+          "number": "020",
+          "videoKey": "lessons/6e61b7849ccc6dd8.mp4",
+          "hasSubtitle": false,
+          "hasChineseSubtitle": false
+        },
+        {
+          "id": "bfaf578b15d78fdd",
+          "title": "Wow!Orange — Unit 6 song 6 1b",
+          "type": "Song",
+          "unit": "6",
+          "number": "021",
+          "videoKey": "lessons/bfaf578b15d78fdd.mp4",
+          "hasSubtitle": false,
+          "hasChineseSubtitle": false
+        },
+        {
+          "id": "1460b4f70510e4d2",
+          "title": "Wow!Orange — Unit 7 story 7 1a",
+          "type": "Story",
+          "unit": "7",
+          "number": "022",
+          "videoKey": "lessons/1460b4f70510e4d2.mp4",
+          "hasSubtitle": false,
+          "hasChineseSubtitle": false
+        },
+        {
+          "id": "764ef953e3d8cc21",
+          "title": "Wow!Orange — Unit 7 story 7 1b",
+          "type": "Story",
+          "unit": "7",
+          "number": "023",
+          "videoKey": "lessons/764ef953e3d8cc21.mp4",
+          "hasSubtitle": false,
+          "hasChineseSubtitle": false
+        },
+        {
+          "id": "b3d52905ff918b73",
+          "title": "Wow!Orange — Unit 7 song 7 1a",
+          "type": "Song",
+          "unit": "7",
+          "number": "024",
+          "videoKey": "lessons/b3d52905ff918b73.mp4",
+          "hasSubtitle": false,
+          "hasChineseSubtitle": false
+        },
+        {
+          "id": "bdc1d821b6e4954e",
+          "title": "Wow!Orange — Unit 7 song 7 1b",
+          "type": "Song",
+          "unit": "7",
+          "number": "025",
+          "videoKey": "lessons/bdc1d821b6e4954e.mp4",
+          "hasSubtitle": false,
+          "hasChineseSubtitle": false
+        },
+        {
+          "id": "cb9de8f828cf738e",
+          "title": "Wow!Orange — Unit 8 story 8 1a",
+          "type": "Story",
+          "unit": "8",
+          "number": "026",
+          "videoKey": "lessons/cb9de8f828cf738e.mp4",
+          "hasSubtitle": false,
+          "hasChineseSubtitle": false
+        },
+        {
+          "id": "ff64370f6677e386",
+          "title": "Wow!Orange — Unit 8 story 8 1b",
+          "type": "Story",
+          "unit": "8",
+          "number": "027",
+          "videoKey": "lessons/ff64370f6677e386.mp4",
+          "hasSubtitle": false,
+          "hasChineseSubtitle": false
+        },
+        {
+          "id": "298f82545c6360a3",
+          "title": "Wow!Orange — Unit 8 song 8 1a",
+          "type": "Song",
+          "unit": "8",
+          "number": "028",
+          "videoKey": "lessons/298f82545c6360a3.mp4",
+          "hasSubtitle": false,
+          "hasChineseSubtitle": false
+        },
+        {
+          "id": "ec14146c0c121d42",
+          "title": "Wow!Orange — Unit 8 song 8 1b",
+          "type": "Song",
+          "unit": "8",
+          "number": "029",
+          "videoKey": "lessons/ec14146c0c121d42.mp4",
+          "hasSubtitle": false,
+          "hasChineseSubtitle": false
+        },
+        {
+          "id": "33ab76d745f2d86e",
+          "title": "Wow!Orange — Unit 9 story 9 1a",
+          "type": "Story",
+          "unit": "9",
+          "number": "030",
+          "videoKey": "lessons/33ab76d745f2d86e.mp4",
+          "hasSubtitle": false,
+          "hasChineseSubtitle": false
+        },
+        {
+          "id": "2ed38a06371a314f",
+          "title": "Wow!Orange — Unit 9 story 9 1b",
+          "type": "Story",
+          "unit": "9",
+          "number": "031",
+          "videoKey": "lessons/2ed38a06371a314f.mp4",
+          "hasSubtitle": false,
+          "hasChineseSubtitle": false
+        },
+        {
+          "id": "da53279d83185637",
+          "title": "Wow!Orange — Unit 9 song 9 1a",
+          "type": "Song",
+          "unit": "9",
+          "number": "032",
+          "videoKey": "lessons/da53279d83185637.mp4",
+          "hasSubtitle": false,
+          "hasChineseSubtitle": false
+        },
+        {
+          "id": "ea077513781f87e8",
+          "title": "Wow!Orange — Unit 9 song 9 1b",
+          "type": "Song",
+          "unit": "9",
+          "number": "033",
+          "videoKey": "lessons/ea077513781f87e8.mp4",
+          "hasSubtitle": false,
+          "hasChineseSubtitle": false
+        }
+      ]
+    },
+    {
+      "id": "level-6",
+      "number": 6,
+      "name": "Level 6 · Bronze",
+      "lessons": [
+        {
+          "id": "a79e7a48bbed500f",
+          "title": "Wow!Bronze — Unit 1 story 1 1",
+          "type": "Story",
+          "unit": "1",
+          "number": "001",
+          "videoKey": "lessons/a79e7a48bbed500f.mp4",
+          "hasSubtitle": false,
+          "hasChineseSubtitle": false
+        },
+        {
+          "id": "0b1d9108b2ca9f27",
+          "title": "Wow!Bronze — Unit 1 song 1 1",
+          "type": "Song",
+          "unit": "1",
+          "number": "002",
+          "videoKey": "lessons/0b1d9108b2ca9f27.mp4",
+          "hasSubtitle": false,
+          "hasChineseSubtitle": false
+        },
+        {
+          "id": "d0d3ffe90e5d1e2e",
+          "title": "Wow!Bronze — Unit 2 story 2 1a",
+          "type": "Story",
+          "unit": "2",
+          "number": "003",
+          "videoKey": "lessons/d0d3ffe90e5d1e2e.mp4",
+          "hasSubtitle": false,
+          "hasChineseSubtitle": false
+        },
+        {
+          "id": "9928a5aa33d11fb2",
+          "title": "Wow!Bronze — Unit 2 story 2 1b",
+          "type": "Story",
+          "unit": "2",
+          "number": "004",
+          "videoKey": "lessons/9928a5aa33d11fb2.mp4",
+          "hasSubtitle": false,
+          "hasChineseSubtitle": false
+        },
+        {
+          "id": "59663a2948b73478",
+          "title": "Wow!Bronze — Unit 2 song 2 1",
+          "type": "Song",
+          "unit": "2",
+          "number": "005",
+          "videoKey": "lessons/59663a2948b73478.mp4",
+          "hasSubtitle": false,
+          "hasChineseSubtitle": false
+        },
+        {
+          "id": "f0db091cbcfbd567",
+          "title": "Wow!Bronze — Unit 3 story 3 1a",
+          "type": "Story",
+          "unit": "3",
+          "number": "006",
+          "videoKey": "lessons/f0db091cbcfbd567.mp4",
+          "hasSubtitle": false,
+          "hasChineseSubtitle": false
+        },
+        {
+          "id": "cbef252d10b3c88b",
+          "title": "Wow!Bronze — Unit 3 story 3 1b",
+          "type": "Story",
+          "unit": "3",
+          "number": "007",
+          "videoKey": "lessons/cbef252d10b3c88b.mp4",
+          "hasSubtitle": false,
+          "hasChineseSubtitle": false
+        },
+        {
+          "id": "c9e481eb7959516b",
+          "title": "Wow!Bronze — Unit 3 song 3 1",
+          "type": "Song",
+          "unit": "3",
+          "number": "008",
+          "videoKey": "lessons/c9e481eb7959516b.mp4",
+          "hasSubtitle": false,
+          "hasChineseSubtitle": false
+        },
+        {
+          "id": "7e935c5f4e5fd378",
+          "title": "Wow!Bronze — Unit 4 story 4 1a",
+          "type": "Story",
+          "unit": "4",
+          "number": "009",
+          "videoKey": "lessons/7e935c5f4e5fd378.mp4",
+          "hasSubtitle": false,
+          "hasChineseSubtitle": false
+        },
+        {
+          "id": "3a5f41d776e58266",
+          "title": "Wow!Bronze — Unit 4 story 4 1b",
+          "type": "Story",
+          "unit": "4",
+          "number": "010",
+          "videoKey": "lessons/3a5f41d776e58266.mp4",
+          "hasSubtitle": false,
+          "hasChineseSubtitle": false
+        },
+        {
+          "id": "7d15ebf2b338215a",
+          "title": "Wow!Bronze — Unit 4 song 4 1",
+          "type": "Song",
+          "unit": "4",
+          "number": "011",
+          "videoKey": "lessons/7d15ebf2b338215a.mp4",
+          "hasSubtitle": false,
+          "hasChineseSubtitle": false
+        },
+        {
+          "id": "ae250615d4da6700",
+          "title": "Wow!Bronze — Unit 5 .story 5 1a",
+          "type": "Video",
+          "unit": "5",
+          "number": "012",
+          "videoKey": "lessons/ae250615d4da6700.mp4",
+          "hasSubtitle": false,
+          "hasChineseSubtitle": false
+        },
+        {
+          "id": "7352b06956e50c65",
+          "title": "Wow!Bronze — Unit 5 story 5 1b",
+          "type": "Story",
+          "unit": "5",
+          "number": "013",
+          "videoKey": "lessons/7352b06956e50c65.mp4",
+          "hasSubtitle": false,
+          "hasChineseSubtitle": false
+        },
+        {
+          "id": "c671e16dd9d447dc",
+          "title": "Wow!Bronze — Unit 5 song 5 1",
+          "type": "Song",
+          "unit": "5",
+          "number": "014",
+          "videoKey": "lessons/c671e16dd9d447dc.mp4",
+          "hasSubtitle": false,
+          "hasChineseSubtitle": false
+        },
+        {
+          "id": "01f40ddc8d24d4be",
+          "title": "Wow!Bronze — Unit 6 story 6 1a",
+          "type": "Story",
+          "unit": "6",
+          "number": "015",
+          "videoKey": "lessons/01f40ddc8d24d4be.mp4",
+          "hasSubtitle": false,
+          "hasChineseSubtitle": false
+        },
+        {
+          "id": "e7e559aa9ebbd44d",
+          "title": "Wow!Bronze — Unit 6 story 6 1b",
+          "type": "Story",
+          "unit": "6",
+          "number": "016",
+          "videoKey": "lessons/e7e559aa9ebbd44d.mp4",
+          "hasSubtitle": false,
+          "hasChineseSubtitle": false
+        },
+        {
+          "id": "4960a4417f17b8e6",
+          "title": "Wow!Bronze — Unit 6 song 6 1",
+          "type": "Song",
+          "unit": "6",
+          "number": "017",
+          "videoKey": "lessons/4960a4417f17b8e6.mp4",
+          "hasSubtitle": false,
+          "hasChineseSubtitle": false
+        },
+        {
+          "id": "4344ff9b18cfacbc",
+          "title": "Wow!Bronze — Unit 7 story 7 1b",
+          "type": "Story",
+          "unit": "7",
+          "number": "018",
+          "videoKey": "lessons/4344ff9b18cfacbc.mp4",
+          "hasSubtitle": false,
+          "hasChineseSubtitle": false
+        },
+        {
+          "id": "62172c7e10de6ac2",
+          "title": "Wow!Bronze — Unit 7 song 7 1",
+          "type": "Song",
+          "unit": "7",
+          "number": "019",
+          "videoKey": "lessons/62172c7e10de6ac2.mp4",
+          "hasSubtitle": false,
+          "hasChineseSubtitle": false
+        },
+        {
+          "id": "833de9b60bb028ec",
+          "title": "Wow!Bronze — Unit 8 story 8 1a",
+          "type": "Story",
+          "unit": "8",
+          "number": "020",
+          "videoKey": "lessons/833de9b60bb028ec.mp4",
+          "hasSubtitle": false,
+          "hasChineseSubtitle": false
+        },
+        {
+          "id": "e011ebeee7fa7e62",
+          "title": "Wow!Bronze — Unit 8 story 8 1b",
+          "type": "Story",
+          "unit": "8",
+          "number": "021",
+          "videoKey": "lessons/e011ebeee7fa7e62.mp4",
+          "hasSubtitle": false,
+          "hasChineseSubtitle": false
+        },
+        {
+          "id": "f37a4b29e980e329",
+          "title": "Wow!Bronze — Unit 8 song 8 1",
+          "type": "Song",
+          "unit": "8",
+          "number": "022",
+          "videoKey": "lessons/f37a4b29e980e329.mp4",
+          "hasSubtitle": false,
+          "hasChineseSubtitle": false
+        },
+        {
+          "id": "c0cf91c131caa9af",
+          "title": "Wow!Bronze — Unit 9 story 9 1a",
+          "type": "Story",
+          "unit": "9",
+          "number": "023",
+          "videoKey": "lessons/c0cf91c131caa9af.mp4",
+          "hasSubtitle": false,
+          "hasChineseSubtitle": false
+        },
+        {
+          "id": "754f8f6eb9c00cc1",
+          "title": "Wow!Bronze — Unit 9 story 9 1b",
+          "type": "Story",
+          "unit": "9",
+          "number": "024",
+          "videoKey": "lessons/754f8f6eb9c00cc1.mp4",
+          "hasSubtitle": false,
+          "hasChineseSubtitle": false
+        },
+        {
+          "id": "a413b5511ab8b14a",
+          "title": "Wow!Bronze — Unit 9 song 9 1",
+          "type": "Song",
+          "unit": "9",
+          "number": "025",
+          "videoKey": "lessons/a413b5511ab8b14a.mp4",
+          "hasSubtitle": false,
+          "hasChineseSubtitle": false
+        }
+      ]
+    },
+    {
+      "id": "level-7",
+      "number": 7,
+      "name": "Level 7 · Silver",
+      "lessons": [
+        {
+          "id": "7aa18f3318167c31",
+          "title": "Wow!Silver — Unit 1 song 1 1a",
+          "type": "Song",
+          "unit": "1",
+          "number": "001",
+          "videoKey": "lessons/7aa18f3318167c31.mp4",
+          "hasSubtitle": false,
+          "hasChineseSubtitle": false
+        },
+        {
+          "id": "59ae013da0c537e5",
+          "title": "Wow!Silver — Unit 1 song 1 1b",
+          "type": "Song",
+          "unit": "1",
+          "number": "002",
+          "videoKey": "lessons/59ae013da0c537e5.mp4",
+          "hasSubtitle": false,
+          "hasChineseSubtitle": false
+        },
+        {
+          "id": "0bf69978a6463432",
+          "title": "Wow!Silver — Unit 1 story 2 1a",
+          "type": "Story",
+          "unit": "1",
+          "number": "003",
+          "videoKey": "lessons/0bf69978a6463432.mp4",
+          "hasSubtitle": false,
+          "hasChineseSubtitle": false
+        },
+        {
+          "id": "7a48ef3ac6e26bee",
+          "title": "Wow!Silver — Unit 1 story 2 1b",
+          "type": "Story",
+          "unit": "1",
+          "number": "004",
+          "videoKey": "lessons/7a48ef3ac6e26bee.mp4",
+          "hasSubtitle": false,
+          "hasChineseSubtitle": false
+        },
+        {
+          "id": "f168f513dc2f56c1",
+          "title": "Wow!Silver — Unit 1 song 2 1",
+          "type": "Song",
+          "unit": "1",
+          "number": "005",
+          "videoKey": "lessons/f168f513dc2f56c1.mp4",
+          "hasSubtitle": false,
+          "hasChineseSubtitle": false
+        },
+        {
+          "id": "57666ed80f031c55",
+          "title": "Wow!Silver — Unit 3 story 3 1a",
+          "type": "Story",
+          "unit": "3",
+          "number": "006",
+          "videoKey": "lessons/57666ed80f031c55.mp4",
+          "hasSubtitle": false,
+          "hasChineseSubtitle": false
+        },
+        {
+          "id": "8ef0f1c52d549a26",
+          "title": "Wow!Silver — Unit 3 story 3 1b",
+          "type": "Story",
+          "unit": "3",
+          "number": "007",
+          "videoKey": "lessons/8ef0f1c52d549a26.mp4",
+          "hasSubtitle": false,
+          "hasChineseSubtitle": false
+        },
+        {
+          "id": "74f5ebfe20f5f72b",
+          "title": "Wow!Silver — Unit 3 song 3 1",
+          "type": "Song",
+          "unit": "3",
+          "number": "008",
+          "videoKey": "lessons/74f5ebfe20f5f72b.mp4",
+          "hasSubtitle": false,
+          "hasChineseSubtitle": false
+        },
+        {
+          "id": "8a1f72cb4ba1a5ce",
+          "title": "Wow!Silver — Unit 4 story 4 1a",
+          "type": "Story",
+          "unit": "4",
+          "number": "009",
+          "videoKey": "lessons/8a1f72cb4ba1a5ce.mp4",
+          "hasSubtitle": false,
+          "hasChineseSubtitle": false
+        },
+        {
+          "id": "671bc657ee0e9839",
+          "title": "Wow!Silver — Unit 4 story 4 1b",
+          "type": "Story",
+          "unit": "4",
+          "number": "010",
+          "videoKey": "lessons/671bc657ee0e9839.mp4",
+          "hasSubtitle": false,
+          "hasChineseSubtitle": false
+        },
+        {
+          "id": "881c46f6013bc3df",
+          "title": "Wow!Silver — Unit 4 song 4 1a",
+          "type": "Song",
+          "unit": "4",
+          "number": "011",
+          "videoKey": "lessons/881c46f6013bc3df.mp4",
+          "hasSubtitle": false,
+          "hasChineseSubtitle": false
+        },
+        {
+          "id": "df4d19ed6f106a79",
+          "title": "Wow!Silver — Unit 5 story 5 1a",
+          "type": "Story",
+          "unit": "5",
+          "number": "012",
+          "videoKey": "lessons/df4d19ed6f106a79.mp4",
+          "hasSubtitle": false,
+          "hasChineseSubtitle": false
+        },
+        {
+          "id": "9c344dabe85d7a68",
+          "title": "Wow!Silver — Unit 5 story 5 1b",
+          "type": "Story",
+          "unit": "5",
+          "number": "013",
+          "videoKey": "lessons/9c344dabe85d7a68.mp4",
+          "hasSubtitle": false,
+          "hasChineseSubtitle": false
+        },
+        {
+          "id": "23c12aa81190ea38",
+          "title": "Wow!Silver — Unit 5 song 5 1",
+          "type": "Song",
+          "unit": "5",
+          "number": "014",
+          "videoKey": "lessons/23c12aa81190ea38.mp4",
+          "hasSubtitle": false,
+          "hasChineseSubtitle": false
+        },
+        {
+          "id": "6029ed466f448d5a",
+          "title": "Wow!Silver — Unit 6 story 6 1a",
+          "type": "Story",
+          "unit": "6",
+          "number": "015",
+          "videoKey": "lessons/6029ed466f448d5a.mp4",
+          "hasSubtitle": false,
+          "hasChineseSubtitle": false
+        },
+        {
+          "id": "58e60b45d7eb0e87",
+          "title": "Wow!Silver — Unit 6 story 6 1b",
+          "type": "Story",
+          "unit": "6",
+          "number": "016",
+          "videoKey": "lessons/58e60b45d7eb0e87.mp4",
+          "hasSubtitle": false,
+          "hasChineseSubtitle": false
+        },
+        {
+          "id": "6cbfc2546aebd0dc",
+          "title": "Wow!Silver — Unit 6 song 6 1",
+          "type": "Song",
+          "unit": "6",
+          "number": "017",
+          "videoKey": "lessons/6cbfc2546aebd0dc.mp4",
+          "hasSubtitle": false,
+          "hasChineseSubtitle": false
+        },
+        {
+          "id": "ba8060918bffee38",
+          "title": "Wow!Silver — Unit 7 story 7 1a",
+          "type": "Story",
+          "unit": "7",
+          "number": "018",
+          "videoKey": "lessons/ba8060918bffee38.mp4",
+          "hasSubtitle": false,
+          "hasChineseSubtitle": false
+        },
+        {
+          "id": "3722c5f2041bca98",
+          "title": "Wow!Silver — Unit 7 story 7 1b",
+          "type": "Story",
+          "unit": "7",
+          "number": "019",
+          "videoKey": "lessons/3722c5f2041bca98.mp4",
+          "hasSubtitle": false,
+          "hasChineseSubtitle": false
+        },
+        {
+          "id": "59877ab0e4a6df57",
+          "title": "Wow!Silver — Unit 7 song 7 1",
+          "type": "Song",
+          "unit": "7",
+          "number": "020",
+          "videoKey": "lessons/59877ab0e4a6df57.mp4",
+          "hasSubtitle": false,
+          "hasChineseSubtitle": false
+        },
+        {
+          "id": "df80fc969fb84f78",
+          "title": "Wow!Silver — Unit 8 story 8 1a",
+          "type": "Story",
+          "unit": "8",
+          "number": "021",
+          "videoKey": "lessons/df80fc969fb84f78.mp4",
+          "hasSubtitle": false,
+          "hasChineseSubtitle": false
+        },
+        {
+          "id": "b84b88067c018434",
+          "title": "Wow!Silver — Unit 8 story 8 1b",
+          "type": "Story",
+          "unit": "8",
+          "number": "022",
+          "videoKey": "lessons/b84b88067c018434.mp4",
+          "hasSubtitle": false,
+          "hasChineseSubtitle": false
+        },
+        {
+          "id": "2629946d405da2c3",
+          "title": "Wow!Silver — Unit 8 song 8 1",
+          "type": "Song",
+          "unit": "8",
+          "number": "023",
+          "videoKey": "lessons/2629946d405da2c3.mp4",
+          "hasSubtitle": false,
+          "hasChineseSubtitle": false
+        },
+        {
+          "id": "398e7531d8d39309",
+          "title": "Wow!Silver — Unit 9 story 9 1a",
+          "type": "Story",
+          "unit": "9",
+          "number": "024",
+          "videoKey": "lessons/398e7531d8d39309.mp4",
+          "hasSubtitle": false,
+          "hasChineseSubtitle": false
+        },
+        {
+          "id": "2f2b2c4bd86b7f5f",
+          "title": "Wow!Silver — Unit 9 story 9 1b",
+          "type": "Story",
+          "unit": "9",
+          "number": "025",
+          "videoKey": "lessons/2f2b2c4bd86b7f5f.mp4",
+          "hasSubtitle": false,
+          "hasChineseSubtitle": false
+        },
+        {
+          "id": "2fec9dfe77f9a382",
+          "title": "Wow!Silver — Unit 9 song 9 1",
+          "type": "Song",
+          "unit": "9",
+          "number": "026",
+          "videoKey": "lessons/2fec9dfe77f9a382.mp4",
+          "hasSubtitle": false,
+          "hasChineseSubtitle": false
+        }
+      ]
+    },
+    {
+      "id": "level-8",
+      "number": 8,
+      "name": "Level 8 · Gold",
+      "lessons": [
+        {
+          "id": "92d5bdf6fb9e242b",
+          "title": "Wow!Gold — Unit 1 story 1 1a",
+          "type": "Story",
+          "unit": "1",
+          "number": "001",
+          "videoKey": "lessons/92d5bdf6fb9e242b.mp4",
+          "hasSubtitle": false,
+          "hasChineseSubtitle": false
+        },
+        {
+          "id": "3971e4d1d2e2e822",
+          "title": "Wow!Gold — Unit 1 song 1 1",
+          "type": "Song",
+          "unit": "1",
+          "number": "002",
+          "videoKey": "lessons/3971e4d1d2e2e822.mp4",
+          "hasSubtitle": false,
+          "hasChineseSubtitle": false
+        },
+        {
+          "id": "cfa1fd317f822515",
+          "title": "Wow!Gold — Unit 2 story 2 1a",
+          "type": "Story",
+          "unit": "2",
+          "number": "003",
+          "videoKey": "lessons/cfa1fd317f822515.mp4",
+          "hasSubtitle": false,
+          "hasChineseSubtitle": false
+        },
+        {
+          "id": "d259643566a5a2d7",
+          "title": "Wow!Gold — Unit 2 story 2 1b",
+          "type": "Story",
+          "unit": "2",
+          "number": "004",
+          "videoKey": "lessons/d259643566a5a2d7.mp4",
+          "hasSubtitle": false,
+          "hasChineseSubtitle": false
+        },
+        {
+          "id": "db095798dd93ab6c",
+          "title": "Wow!Gold — Unit 2 song 2 1",
+          "type": "Song",
+          "unit": "2",
+          "number": "005",
+          "videoKey": "lessons/db095798dd93ab6c.mp4",
+          "hasSubtitle": false,
+          "hasChineseSubtitle": false
+        },
+        {
+          "id": "85426462528f37e2",
+          "title": "Wow!Gold — Unit 3 story 3 1a",
+          "type": "Story",
+          "unit": "3",
+          "number": "006",
+          "videoKey": "lessons/85426462528f37e2.mp4",
+          "hasSubtitle": false,
+          "hasChineseSubtitle": false
+        },
+        {
+          "id": "f037de5d11c2f093",
+          "title": "Wow!Gold — Unit 3 story 3 1b",
+          "type": "Story",
+          "unit": "3",
+          "number": "007",
+          "videoKey": "lessons/f037de5d11c2f093.mp4",
+          "hasSubtitle": false,
+          "hasChineseSubtitle": false
+        },
+        {
+          "id": "8141ca12448b4c68",
+          "title": "Wow!Gold — Unit 3 song 3 1",
+          "type": "Song",
+          "unit": "3",
+          "number": "008",
+          "videoKey": "lessons/8141ca12448b4c68.mp4",
+          "hasSubtitle": false,
+          "hasChineseSubtitle": false
+        },
+        {
+          "id": "71d9a7aea72f11bf",
+          "title": "Wow!Gold — Unit 4 story 4 1a",
+          "type": "Story",
+          "unit": "4",
+          "number": "009",
+          "videoKey": "lessons/71d9a7aea72f11bf.mp4",
+          "hasSubtitle": false,
+          "hasChineseSubtitle": false
+        },
+        {
+          "id": "083d67843460e44f",
+          "title": "Wow!Gold — Unit 4 story 4 1b",
+          "type": "Story",
+          "unit": "4",
+          "number": "010",
+          "videoKey": "lessons/083d67843460e44f.mp4",
+          "hasSubtitle": false,
+          "hasChineseSubtitle": false
+        },
+        {
+          "id": "6527b968242d2103",
+          "title": "Wow!Gold — Unit 4 song 4 1",
+          "type": "Song",
+          "unit": "4",
+          "number": "011",
+          "videoKey": "lessons/6527b968242d2103.mp4",
+          "hasSubtitle": false,
+          "hasChineseSubtitle": false
+        },
+        {
+          "id": "dce71e39a992c44f",
+          "title": "Wow!Gold — Unit 5 story 5 1a",
+          "type": "Story",
+          "unit": "5",
+          "number": "012",
+          "videoKey": "lessons/dce71e39a992c44f.mp4",
+          "hasSubtitle": false,
+          "hasChineseSubtitle": false
+        },
+        {
+          "id": "88e8e5a8258fb7ef",
+          "title": "Wow!Gold — Unit 5 story 5 1b",
+          "type": "Story",
+          "unit": "5",
+          "number": "013",
+          "videoKey": "lessons/88e8e5a8258fb7ef.mp4",
+          "hasSubtitle": false,
+          "hasChineseSubtitle": false
+        },
+        {
+          "id": "011429a0c2537401",
+          "title": "Wow!Gold — Unit 5 song 5 1",
+          "type": "Song",
+          "unit": "5",
+          "number": "014",
+          "videoKey": "lessons/011429a0c2537401.mp4",
+          "hasSubtitle": false,
+          "hasChineseSubtitle": false
+        },
+        {
+          "id": "072d631b6a2e959e",
+          "title": "Wow!Gold — Unit 6 story 6 1a",
+          "type": "Story",
+          "unit": "6",
+          "number": "015",
+          "videoKey": "lessons/072d631b6a2e959e.mp4",
+          "hasSubtitle": false,
+          "hasChineseSubtitle": false
+        },
+        {
+          "id": "060758943c9ff5cd",
+          "title": "Wow!Gold — Unit 6 story 6 1b",
+          "type": "Story",
+          "unit": "6",
+          "number": "016",
+          "videoKey": "lessons/060758943c9ff5cd.mp4",
+          "hasSubtitle": false,
+          "hasChineseSubtitle": false
+        },
+        {
+          "id": "dccacc877d85c0bd",
+          "title": "Wow!Gold — Unit 6 song 6 1",
+          "type": "Song",
+          "unit": "6",
+          "number": "017",
+          "videoKey": "lessons/dccacc877d85c0bd.mp4",
+          "hasSubtitle": false,
+          "hasChineseSubtitle": false
+        },
+        {
+          "id": "4c00564fb93899cc",
+          "title": "Wow!Gold — Unit 7 story 7 1a",
+          "type": "Story",
+          "unit": "7",
+          "number": "018",
+          "videoKey": "lessons/4c00564fb93899cc.mp4",
+          "hasSubtitle": false,
+          "hasChineseSubtitle": false
+        },
+        {
+          "id": "5063158734c240ed",
+          "title": "Wow!Gold — Unit 7 story 7 1b",
+          "type": "Story",
+          "unit": "7",
+          "number": "019",
+          "videoKey": "lessons/5063158734c240ed.mp4",
+          "hasSubtitle": false,
+          "hasChineseSubtitle": false
+        },
+        {
+          "id": "a595e55e01caba79",
+          "title": "Wow!Gold — Unit 7 song 7 1",
+          "type": "Song",
+          "unit": "7",
+          "number": "020",
+          "videoKey": "lessons/a595e55e01caba79.mp4",
+          "hasSubtitle": false,
+          "hasChineseSubtitle": false
+        },
+        {
+          "id": "c0f241d6664c0141",
+          "title": "Wow!Gold — Unit 8 story 8 1a",
+          "type": "Story",
+          "unit": "8",
+          "number": "021",
+          "videoKey": "lessons/c0f241d6664c0141.mp4",
+          "hasSubtitle": false,
+          "hasChineseSubtitle": false
+        },
+        {
+          "id": "d999eb4560f6ee07",
+          "title": "Wow!Gold — Unit 8 story 8 1b",
+          "type": "Story",
+          "unit": "8",
+          "number": "022",
+          "videoKey": "lessons/d999eb4560f6ee07.mp4",
+          "hasSubtitle": false,
+          "hasChineseSubtitle": false
+        },
+        {
+          "id": "0e7861cdcda9222c",
+          "title": "Wow!Gold — Unit 8 song 8 1",
+          "type": "Song",
+          "unit": "8",
+          "number": "023",
+          "videoKey": "lessons/0e7861cdcda9222c.mp4",
+          "hasSubtitle": false,
+          "hasChineseSubtitle": false
+        },
+        {
+          "id": "4aabe65a363024cc",
+          "title": "Wow!Gold — Unit 9 story 9 1a",
+          "type": "Story",
+          "unit": "9",
+          "number": "024",
+          "videoKey": "lessons/4aabe65a363024cc.mp4",
+          "hasSubtitle": false,
+          "hasChineseSubtitle": false
+        },
+        {
+          "id": "95c2daee811060c4",
+          "title": "Wow!Gold — Unit 9 story 9 1b",
+          "type": "Story",
+          "unit": "9",
+          "number": "025",
+          "videoKey": "lessons/95c2daee811060c4.mp4",
+          "hasSubtitle": false,
+          "hasChineseSubtitle": false
+        },
+        {
+          "id": "4a3894e9ada64eae",
+          "title": "Wow!Gold — Unit 9 song 9 1",
+          "type": "Song",
+          "unit": "9",
+          "number": "026",
+          "videoKey": "lessons/4a3894e9ada64eae.mp4",
+          "hasSubtitle": false,
+          "hasChineseSubtitle": false
+        }
+      ]
+    }
+  ]
+}

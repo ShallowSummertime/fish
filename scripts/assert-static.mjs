@@ -735,7 +735,8 @@ for (const removed of [
 ]) assert.ok(!sitemapUrls.some((url) => url.endsWith(removed)), `${removed} must stay out of sitemap`);
 assert.equal(routes.length, 29, "29 indexable routes must be prerendered");
 const redirects = JSON.parse(await readFile("vercel.json", "utf8"));
-assert.equal(redirects.redirects.length, 5, "five duplicate guide URLs must have permanent redirects");
+assert.equal(redirects.redirects.filter((redirect) => redirect.source.startsWith("/guides/")).length, 5, "five duplicate guide URLs must have permanent redirects");
+assert.ok(redirects.redirects.some((redirect) => redirect.source === "/english" && redirect.destination === "/english/" && redirect.permanent));
 for (const redirect of redirects.redirects) assert.equal(redirect.permanent, true);
 const spiderText = textFrom(spider);
 const beginnerText = textFrom(beginner);
