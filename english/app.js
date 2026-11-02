@@ -28,6 +28,7 @@ const currentPlan = () => ({ identity: `today:${currentPlanDate()}`, lessonIds: 
 const plannedIds = () => state.plans.today.key === currentPlanDate() ? state.plans.today.lessonIds : [];
 function currentPlanDate() { const d = new Date(); return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`; }
 const save = () => saveState(state);
+const focusControl = (...selectors) => { const target = selectors.map(selector => document.querySelector(selector)).find(element => element && !element.disabled); target?.focus({ preventScroll: true }); };
 function setActive(id) {
   active = id; const url = new URL(location.href); if (id) url.searchParams.set('lesson', id); else url.searchParams.delete('lesson'); history.pushState({}, '', url); render();
 }
@@ -51,14 +52,14 @@ function render() {
   document.querySelectorAll('[data-open]').forEach(button => button.onclick = () => setActive(button.dataset.open));
   document.querySelectorAll('[data-plan]').forEach(button => button.onclick = () => { const id = button.dataset.plan; const prior = plannedIds(); setPlanLessons(state, 'today', prior.includes(id) ? prior.filter(x => x !== id) : [...prior, id], new Date(), ids); save(); render(); });
   document.querySelectorAll('[data-select]').forEach(box => box.onchange = () => { if (box.checked) selectedIds.add(box.dataset.select); else selectedIds.delete(box.dataset.select); box.closest('.card').classList.toggle('is-selected', box.checked); const add = document.querySelector('#add-selected'); if (add) { add.disabled = !selectedIds.size; add.textContent = `${t('addSelected')} (${selectedIds.size})`; } });
-  const toggle = document.querySelector('#toggle-select'); if (toggle) toggle.onclick = () => { selecting = !selecting; selectedIds.clear(); feedback = ''; render(); };
-  const selectVisible = document.querySelector('#select-visible'); if (selectVisible) selectVisible.onclick = () => { visible.forEach(item => selectedIds.add(item.id)); render(); };
-  const clearSelection = document.querySelector('#clear-selection'); if (clearSelection) clearSelection.onclick = () => { selectedIds.clear(); render(); };
+  const toggle = document.querySelector('#toggle-select'); if (toggle) toggle.onclick = () => { selecting = !selecting; selectedIds.clear(); feedback = ''; render(); focusControl('#toggle-select'); };
+  const selectVisible = document.querySelector('#select-visible'); if (selectVisible) selectVisible.onclick = () => { visible.forEach(item => selectedIds.add(item.id)); render(); focusControl('#select-visible'); };
+  const clearSelection = document.querySelector('#clear-selection'); if (clearSelection) clearSelection.onclick = () => { selectedIds.clear(); render(); focusControl('#clear-selection'); };
   const addSelected = document.querySelector('#add-selected'); if (addSelected) addSelected.onclick = () => { const chosen = lessons.map(item => item.id).filter(id => selectedIds.has(id)); setPlanLessons(state, 'today', [...new Set([...plannedIds(), ...chosen])], new Date(), ids); feedback = extra(`已将 ${chosen.length} 节课程加入今日计划。`, `Added ${chosen.length} lessons to today's plan.`); selectedIds.clear(); selecting = false; save(); render(); };
-  const previous = document.querySelector('#previous'); if (previous) previous.onclick = () => { page--; render(); };
-  const next = document.querySelector('#next'); if (next) next.onclick = () => { page++; render(); };
+  const previous = document.querySelector('#previous'); if (previous) previous.onclick = () => { page--; render(); focusControl('#previous', '#next', '#toggle-select'); };
+  const next = document.querySelector('#next'); if (next) next.onclick = () => { page++; render(); focusControl('#next', '#previous', '#toggle-select'); };
   const clearPlan = document.querySelector('#clear-plan'); if (clearPlan) clearPlan.onclick = () => { if (!window.confirm(t('confirmClear'))) return; state = clearAllPlanContent(state); save(); render(); };
-  const search = document.querySelector('#search'); if (search) search.oninput = e => { query = e.target.value; page = 0; render(); const next = document.querySelector('#search'); next.focus(); };
+  const search = document.querySelector('#search'); if (search) search.oninput = e => { query = e.target.value; const start = e.target.selectionStart, end = e.target.selectionEnd, direction = e.target.selectionDirection; page = 0; render(); const next = document.querySelector('#search'); next.focus({ preventScroll: true }); if (start !== null && end !== null) next.setSelectionRange(start, end, direction); };
   const filter = document.querySelector('#level'); if (filter) filter.onchange = e => { level = e.target.value; page = 0; render(); };
   if (selected) {
     document.querySelector('#back').onclick = () => setActive(null);
@@ -82,7 +83,7 @@ function render() {
       };
     };
     const setupPlayer = () => {
-      area.innerHTML = `<div class="video-stage" id="video-stage"><video playsinline preload="metadata" aria-label="${esc(current.title)}"></video><div class="player-controls visible" id="player-controls"><button id="play-toggle" type="button">${extra('播放', 'Play')}</button><label class="seek-label"><span class="sr-only">${extra('播放进度', 'Playback position')}</span><input id="seek" type="range" min="0" max="1000" value="0"></label><span id="time-display">0:00 / 0:00</span><button id="mute" type="button" aria-pressed="false">${extra('静音', 'Mute')}</button><label>${t('playback')} <select id="playback-mode"><option value="auto-next">${t('autoNext')}</option><option value="repeat-one">${t('repeatOne')}</option><option value="loop-list">${t('loopPlan')}</option></select></label><button id="fullscreen" type="button" aria-pressed="false">${t('fullscreen')}</button></div></div><p role="status" aria-live="polite" id="video-status"></p><button id="retry-video" type="button" hidden>${t('retry')}</button> <button id="logout" type="button">${t('logout')}</button>`;
+      area.innerHTML = `<div class="video-stage" id="video-stage"><video playsinline preload="metadata" aria-label="${esc(current.title)}"></video><div class="player-controls visible" id="player-controls"><button id="play-toggle" type="button">${extra('播放', 'Play')}</button><label class="seek-label"><span class="sr-only">${extra('播放进度', 'Playback position')}</span><input id="seek" type="range" min="0" max="1000" value="0" aria-label="${extra('播放进度', 'Playback position')}" aria-valuetext="${extra('0:00，共 0:00', '0:00 of 0:00')}"></label><span id="time-display">0:00 / 0:00</span><button id="mute" type="button" aria-pressed="false">${extra('静音', 'Mute')}</button><label>${t('playback')} <select id="playback-mode"><option value="auto-next">${t('autoNext')}</option><option value="repeat-one">${t('repeatOne')}</option><option value="loop-list">${t('loopPlan')}</option></select></label><button id="fullscreen" type="button" aria-pressed="false">${t('fullscreen')}</button></div></div><p role="status" aria-live="polite" id="video-status"></p><button id="retry-video" type="button" hidden>${t('retry')}</button> <button id="logout" type="button">${t('logout')}</button>`;
       const video = area.querySelector('video'), stage = area.querySelector('#video-stage'), controls = area.querySelector('#player-controls'), mode = area.querySelector('#playback-mode'), fullscreen = area.querySelector('#fullscreen'), status = area.querySelector('#video-status'), retry = area.querySelector('#retry-video'), playToggle = area.querySelector('#play-toggle'), seek = area.querySelector('#seek'), time = area.querySelector('#time-display');
       mode.value = state.settings.playbackMode; mode.onchange = () => { state.settings.playbackMode = mode.value; save(); };
       const showControls = () => { controls.classList.add('visible'); clearTimeout(timer); timer = setTimeout(() => { if (!video.paused && !controls.contains(document.activeElement)) controls.classList.remove('visible'); }, 2500); };
@@ -92,14 +93,15 @@ function render() {
       document.addEventListener('fullscreenchange', syncFullscreen);
       const play = () => { playingIntent = true; const result = video.play(); if (result && typeof result.catch === 'function') result.catch(() => { playingIntent = false; if (!disposed) status.textContent = t('autoplayBlocked'); }); };
       const formatTime = value => Number.isFinite(value) ? `${Math.floor(value / 60)}:${String(Math.floor(value % 60)).padStart(2, '0')}` : '0:00';
-      const updateTimeline = () => { seek.value = Number.isFinite(video.duration) && video.duration > 0 ? String(Math.round(video.currentTime / video.duration * 1000)) : '0'; time.textContent = `${formatTime(video.currentTime)} / ${formatTime(video.duration)}`; };
+      const updateTimeline = () => { seek.value = Number.isFinite(video.duration) && video.duration > 0 ? String(Math.round(video.currentTime / video.duration * 1000)) : '0'; const currentTime = formatTime(video.currentTime), duration = formatTime(video.duration); time.textContent = `${currentTime} / ${duration}`; seek.setAttribute('aria-valuetext', extra(`${currentTime}，共 ${duration}`, `${currentTime} of ${duration}`)); };
       playToggle.onclick = () => { if (video.paused) play(); else video.pause(); };
       video.onclick = () => { if (video.paused) play(); else video.pause(); };
-      seek.oninput = () => { if (Number.isFinite(video.duration)) video.currentTime = video.duration * Number(seek.value) / 1000; };
+      seek.oninput = () => { if (Number.isFinite(video.duration)) { video.currentTime = video.duration * Number(seek.value) / 1000; updateTimeline(); } };
       const mute = area.querySelector('#mute'); mute.onclick = () => { video.muted = !video.muted; mute.setAttribute('aria-pressed', String(video.muted)); mute.textContent = video.muted ? extra('取消静音', 'Unmute') : extra('静音', 'Mute'); };
       fullscreen.onclick = async () => { try { if (document.fullscreenElement === stage) await document.exitFullscreen(); else { await stage.requestFullscreen(); if (video.paused && video.src) play(); } } catch { status.textContent = t('autoplayBlocked'); } syncFullscreen(); };
       const load = async (resume = pendingResume) => {
         if (resume) pendingResume = resume;
+        document.querySelector('#learning-controls').hidden = true;
         const request = ++serial; status.textContent = t('loading'); retry.hidden = true;
         try { const data = await post('/api/english/playback', { lessonId:current.id }); if (disposed || request !== serial) return;
           const url = new URL(data.url); if (url.protocol !== 'https:' || !url.search || !Number.isFinite(Date.parse(data.expiresAt))) throw new Error('invalid response');

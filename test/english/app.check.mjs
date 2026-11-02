@@ -12,10 +12,12 @@ test('plan empty state, contextual progress, search and selection pagination', a
  assert.match(document.querySelector('.hero-count strong').textContent,/^0$/); assert.equal(document.querySelector('#clear-plan'),null); assert(document.querySelector('.empty [data-view="library"]'));
  document.querySelector('.empty [data-view="library"]').click();
  assert.equal(document.querySelectorAll('.card').length,24);
- const search=document.querySelector('#search'); search.value='level 1'; search.dispatchEvent(new dom.window.Event('input'));
+ const search=document.querySelector('#search'); search.value='level 1'; search.setSelectionRange(2,4,'backward'); search.dispatchEvent(new dom.window.Event('input'));
+ assert.equal(document.activeElement.id,'search'); assert.equal(document.activeElement.selectionStart,2); assert.equal(document.activeElement.selectionEnd,4); assert.equal(document.activeElement.selectionDirection,'backward');
  assert(document.querySelectorAll('.card').length>0); assert([...document.querySelectorAll('.badge')].every(el=>el.textContent.includes('Level 1')));
- document.querySelector('#toggle-select').click(); document.querySelector('#select-visible').click();
- assert.equal(document.querySelectorAll('[data-select]:checked').length,24); document.querySelector('#next').click();
+ document.querySelector('#toggle-select').click(); assert.equal(document.activeElement.id,'toggle-select'); document.querySelector('#select-visible').click(); assert.equal(document.activeElement.id,'select-visible');
+ document.querySelector('#clear-selection').click(); assert.equal(document.activeElement.id,'clear-selection'); document.querySelector('#select-visible').click();
+ assert.equal(document.querySelectorAll('[data-select]:checked').length,24); document.querySelector('#next').click(); assert.equal(document.activeElement.id,'previous');
  assert(document.querySelector('#add-selected').textContent.includes('24')); document.querySelector('#add-selected').click();
  assert.match(document.querySelector('.feedback').textContent,/24/); assert.equal(document.querySelector('.selection-bar'),null);
  document.querySelector('[data-view="plan"]').click(); assert.equal(document.querySelector('.hero-count strong').textContent,'24'); assert.match(document.querySelector('.hero p').textContent,/0 \/ 24/);
@@ -51,7 +53,7 @@ test('batch plan changes and confirmed clear preserve learning history', async (
  const { freshState, dateKey, weekKey } = await import('../../english/state.js');
  const [a,b] = catalog.levels[0].lessons, initial = freshState(), today = dateKey(), week = weekKey();
  initial.plans.week = {key:week,lessonIds:[b.id],reviewLessonIds:[]};
- initial.planProgress[`week:${week}`] = [b.id]; initial.completed[b.id] = true; initial.watched[b.id] = 42;
+ initial.planProgress[`week:${week}`] = [b.id]; initial.completed[a.id] = true; initial.completed[b.id] = true; initial.watched[a.id] = 17; initial.watched[b.id] = 42;
  localStorage.setItem('wow-family-progress-v1',JSON.stringify(initial));
  await import('../../english/app.js?batch');
  document.querySelector('[data-view="plan"]').click(); assert.equal(document.querySelector('#clear-plan').disabled,false, 'week-only plan can be cleared');
@@ -61,8 +63,6 @@ test('batch plan changes and confirmed clear preserve learning history', async (
  document.querySelector('#add-selected').click();
  let stored=JSON.parse(localStorage.getItem('wow-family-progress-v1'));
  assert.deepEqual(stored.plans.today.lessonIds,[a.id,b.id]);
- // Completion history is independent of clearing plan content.
- stored.completed[a.id]=true; localStorage.setItem('wow-family-progress-v1',JSON.stringify(stored));
  document.querySelector('[data-view="plan"]').click();
  const before=localStorage.getItem('wow-family-progress-v1'); window.confirm=()=>false; document.querySelector('#clear-plan').click();
  assert.equal(localStorage.getItem('wow-family-progress-v1'),before);
@@ -70,7 +70,7 @@ test('batch plan changes and confirmed clear preserve learning history', async (
  stored=JSON.parse(localStorage.getItem('wow-family-progress-v1'));
  assert.deepEqual(stored.plans.today.lessonIds,[]); assert.deepEqual(stored.plans.week.lessonIds,[]);
  assert.equal(stored.planProgress[`today:${today}`],undefined); assert.equal(stored.planProgress[`week:${week}`],undefined);
- assert.equal(stored.completed[b.id],true); assert.equal(stored.watched[b.id],42);
+ assert.equal(stored.completed[a.id],true); assert.equal(stored.completed[b.id],true); assert.equal(stored.watched[a.id],17); assert.equal(stored.watched[b.id],42);
  assert.equal(document.querySelector('#clear-plan'),null);
  dom.window.close();
 });
@@ -96,6 +96,7 @@ test('player decisions, fullscreen, mode persistence and replay', async () => {
  for (const item of [a,b]) {const box=document.querySelector(`[data-select="${item.id}"]`);box.checked=true;box.dispatchEvent(new dom.window.Event('change'));}
  document.querySelector('#add-selected').click();document.querySelector(`[data-open="${a.id}"]`).click();
  await new Promise(resolve=>setTimeout(resolve,0)); const video=document.querySelector('video'), stage=document.querySelector('#video-stage');
+ Object.defineProperty(video,'duration',{value:120,configurable:true}); video.currentTime=30; video.dispatchEvent(new dom.window.Event('timeupdate')); const seek=document.querySelector('#seek'); assert.equal(seek.getAttribute('aria-label'),'播放进度'); assert.equal(seek.getAttribute('aria-valuetext'),'0:30，共 2:00'); seek.value='500'; seek.dispatchEvent(new dom.window.Event('input')); assert.equal(seek.getAttribute('aria-valuetext'),'1:00，共 2:00');
  stage.requestFullscreen=async()=>{full=stage;document.dispatchEvent(new dom.window.Event('fullscreenchange'));};
  stage.dispatchEvent(new dom.window.Event('pointerdown')); assert(document.querySelector('#player-controls').classList.contains('visible'));
  document.querySelector('#fullscreen').click(); await new Promise(resolve=>setTimeout(resolve,0));
@@ -113,6 +114,18 @@ test('player decisions, fullscreen, mode persistence and replay', async () => {
  document.querySelector('[data-view="plan"]').click();document.querySelector('#clear-plan').click();document.querySelector('[data-view="library"]').click();document.querySelector(`[data-open="${a.id}"]`).click();
  await new Promise(resolve=>setTimeout(resolve,0)); const replay=document.querySelector('video'); replay.dispatchEvent(new dom.window.Event('ended')); assert.equal(replay.hasAttribute('src'),false); document.querySelector('#retry-video').click(); await new Promise(resolve=>setTimeout(resolve,0)); assert.equal(signed.at(-1),a.id);
  dom.window.close();
+});
+
+test('a failed automatic next lesson hides completion until its media is available', async () => {
+ const catalog=JSON.parse(await readFile('english/data/catalog.json','utf8'));
+ const dom=new JSDOM('<main id="app"></main>',{url:'https://site.test/english/'});
+ for(const name of ['window','document','navigator','location','history','localStorage']) Object.defineProperty(globalThis,name,{value:dom.window[name],configurable:true,writable:true});
+ const [a,b]=catalog.levels[0].lessons;
+ globalThis.fetch=async (url,opts)=>url.endsWith('catalog.json')?{ok:true,json:async()=>catalog}:JSON.parse(opts.body).lessonId===a.id?{ok:true,json:async()=>({url:'https://media.test/a?sig=test',expiresAt:new Date(Date.now()+300000).toISOString()})}:{ok:false,status:503,json:async()=>({})};
+ await import('../../english/app.js?failed-next'); document.querySelector(`[data-open="${a.id}"]`).click(); await new Promise(r=>setTimeout(r,0));
+ assert.equal(document.querySelector('#learning-controls').hidden,false); document.querySelector('video').dispatchEvent(new dom.window.Event('ended')); await new Promise(r=>setTimeout(r,0));
+ assert.equal(new URL(location.href).searchParams.get('lesson'),b.id); assert.equal(document.querySelector('#learning-controls').hidden,true); assert.equal(document.querySelector('#retry-video').hidden,false);
+ assert.equal(JSON.parse(localStorage.getItem('wow-family-progress-v1')).completed[b.id],undefined); dom.window.close();
 });
 
 test('login, logout and stale playback responses stay scoped to current lesson', async () => {
