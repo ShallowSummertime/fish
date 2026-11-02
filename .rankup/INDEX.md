@@ -2,19 +2,19 @@
 
 - 项目：How to Fish Walkthrough
 - 最近更新：2026-11-02
-- 当前阶段：5 — COS 私有媒体鉴权代码已部署，等待安全配置与真实对象验收
+- 当前阶段：5 — COS 私有媒体鉴权与生产密钥已配置，等待契约对象与真实播放验收
 - 当前目标：保留现有攻略站并把 Wow Family 作为 `/english/` 子应用合入同一 Vercel 仓库，媒体改用腾讯云 COS 契约
 - 下一入口：PROJECT.md
 
 ## 接力
 
-- 当前任务：完成 `/english/` 私有 COS 的生产配置和真实媒体验收；鉴权代码已部署。
+- 当前任务：完成 `/english/` 私有 COS 的契约对象映射和真实媒体验收；鉴权代码与生产密钥已部署。
 - 验收：未登录拒绝、会话和课程对象白名单、5 分钟签名、本地测试/构建、Vercel 正式部署、生产安全降级与独立审查通过；桶为空时不宣称真实播放成功。
 - 约束：桶 `english-1257786947` / `ap-hongkong` 保持私有；不上传文件，不提交或输出 SecretId、SecretKey、访问码、会话密钥，不覆盖仓库未归属改动。
 - 部署设计：`docs/unified-wow-deployment.md`；私有 COS 鉴权新设计：`docs/private-cos-auth.md`。
-- 当前状态：提交 `945ad84` 已部署为 Vercel Production Ready。根站、英语页、深链、308、真实 404 和缺配置时 API `503 NOT_CONFIGURED`/页面安全降级已在正式域验证；Vercel 项目环境变量当前为空，未写入任何 secret。采用 300 秒服务端预签名 URL，默认域名可能受 2024 年后存储桶浏览器预览限制；桶为空、自定义域名和真实对象尚未配置，故真实播放、CORS 和 Range 仍待验收。
-- 阻塞：OpenCLI 未安装；Vercel应优先沿 GitHub 自动部署链路验证，必要时再使用可用浏览器驱动。
-- 下一条要执行的动作：在腾讯云创建仅允许该桶 `lessons/*` 执行 `cos:GetObject` 的 CAM 身份，并由项目所有者直接在 Vercel 配置所需变量；上传一条有分发权的样例后验证签名、GET/Range 206、seek 和真实浏览器播放。
+- 当前状态：提交 `b764160` 已以最新项目设置重新部署为 Vercel Production Ready。Vercel Production 已配置家庭访问、会话签名和 COS 服务端变量；腾讯云子用户 `wow-english-vercel-signer` 仅直接关联自定义策略 `WowEnglishVercelGetLessons`，权限限定为 `english-1257786947/lessons/*` 的 `GetObject`。正式域已生成带签名的默认 COS URL，且 COS 返回 `NoSuchKey` 而非 `AccessDenied`，证明登录、会话、白名单、签名和权限链路已生效。当前桶内目录对象未映射到应用契约，精确对象 `lessons/c17532fcfabb66fc.mp4` 不存在，故真实播放、CORS、Range 206 和 seek 仍未通过。
+- 阻塞：缺少与课程 ID 对应的 `lessons/<lessonId>.mp4` 对象；默认 COS 域名的浏览器预览限制和真实 Range 行为仍需用存在的媒体对象验证。CAM 子用户还有一把创建时未保存 SecretKey 的旧密钥，当前未删除或禁用。
+- 下一条要执行的动作：将一条有分发权的视频上传或复制为 `lessons/c17532fcfabb66fc.mp4`，再验证签名 GET、Range 206、seek 和真实浏览器播放；确认新密钥稳定后再单独授权清理旧密钥。
 
 ## 推荐读取顺序
 
@@ -31,6 +31,7 @@
 
 ## 最近变化
 
+- 2026-11-02：完成 Wow Family 私有 COS 的生产配置：建立仅允许 `lessons/*` `GetObject` 的 CAM 子用户与策略，密钥直接写入 Vercel Secret，重新部署后正式域成功生成签名 URL；精确对象缺失返回 `NoSuchKey`，未宣称真实播放成功。
 - 2026-09-04：补齐首页 1280px OG/Twitter 分享图、全站 Meta Description 长度门禁及所有正文图片的 alt/固有尺寸门禁；生产审计 28/28 通过。GSC 重新提交 sitemap，确认发现 28 URL，并将 9 个新增页面全部加入优先抓取队列。
 - 2026-09-03：发布 Tuna、Bowhead Whale、遗失 Boss 任务物/不刷新排错、Money & Cooking 四篇深度攻略；线上 sitemap 扩展到 28 URL，全站生产审计 28/28 无坏页、断图或重复标题。
 - 2026-09-01：新增 `/guides/tips-and-tricks` 深度页，并以 Patch 1.0.10 自有视频证据回填 Beginner 安全控制与 Desert Coconut → Bing Bong → Carrot 路线；索引面扩展到 24 URL。
