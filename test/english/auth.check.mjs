@@ -41,11 +41,13 @@ test('session expiry, integrity, scope, and exact catalog authorization', async 
  assert.equal((await call(playback,{lessonId,key:'x'},{Cookie:cookie(good)})).status,400);
  const old=process.env.COS_SECRET_KEY; delete process.env.COS_SECRET_KEY; assert.equal((await call(playback,{lessonId},{Cookie:cookie(good)})).status,503); process.env.COS_SECRET_KEY=old;
  process.env.COS_MEDIA_DOMAIN='http://bad.test'; assert.equal((await call(playback,{lessonId},{Cookie:cookie(good)})).status,503); delete process.env.COS_MEDIA_DOMAIN;
- assert.throws(()=>buildCatalog({totalLessons:2,levels:[{lessons:[{id:'a',videoKey:'lessons/a.mp4'},{id:'a',videoKey:'lessons/a.mp4'}]}]}));
- assert.throws(()=>buildCatalog({totalLessons:1,levels:[{lessons:[{id:'a',videoKey:'../a'}]}]}));
- assert.throws(()=>buildCatalog({totalLessons:1,levels:[{lessons:[{id:'a',videoKey:'Wow/01.第一级 黄色Wow!Yellow（3-4岁）33集全/../secret.mp4'}]}]}));
- assert.throws(()=>buildCatalog({totalLessons:1,levels:[{lessons:[{id:'a',videoKey:'Wow/02.第二级 蓝色Wow!Blue(4-6岁) 33集全/a.mp4'}]}]}));
- assert.equal(buildCatalog({totalLessons:1,levels:[{lessons:[{id:'a',videoKey:"Wow/01.第一级 黄色Wow!Yellow（3-4岁）33集全/012.Wow!Yellow Unit 4 'toys' - part 2 video_story.mp4"}]}]}).get('a'),"Wow/01.第一级 黄色Wow!Yellow（3-4岁）33集全/012.Wow!Yellow Unit 4 'toys' - part 2 video_story.mp4");
+ assert.throws(()=>buildCatalog({totalLessons:2,levels:[{id:'level-1',lessons:[{id:'a',videoKey:'Wow/01.第一级 黄色Wow!Yellow（3-4岁）33集全/a.mp4'},{id:'a',videoKey:'Wow/01.第一级 黄色Wow!Yellow（3-4岁）33集全/a.mp4'}]}]}));
+ assert.throws(()=>buildCatalog({totalLessons:1,levels:[{id:'level-1',lessons:[{id:'a',videoKey:'../a'}]}]}));
+ assert.throws(()=>buildCatalog({totalLessons:1,levels:[{id:'level-1',lessons:[{id:'a',videoKey:'Wow/01.第一级 黄色Wow!Yellow（3-4岁）33集全/../secret.mp4'}]}]}));
+ assert.throws(()=>buildCatalog({totalLessons:1,levels:[{id:'level-9',lessons:[{id:'a',videoKey:'Wow/09.未知级别/a.mp4'}]}]}));
+ assert.throws(()=>buildCatalog({totalLessons:1,levels:[{id:'level-1',lessons:[{id:'a',videoKey:'Wow/02.第二级 蓝色Wow!Blue(4-6岁) 33集全/a.mp4'}]}]}));
+ assert.equal(buildCatalog({totalLessons:1,levels:[{id:'level-1',lessons:[{id:'a',videoKey:"Wow/01.第一级 黄色Wow!Yellow（3-4岁）33集全/012.Wow!Yellow Unit 4 'toys' - part 2 video_story.mp4"}]}]}).get('a'),"Wow/01.第一级 黄色Wow!Yellow（3-4岁）33集全/012.Wow!Yellow Unit 4 'toys' - part 2 video_story.mp4");
+ assert.equal(buildCatalog({totalLessons:1,levels:[{id:'level-8',lessons:[{id:'a',videoKey:'Wow/08.第八级 金色Wow!Gold（10-12）26集全/026.Wow!Gold Unit 9 video_story.mp4'}]}]}).get('a'),'Wow/08.第八级 金色Wow!Gold（10-12）26集全/026.Wow!Gold Unit 9 video_story.mp4');
 });
 
 test('streamed body limit and SDK signing errors fail closed without disclosure', async () => {
