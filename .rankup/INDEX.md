@@ -2,7 +2,7 @@
 
 - 项目：How to Fish Walkthrough
 - 最近更新：2026-11-02
-- 当前阶段：5 — 合并部署与正式域名验证
+- 当前阶段：5 — 合并部署完成，等待 COS 私有媒体接入
 - 当前目标：保留现有攻略站并把 Wow Family 作为 `/english/` 子应用合入同一 Vercel 仓库，媒体改用腾讯云 COS 契约
 - 下一入口：PROJECT.md
 
@@ -11,10 +11,10 @@
 - 当前任务：把 Wow English 与 fish 合为一个部署仓库，根路径保留攻略站，`/english/` 提供家庭英语学习应用。
 - 验收：统一构建、本地测试、Vercel 正式部署、根站与 `/english/` 生产 E2E、独立审查通过。
 - 约束：不复制23GB原始视频，不提交腾讯云密钥或本机绝对路径，不覆盖 Wow 与 fish 工作树里的未归属改动。
-- 状态文件：`progress-unified-site.md`。
-- 当前状态：public web v1 已补批量计划、完整计划清空与播放器模式，全套本地测试、类型检查、构建及独立本地浏览器审查通过；设计见 `docs/unified-wow-deployment.md`。Vercel 未配置 COS 基址，本次不公开视频；字幕、逐句跟读、录音、学习包未迁移。生产验收待执行。
+- 部署设计：`docs/unified-wow-deployment.md`。
+- 当前状态：public web v1 已由提交 `ae732bd` 部署到 `https://howtofishwalkthrough.com/english/`；根站、英语页、批量计划、Garden 深链、双语、空媒体降级、308、旧攻略重定向和真实 404 均已在正式域验证。Vercel 未配置 COS 基址，本次未公开视频；字幕、逐句跟读、录音、学习包未迁移。
 - 阻塞：OpenCLI 未安装；Vercel应优先沿 GitHub 自动部署链路验证，必要时再使用可用浏览器驱动。
-- 下一条要执行的动作：提交并推送统一站变更，等待 Vercel Production Ready 后执行正式域根站、`/english/`、重定向和 404 验收。
+- 下一条要执行的动作：确定腾讯云 COS 的公开或私有策略；家庭/受限素材必须先设计鉴权与短期签名 URL，再配置媒体域名并验证 CORS、Range 206 和播放器。
 
 ## 推荐读取顺序
 
