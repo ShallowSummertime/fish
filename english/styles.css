@@ -6,3 +6,30 @@
 #login-form input { min-width: 0; padding: .65rem; font: inherit; }
 #login-form button { justify-self: start; }
 #video-status { min-height: 1.5em; }
+
+button, select, .filters input, #login-form input { min-height:44px }
+button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible { outline:3px solid #e38a34; outline-offset:3px }
+button:disabled { opacity:.5; cursor:not-allowed }
+.results { color:#625c74; font-size:.9rem }
+.feedback:empty { display:none }
+.feedback { color:#276b42; font-weight:700 }
+.plan-grid { margin-top:24px }
+.empty { grid-column:1/-1; padding:28px; border:1px dashed #c9c1df; border-radius:18px; background:#fff }
+.card.selecting { padding:0; position:relative }
+.card.selecting .completed { margin:0 20px 16px }
+.card-select { display:block; cursor:pointer; padding:20px; flex:1; border-radius:17px }
+.card-select input { float:right; width:22px; height:22px; margin:0 0 8px 12px; accent-color:#5143a7 }
+.card.is-selected { border-color:#5143a7; background:#f3f0ff; box-shadow:0 0 0 2px #5143a7 }
+.selection-bar { position:sticky; bottom:12px; z-index:2; display:flex; flex-wrap:wrap; gap:8px; justify-content:flex-end; margin-top:20px; padding:12px; border:1px solid #ddd7ef; border-radius:14px; background:#fff; box-shadow:0 6px 24px #211e2d26 }
+.pagination { display:flex; justify-content:center; gap:12px; margin-top:24px }
+.player-controls { top:auto; bottom:0; left:0; right:0; border-radius:0; flex-wrap:wrap; padding:10px; background:rgba(25,22,38,.94) }
+.player-controls select,.player-controls button { min-height:44px; padding:.5rem .7rem }
+.player-controls .seek-label { flex:1; min-width:100px }
+.player-controls input[type=range] { width:100%; min-height:44px; accent-color:#bcb0ff }
+#time-display { font-size:.8rem; font-variant-numeric:tabular-nums; white-space:nowrap }
+#logout,#retry-video { min-height:44px; padding:.6rem .8rem; border:1px solid #d8d1e8; border-radius:9px; background:white; color:#5143a7 }
+#login-form { background:#f0edfc; border-radius:16px; max-width:none; padding:24px }
+#login-form button { min-width:120px }
+.sr-only { position:absolute; width:1px; height:1px; overflow:hidden; clip:rect(0,0,0,0); white-space:nowrap }
+@media(max-width:700px){ .hero { min-width:0 } .hero-count { flex-shrink:0 } .player-controls { left:0; right:0; justify-content:flex-start; gap:6px } .player-controls label { flex-wrap:nowrap } .player-controls .seek-label { min-width:80px } .selection-bar button { flex:1 1 auto } }
+@media(prefers-reduced-motion:reduce){ *, *::before, *::after { scroll-behavior:auto !important; transition-duration:0.01ms !important; animation-duration:0.01ms !important; animation-iteration-count:1 !important } }

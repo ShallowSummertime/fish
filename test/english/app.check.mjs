@@ -2,13 +2,32 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
 import { JSDOM } from 'jsdom';
+test('plan empty state, contextual progress, search and selection pagination', async () => {
+ const catalog = JSON.parse(await readFile('english/data/catalog.json','utf8'));
+ const dom = new JSDOM('<main id="app"></main>', { url:'https://site.test/english/' });
+ for (const name of ['window','document','navigator','location','history','localStorage']) Object.defineProperty(globalThis,name,{value:dom.window[name],configurable:true,writable:true});
+ globalThis.fetch = async url => url.endsWith('catalog.json') ? {ok:true,json:async()=>catalog} : {ok:false,status:401,json:async()=>({})};
+ await import('../../english/app.js?catalog-ui');
+ document.querySelector('[data-view="plan"]').click();
+ assert.match(document.querySelector('.hero-count strong').textContent,/^0$/); assert.equal(document.querySelector('#clear-plan'),null); assert(document.querySelector('.empty [data-view="library"]'));
+ document.querySelector('.empty [data-view="library"]').click();
+ assert.equal(document.querySelectorAll('.card').length,24);
+ const search=document.querySelector('#search'); search.value='level 1'; search.dispatchEvent(new dom.window.Event('input'));
+ assert(document.querySelectorAll('.card').length>0); assert([...document.querySelectorAll('.badge')].every(el=>el.textContent.includes('Level 1')));
+ document.querySelector('#toggle-select').click(); document.querySelector('#select-visible').click();
+ assert.equal(document.querySelectorAll('[data-select]:checked').length,24); document.querySelector('#next').click();
+ assert(document.querySelector('#add-selected').textContent.includes('24')); document.querySelector('#add-selected').click();
+ assert.match(document.querySelector('.feedback').textContent,/24/); assert.equal(document.querySelector('.selection-bar'),null);
+ document.querySelector('[data-view="plan"]').click(); assert.equal(document.querySelector('.hero-count strong').textContent,'24'); assert.match(document.querySelector('.hero p').textContent,/0 \/ 24/);
+ dom.window.close();
+});
 test('catalog, plan, deep link, completion and bilingual UI work without old requests', async () => {
  const catalog = JSON.parse(await readFile('english/data/catalog.json','utf8'));
  const dom = new JSDOM('<main id="app"></main>', { url:'https://site.test/english/' });
  for (const name of ['window','document','navigator','location','history','localStorage']) Object.defineProperty(globalThis, name, { value: dom.window[name], configurable: true, writable: true });
  const requests=[]; globalThis.fetch = async url => { requests.push(url); return url.endsWith('catalog.json') ? {ok:true,json:async()=>catalog} : {ok:false,status:503,json:async()=>({error:{code:'NOT_CONFIGURED'}})}; };
  await import('../../english/app.js');
- assert.equal(document.querySelectorAll('[data-open]').length,catalog.totalLessons);
+ assert.equal(document.querySelectorAll('[data-open]').length,24);
  const id = catalog.levels[0].lessons[0].id;
  document.querySelector(`[data-plan="${id}"]`).click();
  document.querySelector('[data-view="plan"]').click();
@@ -17,8 +36,7 @@ test('catalog, plan, deep link, completion and bilingual UI work without old req
  assert.equal(new URL(location.href).searchParams.get('lesson'),id);
  await new Promise(resolve=>setTimeout(resolve,0)); assert.match(document.querySelector('[role="status"]').textContent,/视频尚未配置/);
  assert.equal(document.querySelector('video').hasAttribute('src'),false);
- document.querySelector('#complete').click();
- assert.equal(JSON.parse(localStorage.getItem('wow-family-progress-v1')).completed[id],true);
+ assert.equal(document.querySelector('#learning-controls').hidden,true);
  document.querySelector('#language').click();
  await new Promise(resolve=>setTimeout(resolve,0)); assert.match(document.querySelector('[role="status"]').textContent,/not configured/);
  assert(requests.includes('/api/english/playback')); assert(!requests.some(x=>x.includes('config.json')));
@@ -38,11 +56,13 @@ test('batch plan changes and confirmed clear preserve learning history', async (
  await import('../../english/app.js?batch');
  document.querySelector('[data-view="plan"]').click(); assert.equal(document.querySelector('#clear-plan').disabled,false, 'week-only plan can be cleared');
  document.querySelector('[data-view="library"]').click();
+ document.querySelector('#toggle-select').click();
  for (const item of [a,b]) { const box=document.querySelector(`[data-select="${item.id}"]`); box.checked=true; box.dispatchEvent(new dom.window.Event('change')); }
  document.querySelector('#add-selected').click();
  let stored=JSON.parse(localStorage.getItem('wow-family-progress-v1'));
  assert.deepEqual(stored.plans.today.lessonIds,[a.id,b.id]);
- document.querySelector(`[data-open="${a.id}"]`).click(); document.querySelector('#complete').click();
+ // Completion history is independent of clearing plan content.
+ stored.completed[a.id]=true; localStorage.setItem('wow-family-progress-v1',JSON.stringify(stored));
  document.querySelector('[data-view="plan"]').click();
  const before=localStorage.getItem('wow-family-progress-v1'); window.confirm=()=>false; document.querySelector('#clear-plan').click();
  assert.equal(localStorage.getItem('wow-family-progress-v1'),before);
@@ -50,8 +70,8 @@ test('batch plan changes and confirmed clear preserve learning history', async (
  stored=JSON.parse(localStorage.getItem('wow-family-progress-v1'));
  assert.deepEqual(stored.plans.today.lessonIds,[]); assert.deepEqual(stored.plans.week.lessonIds,[]);
  assert.equal(stored.planProgress[`today:${today}`],undefined); assert.equal(stored.planProgress[`week:${week}`],undefined);
- assert.equal(stored.completed[a.id],true); assert.equal(stored.completed[b.id],true); assert.equal(stored.watched[b.id],42);
- assert.equal(document.querySelector('#clear-plan').disabled,true);
+ assert.equal(stored.completed[b.id],true); assert.equal(stored.watched[b.id],42);
+ assert.equal(document.querySelector('#clear-plan'),null);
  dom.window.close();
 });
 
@@ -72,6 +92,7 @@ test('player decisions, fullscreen, mode persistence and replay', async () => {
  document.exitFullscreen=async()=>{full=null;document.dispatchEvent(new dom.window.Event('fullscreenchange'));};
  await import('../../english/app.js?player');
  const [a,b]=catalog.levels[0].lessons;
+ document.querySelector('#toggle-select').click();
  for (const item of [a,b]) {const box=document.querySelector(`[data-select="${item.id}"]`);box.checked=true;box.dispatchEvent(new dom.window.Event('change'));}
  document.querySelector('#add-selected').click();document.querySelector(`[data-open="${a.id}"]`).click();
  await new Promise(resolve=>setTimeout(resolve,0)); const video=document.querySelector('video'), stage=document.querySelector('#video-stage');
@@ -111,9 +132,9 @@ test('login, logout and stale playback responses stay scoped to current lesson',
   return {ok:true,json:async()=>({url:'https://media.test/b?sig=test',expiresAt:new Date(Date.now()+300000).toISOString()})};
  };
  await import('../../english/app.js?authflow'); document.querySelector(`[data-open="${a.id}"]`).click(); await new Promise(r=>setTimeout(r,0));
- assert(document.querySelector('#login-form')); document.querySelector('#access-code').value='test access code'; document.querySelector('#login-form').dispatchEvent(new dom.window.Event('submit',{bubbles:true,cancelable:true})); await new Promise(r=>setTimeout(r,0));
+ assert(document.querySelector('#login-form')); assert.equal(document.querySelector('#learning-controls').hidden,true); document.querySelector('#access-code').value='test access code'; document.querySelector('#login-form').dispatchEvent(new dom.window.Event('submit',{bubbles:true,cancelable:true})); await new Promise(r=>setTimeout(r,0));
  assert(pending); document.querySelector('#back').click(); document.querySelector(`[data-open="${b.id}"]`).click(); await new Promise(r=>setTimeout(r,0));
- pending({ok:true,json:async()=>({url:'https://media.test/a?sig=test',expiresAt:new Date(Date.now()+300000).toISOString()})}); await new Promise(r=>setTimeout(r,0)); assert.match(document.querySelector('video').src,/\/b\?/);
+ pending({ok:true,json:async()=>({url:'https://media.test/a?sig=test',expiresAt:new Date(Date.now()+300000).toISOString()})}); await new Promise(r=>setTimeout(r,0)); assert.match(document.querySelector('video').src,/\/b\?/); assert.equal(document.querySelector('#learning-controls').hidden,false); assert.equal(document.querySelector('video').hasAttribute('controls'),false);
  document.querySelector('#logout').click(); await new Promise(r=>setTimeout(r,0)); assert(document.querySelector('#login-form')); assert.equal(document.querySelector('video'),null);
  for(const {options} of calls) { assert.equal(options.cache,'no-store'); assert.equal(options.credentials,'same-origin'); assert.equal(options.method,'POST'); }
  dom.window.close();
