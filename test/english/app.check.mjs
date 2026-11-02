@@ -102,6 +102,14 @@ test('player decisions, fullscreen, mode persistence and replay', async () => {
  document.querySelector('#fullscreen').click(); await new Promise(resolve=>setTimeout(resolve,0));
  assert.equal(document.querySelector('#fullscreen').getAttribute('aria-pressed'),'true'); assert.equal(plays,1);
  document.querySelector('#fullscreen').click(); await new Promise(resolve=>setTimeout(resolve,0)); assert.equal(document.querySelector('#fullscreen').getAttribute('aria-pressed'),'false');
+ stage.requestFullscreen=undefined; let nativeFull=false, nativeEnters=0, nativeExits=0;
+ Object.defineProperty(video,'webkitDisplayingFullscreen',{get:()=>nativeFull,configurable:true});
+ video.webkitEnterFullscreen=()=>{nativeEnters++;nativeFull=true;video.dispatchEvent(new dom.window.Event('webkitbeginfullscreen'));};
+ video.webkitExitFullscreen=()=>{nativeExits++;nativeFull=false;video.dispatchEvent(new dom.window.Event('webkitendfullscreen'));};
+ document.querySelector('#fullscreen').click(); await new Promise(resolve=>setTimeout(resolve,0));
+ assert.equal(nativeEnters,1); assert.equal(document.querySelector('#fullscreen').getAttribute('aria-pressed'),'true');
+ document.querySelector('#fullscreen').click(); await new Promise(resolve=>setTimeout(resolve,0));
+ assert.equal(nativeExits,1); assert.equal(document.querySelector('#fullscreen').getAttribute('aria-pressed'),'false');
  const mode=document.querySelector('#playback-mode'); mode.value='loop-list';mode.dispatchEvent(new dom.window.Event('change'));
  assert.equal(JSON.parse(localStorage.getItem('wow-family-progress-v1')).settings.playbackMode,'loop-list');
  video.dispatchEvent(new dom.window.Event('ended')); await new Promise(resolve=>setTimeout(resolve,0)); assert.equal(new URL(location.href).searchParams.get('lesson'),b.id);

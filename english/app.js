@@ -89,8 +89,12 @@ function render() {
       const showControls = () => { controls.classList.add('visible'); clearTimeout(timer); timer = setTimeout(() => { if (!video.paused && !controls.contains(document.activeElement)) controls.classList.remove('visible'); }, 2500); };
       const hideControls = () => { clearTimeout(timer); if (!video.paused && !controls.contains(document.activeElement)) controls.classList.remove('visible'); };
       stage.addEventListener('pointermove', showControls); stage.addEventListener('pointerdown', showControls); stage.addEventListener('pointerleave', hideControls); stage.addEventListener('focusin', showControls); stage.addEventListener('focusout', () => setTimeout(hideControls, 0));
-      const syncFullscreen = () => { const isFull = document.fullscreenElement === stage; fullscreen.setAttribute('aria-pressed', String(isFull)); fullscreen.textContent = t(isFull ? 'exitFullscreen' : 'fullscreen'); };
+      const syncFullscreen = () => { const isFull = document.fullscreenElement === stage || document.webkitFullscreenElement === stage || Boolean(video.webkitDisplayingFullscreen); fullscreen.setAttribute('aria-pressed', String(isFull)); fullscreen.textContent = t(isFull ? 'exitFullscreen' : 'fullscreen'); };
+      const removeFullscreenListeners = () => { document.removeEventListener('fullscreenchange', syncFullscreen); document.removeEventListener('webkitfullscreenchange', syncFullscreen); video.removeEventListener('webkitbeginfullscreen', syncFullscreen); video.removeEventListener('webkitendfullscreen', syncFullscreen); };
       document.addEventListener('fullscreenchange', syncFullscreen);
+      document.addEventListener('webkitfullscreenchange', syncFullscreen);
+      video.addEventListener('webkitbeginfullscreen', syncFullscreen);
+      video.addEventListener('webkitendfullscreen', syncFullscreen);
       const play = () => { playingIntent = true; const result = video.play(); if (result && typeof result.catch === 'function') result.catch(() => { playingIntent = false; if (!disposed) status.textContent = t('autoplayBlocked'); }); };
       const formatTime = value => Number.isFinite(value) ? `${Math.floor(value / 60)}:${String(Math.floor(value % 60)).padStart(2, '0')}` : '0:00';
       const updateTimeline = () => { seek.value = Number.isFinite(video.duration) && video.duration > 0 ? String(Math.round(video.currentTime / video.duration * 1000)) : '0'; const currentTime = formatTime(video.currentTime), duration = formatTime(video.duration); time.textContent = `${currentTime} / ${duration}`; seek.setAttribute('aria-valuetext', extra(`${currentTime}，共 ${duration}`, `${currentTime} of ${duration}`)); };
@@ -98,7 +102,23 @@ function render() {
       video.onclick = () => { if (video.paused) play(); else video.pause(); };
       seek.oninput = () => { if (Number.isFinite(video.duration)) { video.currentTime = video.duration * Number(seek.value) / 1000; updateTimeline(); } };
       const mute = area.querySelector('#mute'); mute.onclick = () => { video.muted = !video.muted; mute.setAttribute('aria-pressed', String(video.muted)); mute.textContent = video.muted ? extra('取消静音', 'Unmute') : extra('静音', 'Mute'); };
-      fullscreen.onclick = async () => { try { if (document.fullscreenElement === stage) await document.exitFullscreen(); else { await stage.requestFullscreen(); if (video.paused && video.src) play(); } } catch { status.textContent = t('autoplayBlocked'); } syncFullscreen(); };
+      fullscreen.onclick = async () => {
+        try {
+          if (video.webkitDisplayingFullscreen && typeof video.webkitExitFullscreen === 'function') video.webkitExitFullscreen();
+          else if ((document.fullscreenElement === stage || document.webkitFullscreenElement === stage) && (document.exitFullscreen || document.webkitExitFullscreen)) await (document.exitFullscreen || document.webkitExitFullscreen).call(document);
+          else {
+            const request = stage.requestFullscreen || stage.webkitRequestFullscreen;
+            if (typeof request === 'function') await request.call(stage);
+            else {
+              const enterVideoFullscreen = video.webkitEnterFullscreen || video.webkitEnterFullScreen;
+              if (typeof enterVideoFullscreen !== 'function') throw new Error('fullscreen unavailable');
+              enterVideoFullscreen.call(video);
+            }
+            if (video.paused && video.src) play();
+          }
+        } catch { status.textContent = t('autoplayBlocked'); }
+        syncFullscreen();
+      };
       const load = async (resume = pendingResume) => {
         if (resume) pendingResume = resume;
         document.querySelector('#learning-controls').hidden = true;
@@ -106,10 +126,10 @@ function render() {
         try { const data = await post('/api/english/playback', { lessonId:current.id }); if (disposed || request !== serial) return;
           const url = new URL(data.url); if (url.protocol !== 'https:' || !url.search || !Number.isFinite(Date.parse(data.expiresAt))) throw new Error('invalid response');
           expiresAt = Date.parse(data.expiresAt); resumeAt = pendingResume?.position ?? null; resumePlay = pendingResume?.shouldPlay ?? false; switching = true; video.src = url.href; status.textContent = ''; document.querySelector('#learning-controls').hidden = false;
-        } catch (err) { if (disposed || request !== serial) return; video.removeAttribute('src'); if (err.status === 401) { document.removeEventListener('fullscreenchange', syncFullscreen); loginForm(); } else { status.textContent = message(err); retry.hidden = false; } }
+        } catch (err) { if (disposed || request !== serial) return; video.removeAttribute('src'); if (err.status === 401) { removeFullscreenListeners(); loginForm(); } else { status.textContent = message(err); retry.hidden = false; } }
       };
       retry.onclick = () => { recovering = false; const resume = pendingResume || { position: stopped ? 0 : (video.currentTime || 0), shouldPlay: playingIntent }; stopped = false; load(resume); };
-      area.querySelector('#logout').onclick = async () => { ++serial; playingIntent = false; pendingResume = null; video.pause(); video.removeAttribute('src'); try { await post('/api/english/logout', {}); if (!disposed) { document.removeEventListener('fullscreenchange', syncFullscreen); loginForm(); } } catch (err) { if (!disposed) { status.textContent = message(err); retry.hidden = false; } } };
+      area.querySelector('#logout').onclick = async () => { ++serial; playingIntent = false; pendingResume = null; video.pause(); video.removeAttribute('src'); try { await post('/api/english/logout', {}); if (!disposed) { removeFullscreenListeners(); loginForm(); } } catch (err) { if (!disposed) { status.textContent = message(err); retry.hidden = false; } } };
       video.addEventListener('error', () => { if (disposed || !video.getAttribute('src')) return; if (!recovering && Date.now() >= expiresAt) { recovering = true; load({ position: video.currentTime || 0, shouldPlay: playingIntent }); } else { status.textContent = t('videoError'); retry.hidden = false; } });
       video.addEventListener('loadedmetadata', () => { video.currentTime = resumeAt === null ? resumePosition(state.watched[current.id], video.duration, !!state.completed[current.id]) : Math.min(resumeAt, Number.isFinite(video.duration) ? video.duration : resumeAt); updateTimeline(); switching = false; recovering = false; pendingResume = null; if (resumePlay) play(); resumeAt = null; resumePlay = false; });
       video.addEventListener('play', () => { playingIntent = true; playToggle.textContent = extra('暂停', 'Pause'); showControls(); });
@@ -127,7 +147,7 @@ function render() {
           video.setAttribute('aria-label', next.title); load({ position: 0, shouldPlay: true });
         } else { stopped = true; video.removeAttribute('src'); status.textContent = ''; retry.hidden = false; }
       });
-      disposePlayer = () => { disposed = true; ++serial; clearTimeout(timer); document.removeEventListener('fullscreenchange', syncFullscreen); video.removeAttribute('src'); };
+      disposePlayer = () => { disposed = true; ++serial; clearTimeout(timer); removeFullscreenListeners(); video.removeAttribute('src'); };
       load();
     };
     disposePlayer = () => { disposed = true; ++serial; clearTimeout(timer); };
