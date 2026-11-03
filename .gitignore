@@ -7,3 +7,6 @@ vite.config.d.ts
 .DS_Store
 # Third-party screenshots are local research references, never deployable assets.
 research/reference-images/game8/*.png
+
+# Private teaching content is uploaded separately, never committed or served statically.
+/lib/english/subtitle-data.json

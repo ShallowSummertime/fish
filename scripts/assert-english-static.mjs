@@ -9,8 +9,10 @@ assert(!all.some(f => /\.(mp4|srt|mp3|wav|pdf)$/i.test(f)), 'Media or source sub
 for (const file of all) {
  const contents = await readFile(file,'utf8');
  assert(!/\/Users\/|\/home\/|[A-Za-z]:\\\\|\/media\/|WOW_PUBLIC_MEDIA_BASE_URL|mediaBaseUrl|cos\.ap-hongkong\.myqcloud\.com/.test(contents), `Private path or public media fallback in ${file}`);
- for (const endpoint of contents.match(/\/api\/[a-zA-Z0-9_\/-]+/g) || []) assert(['/api/english/login','/api/english/logout','/api/english/playback'].includes(endpoint), `Unexpected endpoint ${endpoint}`);
+ for (const endpoint of contents.match(/\/api\/[a-zA-Z0-9_\/-]+/g) || []) assert(['/api/english/login','/api/english/logout','/api/english/playback','/api/english/subtitles'].includes(endpoint), `Unexpected endpoint ${endpoint}`);
 }
+assert(!all.some(file => file.endsWith('subtitle-data.json')), 'Private subtitle text must stay outside static output');
+const privateSubtitles = JSON.parse(await readFile('lib/english/subtitle-manifest.json','utf8'));
 const catalog = JSON.parse(await readFile(`${root}/data/catalog.json`));
 const lessons = catalog.levels.flatMap(l => l.lessons); const ids = new Set();
 assert.equal(lessons.length,catalog.totalLessons); assert(lessons.length > 0);
@@ -22,7 +24,9 @@ for (const level of catalog.levels) {
   const prefix = `Wow/${LEVEL_MEDIA_FOLDERS[level.id]}/`;
   assert(lesson.videoKey.startsWith(prefix)); assert(lesson.videoKey.endsWith('.mp4'));
   assert(!lesson.videoKey.slice(prefix.length).includes('/'));
-  assert.equal(lesson.hasSubtitle,false); assert.equal(lesson.hasChineseSubtitle,false);
+  assert.equal(typeof lesson.hasSubtitle,'boolean'); assert.equal(typeof lesson.hasChineseSubtitle,'boolean');
+  const entry = privateSubtitles.lessons[lesson.id];
+  assert.equal(lesson.hasSubtitle,Boolean(entry)); assert.equal(lesson.hasChineseSubtitle,Boolean(entry?.hasChinese));
  }
 }
 assert.equal(catalog.levels.find(level => level.id === 'level-1').lessons.length,33);
