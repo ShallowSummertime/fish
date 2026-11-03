@@ -1,4 +1,4 @@
-const CACHE = 'wow-family-english-shell-v4';
+const CACHE = 'wow-family-english-shell-v5';
 const SHELL = ['/english/', '/english/index.html', '/english/styles.css', '/english/app.js', '/english/player.js', '/english/subtitles.js', '/english/state.js', '/english/training-state.js', '/english/flashcard-state.js', '/english/viewing-reminder.js', '/english/data/catalog.json', '/english/manifest.webmanifest', '/english/icon.svg'];
 self.addEventListener('install', event => event.waitUntil(caches.open(CACHE).then(cache => cache.addAll(SHELL)).then(() => self.skipWaiting())));
 self.addEventListener('activate', event => event.waitUntil(caches.keys().then(keys => Promise.all(keys.filter(key => key.startsWith('wow-family-english-shell-') && key !== CACHE).map(key => caches.delete(key)))).then(() => self.clients.claim())));

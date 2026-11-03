@@ -108,3 +108,12 @@ html,body{width:100%;overflow-x:clip}
   .player-tools label{width:100%}
   .player-tools select{max-width:none;flex:1}
 }
+
+/* Keep the custom bar outside the video/caption viewport, even while it fades.
+   A stable separate row avoids both native-cue overlap and picture resizing. */
+.video-stage{display:grid;grid-template-rows:minmax(0,1fr) auto}
+.video-picture{position:relative;min-width:0;min-height:0;display:grid;place-items:center}
+.video-picture video{border-radius:0}
+.video-stage>.player-controls{position:relative;inset:auto;width:100%;background:#211e2d}
+.video-stage:fullscreen,.video-stage:-webkit-full-screen{grid-template-rows:minmax(0,1fr) auto;align-items:stretch}
+.video-stage:fullscreen .video-picture video,.video-stage:-webkit-full-screen .video-picture video{height:100%;max-height:100%;aspect-ratio:auto;object-fit:contain}
